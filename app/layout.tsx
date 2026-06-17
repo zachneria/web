@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     description: "Built for promoters and scene makers. Minimal fees, no account needed.",
     url: "https://fansonly.live",
     siteName: "fansonly",
-    images: ["/icon.png"],
+    images: ["/logo.png"],
   },
   twitter: {
     card: "summary",
     title: "fansonly",
     description: "Built for promoters and scene makers.",
-    images: ["/icon.png"],
+    images: ["/logo.png"],
   },
 };
 
