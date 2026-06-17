@@ -1,0 +1,15 @@
+export default function Home() {
+  return (
+    <main className="home">
+      <h1 className="logo">fansonly</h1>
+      <p className="tag">underground ticketing</p>
+      <p>
+        Got a link to a show? Open it to grab your tickets — no account needed,
+        no app required.
+      </p>
+      <p className="muted">
+        Throwing the show? Create and manage events in the fansonly app.
+      </p>
+    </main>
+  );
+}
