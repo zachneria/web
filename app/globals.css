@@ -30,6 +30,54 @@ a {
   margin: 0 auto;
   padding-bottom: 64px;
 }
+
+/* Mobile-only "open in app vs web" choice */
+.appbanner {
+  background: #111;
+  color: #fff;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.appbanner-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.appbanner-copy strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+.appbanner-copy span {
+  font-size: 13px;
+  color: #bbb;
+  line-height: 1.4;
+}
+.appbanner-actions {
+  display: flex;
+  gap: 8px;
+}
+.appbanner-open,
+.appbanner-web {
+  flex: 1;
+  text-align: center;
+  padding: 11px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.appbanner-open {
+  background: var(--brand);
+  color: #000;
+}
+.appbanner-web {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #444;
+  font-weight: 600;
+}
 .flyer {
   width: 100%;
   height: auto;

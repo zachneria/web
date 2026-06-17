@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { getEvent, getBuyerFee } from "@/lib/backend";
 import { admissionTypes, formatDate, formatTime } from "@/lib/pricing";
+import AppBanner from "./AppBanner";
 import BuyBox from "./BuyBox";
 
 export const dynamic = "force-dynamic";
@@ -47,6 +48,8 @@ export default async function EventPage({
 
   return (
     <main className="event">
+      <AppBanner eventId={event.id} />
+
       {event.flyerUrl && (
         // eslint-disable-next-line @next/next/no-img-element
         <img className="flyer" src={event.flyerUrl} alt={event.name} />
