@@ -1,0 +1,97 @@
+:root {
+  --brand: #f5e642;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background: #fff;
+  color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---- Event page ---- */
+.event {
+  max-width: 480px;
+  margin: 0 auto;
+  padding-bottom: 64px;
+}
+.flyer {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.content {
+  padding: 24px 20px;
+}
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+.meta {
+  font-size: 15px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 12px;
+}
+.venue {
+  font-size: 15px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.addr {
+  color: #666;
+  font-size: 14px;
+}
+.desc {
+  margin-top: 28px;
+  color: #333;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  font-size: 15px;
+}
+
+/* ---- Home ---- */
+.home {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  text-align: center;
+}
+.logo {
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+.tag {
+  color: #666;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 13px;
+  margin-top: 8px;
+}
+.home p {
+  color: #333;
+  line-height: 1.6;
+  margin-top: 24px;
+}
+.home .muted {
+  color: #888;
+  font-size: 14px;
+}
