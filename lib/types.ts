@@ -21,6 +21,7 @@ export interface BuyEvent {
   venueName: string;
   venueAddress: string;
   eventDate: string;
+  endTime?: string | null;
   doorsTime: string;
   capacity: number;
   status: "draft" | "published" | "cancelled";

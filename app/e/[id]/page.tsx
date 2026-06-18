@@ -46,6 +46,13 @@ export default async function EventPage({
 
   const [fee, tickets] = [await getBuyerFee(), admissionTypes(event)];
 
+  // Sales close when the event ends — endTime, or a 6h fallback for legacy
+  // events with none. Mirrors the backend cutoff in validateAndPrice.
+  const endMs = event.endTime
+    ? new Date(event.endTime).getTime()
+    : new Date(event.eventDate).getTime() + 6 * 60 * 60 * 1000;
+  const ended = Date.now() > endMs;
+
   return (
     <main className="event">
       <AppBanner eventId={event.id} />
@@ -66,7 +73,11 @@ export default async function EventPage({
           <span className="addr">{event.venueAddress}</span>
         </p>
 
-        <BuyBox eventId={event.id} tickets={tickets} fee={fee} />
+        {ended ? (
+          <p className="ended">This event has ended — ticket sales are closed.</p>
+        ) : (
+          <BuyBox eventId={event.id} tickets={tickets} fee={fee} />
+        )}
 
         {event.description && <p className="desc">{event.description}</p>}
       </div>
