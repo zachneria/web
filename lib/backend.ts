@@ -1,10 +1,23 @@
 // Server-side calls to the fansonly API. Kept on the server (Server Components +
 // route handlers) so the browser never hits api.fansonly.live directly — no CORS
 // to configure, and the API base stays out of the client bundle.
-import type { BuyEvent } from "./types";
+import type { BuyEvent, PromoterPage } from "./types";
 
 const API_BASE = process.env.API_BASE_URL || "https://api.fansonly.live";
 const BUYER_FEE_FALLBACK = 0.99;
+
+// A promoter's name + logo and their published upcoming events.
+export async function getPromoter(id: string): Promise<PromoterPage | null> {
+  try {
+    const res = await fetch(`${API_BASE}/events/promoter/${id}`, {
+      next: { revalidate: 30 },
+    });
+    if (!res.ok) return null;
+    return (await res.json()) as PromoterPage;
+  } catch {
+    return null;
+  }
+}
 
 export async function getEvent(id: string): Promise<BuyEvent | null> {
   try {

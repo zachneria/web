@@ -27,6 +27,30 @@ export interface BuyEvent {
   status: "draft" | "published" | "cancelled";
   flyerUrl: string | null;
   ticketTypes: BuyTicketType[];
+  organizer?: Promoter | null;
+}
+
+export interface Promoter {
+  id: string;
+  name: string;
+  logoUrl: string | null;
+}
+
+export interface PromoterEventCard {
+  id: string;
+  name: string;
+  venueName: string;
+  eventDate: string;
+  endTime?: string | null;
+  flyerUrl: string | null;
+  currentTier?: string | null;
+  soldPct?: number;
+  soldOut?: boolean;
+}
+
+export interface PromoterPage {
+  organizer: Promoter;
+  events: PromoterEventCard[];
 }
 
 export interface BuyTicket {
