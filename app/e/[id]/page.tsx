@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { getEvent, getBuyerFee } from "@/lib/backend";
 import { admissionTypes, formatDate, formatTime } from "@/lib/pricing";
 import AppBanner from "./AppBanner";
@@ -53,20 +55,37 @@ export default async function EventPage({
     : new Date(event.eventDate).getTime() + 6 * 60 * 60 * 1000;
   const ended = Date.now() > endMs;
 
+  const organizer = event.organizer;
+
   return (
-    <main className="event">
-      <AppBanner eventId={event.id} />
+    <>
+      <SiteHeader />
+      <main className="event">
+        <AppBanner eventId={event.id} />
 
-      {event.flyerUrl && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img className="flyer" src={event.flyerUrl} alt={event.name} />
-      )}
+        {event.flyerUrl && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className="flyer" src={event.flyerUrl} alt={event.name} />
+        )}
 
-      <div className="content">
-        <h1 className="title">{event.name}</h1>
-        <p className="meta">
-          {formatDate(event.eventDate)} · {formatTime(event.eventDate)}
-        </p>
+        <div className="content">
+          <h1 className="title">{event.name}</h1>
+          {organizer && (
+            <Link href={`/p/${organizer.id}`} className="promoter-byline">
+              {organizer.logoUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img className="promoter-byline-logo" src={organizer.logoUrl} alt="" />
+              ) : (
+                <span className="promoter-byline-logo promoter-byline-fallback">
+                  {organizer.name?.[0]?.toUpperCase()}
+                </span>
+              )}
+              <span className="promoter-byline-name">{organizer.name}</span>
+            </Link>
+          )}
+          <p className="meta">
+            {formatDate(event.eventDate)} · {formatTime(event.eventDate)}
+          </p>
         <p className="venue">
           {event.venueName}
           <br />
@@ -80,7 +99,15 @@ export default async function EventPage({
         )}
 
         {event.description && <p className="desc">{event.description}</p>}
-      </div>
-    </main>
+
+          {organizer && (
+            <Link href={`/p/${organizer.id}`} className="more-from">
+              More from {organizer.name} →
+            </Link>
+          )}
+        </div>
+      </main>
+      <SiteFooter />
+    </>
   );
 }
