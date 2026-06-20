@@ -1,5 +1,10 @@
 // Shapes returned by the fansonly APIs (subset the web needs).
 
+export interface PriceOption {
+  label: string | null;
+  price: number;
+}
+
 export interface BuyTicketType {
   id: string;
   name: string;
@@ -8,6 +13,7 @@ export interface BuyTicketType {
   isPayWhatYouWant: boolean;
   minPrice: string | null;
   maxPrice: string | null;
+  priceOptions?: PriceOption[] | null; // choose-a-price: pick one, 1 per person
   quantity: number;
   absorbFee: boolean;
   salesStart: string | null;
