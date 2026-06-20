@@ -6,7 +6,12 @@ export const BRAND = "#F5E642";
 // WEB IS ADMISSION-ONLY. Drinks/credits/merch are app-only for now, so the site
 // never lists or sells them.
 export function admissionTypes(event: BuyEvent): BuyTicketType[] {
-  return (event.ticketTypes || []).filter((t) => t.category === "admission");
+  const isChoose = (t: BuyTicketType) =>
+    Array.isArray(t.priceOptions) && t.priceOptions.length > 0;
+  // Choose-a-price ("Choose Your Adventure") always sits above the fixed tiers.
+  return (event.ticketTypes || [])
+    .filter((t) => t.category === "admission")
+    .sort((a, b) => Number(isChoose(b)) - Number(isChoose(a)));
 }
 
 export const money = (n: number) => `$${n.toFixed(2)}`;
