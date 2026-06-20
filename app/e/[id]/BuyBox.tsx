@@ -42,6 +42,7 @@ export default function BuyBox({
   fee: number;
 }) {
   const [cart, setCart] = useState<Record<string, number>>({});
+  const [chosen, setChosen] = useState<Record<string, number>>({}); // choose-a-price
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [step, setStep] = useState<"select" | "pay" | "done">("select");
@@ -51,12 +52,28 @@ export default function BuyBox({
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  const totals = computeTotals(tickets, cart, fee);
+  const totals = computeTotals(tickets, cart, fee, chosen);
   const canBuy =
     totals.count > 0 && name.trim().length >= 2 && EMAIL_RE.test(email.trim());
 
   const setQty = (id: string, q: number) =>
     setCart((c) => ({ ...c, [id]: Math.max(0, q) }));
+
+  // Choose-a-price: tap a price to select (qty 1); tap the selected one to clear.
+  const selectChip = (id: string, price: number) => {
+    const isSel = (cart[id] || 0) > 0 && chosen[id] === price;
+    if (isSel) {
+      setCart((c) => ({ ...c, [id]: 0 }));
+      setChosen((ch) => {
+        const n = { ...ch };
+        delete n[id];
+        return n;
+      });
+    } else {
+      setCart((c) => ({ ...c, [id]: 1 }));
+      setChosen((ch) => ({ ...ch, [id]: price }));
+    }
+  };
 
   const getTickets = async () => {
     setSubmitting(true);
@@ -71,6 +88,7 @@ export default function BuyBox({
           items: totals.lines.map((l) => ({
             ticketTypeId: l.ticketTypeId,
             quantity: l.quantity,
+            ...(l.priced ? { price: l.unit } : {}),
           })),
         }),
       });
@@ -114,31 +132,57 @@ export default function BuyBox({
 
   return (
     <div style={styles.box}>
-      {tickets.map((t) => (
-        <div key={t.id} style={styles.row}>
-          <div>
-            <div style={styles.tName}>{t.name}</div>
-            <div style={styles.tPrice}>{money(parseFloat(t.price))}</div>
+      {tickets.map((t) => {
+        const opts = Array.isArray(t.priceOptions) ? t.priceOptions : null;
+        if (opts && opts.length) {
+          return (
+            <div key={t.id} style={styles.chooseRow}>
+              <div style={styles.tName}>{t.name}</div>
+              <div style={styles.chooseHint}>Choose your price · 1 per person</div>
+              <div style={styles.chips}>
+                {opts.map((o, i) => {
+                  const sel = (cart[t.id] || 0) > 0 && chosen[t.id] === o.price;
+                  return (
+                    <button
+                      key={`${o.label}-${o.price}-${i}`}
+                      onClick={() => selectChip(t.id, o.price)}
+                      style={{ ...styles.chip, ...(sel ? styles.chipSel : {}) }}
+                    >
+                      {o.label ? <span style={styles.chipLabel}>{o.label}</span> : null}
+                      <span style={styles.chipPrice}>${o.price.toFixed(0)}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        }
+        return (
+          <div key={t.id} style={styles.row}>
+            <div>
+              <div style={styles.tName}>{t.name}</div>
+              <div style={styles.tPrice}>{money(parseFloat(t.price))}</div>
+            </div>
+            <div style={styles.stepper}>
+              <button
+                style={styles.stepBtn}
+                onClick={() => setQty(t.id, (cart[t.id] || 0) - 1)}
+                aria-label={`Remove ${t.name}`}
+              >
+                −
+              </button>
+              <span style={styles.qty}>{cart[t.id] || 0}</span>
+              <button
+                style={styles.stepBtn}
+                onClick={() => setQty(t.id, (cart[t.id] || 0) + 1)}
+                aria-label={`Add ${t.name}`}
+              >
+                +
+              </button>
+            </div>
           </div>
-          <div style={styles.stepper}>
-            <button
-              style={styles.stepBtn}
-              onClick={() => setQty(t.id, (cart[t.id] || 0) - 1)}
-              aria-label={`Remove ${t.name}`}
-            >
-              −
-            </button>
-            <span style={styles.qty}>{cart[t.id] || 0}</span>
-            <button
-              style={styles.stepBtn}
-              onClick={() => setQty(t.id, (cart[t.id] || 0) + 1)}
-              aria-label={`Add ${t.name}`}
-            >
-              +
-            </button>
-          </div>
-        </div>
-      ))}
+        );
+      })}
 
       <input
         style={styles.input}
@@ -276,6 +320,32 @@ const styles: Record<string, CSSProperties> = {
   tName: { fontSize: 16, fontWeight: 700, color: "#000" },
   tPrice: { fontSize: 14, color: "#666", marginTop: 2 },
   stepper: { display: "flex", alignItems: "center", gap: 14 },
+  chooseRow: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 8,
+    background: "#F8F8F8",
+    borderRadius: 14,
+    padding: 16,
+  },
+  chooseHint: { fontSize: 13, color: "#888" },
+  chips: { display: "flex", gap: 8, flexWrap: "wrap" },
+  chip: {
+    flex: 1,
+    minWidth: 90,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 2,
+    border: "1.5px solid #E0E0E0",
+    borderRadius: 12,
+    background: "#fff",
+    padding: "10px 8px",
+    cursor: "pointer",
+  },
+  chipSel: { background: BRAND, borderColor: BRAND },
+  chipLabel: { fontSize: 12, fontWeight: 600, color: "#555" },
+  chipPrice: { fontSize: 17, fontWeight: 800, color: "#000" },
   stepBtn: {
     width: 36,
     height: 36,

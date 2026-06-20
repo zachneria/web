@@ -27,20 +27,27 @@ export function formatTime(dateStr: string): string {
 }
 
 export interface CartTotals {
-  lines: { ticketTypeId: string; name: string; quantity: number; unit: number }[];
+  lines: {
+    ticketTypeId: string;
+    name: string;
+    quantity: number;
+    unit: number;
+    priced?: boolean; // choose-a-price → send the chosen price to the server
+  }[];
   subtotal: number;
   fee: number;
   total: number;
   count: number;
 }
 
-// cart: { [ticketTypeId]: quantity }. One flat buyer fee, waived only if every
-// selected line absorbs it — mirrors the server's rule. The server re-prices
-// authoritatively at checkout; this is for display.
+// cart: { [ticketTypeId]: quantity }. `chosen`: { [id]: price } for choose-a-
+// price types. One flat buyer fee, waived only if every selected line absorbs
+// it. Server re-prices authoritatively; this is for display.
 export function computeTotals(
   types: BuyTicketType[],
   cart: Record<string, number>,
   fee: number,
+  chosen: Record<string, number> = {},
 ): CartTotals {
   const lines: CartTotals["lines"] = [];
   let subtotal = 0;
@@ -49,11 +56,21 @@ export function computeTotals(
   for (const t of types) {
     const quantity = cart[t.id] || 0;
     if (quantity <= 0) continue;
-    const unit = parseFloat(t.price);
-    subtotal += unit * quantity;
-    count += quantity;
+    const opts = Array.isArray(t.priceOptions) ? t.priceOptions : null;
+    let unit: number;
+    let qty = quantity;
+    let priced = false;
+    if (opts && opts.length) {
+      qty = 1; // choose-a-price is capped at 1
+      unit = chosen[t.id] ?? opts[0].price;
+      priced = true;
+    } else {
+      unit = parseFloat(t.price);
+    }
+    subtotal += unit * qty;
+    count += qty;
     if (!t.absorbFee) allAbsorb = false;
-    lines.push({ ticketTypeId: t.id, name: t.name, quantity, unit });
+    lines.push({ ticketTypeId: t.id, name: t.name, quantity: qty, unit, priced });
   }
   const appliedFee = count > 0 && !allAbsorb ? fee : 0;
   return { lines, subtotal, fee: appliedFee, total: subtotal + appliedFee, count };
