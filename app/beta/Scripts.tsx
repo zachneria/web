@@ -17,7 +17,13 @@ function textOf(node: ReactNode): string {
 const slug = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
-export default function Scripts({ markdown }: { markdown: string }) {
+export default function Scripts({
+  markdown,
+  bugFormUrl,
+}: {
+  markdown: string;
+  bugFormUrl: string | null;
+}) {
   // Section nav = the "## " headings (Parts + Before you start).
   const sections = markdown
     .split("\n")
@@ -29,6 +35,16 @@ export default function Scripts({ markdown }: { markdown: string }) {
       <div style={styles.bar}>
         <span style={styles.brandDot}>☺</span>
         <span style={styles.barTitle}>fansonly · Beta</span>
+        {bugFormUrl && (
+          <a
+            style={styles.report}
+            href={bugFormUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🐞 Report a bug
+          </a>
+        )}
         <button style={styles.print} onClick={() => window.print()}>
           Print / PDF
         </button>
@@ -45,6 +61,18 @@ export default function Scripts({ markdown }: { markdown: string }) {
         </nav>
 
         <article className="beta-doc" style={styles.doc}>
+          {bugFormUrl && (
+            <a
+              style={styles.callout}
+              href={bugFormUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="beta-no-print"
+            >
+              <span>🐞 Found a bug or have feedback?</span>
+              <span style={styles.calloutCta}>Report it →</span>
+            </a>
+          )}
           <ReactMarkdown
             components={{
               h2: ({ children }) => <h2 id={slug(textOf(children))}>{children}</h2>,
@@ -93,6 +121,31 @@ const styles: Record<string, CSSProperties> = {
     fontWeight: 600,
     cursor: "pointer",
   },
+  report: {
+    background: BRAND,
+    color: "#000",
+    borderRadius: 8,
+    padding: "6px 12px",
+    fontSize: 13,
+    fontWeight: 700,
+    textDecoration: "none",
+  },
+  callout: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+    background: "#FBF6DA",
+    border: "1px solid #EFE7C2",
+    borderRadius: 12,
+    padding: "12px 16px",
+    margin: "0 0 20px",
+    color: "#000",
+    fontSize: 15,
+    fontWeight: 600,
+    textDecoration: "none",
+  },
+  calloutCta: { color: "#1B873F", fontWeight: 800, whiteSpace: "nowrap" },
   wrap: {
     maxWidth: 1000,
     margin: "0 auto",
