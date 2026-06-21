@@ -15,6 +15,7 @@ export interface BuyTicketType {
   maxPrice: string | null;
   priceOptions?: PriceOption[] | null; // choose-a-price: pick one, 1 per person
   quantity: number;
+  sold?: number; // admission tickets already sold; remaining = quantity − sold
   absorbFee: boolean;
   salesStart: string | null;
   salesEnd: string | null;
