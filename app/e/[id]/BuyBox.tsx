@@ -15,6 +15,8 @@ import type { BuyTicket, BuyTicketType } from "@/lib/types";
 
 const stripePromise = getStripe();
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Server caps any single line at 20 (validateAndPrice); mirror it in the UI.
+const MAX_PER_ORDER = 20;
 
 async function pollOrder(token: string): Promise<BuyTicket[]> {
   for (let i = 0; i < 40; i++) {
@@ -84,10 +86,11 @@ export default function BuyBox({
   const setQty = (id: string, q: number) => {
     // Cap admission tiers at what's left (server still backstops at checkout).
     const t = tickets.find((x) => x.id === id);
+    let cap = MAX_PER_ORDER;
     if (t && t.category === "admission") {
-      const remaining = Math.max(0, t.quantity - (t.sold ?? 0));
-      q = Math.min(q, remaining);
+      cap = Math.min(cap, Math.max(0, t.quantity - (t.sold ?? 0)));
     }
+    q = Math.min(q, cap);
     setCart((c) => ({ ...c, [id]: Math.max(0, q) }));
     clearCode();
   };
@@ -209,7 +212,9 @@ export default function BuyBox({
         const remaining = isAdm ? Math.max(0, t.quantity - (t.sold ?? 0)) : Infinity;
         const soldOut = isAdm && remaining <= 0;
         const lowStock = isAdm && remaining > 0 && remaining <= 10;
-        const atMax = (cart[t.id] || 0) >= remaining;
+        const cap = Math.min(MAX_PER_ORDER, remaining);
+        const atMax = (cart[t.id] || 0) >= cap;
+        const orderCapped = atMax && !soldOut && !lowStock && cap === MAX_PER_ORDER;
         if (opts && opts.length) {
           return (
             <div key={t.id} style={styles.chooseRow}>
@@ -256,6 +261,9 @@ export default function BuyBox({
               {soldOut && <div style={styles.soldOutNote}>Sold out</div>}
               {!soldOut && lowStock && (
                 <div style={styles.lowStockNote}>Only {remaining} left</div>
+              )}
+              {orderCapped && (
+                <div style={styles.lowStockNote}>Max {MAX_PER_ORDER} per order</div>
               )}
             </div>
             <div style={styles.stepper}>
