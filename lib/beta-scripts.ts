@@ -21,9 +21,10 @@ steps and note anything that doesn't match the **Expected result**.
 - **Organizer** — creates and manages an event.
 - **Attendee** — buys a ticket and shows up at the door (no account needed).
 
-**How to report a result:** for each step, mark **PASS** or **FAIL**. If FAIL,
-note: (1) what you did, (2) what you expected, (3) what actually happened,
-(4) a screenshot if possible, (5) your phone model + iOS/Android version.
+**How to report:** for each step, mark **PASS** or **FAIL** for yourself. For any
+FAIL or idea, tap **Report a bug** (top of this page) and fill out the short
+form — note what you did, what you expected, what happened, your device, and a
+screenshot if you can. One report per issue.
 
 ---
 

@@ -17,5 +17,5 @@ export default async function BetaPage() {
   const authed = !!expected && store.get("beta_auth")?.value === expected;
 
   if (!authed) return <BetaGate configured={!!expected} />;
-  return <Scripts markdown={BETA_SCRIPTS} />;
+  return <Scripts markdown={BETA_SCRIPTS} bugFormUrl={process.env.BUG_FORM_URL ?? null} />;
 }
