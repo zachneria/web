@@ -51,13 +51,40 @@ export default function BuyBox({
   const [issued, setIssued] = useState<BuyTicket[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [codeInput, setCodeInput] = useState("");
+  const [applied, setApplied] = useState<{
+    code: string;
+    discountType: string;
+    value: number;
+  } | null>(null);
+  const [discount, setDiscount] = useState(0);
+  const [applyingCode, setApplyingCode] = useState(false);
+  const [codeError, setCodeError] = useState<string | null>(null);
 
   const totals = computeTotals(tickets, cart, fee, chosen);
+  // Discount comes from the server preview; never below 0 (fee is never discounted).
+  const effectiveTotal = Math.max(0, Math.round((totals.total - discount) * 100) / 100);
   const canBuy =
     totals.count > 0 && name.trim().length >= 2 && EMAIL_RE.test(email.trim());
 
-  const setQty = (id: string, q: number) =>
+  // Any cart edit invalidates an applied code — clear it so totals never lie.
+  const clearCode = () => {
+    setApplied(null);
+    setDiscount(0);
+    setCodeError(null);
+  };
+
+  const itemsPayload = () =>
+    totals.lines.map((l) => ({
+      ticketTypeId: l.ticketTypeId,
+      quantity: l.quantity,
+      ...(l.priced ? { price: l.unit } : {}),
+    }));
+
+  const setQty = (id: string, q: number) => {
     setCart((c) => ({ ...c, [id]: Math.max(0, q) }));
+    clearCode();
+  };
 
   // Choose-a-price: tap a price to select (qty 1); tap the selected one to clear.
   const selectChip = (id: string, price: number) => {
@@ -73,6 +100,47 @@ export default function BuyBox({
       setCart((c) => ({ ...c, [id]: 1 }));
       setChosen((ch) => ({ ...ch, [id]: price }));
     }
+    clearCode();
+  };
+
+  const applyCode = async () => {
+    const code = codeInput.trim();
+    if (!code) return;
+    setApplyingCode(true);
+    setCodeError(null);
+    try {
+      const res = await fetch(`/api/events/${eventId}/preview`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: itemsPayload(),
+          discountCode: code,
+          buyerEmail: EMAIL_RE.test(email.trim()) ? email.trim().toLowerCase() : undefined,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setCodeError(data.error || "That code isn’t valid.");
+        return;
+      }
+      if (!data.code || data.discount <= 0) {
+        setCodeError("That code doesn’t apply to your cart.");
+        return;
+      }
+      setApplied(data.code);
+      setDiscount(data.discount);
+    } catch {
+      setCodeError("Network error — try again.");
+    } finally {
+      setApplyingCode(false);
+    }
+  };
+
+  const removeCode = () => {
+    setApplied(null);
+    setDiscount(0);
+    setCodeInput("");
+    setCodeError(null);
   };
 
   const getTickets = async () => {
@@ -85,11 +153,8 @@ export default function BuyBox({
         body: JSON.stringify({
           buyerName: name.trim(),
           buyerEmail: email.trim().toLowerCase(),
-          items: totals.lines.map((l) => ({
-            ticketTypeId: l.ticketTypeId,
-            quantity: l.quantity,
-            ...(l.priced ? { price: l.unit } : {}),
-          })),
+          items: itemsPayload(),
+          ...(applied ? { discountCode: applied.code } : {}),
         }),
       });
       const data = await res.json();
@@ -201,20 +266,59 @@ export default function BuyBox({
       />
 
       {totals.count > 0 && (
-        <div style={styles.totals}>
-          <div style={styles.totRow}>
-            <span>Subtotal</span>
-            <span>{money(totals.subtotal)}</span>
+        <>
+          {applied ? (
+            <div style={styles.codeApplied}>
+              <span style={styles.codeAppliedText}>Code {applied.code} applied</span>
+              <button style={styles.codeRemove} onClick={removeCode}>
+                Remove
+              </button>
+            </div>
+          ) : (
+            <div style={styles.codeRow}>
+              <input
+                style={styles.codeInput}
+                placeholder="Have a code?"
+                value={codeInput}
+                onChange={(e) => setCodeInput(e.target.value.toUpperCase())}
+                autoCapitalize="characters"
+                autoCorrect="off"
+              />
+              <button
+                style={{
+                  ...styles.codeApply,
+                  opacity: !codeInput.trim() || applyingCode ? 0.5 : 1,
+                }}
+                disabled={!codeInput.trim() || applyingCode}
+                onClick={applyCode}
+              >
+                {applyingCode ? "…" : "Apply"}
+              </button>
+            </div>
+          )}
+          {codeError && <p style={styles.error}>{codeError}</p>}
+
+          <div style={styles.totals}>
+            <div style={styles.totRow}>
+              <span>Subtotal</span>
+              <span>{money(totals.subtotal)}</span>
+            </div>
+            {discount > 0 && (
+              <div style={{ ...styles.totRow, color: "#1A8A34" }}>
+                <span>Discount{applied ? ` (${applied.code})` : ""}</span>
+                <span>−{money(discount)}</span>
+              </div>
+            )}
+            <div style={styles.totRow}>
+              <span>Booking fee</span>
+              <span>{money(totals.fee)}</span>
+            </div>
+            <div style={styles.totRowBold}>
+              <span>Total</span>
+              <span>{money(effectiveTotal)}</span>
+            </div>
           </div>
-          <div style={styles.totRow}>
-            <span>Booking fee</span>
-            <span>{money(totals.fee)}</span>
-          </div>
-          <div style={styles.totRowBold}>
-            <span>Total</span>
-            <span>{money(totals.total)}</span>
-          </div>
-        </div>
+        </>
       )}
 
       {error && <p style={styles.error}>{error}</p>}
@@ -227,7 +331,7 @@ export default function BuyBox({
         {submitting
           ? "…"
           : totals.count > 0
-            ? `Get tickets · ${money(totals.total)}`
+            ? `Get tickets · ${money(effectiveTotal)}`
             : "Get tickets"}
       </button>
     </div>
@@ -395,6 +499,42 @@ const styles: Record<string, CSSProperties> = {
   },
   soldout: { color: "#666", marginTop: 20 },
   error: { color: "#D70015", fontSize: 14 },
+  codeRow: { display: "flex", gap: 8 },
+  codeInput: {
+    flex: 1,
+    border: "1.5px solid #E0E0E0",
+    borderRadius: 12,
+    padding: "14px 16px",
+    fontSize: 16,
+    boxSizing: "border-box",
+  },
+  codeApply: {
+    background: BRAND,
+    border: "none",
+    borderRadius: 12,
+    padding: "0 20px",
+    fontSize: 15,
+    fontWeight: 700,
+    color: "#000",
+    cursor: "pointer",
+  },
+  codeApplied: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    background: "#E4F6E9",
+    borderRadius: 12,
+    padding: "12px 16px",
+  },
+  codeAppliedText: { fontSize: 14, fontWeight: 700, color: "#1A8A34" },
+  codeRemove: {
+    background: "none",
+    border: "none",
+    color: "#666",
+    fontSize: 14,
+    fontWeight: 600,
+    cursor: "pointer",
+  },
   youreIn: { fontSize: 13, fontWeight: 700, letterSpacing: 1, color: "#1A8A34" },
   ticketCard: {
     background: "#F8F8F8",
