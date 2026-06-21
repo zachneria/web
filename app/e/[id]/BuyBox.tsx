@@ -203,7 +203,10 @@ export default function BuyBox({
           return (
             <div key={t.id} style={styles.chooseRow}>
               <div style={styles.tName}>{t.name}</div>
-              <div style={styles.chooseHint}>Choose your price · 1 per person</div>
+              <div style={styles.chooseHint}>
+                Choose your price · 1 per person
+                {!t.absorbFee && fee > 0 ? `  ·  +$${fee} fee` : ""}
+              </div>
               <div style={styles.chips}>
                 {opts.map((o, i) => {
                   const sel = (cart[t.id] || 0) > 0 && chosen[t.id] === o.price;
@@ -226,7 +229,12 @@ export default function BuyBox({
           <div key={t.id} style={styles.row}>
             <div>
               <div style={styles.tName}>{t.name}</div>
-              <div style={styles.tPrice}>{money(parseFloat(t.price))}</div>
+              <div style={styles.tPrice}>
+                {money(parseFloat(t.price))}
+                {!t.absorbFee && fee > 0 ? (
+                  <span style={styles.feeNote}>{`  ·  +$${fee} fee`}</span>
+                ) : null}
+              </div>
             </div>
             <div style={styles.stepper}>
               <button
@@ -423,6 +431,7 @@ const styles: Record<string, CSSProperties> = {
   },
   tName: { fontSize: 16, fontWeight: 700, color: "#000" },
   tPrice: { fontSize: 14, color: "#666", marginTop: 2 },
+  feeNote: { color: "#999" },
   stepper: { display: "flex", alignItems: "center", gap: 14 },
   chooseRow: {
     display: "flex",
