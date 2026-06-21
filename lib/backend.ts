@@ -52,6 +52,15 @@ export function createIntent(eventId: string, body: unknown): Promise<Response> 
   });
 }
 
+// Price a cart + optional discount code before charging.
+export function previewOrder(eventId: string, body: unknown): Promise<Response> {
+  return fetch(`${API_BASE}/tickets/events/${eventId}/orders/preview`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+}
+
 export function getOrder(token: string): Promise<Response> {
   return fetch(`${API_BASE}/tickets/order?token=${encodeURIComponent(token)}`);
 }
