@@ -57,7 +57,7 @@ export function computeTotals(
   const lines: CartTotals["lines"] = [];
   let subtotal = 0;
   let count = 0;
-  let allAbsorb = true;
+  let feeUnits = 0; // fee-bearing admission tickets (matches the server: fee × units)
   for (const t of types) {
     const quantity = cart[t.id] || 0;
     if (quantity <= 0) continue;
@@ -74,10 +74,12 @@ export function computeTotals(
     }
     subtotal += unit * qty;
     count += qty;
-    if (!t.absorbFee) allAbsorb = false;
+    if (!t.absorbFee) feeUnits += qty;
     lines.push({ ticketTypeId: t.id, name: t.name, quantity: qty, unit, priced });
   }
-  const appliedFee = count > 0 && !allAbsorb ? fee : 0;
+  // Web is admission-only: the buyer fee is PER TICKET (fee × fee-bearing units),
+  // matching fo-tickets validateAndPrice + the app. (Was a flat fee — undercounted.)
+  const appliedFee = Math.round(fee * feeUnits * 100) / 100;
   return { lines, subtotal, fee: appliedFee, total: subtotal + appliedFee, count };
 }
 
