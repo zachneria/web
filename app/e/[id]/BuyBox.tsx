@@ -82,6 +82,12 @@ export default function BuyBox({
     }));
 
   const setQty = (id: string, q: number) => {
+    // Cap admission tiers at what's left (server still backstops at checkout).
+    const t = tickets.find((x) => x.id === id);
+    if (t && t.category === "admission") {
+      const remaining = Math.max(0, t.quantity - (t.sold ?? 0));
+      q = Math.min(q, remaining);
+    }
     setCart((c) => ({ ...c, [id]: Math.max(0, q) }));
     clearCode();
   };
@@ -199,6 +205,11 @@ export default function BuyBox({
     <div style={styles.box}>
       {tickets.map((t) => {
         const opts = Array.isArray(t.priceOptions) ? t.priceOptions : null;
+        const isAdm = t.category === "admission";
+        const remaining = isAdm ? Math.max(0, t.quantity - (t.sold ?? 0)) : Infinity;
+        const soldOut = isAdm && remaining <= 0;
+        const lowStock = isAdm && remaining > 0 && remaining <= 10;
+        const atMax = (cart[t.id] || 0) >= remaining;
         if (opts && opts.length) {
           return (
             <div key={t.id} style={styles.chooseRow}>
@@ -207,21 +218,28 @@ export default function BuyBox({
                 Choose your price · 1 per person
                 {!t.absorbFee && fee > 0 ? `  ·  +$${fee} fee` : ""}
               </div>
-              <div style={styles.chips}>
-                {opts.map((o, i) => {
-                  const sel = (cart[t.id] || 0) > 0 && chosen[t.id] === o.price;
-                  return (
-                    <button
-                      key={`${o.label}-${o.price}-${i}`}
-                      onClick={() => selectChip(t.id, o.price)}
-                      style={{ ...styles.chip, ...(sel ? styles.chipSel : {}) }}
-                    >
-                      {o.label ? <span style={styles.chipLabel}>{o.label}</span> : null}
-                      <span style={styles.chipPrice}>${o.price.toFixed(0)}</span>
-                    </button>
-                  );
-                })}
-              </div>
+              {soldOut ? (
+                <div style={styles.soldOutNote}>Sold out</div>
+              ) : (
+                <>
+                  <div style={styles.chips}>
+                    {opts.map((o, i) => {
+                      const sel = (cart[t.id] || 0) > 0 && chosen[t.id] === o.price;
+                      return (
+                        <button
+                          key={`${o.label}-${o.price}-${i}`}
+                          onClick={() => selectChip(t.id, o.price)}
+                          style={{ ...styles.chip, ...(sel ? styles.chipSel : {}) }}
+                        >
+                          {o.label ? <span style={styles.chipLabel}>{o.label}</span> : null}
+                          <span style={styles.chipPrice}>${o.price.toFixed(0)}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {lowStock && <div style={styles.lowStockNote}>Only {remaining} left</div>}
+                </>
+              )}
             </div>
           );
         }
@@ -235,6 +253,10 @@ export default function BuyBox({
                   <span style={styles.feeNote}>{`  ·  +$${fee} fee`}</span>
                 ) : null}
               </div>
+              {soldOut && <div style={styles.soldOutNote}>Sold out</div>}
+              {!soldOut && lowStock && (
+                <div style={styles.lowStockNote}>Only {remaining} left</div>
+              )}
             </div>
             <div style={styles.stepper}>
               <button
@@ -246,7 +268,8 @@ export default function BuyBox({
               </button>
               <span style={styles.qty}>{cart[t.id] || 0}</span>
               <button
-                style={styles.stepBtn}
+                style={{ ...styles.stepBtn, opacity: soldOut || atMax ? 0.4 : 1 }}
+                disabled={soldOut || atMax}
                 onClick={() => setQty(t.id, (cart[t.id] || 0) + 1)}
                 aria-label={`Add ${t.name}`}
               >
@@ -432,6 +455,8 @@ const styles: Record<string, CSSProperties> = {
   tName: { fontSize: 16, fontWeight: 700, color: "#000" },
   tPrice: { fontSize: 14, color: "#666", marginTop: 2 },
   feeNote: { color: "#999" },
+  lowStockNote: { fontSize: 13, fontWeight: 700, color: "#B25E00", marginTop: 6 },
+  soldOutNote: { fontSize: 13, fontWeight: 700, color: "#C0322B", marginTop: 6 },
   stepper: { display: "flex", alignItems: "center", gap: 14 },
   chooseRow: {
     display: "flex",
