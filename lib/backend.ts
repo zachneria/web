@@ -61,6 +61,16 @@ export function previewOrder(eventId: string, body: unknown): Promise<Response> 
   });
 }
 
+// Free / $0 order (RSVP, or a code that zeroes the total) — no Stripe; issues
+// tickets immediately.
+export function createFreeOrder(eventId: string, body: unknown): Promise<Response> {
+  return fetch(`${API_BASE}/tickets/events/${eventId}/orders`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+}
+
 export function getOrder(token: string): Promise<Response> {
   return fetch(`${API_BASE}/tickets/order?token=${encodeURIComponent(token)}`);
 }

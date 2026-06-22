@@ -38,10 +38,12 @@ export default function BuyBox({
   eventId,
   tickets,
   fee,
+  isFree,
 }: {
   eventId: string;
   tickets: BuyTicketType[];
   fee: number;
+  isFree?: boolean;
 }) {
   const [cart, setCart] = useState<Record<string, number>>({});
   const [chosen, setChosen] = useState<Record<string, number>>({}); // choose-a-price
@@ -89,6 +91,7 @@ export default function BuyBox({
     let cap = MAX_PER_ORDER;
     if (t && t.category === "admission") {
       cap = Math.min(cap, Math.max(0, t.quantity - (t.sold ?? 0)));
+      if (isFree) cap = Math.min(cap, 2); // RSVP party cap (up to 2)
     }
     q = Math.min(q, cap);
     setCart((c) => ({ ...c, [id]: Math.max(0, q) }));
@@ -156,15 +159,35 @@ export default function BuyBox({
     setSubmitting(true);
     setError(null);
     try {
+      const body = JSON.stringify({
+        buyerName: name.trim(),
+        buyerEmail: email.trim().toLowerCase(),
+        items: itemsPayload(),
+        ...(applied ? { discountCode: applied.code } : {}),
+      });
+
+      // Free / RSVP (or a code that zeroes the total) → no Stripe; reserve and
+      // show the QR straight away.
+      if (isFree || effectiveTotal <= 0) {
+        const res = await fetch(`/api/events/${eventId}/order`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body,
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          setError(data.error || "Couldn't reserve your spot.");
+          return;
+        }
+        setIssued(data.tickets || []);
+        setStep("done");
+        return;
+      }
+
       const res = await fetch(`/api/events/${eventId}/intent`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          buyerName: name.trim(),
-          buyerEmail: email.trim().toLowerCase(),
-          items: itemsPayload(),
-          ...(applied ? { discountCode: applied.code } : {}),
-        }),
+        body,
       });
       const data = await res.json();
       if (!res.ok) {
@@ -369,9 +392,13 @@ export default function BuyBox({
       >
         {submitting
           ? "…"
-          : totals.count > 0
-            ? `Get tickets · ${money(effectiveTotal)}`
-            : "Get tickets"}
+          : isFree
+            ? totals.count > 0
+              ? `Reserve · ${totals.count} ${totals.count === 1 ? "spot" : "spots"}`
+              : "Reserve"
+            : totals.count > 0
+              ? `Get tickets · ${money(effectiveTotal)}`
+              : "Get tickets"}
       </button>
     </div>
   );

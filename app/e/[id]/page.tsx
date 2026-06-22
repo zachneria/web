@@ -95,7 +95,7 @@ export default async function EventPage({
         {ended ? (
           <p className="ended">This event has ended — ticket sales are closed.</p>
         ) : (
-          <BuyBox eventId={event.id} tickets={tickets} fee={fee} />
+          <BuyBox eventId={event.id} tickets={tickets} fee={fee} isFree={event.isFree} />
         )}
 
         {event.description && <p className="desc">{event.description}</p>}

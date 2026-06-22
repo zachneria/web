@@ -31,6 +31,7 @@ export interface BuyEvent {
   endTime?: string | null;
   doorsTime: string;
   capacity: number;
+  isFree?: boolean; // free/RSVP event — no fee, reserve up to 2
   status: "draft" | "published" | "cancelled";
   flyerUrl: string | null;
   ticketTypes: BuyTicketType[];
