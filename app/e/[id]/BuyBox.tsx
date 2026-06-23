@@ -68,6 +68,19 @@ export default function BuyBox({
   const totals = computeTotals(tickets, cart, fee, chosen);
   // Discount comes from the server preview; never below 0 (fee is never discounted).
   const effectiveTotal = Math.max(0, Math.round((totals.total - discount) * 100) / 100);
+
+  // Sequential tiers: fixed admission forms a price-ascending ladder; only the
+  // cheapest in-stock tier is buyable (choose-a-price / PWYW are independent).
+  const activeFixedTierId =
+    tickets
+      .filter(
+        (t) =>
+          t.category === "admission" &&
+          !(Array.isArray(t.priceOptions) && t.priceOptions.length) &&
+          !t.isPayWhatYouWant,
+      )
+      .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+      .find((t) => Math.max(0, t.quantity - (t.sold ?? 0)) > 0)?.id ?? null;
   const canBuy =
     totals.count > 0 && name.trim().length >= 2 && EMAIL_RE.test(email.trim());
 
@@ -232,12 +245,18 @@ export default function BuyBox({
       {tickets.map((t) => {
         const opts = Array.isArray(t.priceOptions) ? t.priceOptions : null;
         const isAdm = t.category === "admission";
+        const isChoose = !!(opts && opts.length);
         const remaining = isAdm ? Math.max(0, t.quantity - (t.sold ?? 0)) : Infinity;
         const soldOut = isAdm && remaining <= 0;
         const lowStock = isAdm && remaining > 0 && remaining <= 10;
         const cap = Math.min(MAX_PER_ORDER, remaining);
         const atMax = (cart[t.id] || 0) >= cap;
         const orderCapped = atMax && !soldOut && !lowStock && cap === MAX_PER_ORDER;
+        // Sequential ladder: a fixed admission tier that isn't the active
+        // (cheapest in-stock) one is locked until earlier tiers sell out.
+        const isLadder = isAdm && !isChoose && !t.isPayWhatYouWant;
+        const locked =
+          isLadder && !soldOut && activeFixedTierId != null && t.id !== activeFixedTierId;
         if (opts && opts.length) {
           return (
             <div key={t.id} style={styles.chooseRow}>
@@ -282,7 +301,10 @@ export default function BuyBox({
                 ) : null}
               </div>
               {soldOut && <div style={styles.soldOutNote}>Sold out</div>}
-              {!soldOut && lowStock && (
+              {locked && (
+                <div style={styles.lowStockNote}>Opens when earlier tiers sell out</div>
+              )}
+              {!soldOut && !locked && lowStock && (
                 <div style={styles.lowStockNote}>Only {remaining} left</div>
               )}
               {orderCapped && (
@@ -299,8 +321,8 @@ export default function BuyBox({
               </button>
               <span style={styles.qty}>{cart[t.id] || 0}</span>
               <button
-                style={{ ...styles.stepBtn, opacity: soldOut || atMax ? 0.4 : 1 }}
-                disabled={soldOut || atMax}
+                style={{ ...styles.stepBtn, opacity: soldOut || atMax || locked ? 0.4 : 1 }}
+                disabled={soldOut || atMax || locked}
                 onClick={() => setQty(t.id, (cart[t.id] || 0) + 1)}
                 aria-label={`Add ${t.name}`}
               >
