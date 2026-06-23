@@ -64,8 +64,15 @@ export default async function EventPage({
         <AppBanner eventId={event.id} />
 
         {event.flyerUrl && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img className="flyer" src={event.flyerUrl} alt={event.name} />
+          <div className="flyer-stage">
+            <div
+              className="flyer-bg"
+              style={{ backgroundImage: `url("${event.flyerUrl}")` }}
+              aria-hidden
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="flyer" src={event.flyerUrl} alt={event.name} />
+          </div>
         )}
 
         <div className="content">
@@ -98,7 +105,12 @@ export default async function EventPage({
           <BuyBox eventId={event.id} tickets={tickets} fee={fee} isFree={event.isFree} />
         )}
 
-        {event.description && <p className="desc">{event.description}</p>}
+        {event.description && (
+          <div className="desc-card">
+            <p className="desc-label">About this event</p>
+            <p className="desc">{event.description}</p>
+          </div>
+        )}
 
           {organizer && (
             <Link href={`/p/${organizer.id}`} className="more-from">
