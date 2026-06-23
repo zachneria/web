@@ -3,7 +3,7 @@ import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 export default function Home() {
   return (
     <>
-      <SiteHeader logo={false} />
+      <SiteHeader logo={false} wordmark={false} />
       <main className="home">
         <img className="home-icon" src="/logo.png" alt="fansonly" width={108} height={108} />
         <h1 className="logo">fansonly</h1>
