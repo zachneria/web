@@ -2,13 +2,15 @@ import Link from "next/link";
 
 // Shared branded header + footer so the event and promoter pages feel like one
 // cohesive fansonly experience (the homepage stays bespoke).
-export function SiteHeader() {
+export function SiteHeader({ logo = true }: { logo?: boolean }) {
   return (
     <header className="topbar">
       <div className="topbar-inner">
         <Link href="/" className="topbar-brand">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="" className="topbar-logo" />
+          {logo && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src="/logo.png" alt="" className="topbar-logo" />
+          )}
           <span className="topbar-word">fansonly</span>
         </Link>
       </div>
