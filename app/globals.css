@@ -192,6 +192,23 @@ a {
   color: #888;
   font-size: 14px;
 }
+.home p.home-pitch {
+  margin-top: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+}
+.home-invite {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #000;
+  border-bottom: 3px solid var(--brand);
+  padding-bottom: 3px;
+}
 .stores {
   display: flex;
   gap: 10px;
