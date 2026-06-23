@@ -5,11 +5,13 @@ import Link from "next/link";
 export function SiteHeader() {
   return (
     <header className="topbar">
-      <Link href="/" className="topbar-brand">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.png" alt="" className="topbar-logo" />
-        <span className="topbar-word">fansonly</span>
-      </Link>
+      <div className="topbar-inner">
+        <Link href="/" className="topbar-brand">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="" className="topbar-logo" />
+          <span className="topbar-word">fansonly</span>
+        </Link>
+      </div>
     </header>
   );
 }
@@ -17,8 +19,10 @@ export function SiteHeader() {
 export function SiteFooter() {
   return (
     <footer className="footer">
-      <span className="footer-word">fansonly</span>
-      <span className="footer-tag">Built for promoters and scene makers</span>
+      <div className="footer-inner">
+        <span className="footer-word">fansonly</span>
+        <span className="footer-tag">Built for promoters and scene makers</span>
+      </div>
     </footer>
   );
 }
