@@ -27,6 +27,17 @@ export default function Home() {
           Request an invite →
         </a>
 
+        <div className="dash-links">
+          <a className="dash-pill" href="/dashboard">
+            <strong>Promoter</strong>
+            <span>Dashboard →</span>
+          </a>
+          <a className="dash-pill soon" href="/talent">
+            <strong>Talent</strong>
+            <span>Coming soon</span>
+          </a>
+        </div>
+
         <div className="stores">
           <span className="store-pill">
             <strong>App Store</strong>
