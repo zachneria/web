@@ -66,7 +66,7 @@ export default function PromoterSettings() {
 
   return (
     <div style={{ maxWidth: 560, margin: "0 auto" }}>
-      <Link href="/dashboard" style={{ color: "#6C5CE7", fontWeight: 700, fontSize: 14 }}>
+      <Link href="/dashboard" style={{ color: "#161616", fontWeight: 700, fontSize: 14 }}>
         ← Dashboard
       </Link>
       <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px" }}>Promoter Settings</h1>
@@ -135,7 +135,7 @@ export default function PromoterSettings() {
                   href={`https://fansonly.live/p/${savedHandle}`}
                   target="_blank"
                   rel="noreferrer"
-                  style={{ color: "#6C5CE7", fontWeight: 600, fontSize: 14 }}
+                  style={{ color: "#161616", fontWeight: 600, fontSize: 14 }}
                 >
                   View page ↗
                 </a>

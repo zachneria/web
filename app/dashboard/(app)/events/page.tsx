@@ -26,7 +26,7 @@ export default async function DashboardEvents() {
 
   return (
     <>
-      <Link href="/dashboard" style={{ color: "#6C5CE7", fontWeight: 700, fontSize: 14 }}>
+      <Link href="/dashboard" style={{ color: "#161616", fontWeight: 700, fontSize: 14 }}>
         ← Dashboard
       </Link>
       <h1 style={{ fontSize: 26, fontWeight: 800, margin: "12px 0 4px", color: "#111" }}>
