@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const VALID_HANDLE = /^[a-z0-9-]{3,30}$/;
 
@@ -13,9 +13,6 @@ export default function PromoterSettings() {
   const [loaded, setLoaded] = useState(false);
   const [savingHandle, setSavingHandle] = useState(false);
   const [handleMsg, setHandleMsg] = useState<{ ok: boolean; text: string } | null>(null);
-  const [logoBusy, setLogoBusy] = useState(false);
-  const [logoMsg, setLogoMsg] = useState<string | null>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     (async () => {
@@ -59,44 +56,6 @@ export default function PromoterSettings() {
     }
   };
 
-  const onPickFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setLogoBusy(true);
-    setLogoMsg(null);
-    try {
-      const res = await fetch("/api/dashboard/logo", {
-        method: "POST",
-        headers: { "Content-Type": file.type },
-        body: file,
-      });
-      const d = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        setLogoMsg(d.error || "Upload failed.");
-        return;
-      }
-      setLogoUrl(d.logoUrl);
-    } finally {
-      setLogoBusy(false);
-      if (fileRef.current) fileRef.current.value = "";
-    }
-  };
-
-  const removeLogo = async () => {
-    setLogoBusy(true);
-    setLogoMsg(null);
-    try {
-      const res = await fetch("/api/dashboard/profile", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ logoUrl: null }),
-      });
-      if (res.ok) setLogoUrl(null);
-    } finally {
-      setLogoBusy(false);
-    }
-  };
-
   const card: React.CSSProperties = {
     background: "#fff",
     border: "1px solid #eee",
@@ -116,59 +75,39 @@ export default function PromoterSettings() {
         <p style={{ color: "#999" }}>Loading…</p>
       ) : (
         <>
-          {/* Logo */}
+          {/* Logo (display only — upload your logo in the fansonly app) */}
           <div style={{ ...card, textAlign: "center" }}>
-            <div style={{ marginBottom: 14 }}>
-              {logoUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={logoUrl}
-                  alt=""
-                  width={96}
-                  height={96}
-                  style={{ borderRadius: "50%", objectFit: "cover", border: "3px solid #F5E642", background: "#fff" }}
-                />
-              ) : (
-                <div
-                  style={{
-                    width: 96,
-                    height: 96,
-                    borderRadius: "50%",
-                    background: "#F5E642",
-                    color: "#000",
-                    fontSize: 40,
-                    fontWeight: 800,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    margin: "0 auto",
-                  }}
-                >
-                  {(name || "?").charAt(0).toUpperCase()}
-                </div>
-              )}
-            </div>
-            <input
-              ref={fileRef}
-              type="file"
-              accept="image/png,image/jpeg,image/webp"
-              onChange={onPickFile}
-              style={{ display: "none" }}
-            />
-            <button
-              onClick={() => fileRef.current?.click()}
-              disabled={logoBusy}
-              style={btn}
-            >
-              {logoBusy ? "Uploading…" : logoUrl ? "Change logo" : "Add your logo"}
-            </button>
-            {logoUrl && !logoBusy ? (
-              <button onClick={removeLogo} style={{ ...btnGhost, marginLeft: 8 }}>
-                Remove
-              </button>
-            ) : null}
-            <p style={{ fontSize: 12, color: "#999", marginTop: 10 }}>Square PNG, JPEG, or WebP.</p>
-            {logoMsg ? <p style={{ color: "#C0322B", fontSize: 13, marginTop: 6 }}>{logoMsg}</p> : null}
+            {logoUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={logoUrl}
+                alt=""
+                width={96}
+                height={96}
+                style={{ borderRadius: "50%", objectFit: "cover", border: "3px solid #F5E642", background: "#fff" }}
+              />
+            ) : (
+              <div
+                style={{
+                  width: 96,
+                  height: 96,
+                  borderRadius: "50%",
+                  background: "#F5E642",
+                  color: "#000",
+                  fontSize: 40,
+                  fontWeight: 800,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "0 auto",
+                }}
+              >
+                {(name || "?").charAt(0).toUpperCase()}
+              </div>
+            )}
+            <p style={{ fontSize: 13, color: "#999", marginTop: 12 }}>
+              {logoUrl ? "Your logo." : "No logo yet."} Upload or change it in the fansonly app.
+            </p>
           </div>
 
           {/* Promoter page handle */}
@@ -218,16 +157,6 @@ const btn: React.CSSProperties = {
   background: "#F5E642",
   color: "#000",
   border: "none",
-  borderRadius: 10,
-  padding: "10px 18px",
-  fontWeight: 700,
-  fontSize: 14,
-  cursor: "pointer",
-};
-const btnGhost: React.CSSProperties = {
-  background: "transparent",
-  color: "#C0322B",
-  border: "1.5px solid #f0c5c2",
   borderRadius: 10,
   padding: "10px 18px",
   fontWeight: 700,
