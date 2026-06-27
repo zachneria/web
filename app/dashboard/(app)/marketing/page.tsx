@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
-const AI = "#6C5CE7";
+const AI = "#F5E642"; // brand yellow — AI accent
+const AI_BG = "#161616"; // dark AI card (on-brand dark+yellow)
+const INK = "#161616"; // readable link / text color
 
 interface PickEvent {
   id: string;
@@ -248,7 +250,7 @@ export default function MarketingComposer() {
 
   return (
     <div style={{ maxWidth: 620, margin: "0 auto" }}>
-      <Link href="/dashboard" style={{ color: AI, fontWeight: 700, fontSize: 14 }}>
+      <Link href="/dashboard" style={{ color: INK, fontWeight: 700, fontSize: 14 }}>
         ← Dashboard
       </Link>
       <h1 style={{ fontSize: 26, fontWeight: 800, margin: "12px 0 4px" }}>Email your fans</h1>
@@ -274,7 +276,7 @@ export default function MarketingComposer() {
       </div>
 
       {/* AI card */}
-      <div style={{ background: "#F3F1FF", border: `1.5px solid #E2DDFF`, borderRadius: 12, padding: 16, marginBottom: 16 }}>
+      <div style={{ background: AI_BG, borderRadius: 12, padding: 16, marginBottom: 16 }}>
         <div style={{ fontWeight: 800, color: AI, marginBottom: 8 }}>✨ Draft with AI</div>
         <textarea
           style={{ ...input, minHeight: 60, background: "#fff" }}
@@ -285,7 +287,7 @@ export default function MarketingComposer() {
         <button
           onClick={handleDraft}
           disabled={drafting}
-          style={{ marginTop: 8, width: "100%", background: AI, color: "#fff", border: "none", borderRadius: 10, padding: 12, fontWeight: 700, fontSize: 15, cursor: "pointer" }}
+          style={{ marginTop: 8, width: "100%", background: AI, color: "#000", border: "none", borderRadius: 10, padding: 12, fontWeight: 700, fontSize: 15, cursor: "pointer" }}
         >
           {drafting ? "Drafting…" : "✨ Draft it"}
         </button>
@@ -300,7 +302,7 @@ export default function MarketingComposer() {
                   key={t.tone}
                   disabled={!!rewriting}
                   onClick={() => handleRewrite(t.tone)}
-                  style={{ ...chip, borderColor: AI, color: AI }}
+                  style={{ ...chip, background: "transparent", borderColor: AI, color: AI }}
                 >
                   {rewriting === t.tone ? "…" : t.label}
                 </button>
@@ -309,7 +311,7 @@ export default function MarketingComposer() {
             <button
               onClick={handleSubjects}
               disabled={loadingSubjects}
-              style={{ marginTop: 10, width: "100%", background: "#fff", color: AI, border: `1.5px solid #E2DDFF`, borderRadius: 10, padding: 10, fontWeight: 700, cursor: "pointer" }}
+              style={{ marginTop: 10, width: "100%", background: "transparent", color: AI, border: `1.5px solid ${AI}`, borderRadius: 10, padding: 10, fontWeight: 700, cursor: "pointer" }}
             >
               {loadingSubjects ? "Thinking…" : "💡 Subject ideas"}
             </button>
@@ -322,7 +324,7 @@ export default function MarketingComposer() {
                       setSubject(s);
                       setSubjectOptions([]);
                     }}
-                    style={{ textAlign: "left", background: "#fff", border: `1px solid #E2DDFF`, borderRadius: 10, padding: "10px 12px", fontSize: 14, cursor: "pointer" }}
+                    style={{ textAlign: "left", background: "#fff", border: "1px solid #444", borderRadius: 10, padding: "10px 12px", fontSize: 14, cursor: "pointer" }}
                   >
                     ↑ {s}
                   </button>
@@ -366,15 +368,15 @@ export default function MarketingComposer() {
                 display: "flex",
                 alignItems: "center",
                 gap: 10,
-                background: on ? "#F3F1FF" : "#fff",
-                border: `1px solid ${on ? "#C9BFFF" : "#eee"}`,
+                background: on ? "#FBF6DA" : "#fff",
+                border: `1px solid ${on ? "#EFE7C2" : "#eee"}`,
                 borderRadius: 10,
                 padding: "10px 12px",
                 cursor: "pointer",
                 textAlign: "left",
               }}
             >
-              <span style={{ color: on ? AI : "#bbb", fontWeight: 800 }}>{on ? "☑" : "☐"}</span>
+              <span style={{ color: on ? INK : "#bbb", fontWeight: 800 }}>{on ? "☑" : "☐"}</span>
               <span style={{ flex: 1, fontSize: 14, fontWeight: 600 }}>{e.name}</span>
               <span style={{ fontSize: 12, color: "#999" }}>{fmtDate(e.eventDate)}</span>
             </button>
