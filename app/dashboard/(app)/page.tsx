@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { getOrgClaims } from "@/lib/org-api";
+import { getOrgClaims, orgFetch } from "@/lib/org-api";
 
 export const dynamic = "force-dynamic";
 
@@ -15,29 +15,58 @@ const ROWS = [
 ];
 
 export default async function DashboardHub() {
-  const { email, name } = await getOrgClaims();
+  const { email, name, sub } = await getOrgClaims();
   const initial = (name || email || "?").charAt(0).toUpperCase();
+
+  // Pull the promoter logo (set in Promoter Settings) for the avatar.
+  let logoUrl: string | null = null;
+  if (sub) {
+    try {
+      const r = await orgFetch(`/users/${sub}`);
+      if (r.ok) logoUrl = (await r.json())?.logoUrl ?? null;
+    } catch {
+      /* best-effort — fall back to the initial */
+    }
+  }
 
   return (
     <div style={{ maxWidth: 560, margin: "0 auto" }}>
       <div style={{ textAlign: "center", padding: "16px 0 28px" }}>
-        <div
-          style={{
-            width: 72,
-            height: 72,
-            borderRadius: 36,
-            background: "#F5E642",
-            color: "#000",
-            fontSize: 30,
-            fontWeight: 800,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "0 auto 12px",
-          }}
-        >
-          {initial}
-        </div>
+        {logoUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={logoUrl}
+            alt=""
+            width={72}
+            height={72}
+            style={{
+              borderRadius: 36,
+              objectFit: "cover",
+              border: "3px solid #F5E642",
+              background: "#fff",
+              margin: "0 auto 12px",
+              display: "block",
+            }}
+          />
+        ) : (
+          <div
+            style={{
+              width: 72,
+              height: 72,
+              borderRadius: 36,
+              background: "#F5E642",
+              color: "#000",
+              fontSize: 30,
+              fontWeight: 800,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "0 auto 12px",
+            }}
+          >
+            {initial}
+          </div>
+        )}
         <div style={{ fontSize: 22, fontWeight: 800, color: "#111" }}>{name || "Organizer"}</div>
         {email ? <div style={{ fontSize: 14, color: "#777", marginTop: 2 }}>{email}</div> : null}
       </div>
