@@ -32,6 +32,11 @@ export function SiteFooter() {
       <div className="footer-inner">
         <span className="footer-word">fansonly</span>
         <span className="footer-tag">Built for promoters and scene makers</span>
+        <span className="footer-links">
+          <Link href="/terms">Terms</Link>
+          {" · "}
+          <Link href="/privacy">Privacy</Link>
+        </span>
       </div>
     </footer>
   );
