@@ -10,8 +10,8 @@ export const dynamic = "force-dynamic";
 const ROWS = [
   { href: "/dashboard/events", icon: "🎟️", label: "Your Events", hint: "Sales + stats at a glance", live: true },
   { href: "/dashboard/marketing", icon: "📣", label: "Marketing", hint: "Email your fans — blasts + AI draft", live: true },
-  { href: "/dashboard/promoter-settings", icon: "🌐", label: "Promoter Settings", hint: "Your promoter page + logo", live: false },
-  { href: "/dashboard/account-settings", icon: "⚙️", label: "Account Settings", hint: "Email + payouts", live: false },
+  { href: "/dashboard/promoter-settings", icon: "🌐", label: "Promoter Settings", hint: "Your promoter page + logo", live: true },
+  { href: "/dashboard/account-settings", icon: "⚙️", label: "Account Settings", hint: "Email + payouts", live: true },
 ];
 
 export default async function DashboardHub() {

@@ -21,26 +21,24 @@ export async function orgFetch(path: string, init?: RequestInit): Promise<Respon
       headers: { "Content-Type": "application/json" },
     });
   }
-  return fetch(`${API_BASE}${path}`, {
-    ...init,
-    headers: {
-      ...(init?.headers || {}),
-      Authorization: `Bearer ${idToken}`,
-      ...(init?.body ? { "Content-Type": "application/json" } : {}),
-    },
-    cache: "no-store",
-  });
+  // The users service authorizes via x-auth-token; everything else uses
+  // Authorization (mirrors the app's api client + routing rule #2).
+  const headers: Record<string, string> = path.startsWith("/users")
+    ? { "x-auth-token": `Bearer ${idToken}` }
+    : { Authorization: `Bearer ${idToken}` };
+  if (init?.body) headers["Content-Type"] = "application/json";
+  return fetch(`${API_BASE}${path}`, { ...init, headers, cache: "no-store" });
 }
 
 // The signed-in organizer's display info, read from the id token claims (the
 // token is our own httpOnly cookie, so no verification needed just to display).
-export async function getOrgClaims(): Promise<{ email?: string; name?: string }> {
+export async function getOrgClaims(): Promise<{ email?: string; name?: string; sub?: string }> {
   const store = await cookies();
   const tok = store.get(ID_COOKIE)?.value;
   if (!tok) return {};
   try {
     const payload = JSON.parse(Buffer.from(tok.split(".")[1], "base64").toString());
-    return { email: payload.email, name: payload.name };
+    return { email: payload.email, name: payload.name, sub: payload.sub };
   } catch {
     return {};
   }
