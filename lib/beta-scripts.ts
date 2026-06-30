@@ -218,11 +218,19 @@ screenshot if you can. One report per issue.
 1. In the door scanner, tap **Search by name**, type part of a name, check them in.
 2. **Expected:** Checked in without scanning; the row shows "In."
 
-### DOOR-04 — Drinks unlock after check-in
-1. As a checked-in attendee, open the event in the app.
-2. **Expected:** Drinks/credits become buyable (locked before check-in).
+### DOOR-04 — Drinks button appears after check-in
+1. Be a **checked-in attendee** (your ticket was scanned in DOOR-01), on the **same phone that holds the ticket**.
+2. **Bring the app back to the foreground** (or relaunch it) so it picks up your check-in.
+3. Look at the bottom bar from any tab.
+4. **Expected:** A **teal Drinks button** (wine-glass icon) appears in the **middle of the bar**, between Tickets and My Events, and stays there on every tab. (Before check-in it isn't there.)
 
-### DOOR-05 — Bar / Merch modes
+### DOOR-05 — Order a drink / credit
+1. Tap the teal **Drinks** button.
+2. **Expected:** It opens your event scrolled to **"At the venue,"** with **Drinks and Credits now unlocked** (they were locked before check-in).
+3. Add a drink, check out with the test card \`4242 4242 4242 4242\`.
+4. **Expected:** You get a **drink pass with its own QR**, kept in the app (not emailed). Redeem it in DOOR-06.
+
+### DOOR-06 — Bar / Merch modes
 1. Scanner Mode, **Beverages** (and **Merch**). Scan a buyer's drink/merch pass.
 2. **Expected:** Redeems the right item and shows the allotment.
 
@@ -272,6 +280,7 @@ screenshot if you can. One report per issue.
 
 - **Totals match:** the price before paying equals what's charged (especially with discounts and multiple tickets).
 - **Fee is never discounted:** a code lowers ticket price only.
+- **Drinks button:** shows in the bottom bar after door check-in (re-open the app to see it), gone before.
 - **Layout:** nothing cut off by the notch, home bar, or system nav (note your device).
 - **Speed:** flag anything slow or frozen (especially the door scanner and checkout).
 - **Email:** tickets actually arrive.
