@@ -113,13 +113,13 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
         {TILES.map((t) =>
           t.href ? (
             <Link key={t.key} href={`/dashboard/events/${id}/${t.href}`} style={tileLink}>
-              <div style={tile}>
+              <div style={tileLive}>
                 <span style={{ fontSize: 26 }}>{t.icon}</span>
                 <span style={tileLabel}>{t.label}</span>
               </div>
             </Link>
           ) : (
-            <div key={t.key} style={{ ...tile, opacity: 0.55 }}>
+            <div key={t.key} style={tileSoon}>
               <span style={{ fontSize: 26 }}>{t.icon}</span>
               <span style={tileLabel}>{t.label}</span>
               <span style={soonTag}>In app</span>
@@ -146,9 +146,8 @@ function Stat({ label, value }: { label: string; value: number | string }) {
 }
 
 const tileLink: React.CSSProperties = { textDecoration: "none", color: "inherit" };
-const tile: React.CSSProperties = {
+const tileBase: React.CSSProperties = {
   position: "relative",
-  background: "#F5F5F5",
   borderRadius: 16,
   minHeight: 96,
   display: "flex",
@@ -157,7 +156,20 @@ const tile: React.CSSProperties = {
   justifyContent: "center",
   gap: 8,
 };
-const tileLabel: React.CSSProperties = { fontSize: 14, fontWeight: 600, color: "#111" };
+// Live tiles = brand yellow so they stand out on the off-white page.
+const tileLive: React.CSSProperties = {
+  ...tileBase,
+  background: "#F5E642",
+  border: "1px solid #E4D400",
+};
+// Not-yet-built ("In app") tiles stay muted grey to read as unavailable.
+const tileSoon: React.CSSProperties = {
+  ...tileBase,
+  background: "#F0F0F0",
+  border: "1px solid #E5E5E5",
+  opacity: 0.7,
+};
+const tileLabel: React.CSSProperties = { fontSize: 14, fontWeight: 700, color: "#161616" };
 const soonTag: React.CSSProperties = {
   position: "absolute",
   top: 8,
