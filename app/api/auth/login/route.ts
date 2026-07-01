@@ -26,13 +26,11 @@ export async function POST(req: NextRequest) {
   try {
     const r = await cognitoLogin(email.trim(), password);
     if (r.challenge === "NEW_PASSWORD_REQUIRED") {
-      // First-login password set isn't on web yet — do it in the app once.
+      // First login (invite flow): hand the client the session so it can prompt
+      // for a new password and complete via /api/auth/new-password.
       return NextResponse.json(
-        {
-          error:
-            "Finish setting up your password in the fansonly app first, then sign in here.",
-        },
-        { status: 409 },
+        { challenge: "NEW_PASSWORD_REQUIRED", session: r.session, email: email.trim() },
+        { status: 200 },
       );
     }
     if (!r.idToken || !r.refreshToken) {

@@ -38,8 +38,10 @@ async function idp(target: string, body: unknown): Promise<any> {
 export interface LoginResult {
   idToken: string;
   refreshToken: string;
-  // present instead of tokens when the account must set a new password first
+  // present instead of tokens when the account must set a new password first;
+  // `session` is the opaque handle needed to answer the challenge.
   challenge?: "NEW_PASSWORD_REQUIRED";
+  session?: string;
 }
 
 export async function cognitoLogin(email: string, password: string): Promise<LoginResult> {
@@ -49,9 +51,40 @@ export async function cognitoLogin(email: string, password: string): Promise<Log
     AuthParameters: { USERNAME: email, PASSWORD: password },
   });
   if (data.ChallengeName === "NEW_PASSWORD_REQUIRED") {
-    return { idToken: "", refreshToken: "", challenge: "NEW_PASSWORD_REQUIRED" };
+    return {
+      idToken: "",
+      refreshToken: "",
+      challenge: "NEW_PASSWORD_REQUIRED",
+      session: data.Session,
+    };
   }
   const r = data.AuthenticationResult || {};
+  return { idToken: r.IdToken, refreshToken: r.RefreshToken };
+}
+
+// Answer the first-login NEW_PASSWORD_REQUIRED challenge (invite flow: the
+// organizer was created with a temporary password and must set a real one).
+// Returns real session tokens on success, same shape as a normal login.
+export async function cognitoCompleteNewPassword(
+  email: string,
+  session: string,
+  newPassword: string,
+): Promise<{ idToken: string; refreshToken: string }> {
+  const data = await idp("RespondToAuthChallenge", {
+    ClientId: CLIENT_ID,
+    ChallengeName: "NEW_PASSWORD_REQUIRED",
+    Session: session,
+    ChallengeResponses: { USERNAME: email, NEW_PASSWORD: newPassword },
+  });
+  const r = data.AuthenticationResult || {};
+  if (!r.IdToken || !r.RefreshToken) {
+    // A chained challenge (e.g. required attributes) — not expected for this pool.
+    const e = new Error("Password set, but sign-in didn't complete.") as Error & {
+      code?: string;
+    };
+    e.code = data.ChallengeName || "UNEXPECTED_CHALLENGE";
+    throw e;
+  }
   return { idToken: r.IdToken, refreshToken: r.RefreshToken };
 }
 
