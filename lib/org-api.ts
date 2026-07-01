@@ -59,6 +59,9 @@ export interface DashSummary {
   capacity?: number;
   checkedIn?: number;
   guests?: number;
+  drinks?: number;
+  merch?: number;
+  tiers?: { name: string; sold: number; quantity: number }[];
 }
 
 export async function getDashboard(): Promise<{
@@ -73,11 +76,17 @@ export async function getDashboard(): Promise<{
   let summary: Record<string, DashSummary> = {};
   if (sumRes.ok) {
     const raw = await sumRes.json().catch(() => null);
-    if (Array.isArray(raw)) {
-      summary = Object.fromEntries(raw.map((s: DashSummary & { id: string }) => [s.id, s]));
-    } else if (raw && typeof raw === "object") {
-      summary = raw;
-    }
+    // The endpoint returns { events: [{ eventId, sold, capacity, checkedIn,
+    // tiers, guests, drinks, merch }, ...] }. Key it by eventId (fall back to a
+    // bare array / id for safety).
+    const rows: (DashSummary & { eventId?: string; id?: string })[] = Array.isArray(raw)
+      ? raw
+      : Array.isArray(raw?.events)
+        ? raw.events
+        : [];
+    summary = Object.fromEntries(
+      rows.filter((r) => r.eventId || r.id).map((r) => [r.eventId ?? r.id, r]),
+    );
   }
   return { events, summary };
 }
