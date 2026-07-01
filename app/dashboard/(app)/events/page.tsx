@@ -179,8 +179,12 @@ export default async function DashboardEvents() {
             const s = summary[e.id] || {};
             const pill = STATUS[e.status] || STATUS.draft;
             return (
-              <div
+              <Link
                 key={e.id}
+                href={`/dashboard/events/${e.id}`}
+                style={{ textDecoration: "none", color: "inherit", display: "block" }}
+              >
+              <div
                 style={{
                   background: "#fff",
                   border: "1px solid #eee",
@@ -233,6 +237,7 @@ export default async function DashboardEvents() {
                   {typeof s.sold === "number" ? <EventStats s={s} /> : null}
                 </div>
               </div>
+              </Link>
             );
           })}
         </div>
