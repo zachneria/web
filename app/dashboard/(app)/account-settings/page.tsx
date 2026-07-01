@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { getOrgClaims, orgFetch } from "@/lib/org-api";
+import { PayoutsConnect } from "./PayoutsConnect";
 
 export const dynamic = "force-dynamic";
 
@@ -20,8 +21,13 @@ const label: React.CSSProperties = {
   marginBottom: 8,
 };
 
-export default async function AccountSettings() {
+export default async function AccountSettings({
+  searchParams,
+}: {
+  searchParams: Promise<{ connect?: string }>;
+}) {
   const { email } = await getOrgClaims();
+  const { connect: justReturned = null } = await searchParams;
   let connect: { connected?: boolean; onboarded?: boolean } | null = null;
   try {
     const r = await orgFetch("/payouts/connect/status");
@@ -47,16 +53,11 @@ export default async function AccountSettings() {
 
       <div style={card}>
         <div style={label}>Get Paid</div>
-        {connect?.connected ? (
-          <div style={{ color: "#1B873F", fontWeight: 700 }}>✓ Payouts connected</div>
-        ) : (
-          <div style={{ color: "#666", fontSize: 14, lineHeight: 1.6 }}>
-            {connect?.onboarded
-              ? "Almost there — finish verifying in the fansonly app to receive payouts."
-              : "Not connected yet. Connect your bank in the fansonly app to receive ticket revenue."}{" "}
-            <span style={{ color: "#999" }}>(Setup on web is coming soon.)</span>
-          </div>
-        )}
+        <PayoutsConnect
+          connected={!!connect?.connected}
+          onboarded={!!connect?.onboarded}
+          justReturned={justReturned}
+        />
       </div>
     </div>
   );

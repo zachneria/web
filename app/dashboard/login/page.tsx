@@ -9,6 +9,10 @@ export default function DashboardLogin() {
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
+  // First-login (invite) NEW_PASSWORD_REQUIRED challenge.
+  const [session, setSession] = useState<string | null>(null);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,10 +29,50 @@ export default function DashboardLogin() {
         setErr(data.error || "Sign-in failed.");
         return;
       }
+      if (data.challenge === "NEW_PASSWORD_REQUIRED") {
+        // Switch to "set your password" for this first-login account.
+        setSession(data.session);
+        setPassword("");
+        return;
+      }
       router.replace("/dashboard");
       router.refresh();
     } catch {
       setErr("Couldn't sign in. Try again.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const submitNewPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErr("");
+    if (newPassword.length < 8) {
+      setErr("Password must be at least 8 characters.");
+      return;
+    }
+    if (newPassword !== confirm) {
+      setErr("Passwords don't match.");
+      return;
+    }
+    setBusy(true);
+    try {
+      const res = await fetch("/api/auth/new-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, session, newPassword }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setErr(data.error || "Couldn't set your password.");
+        // Session expired → send them back to the sign-in form to restart.
+        if (/session expired/i.test(data.error || "")) setSession(null);
+        return;
+      }
+      router.replace("/dashboard");
+      router.refresh();
+    } catch {
+      setErr("Couldn't set your password. Try again.");
     } finally {
       setBusy(false);
     }
@@ -46,7 +90,7 @@ export default function DashboardLogin() {
       }}
     >
       <form
-        onSubmit={submit}
+        onSubmit={session ? submitNewPassword : submit}
         style={{
           width: "100%",
           maxWidth: 380,
@@ -61,36 +105,73 @@ export default function DashboardLogin() {
           <img src="/icon.png" alt="" width={32} height={32} style={{ borderRadius: 7 }} />
           <span style={{ fontWeight: 800, fontSize: 20, letterSpacing: -0.4 }}>fansonly</span>
         </div>
-        <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px" }}>Organizer sign in</h1>
-        <p style={{ color: "#777", fontSize: 14, margin: "0 0 20px" }}>
-          Use your fansonly organizer account.
-        </p>
 
-        <label style={labelStyle}>Email</label>
-        <input
-          type="email"
-          autoCapitalize="none"
-          autoComplete="email"
-          value={email}
-          onChange={(ev) => setEmail(ev.target.value)}
-          style={inputStyle}
-        />
-        <label style={labelStyle}>Password</label>
-        <input
-          type="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={(ev) => setPassword(ev.target.value)}
-          style={inputStyle}
-        />
+        {session ? (
+          <>
+            <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px" }}>Set your password</h1>
+            <p style={{ color: "#777", fontSize: 14, margin: "0 0 20px" }}>
+              First time in — choose a password for <strong>{email}</strong>.
+            </p>
 
-        {err ? (
-          <p style={{ color: "#C0322B", fontSize: 13, margin: "12px 0 0" }}>{err}</p>
-        ) : null}
+            <label style={labelStyle}>New password</label>
+            <input
+              type="password"
+              autoComplete="new-password"
+              value={newPassword}
+              onChange={(ev) => setNewPassword(ev.target.value)}
+              style={inputStyle}
+            />
+            <label style={labelStyle}>Confirm password</label>
+            <input
+              type="password"
+              autoComplete="new-password"
+              value={confirm}
+              onChange={(ev) => setConfirm(ev.target.value)}
+              style={inputStyle}
+            />
 
-        <button type="submit" disabled={busy} style={buttonStyle}>
-          {busy ? "Signing in…" : "Sign in"}
-        </button>
+            {err ? (
+              <p style={{ color: "#C0322B", fontSize: 13, margin: "12px 0 0" }}>{err}</p>
+            ) : null}
+
+            <button type="submit" disabled={busy} style={buttonStyle}>
+              {busy ? "Saving…" : "Set password & sign in"}
+            </button>
+          </>
+        ) : (
+          <>
+            <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px" }}>Organizer sign in</h1>
+            <p style={{ color: "#777", fontSize: 14, margin: "0 0 20px" }}>
+              Use your fansonly organizer account.
+            </p>
+
+            <label style={labelStyle}>Email</label>
+            <input
+              type="email"
+              autoCapitalize="none"
+              autoComplete="email"
+              value={email}
+              onChange={(ev) => setEmail(ev.target.value)}
+              style={inputStyle}
+            />
+            <label style={labelStyle}>Password</label>
+            <input
+              type="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(ev) => setPassword(ev.target.value)}
+              style={inputStyle}
+            />
+
+            {err ? (
+              <p style={{ color: "#C0322B", fontSize: 13, margin: "12px 0 0" }}>{err}</p>
+            ) : null}
+
+            <button type="submit" disabled={busy} style={buttonStyle}>
+              {busy ? "Signing in…" : "Sign in"}
+            </button>
+          </>
+        )}
       </form>
     </div>
   );
