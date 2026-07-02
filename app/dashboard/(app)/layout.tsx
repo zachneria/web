@@ -28,7 +28,7 @@ export default function DashboardLayout({
           }}
         >
           <Link
-            href="/dashboard"
+            href="/"
             style={{
               display: "flex",
               alignItems: "center",
