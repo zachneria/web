@@ -193,10 +193,11 @@
   gap: 18px;
 }
 .feature {
-  background: #fff;
-  border: 1px solid #eee;
+  background: #f6ea8a;
+  border: 1px solid #ecdd6a;
   border-radius: 16px;
   padding: 22px;
+  box-shadow: 0 7px 20px rgba(245, 230, 66, 0.18);
 }
 .featureIcon {
   font-size: 24px;
@@ -205,11 +206,12 @@
   font-size: 16px;
   font-weight: 800;
   margin: 10px 0 5px;
+  color: #161616;
 }
 .featureBody {
   font-size: 14px;
   line-height: 1.55;
-  color: #666;
+  color: rgba(0, 0, 0, 0.72);
 }
 
 /* ---- How it works ---- */
