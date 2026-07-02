@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { EventDetail, DetailSummary, STATUS, card, fmtDate, fmtTime, getJSON, money } from "./_shared";
+import { PublishToggle } from "./PublishToggle";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +16,7 @@ const TILES: { key: string; label: string; icon: string; href?: string }[] = [
   { key: "discounts", label: "Discounts", icon: "🏷️" },
   { key: "passports", label: "Passports", icon: "⭐" },
   { key: "message", label: "Message", icon: "✉️" },
-  { key: "edit", label: "Edit", icon: "✏️" },
+  { key: "edit", label: "Edit", icon: "✏️", href: "edit" },
 ];
 
 export default async function EventHub({ params }: { params: Promise<{ id: string }> }) {
@@ -126,6 +127,10 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
             </div>
           ),
         )}
+      </div>
+
+      <div style={{ marginTop: 20 }}>
+        <PublishToggle id={event.id} status={event.status} />
       </div>
 
       <div style={{ color: "#999", fontSize: 13, margin: "16px 2px 0", lineHeight: 1.6 }}>
