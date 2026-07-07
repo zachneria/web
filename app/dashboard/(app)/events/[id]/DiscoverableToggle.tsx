@@ -60,7 +60,15 @@ export function DiscoverableToggle({ id, discoverable }: { id: string; discovera
           <span style={{ display: "block", fontSize: 15, fontWeight: 700, color: "#F2F2F2" }}>
             Discoverable in search
           </span>
-          <span style={{ display: "block", fontSize: 13, color: "#8F8F8F", marginTop: 2 }}>
+          <span
+            style={{
+              display: "block",
+              fontSize: 13,
+              // Teal when discoverable, red when hidden — reinforces the state.
+              color: on ? "#0FA7B5" : "#C0322B",
+              marginTop: 2,
+            }}
+          >
             {on
               ? "Listed publicly in Find Events"
               : "Not discoverable — link-only, hidden from Find Events"}
