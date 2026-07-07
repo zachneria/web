@@ -61,7 +61,9 @@ export function DiscoverableToggle({ id, discoverable }: { id: string; discovera
             Discoverable in search
           </span>
           <span style={{ display: "block", fontSize: 13, color: "#8F8F8F", marginTop: 2 }}>
-            {on ? "Listed publicly in Find Events" : "Link-only — hidden from search"}
+            {on
+              ? "Listed publicly in Find Events"
+              : "Not discoverable — link-only, hidden from Find Events"}
           </span>
         </span>
         <span
@@ -70,9 +72,8 @@ export function DiscoverableToggle({ id, discoverable }: { id: string; discovera
             width: 46,
             height: 28,
             borderRadius: 999,
-            // Darker on-brand yellow (BrandDark) — the full #F5E642 track blows
-            // out against the dark hub; this reads calmer while staying on-brand.
-            background: on ? "#D4C500" : "#3A3A3A",
+            // Teal (the drink accent) when on — matches the tile hover; grey off.
+            background: on ? "#0FA7B5" : "#3A3A3A",
             position: "relative",
             transition: "background 150ms",
           }}
@@ -85,9 +86,8 @@ export function DiscoverableToggle({ id, discoverable }: { id: string; discovera
               width: 22,
               height: 22,
               borderRadius: 999,
-              // Dark thumb on the yellow track (like dark text on brand yellow);
-              // light thumb on the grey off-track so it stays visible.
-              background: on ? "#161616" : "#F2F2F2",
+              // White knob — prominent on the teal track and the grey off-track.
+              background: "#FFFFFF",
               transition: "left 150ms, background 150ms",
             }}
           />
