@@ -70,7 +70,9 @@ export function DiscoverableToggle({ id, discoverable }: { id: string; discovera
             width: 46,
             height: 28,
             borderRadius: 999,
-            background: on ? "#F5E642" : "#3A3A3A",
+            // Darker on-brand yellow (BrandDark) — the full #F5E642 track blows
+            // out against the dark hub; this reads calmer while staying on-brand.
+            background: on ? "#D4C500" : "#3A3A3A",
             position: "relative",
             transition: "background 150ms",
           }}
@@ -83,8 +85,10 @@ export function DiscoverableToggle({ id, discoverable }: { id: string; discovera
               width: 22,
               height: 22,
               borderRadius: 999,
-              background: "#fff",
-              transition: "left 150ms",
+              // Dark thumb on the yellow track (like dark text on brand yellow);
+              // light thumb on the grey off-track so it stays visible.
+              background: on ? "#161616" : "#F2F2F2",
+              transition: "left 150ms, background 150ms",
             }}
           />
         </span>
