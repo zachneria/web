@@ -15,6 +15,7 @@ import {
 import { EventDetail, DetailSummary, STATUS, T, backLink, card, fmtDate, fmtTime, getJSON, money } from "./_shared";
 import { DiscoverableToggle } from "./DiscoverableToggle";
 import { PublishToggle } from "./PublishToggle";
+import styles from "./tiles.module.css";
 
 export const dynamic = "force-dynamic";
 
@@ -128,9 +129,9 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
         {TILES.map((t) =>
           t.href ? (
             <Link key={t.key} href={`/dashboard/events/${id}/${t.href}`} style={tileLink}>
-              <div style={tileLive}>
-                <t.Icon size={30} color="#F5E642" />
-                <span style={tileLabel}>{t.label}</span>
+              <div className={styles.tile} style={tileLive}>
+                <t.Icon size={30} color="currentColor" />
+                <span style={{ ...tileLabel, color: "inherit" }}>{t.label}</span>
               </div>
             </Link>
           ) : (
@@ -182,11 +183,11 @@ const tileBase: React.CSSProperties = {
   gap: 8,
 };
 // Live tiles: outlined yellow (matches the Sign-out button) — less bright than
-// a solid fill, calmer on the dark background.
+// a solid fill, calmer on the dark background. Border + text color live in
+// tiles.module.css so the teal hover (:hover) can override them.
 const tileLive: React.CSSProperties = {
   ...tileBase,
   background: "#1E1E1E",
-  border: "1.5px solid #F5E642",
 };
 // Not-yet-built ("In app") tiles stay muted dark to read as unavailable.
 const tileSoon: React.CSSProperties = {

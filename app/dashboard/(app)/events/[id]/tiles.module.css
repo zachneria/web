@@ -1,0 +1,12 @@
+/* Manage grid live tiles: outlined brand-yellow, flashing to the drink teal
+   (#0FA7B5) on hover — border + icon + label shift together so it reads
+   intentional. Icon/label inherit `color` (currentColor), so one rule drives all. */
+.tile {
+  border: 1.5px solid #f5e642;
+  color: #f5e642;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+.tile:hover {
+  border-color: #0fa7b5;
+  color: #0fa7b5;
+}
