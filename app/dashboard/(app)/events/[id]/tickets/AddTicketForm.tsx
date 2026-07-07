@@ -229,9 +229,12 @@ const cardStyle: React.CSSProperties = {
 const input: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
+  // Fixed height (not vertical padding) so text <input>s and native <select>s
+  // render the SAME height (selects otherwise cap shorter than an input).
+  height: 44,
   border: "1px solid #383838",
   borderRadius: 10,
-  padding: "11px 12px",
+  padding: "0 12px",
   fontSize: 15,
   background: "#222",
   color: "#F2F2F2",
