@@ -13,6 +13,7 @@ export interface EventDetail {
   capacity: number;
   description?: string;
   slug?: string | null;
+  discoverable?: boolean;
 }
 export interface DetailSummary {
   ticketsSold?: number;

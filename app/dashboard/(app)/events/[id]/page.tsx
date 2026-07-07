@@ -13,6 +13,7 @@ import {
 } from "react-icons/io5";
 
 import { EventDetail, DetailSummary, STATUS, T, backLink, card, fmtDate, fmtTime, getJSON, money } from "./_shared";
+import { DiscoverableToggle } from "./DiscoverableToggle";
 import { PublishToggle } from "./PublishToggle";
 
 export const dynamic = "force-dynamic";
@@ -142,7 +143,13 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
         )}
       </div>
 
-      <div style={{ marginTop: 20 }}>
+      {event.status !== "cancelled" ? (
+        <div style={{ marginTop: 20 }}>
+          <DiscoverableToggle id={event.id} discoverable={event.discoverable ?? false} />
+        </div>
+      ) : null}
+
+      <div style={{ marginTop: 12 }}>
         <PublishToggle id={event.id} status={event.status} />
       </div>
 
