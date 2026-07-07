@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const CATEGORIES = ["general", "comp", "vip", "talent"];
+// Mirrors the app's DRINK_CREDIT_OPTIONS.
+const DRINK_CREDITS = ["0", "1", "2", "3", "4", "5", "10", "Unlimited"];
 
 export function GuestAddForm({ eventId }: { eventId: string }) {
   const router = useRouter();
@@ -12,6 +14,8 @@ export function GuestAddForm({ eventId }: { eventId: string }) {
   const [email, setEmail] = useState("");
   const [plusOne, setPlusOne] = useState("0");
   const [category, setCategory] = useState("general");
+  const [drinkCredits, setDrinkCredits] = useState("0");
+  const [notes, setNotes] = useState("");
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState("");
 
@@ -26,9 +30,10 @@ export function GuestAddForm({ eventId }: { eventId: string }) {
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim() || undefined,
+          notes: notes.trim() || undefined,
           plusOne: parseInt(plusOne, 10) || 0,
           category,
-          drinkCredits: 0,
+          drinkCredits: drinkCredits === "Unlimited" ? null : parseInt(drinkCredits, 10),
         }),
       });
       if (!res.ok) {
@@ -38,7 +43,9 @@ export function GuestAddForm({ eventId }: { eventId: string }) {
       }
       setName("");
       setEmail("");
+      setNotes("");
       setPlusOne("0");
+      setDrinkCredits("0");
       setOpen(false);
       router.refresh();
     } catch {
@@ -66,19 +73,39 @@ export function GuestAddForm({ eventId }: { eventId: string }) {
         onChange={(e) => setEmail(e.target.value)}
       />
       <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
-        <select style={{ ...input, flex: 1 }} value={category} onChange={(e) => setCategory(e.target.value)}>
-          {CATEGORIES.map((c) => (
-            <option key={c} value={c} style={{ background: "#1E1E1E" }}>
-              {c[0].toUpperCase() + c.slice(1)}
-            </option>
-          ))}
-        </select>
-        <select style={{ ...input, flex: 1 }} value={plusOne} onChange={(e) => setPlusOne(e.target.value)}>
-          <option value="0" style={{ background: "#1E1E1E" }}>No plus-ones</option>
-          <option value="1" style={{ background: "#1E1E1E" }}>+1</option>
-          <option value="2" style={{ background: "#1E1E1E" }}>+2</option>
-        </select>
+        <Field label="Type">
+          <select style={input} value={category} onChange={(e) => setCategory(e.target.value)}>
+            {CATEGORIES.map((c) => (
+              <option key={c} value={c} style={opt}>
+                {c[0].toUpperCase() + c.slice(1)}
+              </option>
+            ))}
+          </select>
+        </Field>
+        <Field label="Plus-ones">
+          <input
+            style={input}
+            inputMode="numeric"
+            value={plusOne}
+            onChange={(e) => setPlusOne(e.target.value.replace(/[^0-9]/g, "") || "0")}
+          />
+        </Field>
+        <Field label="Drink credits">
+          <select style={input} value={drinkCredits} onChange={(e) => setDrinkCredits(e.target.value)}>
+            {DRINK_CREDITS.map((d) => (
+              <option key={d} value={d} style={opt}>
+                {d}
+              </option>
+            ))}
+          </select>
+        </Field>
       </div>
+      <input
+        style={{ ...input, marginTop: 10 }}
+        placeholder="Notes (optional)"
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
+      />
       {err ? <p style={{ color: "#C0322B", fontSize: 13, margin: "10px 0 0" }}>{err}</p> : null}
       <div style={{ display: "flex", gap: 8, marginTop: 14 }}>
         <button onClick={save} disabled={saving} style={{ ...addBtn, marginBottom: 0, flex: 1 }}>
@@ -92,6 +119,16 @@ export function GuestAddForm({ eventId }: { eventId: string }) {
   );
 }
 
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label style={{ flex: 1, minWidth: 0 }}>
+      <span style={{ display: "block", fontSize: 11, color: "#8F8F8F", marginBottom: 4 }}>{label}</span>
+      {children}
+    </label>
+  );
+}
+
+const opt: React.CSSProperties = { background: "#1E1E1E" };
 const cardStyle: React.CSSProperties = {
   background: "#1E1E1E",
   border: "1px solid #2E2E2E",
