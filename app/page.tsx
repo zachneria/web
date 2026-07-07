@@ -9,7 +9,7 @@ import {
   IoMegaphoneOutline,
   IoMicOutline,
   IoPeopleOutline,
-  IoPersonRemoveOutline,
+  IoPersonOutline,
   IoPricetagOutline,
   IoScanOutline,
   IoStatsChartOutline,
@@ -26,7 +26,7 @@ const INVITE = "mailto:hello@fansonly.live?subject=fansonly%20invite%20request";
 const FEATURES: { Icon: IconType; title: string; body: string }[] = [
   { Icon: IoLinkOutline, title: "Sell from a link", body: "One share link — text it, post it, drop it in a group chat. Buyers tap and check out." },
   { Icon: IoCashOutline, title: "Minimal, honest fees", body: "Way less than the big guys. What you price is what your fans pay — no surprise add-ons." },
-  { Icon: IoPersonRemoveOutline, title: "No buyer account", body: "Fans never sign up. Tap the link, grab the ticket, done." },
+  { Icon: IoPersonOutline, title: "No buyer account", body: "Fans never sign up. Tap the link, grab the ticket, done." },
   { Icon: IoScanOutline, title: "Door check-in", body: "Scan tickets at the door from your phone — plus name search for the list." },
   { Icon: IoStatsChartOutline, title: "Live sales", body: "Watch sold, checked-in, and revenue update in real time, per tier." },
   { Icon: IoCardOutline, title: "Fast payouts", body: "Connect your bank and cash out after the show. Powered by Stripe." },
