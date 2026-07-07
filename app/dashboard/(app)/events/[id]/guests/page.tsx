@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { EventDetail, Guest, card, getJSON, row } from "../_shared";
+import { GuestAddForm } from "./GuestAddForm";
 
 export const dynamic = "force-dynamic";
 
@@ -20,9 +21,11 @@ export default async function GuestsPage({ params }: { params: Promise<{ id: str
         Guests {guests && guests.length > 0 ? `(${guests.length})` : ""}
       </h1>
 
+      <GuestAddForm eventId={id} />
+
       <div style={card}>
         {!guests || guests.length === 0 ? (
-          <div style={{ color: "#8F8F8F" }}>No guest passes yet — add them in the fansonly app.</div>
+          <div style={{ color: "#8F8F8F" }}>No guest passes yet — add one above.</div>
         ) : (
           guests.map((g) => (
             <div key={g.id} style={row}>

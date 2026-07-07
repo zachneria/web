@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { EventDetail, Payout, card, getJSON, money, row, rowVal } from "../_shared";
+import { CostAddForm } from "./CostAddForm";
 
 export const dynamic = "force-dynamic";
 
@@ -20,9 +21,11 @@ export default async function ProductionPage({ params }: { params: Promise<{ id:
       </Link>
       <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#F2F2F2" }}>Production</h1>
 
+      <CostAddForm eventId={id} />
+
       <div style={card}>
         {costs.length === 0 ? (
-          <div style={{ color: "#8F8F8F" }}>No production costs yet — add them in the fansonly app.</div>
+          <div style={{ color: "#8F8F8F" }}>No production costs yet — add one above.</div>
         ) : (
           <>
             {costs.map((c, i) => (
