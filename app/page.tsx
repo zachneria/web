@@ -1,22 +1,41 @@
+import type { IconType } from "react-icons";
+import {
+  IoCardOutline,
+  IoCashOutline,
+  IoHeadsetOutline,
+  IoHeartOutline,
+  IoLinkOutline,
+  IoLockClosedOutline,
+  IoMegaphoneOutline,
+  IoMicOutline,
+  IoPeopleOutline,
+  IoPersonRemoveOutline,
+  IoPricetagOutline,
+  IoScanOutline,
+  IoStatsChartOutline,
+  IoWalletOutline,
+  IoWineOutline,
+} from "react-icons/io5";
+
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 
 import styles from "./page.module.css";
 
 const INVITE = "mailto:hello@fansonly.live?subject=fansonly%20invite%20request";
 
-const FEATURES: { icon: string; title: string; body: string }[] = [
-  { icon: "🔗", title: "Sell from a link", body: "One share link — text it, post it, drop it in a group chat. Buyers tap and check out." },
-  { icon: "💸", title: "Minimal, honest fees", body: "Way less than the big guys. What you price is what your fans pay — no surprise add-ons." },
-  { icon: "🙅", title: "No buyer account", body: "Fans never sign up. Tap the link, grab the ticket, done." },
-  { icon: "📷", title: "Door check-in", body: "Scan tickets at the door from your phone — plus name search for the list." },
-  { icon: "📊", title: "Live sales", body: "Watch sold, checked-in, and revenue update in real time, per tier." },
-  { icon: "🏦", title: "Fast payouts", body: "Connect your bank and cash out after the show. Powered by Stripe." },
-  { icon: "🏷️", title: "Discount codes", body: "Shared or unique-batch codes, % or $ off, caps and expiries." },
-  { icon: "🎟️", title: "Guest & comp passes", body: "Add guests and plus-ones without burning inventory." },
-  { icon: "🍸", title: "In-app drink & merch", body: "Sell drink and merch passes that unlock at the bar once fans check in." },
-  { icon: "📣", title: "Email & SMS blasts", body: "Message your buyers about new shows and last-chance tickets, with AI drafting." },
-  { icon: "🍎", title: "Apple Wallet", body: "Every ticket adds to Apple Wallet — and lives in the app as a backup." },
-  { icon: "🔒", title: "Anti-scalp by design", body: "Passes stay in the app so they can't be screenshotted, forwarded, or resold." },
+const FEATURES: { Icon: IconType; title: string; body: string }[] = [
+  { Icon: IoLinkOutline, title: "Sell from a link", body: "One share link — text it, post it, drop it in a group chat. Buyers tap and check out." },
+  { Icon: IoCashOutline, title: "Minimal, honest fees", body: "Way less than the big guys. What you price is what your fans pay — no surprise add-ons." },
+  { Icon: IoPersonRemoveOutline, title: "No buyer account", body: "Fans never sign up. Tap the link, grab the ticket, done." },
+  { Icon: IoScanOutline, title: "Door check-in", body: "Scan tickets at the door from your phone — plus name search for the list." },
+  { Icon: IoStatsChartOutline, title: "Live sales", body: "Watch sold, checked-in, and revenue update in real time, per tier." },
+  { Icon: IoCardOutline, title: "Fast payouts", body: "Connect your bank and cash out after the show. Powered by Stripe." },
+  { Icon: IoPricetagOutline, title: "Discount codes", body: "Shared or unique-batch codes, % or $ off, caps and expiries." },
+  { Icon: IoPeopleOutline, title: "Guest & comp passes", body: "Add guests and plus-ones without burning inventory." },
+  { Icon: IoWineOutline, title: "In-app drink & merch", body: "Sell drink and merch passes that unlock at the bar once fans check in." },
+  { Icon: IoMegaphoneOutline, title: "Email & SMS blasts", body: "Message your buyers about new shows and last-chance tickets, with AI drafting." },
+  { Icon: IoWalletOutline, title: "Apple Wallet", body: "Every ticket adds to Apple Wallet — and lives in the app as a backup." },
+  { Icon: IoLockClosedOutline, title: "Anti-scalp by design", body: "Passes stay in the app so they can't be screenshotted, forwarded, or resold." },
 ];
 
 export default function Home() {
@@ -57,7 +76,7 @@ export default function Home() {
         <h2 className={styles.h2}>Built for the whole night</h2>
         <div className={styles.audience}>
           <div className={styles.audienceCard}>
-            <div className={styles.audEmoji}>🎧</div>
+            <div className={styles.audEmoji}><IoHeadsetOutline size={36} color="#161616" /></div>
             <div className={styles.audTitle}>Promoters &amp; creators</div>
             <p className={styles.audBody}>
               Throw the event — we handle the rest. Create in minutes, sell from one link,
@@ -66,7 +85,7 @@ export default function Home() {
             </p>
           </div>
           <div className={styles.audienceCard}>
-            <div className={styles.audEmoji}>🙌</div>
+            <div className={styles.audEmoji}><IoHeartOutline size={36} color="#161616" /></div>
             <div className={styles.audTitle}>Fans &amp; buyers</div>
             <p className={styles.audBody}>
               Tap a link, grab your ticket — no account, no forced app download. Keep tickets
@@ -76,7 +95,7 @@ export default function Home() {
           </div>
           <div className={`${styles.audienceCard} ${styles.dark}`}>
             <span className={styles.soonTag}>Soon</span>
-            <div className={styles.audEmoji}>🎤</div>
+            <div className={styles.audEmoji}><IoMicOutline size={36} color="#F5E642" /></div>
             <div className={styles.audTitle}>Talent</div>
             <p className={styles.audBody}>
               Your own gig page, get booked, and get paid — with cost-flow that pays your
@@ -94,7 +113,9 @@ export default function Home() {
           <div className={styles.features}>
             {FEATURES.map((f) => (
               <div key={f.title} className={styles.feature}>
-                <div className={styles.featureIcon}>{f.icon}</div>
+                <div className={styles.featureIcon}>
+                  <f.Icon size={26} color="#161616" />
+                </div>
                 <div className={styles.featureTitle}>{f.title}</div>
                 <p className={styles.featureBody}>{f.body}</p>
               </div>
