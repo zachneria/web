@@ -1,0 +1,285 @@
+/* Pricing / comparison page — dark + yellow, matches the homepage. Scoped. */
+
+.page {
+  background: #fff;
+  color: #161616;
+}
+
+/* ---- Hero ---- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: #161616;
+  color: #fff;
+  padding: 88px 24px 72px;
+  text-align: center;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 55% at 50% -10%, rgba(245, 230, 66, 0.28), transparent 70%),
+    radial-gradient(40% 40% at 85% 20%, rgba(15, 167, 181, 0.18), transparent 70%);
+  pointer-events: none;
+}
+.heroInner {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #f5e642;
+  border: 1px solid rgba(245, 230, 66, 0.4);
+  border-radius: 999px;
+  padding: 6px 14px;
+  margin-bottom: 22px;
+}
+.h1 {
+  font-size: clamp(38px, 7vw, 64px);
+  line-height: 1.03;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  margin: 0 0 16px;
+}
+.h1 em {
+  font-style: normal;
+  color: #f5e642;
+}
+.sub {
+  font-size: clamp(16px, 2.3vw, 20px);
+  line-height: 1.55;
+  color: #cfcfcf;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ---- Sections ---- */
+.section {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 56px 24px;
+}
+.kicker {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #b58b00;
+  margin: 0 0 8px;
+}
+.h2 {
+  text-align: center;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  margin: 0 0 10px;
+}
+.sectionSub {
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555;
+  max-width: 620px;
+  margin: 0 auto 28px;
+}
+
+/* ---- Big numbers ---- */
+.bigNumberRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.bigNumberCard {
+  background: #161616;
+  border-radius: 18px;
+  padding: 32px 20px;
+  text-align: center;
+}
+.bigNumber {
+  font-size: clamp(44px, 8vw, 64px);
+  font-weight: 900;
+  color: #f5e642;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.bigNumberLabel {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #cfcfcf;
+  line-height: 1.4;
+}
+
+/* ---- Comparison table ---- */
+.tableWrap {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid #ececec;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+  font-size: 15px;
+}
+.table thead th {
+  background: #161616;
+  color: #fff;
+  font-weight: 800;
+  padding: 16px 18px;
+  text-align: left;
+  font-size: 15px;
+}
+.table thead th.foCol {
+  color: #f5e642;
+}
+.table tbody td {
+  padding: 15px 18px;
+  border-top: 1px solid #eee;
+  color: #333;
+  vertical-align: top;
+}
+.rowHead {
+  font-weight: 700;
+  color: #161616;
+  background: #fafafa;
+  white-space: nowrap;
+}
+.foCell {
+  font-weight: 700;
+  color: #161616;
+  background: rgba(245, 230, 66, 0.14);
+}
+
+/* ---- Breakdown cards ---- */
+.breakdownGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.breakdownCard {
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  padding: 20px;
+  background: #fff;
+}
+.faceTag {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #999;
+  margin-bottom: 14px;
+}
+.payRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid #f0f0f0;
+  font-size: 15px;
+  color: #444;
+}
+.payRow strong {
+  font-weight: 800;
+  color: #161616;
+}
+.payWin {
+  border-top: none;
+  color: #161616;
+}
+.payWin span {
+  font-weight: 800;
+}
+.payWin strong {
+  color: #0a8f16;
+}
+.keepNote {
+  margin-top: 14px;
+  background: rgba(245, 230, 66, 0.16);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #161616;
+  text-align: center;
+}
+.footnote {
+  max-width: 820px;
+  margin: 22px auto 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #999;
+  text-align: center;
+}
+
+/* ---- Target band ---- */
+.bandWrap {
+  background: #161616;
+  color: #fff;
+}
+.band {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  text-align: center;
+}
+.band .h2 {
+  color: #fff;
+}
+.band .sectionSub {
+  color: #cfcfcf;
+}
+.bandRange {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 460px;
+  margin: 8px auto 0;
+  font-weight: 800;
+  color: #f5e642;
+}
+.bandTrack {
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  background: #2a2a2a;
+  overflow: hidden;
+}
+.bandFill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(245, 230, 66, 0.4), #f5e642);
+}
+
+/* ---- CTA button ---- */
+.btnPrimary {
+  display: inline-block;
+  margin-top: 8px;
+  background: #f5e642;
+  color: #161616;
+  font-weight: 800;
+  font-size: 17px;
+  padding: 15px 26px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  box-shadow: 0 8px 30px rgba(245, 230, 66, 0.25);
+}
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(245, 230, 66, 0.35);
+}
+
+@media (max-width: 720px) {
+  .bigNumberRow,
+  .breakdownGrid {
+    grid-template-columns: 1fr;
+  }
+}
