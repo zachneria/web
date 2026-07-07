@@ -1,0 +1,36 @@
+import Link from "next/link";
+
+import { EventDetail, getJSON } from "../_shared";
+import { MessageClient } from "./MessageClient";
+
+export const dynamic = "force-dynamic";
+
+interface AnnounceData {
+  recipientCount?: number;
+  announcements?: { subject: string; body: string; createdAt?: string; sentAt?: string }[];
+}
+
+export default async function MessagePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const [event, ann] = await Promise.all([
+    getJSON<EventDetail>(`/events/${id}`),
+    getJSON<AnnounceData>(`/tickets/events/${id}/announce`),
+  ]);
+
+  return (
+    <div style={{ maxWidth: 620, margin: "0 auto" }}>
+      <Link href={`/dashboard/events/${id}`} style={{ color: "#161616", fontWeight: 700, fontSize: 14 }}>
+        ← {event?.name ?? "Event"}
+      </Link>
+      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 4px", color: "#111" }}>Message buyers</h1>
+      <p style={{ color: "#777", fontSize: 14, margin: "0 0 18px" }}>
+        Emails everyone with a ticket to this event.
+      </p>
+      <MessageClient
+        eventId={id}
+        recipientCount={ann?.recipientCount ?? 0}
+        history={ann?.announcements ?? []}
+      />
+    </div>
+  );
+}

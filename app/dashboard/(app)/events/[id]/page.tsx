@@ -12,10 +12,10 @@ const TILES: { key: string; label: string; icon: string; href?: string }[] = [
   { key: "guests", label: "Guests", icon: "👥", href: "guests" },
   { key: "payouts", label: "Payouts", icon: "💵", href: "payouts" },
   { key: "production", label: "Production", icon: "🧾", href: "production" },
-  { key: "potential", label: "Potential", icon: "📈" },
-  { key: "discounts", label: "Discounts", icon: "🏷️" },
-  { key: "passports", label: "Passports", icon: "⭐" },
-  { key: "message", label: "Message", icon: "✉️" },
+  { key: "potential", label: "Potential", icon: "📈", href: "potential" },
+  { key: "discounts", label: "Discounts", icon: "🏷️", href: "discounts" },
+  { key: "passports", label: "Passports", icon: "⭐", href: "passports" },
+  { key: "message", label: "Message", icon: "✉️", href: "message" },
   { key: "edit", label: "Edit", icon: "✏️", href: "edit" },
 ];
 

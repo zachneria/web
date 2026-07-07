@@ -6,7 +6,7 @@ import { getOrgClaims, orgFetch } from "@/lib/org-api";
 // /api/dashboard/api/<path> → <API>/<path> with the org bearer attached
 // server-side (token never reaches the browser). Allowlisted to the organizer
 // surfaces so it can't be used as an open proxy.
-const ALLOW = new Set(["events", "guests", "payouts"]);
+const ALLOW = new Set(["events", "guests", "payouts", "tickets"]);
 
 const json = (data: unknown, status = 200) =>
   new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
