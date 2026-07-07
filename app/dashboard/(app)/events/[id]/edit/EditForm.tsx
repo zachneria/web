@@ -12,6 +12,7 @@ export interface EditableEvent {
   capacity: number;
   eventDate: string;
   endTime?: string | null;
+  flyerUrl?: string | null;
 }
 
 // ISO → value for <input type="datetime-local"> (local wall-clock, no seconds).
@@ -31,8 +32,41 @@ export function EditForm({ event }: { event: EditableEvent }) {
   const [description, setDescription] = useState(event.description ?? "");
   const [eventDate, setEventDate] = useState(toLocalInput(event.eventDate));
   const [endTime, setEndTime] = useState(toLocalInput(event.endTime));
+  const [flyerUrl, setFlyerUrl] = useState<string | null>(event.flyerUrl ?? null);
+  const [uploading, setUploading] = useState(false);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
+
+  // Flyer upload — mirrors the app: presigned S3 PUT (POST /events/upload-url →
+  // { uploadUrl, fileUrl }, then PUT the bytes straight to S3; bucket CORS allows it).
+  const onPickFlyer = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // allow re-picking the same file
+    if (!file) return;
+    setErr("");
+    setUploading(true);
+    try {
+      const contentType = file.type || "image/jpeg";
+      const presign = await fetch(`/api/dashboard/api/events/upload-url`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contentType, kind: "flyer" }),
+      });
+      if (!presign.ok) throw new Error();
+      const { uploadUrl, fileUrl } = await presign.json();
+      const put = await fetch(uploadUrl, {
+        method: "PUT",
+        headers: { "Content-Type": contentType },
+        body: file,
+      });
+      if (!put.ok) throw new Error();
+      setFlyerUrl(fileUrl);
+    } catch {
+      setErr("Flyer upload failed. Try again.");
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,6 +100,7 @@ export function EditForm({ event }: { event: EditableEvent }) {
           doorsTime: startIso, // doors == start (no separate doors concept)
           endTime: endTime ? new Date(endTime).toISOString() : null,
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          flyerUrl, // null clears it
         }),
       });
       if (!res.ok) {
@@ -156,6 +191,36 @@ export function EditForm({ event }: { event: EditableEvent }) {
         />
       </Field>
 
+      <Field label="Flyer">
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          {flyerUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={flyerUrl}
+              alt=""
+              width={56}
+              height={70}
+              style={{ borderRadius: 8, objectFit: "cover", background: "#222", flexShrink: 0 }}
+            />
+          ) : null}
+          <label style={uploadLabel}>
+            {uploading ? "Uploading…" : flyerUrl ? "Replace flyer" : "Upload flyer"}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={onPickFlyer}
+              disabled={uploading}
+              style={{ display: "none" }}
+            />
+          </label>
+          {flyerUrl && !uploading ? (
+            <button type="button" onClick={() => setFlyerUrl(null)} style={removeLink}>
+              Remove
+            </button>
+          ) : null}
+        </div>
+      </Field>
+
       {err ? <p style={{ color: "#C0322B", fontSize: 13, margin: 0 }}>{err}</p> : null}
 
       <button
@@ -174,9 +239,6 @@ export function EditForm({ event }: { event: EditableEvent }) {
       >
         {busy ? "Saving…" : "Save changes"}
       </button>
-      <p style={{ color: "#8F8F8F", fontSize: 13, margin: 0 }}>
-        Flyer image is edited in the fansonly app.
-      </p>
 
       <button
         type="button"
@@ -229,6 +291,24 @@ function Field({
   );
 }
 
+const uploadLabel: React.CSSProperties = {
+  display: "inline-block",
+  background: "#222",
+  color: "#F2F2F2",
+  border: "1px solid #383838",
+  borderRadius: 10,
+  padding: "10px 16px",
+  fontSize: 14,
+  fontWeight: 600,
+  cursor: "pointer",
+};
+const removeLink: React.CSSProperties = {
+  background: "transparent",
+  color: "#8F8F8F",
+  border: "none",
+  fontSize: 13,
+  cursor: "pointer",
+};
 const input: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",

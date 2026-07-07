@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 interface EditEvent extends EventDetail {
   endTime?: string | null;
+  flyerUrl?: string | null;
 }
 
 export default async function EditEventPage({ params }: { params: Promise<{ id: string }> }) {
@@ -33,6 +34,7 @@ export default async function EditEventPage({ params }: { params: Promise<{ id: 
             capacity: event.capacity,
             eventDate: event.eventDate,
             endTime: event.endTime ?? null,
+            flyerUrl: event.flyerUrl ?? null,
           }}
         />
       )}
