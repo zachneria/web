@@ -1,17 +1,20 @@
 import Link from "next/link";
+import type { IconType } from "react-icons";
+import { IoGlobeOutline, IoMegaphoneOutline, IoSettingsOutline, IoTicketOutline } from "react-icons/io5";
 
 import { getOrgClaims, orgFetch } from "@/lib/org-api";
 
 export const dynamic = "force-dynamic";
 
 // Account hub — mirrors the app's Account screen (Events / Promoter Settings /
-// Marketing / Account Settings). Marketing (the blast composer) is the live one;
-// the others land on coming-soon stubs for now.
-const ROWS = [
-  { href: "/dashboard/events", icon: "🎟️", label: "Your Events", hint: "Sales + stats at a glance", live: true },
-  { href: "/dashboard/marketing", icon: "📣", label: "Marketing", hint: "Email your fans — blasts + AI draft", live: true },
-  { href: "/dashboard/promoter-settings", icon: "🌐", label: "Promoter Settings", hint: "Your promoter page + logo", live: true },
-  { href: "/dashboard/account-settings", icon: "⚙️", label: "Account Settings", hint: "Email + payouts", live: true },
+// Marketing / Account Settings). Icons match the app's Account rows
+// (globe/megaphone/settings-outline). Marketing (the blast composer) is the live
+// one; the others land on coming-soon stubs for now.
+const ROWS: { href: string; Icon: IconType; label: string; hint: string; live: boolean }[] = [
+  { href: "/dashboard/events", Icon: IoTicketOutline, label: "Your Events", hint: "Sales + stats at a glance", live: true },
+  { href: "/dashboard/marketing", Icon: IoMegaphoneOutline, label: "Marketing", hint: "Email your fans — blasts + AI draft", live: true },
+  { href: "/dashboard/promoter-settings", Icon: IoGlobeOutline, label: "Promoter Settings", hint: "Your promoter page + logo", live: true },
+  { href: "/dashboard/account-settings", Icon: IoSettingsOutline, label: "Account Settings", hint: "Email + payouts", live: true },
 ];
 
 export default async function DashboardHub() {
@@ -87,7 +90,7 @@ export default async function DashboardHub() {
               textDecoration: "none",
             }}
           >
-            <span style={{ fontSize: 22 }}>{r.icon}</span>
+            <r.Icon size={24} color="#F5E642" style={{ flexShrink: 0 }} />
             <span style={{ flex: 1 }}>
               <span style={{ display: "block", fontSize: 16, fontWeight: 700, color: "#F2F2F2" }}>
                 {r.label}
