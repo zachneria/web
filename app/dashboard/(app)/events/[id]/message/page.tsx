@@ -19,11 +19,11 @@ export default async function MessagePage({ params }: { params: Promise<{ id: st
 
   return (
     <div style={{ maxWidth: 620, margin: "0 auto" }}>
-      <Link href={`/dashboard/events/${id}`} style={{ color: "#161616", fontWeight: 700, fontSize: 14 }}>
+      <Link href={`/dashboard/events/${id}`} style={{ color: "#F5E642", fontWeight: 700, fontSize: 14 }}>
         ← {event?.name ?? "Event"}
       </Link>
-      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 4px", color: "#111" }}>Message buyers</h1>
-      <p style={{ color: "#777", fontSize: 14, margin: "0 0 18px" }}>
+      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 4px", color: "#F2F2F2" }}>Message buyers</h1>
+      <p style={{ color: "#8F8F8F", fontSize: 14, margin: "0 0 18px" }}>
         Emails everyone with a ticket to this event.
       </p>
       <MessageClient

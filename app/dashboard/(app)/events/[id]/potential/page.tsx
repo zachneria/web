@@ -34,28 +34,28 @@ export default async function PotentialPage({ params }: { params: Promise<{ id: 
 
   return (
     <div style={{ maxWidth: 620, margin: "0 auto" }}>
-      <Link href={`/dashboard/events/${id}`} style={{ color: "#161616", fontWeight: 700, fontSize: 14 }}>
+      <Link href={`/dashboard/events/${id}`} style={{ color: "#F5E642", fontWeight: 700, fontSize: 14 }}>
         ← {event?.name ?? "Event"}
       </Link>
-      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 4px", color: "#111" }}>Potential</h1>
-      <p style={{ color: "#777", fontSize: 14, margin: "0 0 18px" }}>
+      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 4px", color: "#F2F2F2" }}>Potential</h1>
+      <p style={{ color: "#8F8F8F", fontSize: 14, margin: "0 0 18px" }}>
         If every admission ticket sells.
       </p>
 
       <div style={card}>
         <div style={row}>
-          <span style={{ color: "#333" }}>Sold so far</span>
+          <span style={{ color: "#D8D8D8" }}>Sold so far</span>
           <span style={rowVal}>
             {sold} / {cap}
           </span>
         </div>
         <div style={row}>
-          <span style={{ color: "#333" }}>Revenue so far</span>
+          <span style={{ color: "#D8D8D8" }}>Revenue so far</span>
           <span style={rowVal}>{money(currentRevenue)}</span>
         </div>
       </div>
 
-      <div style={{ ...card, background: "#161616", border: "1px solid #161616" }}>
+      <div style={{ ...card, background: "#161616", border: "1px solid #2E2E2E" }}>
         <div
           style={{
             fontSize: 12,
@@ -88,7 +88,7 @@ export default async function PotentialPage({ params }: { params: Promise<{ id: 
             style={{
               fontSize: 12,
               fontWeight: 700,
-              color: "#999",
+              color: "#8F8F8F",
               textTransform: "uppercase",
               letterSpacing: 0.5,
               marginBottom: 8,
@@ -98,8 +98,8 @@ export default async function PotentialPage({ params }: { params: Promise<{ id: 
           </div>
           {admission.map((t) => (
             <div key={t.id} style={row}>
-              <span style={{ color: "#333" }}>
-                {t.name} <span style={{ color: "#aaa", fontSize: 13 }}>· {money(t.price)} × {t.quantity}</span>
+              <span style={{ color: "#D8D8D8" }}>
+                {t.name} <span style={{ color: "#8F8F8F", fontSize: 13 }}>· {money(t.price)} × {t.quantity}</span>
               </span>
               <span style={rowVal}>{money(Number(t.price) * (t.quantity || 0))}</span>
             </div>

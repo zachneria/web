@@ -60,7 +60,7 @@ export function MessageClient({
   return (
     <>
       <div style={card}>
-        <div style={{ fontSize: 13, color: "#777", marginBottom: 12 }}>
+        <div style={{ fontSize: 13, color: "#8F8F8F", marginBottom: 12 }}>
           {recipientCount} recipient{recipientCount === 1 ? "" : "s"}
         </div>
         <input
@@ -88,7 +88,7 @@ export function MessageClient({
             style={{
               fontSize: 12,
               fontWeight: 700,
-              color: "#999",
+              color: "#8F8F8F",
               textTransform: "uppercase",
               letterSpacing: 0.5,
               marginBottom: 8,
@@ -99,10 +99,10 @@ export function MessageClient({
           {history.map((a, i) => {
             const when = a.sentAt || a.createdAt;
             return (
-              <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid #f2f2f2" }}>
-                <div style={{ fontWeight: 700, color: "#111" }}>{a.subject}</div>
+              <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid #2A2A2A" }}>
+                <div style={{ fontWeight: 700, color: "#F2F2F2" }}>{a.subject}</div>
                 {when ? (
-                  <div style={{ fontSize: 12, color: "#999" }}>{new Date(when).toLocaleString()}</div>
+                  <div style={{ fontSize: 12, color: "#8F8F8F" }}>{new Date(when).toLocaleString()}</div>
                 ) : null}
               </div>
             );
@@ -114,8 +114,8 @@ export function MessageClient({
 }
 
 const card: React.CSSProperties = {
-  background: "#fff",
-  border: "1px solid #eee",
+  background: "#1E1E1E",
+  border: "1px solid #2E2E2E",
   borderRadius: 14,
   padding: 18,
   marginBottom: 14,
@@ -123,10 +123,12 @@ const card: React.CSSProperties = {
 const input: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  border: "1px solid #ddd",
+  border: "1px solid #383838",
   borderRadius: 10,
   padding: "12px 14px",
   fontSize: 15,
+  background: "#222",
+  color: "#F2F2F2",
 };
 const btn: React.CSSProperties = {
   width: "100%",

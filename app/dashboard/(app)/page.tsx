@@ -43,7 +43,7 @@ export default async function DashboardHub() {
               borderRadius: 36,
               objectFit: "cover",
               border: "3px solid #F5E642",
-              background: "#fff",
+              background: "#1E1E1E",
               margin: "0 auto 12px",
               display: "block",
             }}
@@ -67,8 +67,8 @@ export default async function DashboardHub() {
             {initial}
           </div>
         )}
-        <div style={{ fontSize: 22, fontWeight: 800, color: "#111" }}>{name || "Organizer"}</div>
-        {email ? <div style={{ fontSize: 14, color: "#777", marginTop: 2 }}>{email}</div> : null}
+        <div style={{ fontSize: 22, fontWeight: 800, color: "#F2F2F2" }}>{name || "Organizer"}</div>
+        {email ? <div style={{ fontSize: 14, color: "#8F8F8F", marginTop: 2 }}>{email}</div> : null}
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -80,8 +80,8 @@ export default async function DashboardHub() {
               display: "flex",
               alignItems: "center",
               gap: 14,
-              background: "#fff",
-              border: "1px solid #eee",
+              background: "#1E1E1E",
+              border: "1px solid #2E2E2E",
               borderRadius: 14,
               padding: "16px 18px",
               textDecoration: "none",
@@ -89,17 +89,17 @@ export default async function DashboardHub() {
           >
             <span style={{ fontSize: 22 }}>{r.icon}</span>
             <span style={{ flex: 1 }}>
-              <span style={{ display: "block", fontSize: 16, fontWeight: 700, color: "#111" }}>
+              <span style={{ display: "block", fontSize: 16, fontWeight: 700, color: "#F2F2F2" }}>
                 {r.label}
                 {!r.live ? (
-                  <span style={{ fontSize: 11, color: "#aaa", fontWeight: 600 }}> · soon</span>
+                  <span style={{ fontSize: 11, color: "#8F8F8F", fontWeight: 600 }}> · soon</span>
                 ) : null}
               </span>
-              <span style={{ display: "block", fontSize: 13, color: "#888", marginTop: 2 }}>
+              <span style={{ display: "block", fontSize: 13, color: "#8F8F8F", marginTop: 2 }}>
                 {r.hint}
               </span>
             </span>
-            <span style={{ color: "#ccc", fontSize: 20 }}>›</span>
+            <span style={{ color: "#8F8F8F", fontSize: 20 }}>›</span>
           </Link>
         ))}
       </div>

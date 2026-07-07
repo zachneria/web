@@ -42,12 +42,12 @@ export function PayoutsConnect({
   return (
     <div>
       {justReturned === "done" && !onboarded ? (
-        <p style={{ color: "#666", fontSize: 14, lineHeight: 1.6, margin: "0 0 12px" }}>
+        <p style={{ color: "#8F8F8F", fontSize: 14, lineHeight: 1.6, margin: "0 0 12px" }}>
           Thanks — Stripe is still verifying your details. This can take a few
           minutes; refresh to check.
         </p>
       ) : (
-        <p style={{ color: "#666", fontSize: 14, lineHeight: 1.6, margin: "0 0 12px" }}>
+        <p style={{ color: "#8F8F8F", fontSize: 14, lineHeight: 1.6, margin: "0 0 12px" }}>
           {onboarded
             ? "Almost there — a few more details are needed before payouts turn on."
             : "Connect your bank to receive ticket revenue. Powered by Stripe."}

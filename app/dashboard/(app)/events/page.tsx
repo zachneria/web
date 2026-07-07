@@ -27,7 +27,7 @@ const statRow: React.CSSProperties = {
 const statVal: React.CSSProperties = {
   fontSize: 13,
   fontWeight: 600,
-  color: "#222",
+  color: "#D8D8D8",
   fontVariantNumeric: "tabular-nums",
 };
 
@@ -50,7 +50,7 @@ function EventStats({ s }: { s: DashSummary }) {
             flex: 1,
             height: 22,
             borderRadius: 6,
-            background: "#ECECEC",
+            background: "#2A2A2A",
             display: "flex",
             overflow: "hidden",
           }}
@@ -59,14 +59,14 @@ function EventStats({ s }: { s: DashSummary }) {
             <div
               style={{
                 flex: sold,
-                background: "#1A1A1A",
+                background: "#F5E642",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
               {soldShare >= 0.16 ? (
-                <span style={{ color: "#fff", fontSize: 12, fontWeight: 800 }}>{sold}</span>
+                <span style={{ color: "#000", fontSize: 12, fontWeight: 800 }}>{sold}</span>
               ) : null}
             </div>
           ) : null}
@@ -80,23 +80,23 @@ function EventStats({ s }: { s: DashSummary }) {
               }}
             >
               {remainShare >= 0.16 ? (
-                <span style={{ color: "#555", fontSize: 12, fontWeight: 800 }}>{remaining}</span>
+                <span style={{ color: "#8F8F8F", fontSize: 12, fontWeight: 800 }}>{remaining}</span>
               ) : null}
             </div>
           ) : null}
         </div>
-        <span style={{ width: 44, textAlign: "right", fontSize: 14, fontWeight: 800, color: "#000" }}>
+        <span style={{ width: 44, textAlign: "right", fontSize: 14, fontWeight: 800, color: "#F2F2F2" }}>
           {pct}%
         </span>
       </div>
 
-      <div style={{ fontSize: 12, color: "#999" }}>
+      <div style={{ fontSize: 12, color: "#8F8F8F" }}>
         {s.checkedIn ?? 0}/{cap} checked in
       </div>
 
       {s.tiers && s.tiers.length > 0 ? (
         <div style={{ marginTop: 4, display: "flex", flexDirection: "column", gap: 3 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: "#AAA", letterSpacing: 0.5 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: "#8F8F8F", letterSpacing: 0.5 }}>
             TICKETS
           </div>
           {s.tiers.map((t, i) => {
@@ -106,7 +106,7 @@ function EventStats({ s }: { s: DashSummary }) {
                 <span
                   style={{
                     fontSize: 13,
-                    color: "#444",
+                    color: "#D8D8D8",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
@@ -125,18 +125,18 @@ function EventStats({ s }: { s: DashSummary }) {
       ) : null}
 
       <div style={statRow}>
-        <span style={{ fontSize: 13, color: "#444" }}>Guests</span>
+        <span style={{ fontSize: 13, color: "#D8D8D8" }}>Guests</span>
         <span style={statVal}>{s.guests ?? 0}</span>
       </div>
       {typeof s.drinks === "number" && s.drinks > 0 ? (
         <div style={statRow}>
-          <span style={{ fontSize: 13, color: "#444" }}>Drinks</span>
+          <span style={{ fontSize: 13, color: "#D8D8D8" }}>Drinks</span>
           <span style={statVal}>{s.drinks}</span>
         </div>
       ) : null}
       {typeof s.merch === "number" && s.merch > 0 ? (
         <div style={statRow}>
-          <span style={{ fontSize: 13, color: "#444" }}>Merch</span>
+          <span style={{ fontSize: 13, color: "#D8D8D8" }}>Merch</span>
           <span style={statVal}>{s.merch}</span>
         </div>
       ) : null}
@@ -152,23 +152,23 @@ export default async function DashboardEvents() {
 
   return (
     <>
-      <Link href="/dashboard" style={{ color: "#161616", fontWeight: 700, fontSize: 14 }}>
+      <Link href="/dashboard" style={{ color: "#F5E642", fontWeight: 700, fontSize: 14 }}>
         ← Dashboard
       </Link>
-      <h1 style={{ fontSize: 26, fontWeight: 800, margin: "12px 0 4px", color: "#111" }}>
+      <h1 style={{ fontSize: 26, fontWeight: 800, margin: "12px 0 4px", color: "#F2F2F2" }}>
         Your events
       </h1>
-      <p style={{ color: "#777", margin: "0 0 24px", fontSize: 15 }}>Sales at a glance.</p>
+      <p style={{ color: "#8F8F8F", margin: "0 0 24px", fontSize: 15 }}>Sales at a glance.</p>
 
       {sorted.length === 0 ? (
         <div
           style={{
-            background: "#fff",
-            border: "1px solid #eee",
+            background: "#1E1E1E",
+            border: "1px solid #2E2E2E",
             borderRadius: 14,
             padding: 32,
             textAlign: "center",
-            color: "#888",
+            color: "#8F8F8F",
           }}
         >
           No events yet — create one in the fansonly app.
@@ -186,8 +186,8 @@ export default async function DashboardEvents() {
               >
               <div
                 style={{
-                  background: "#fff",
-                  border: "1px solid #eee",
+                  background: "#1E1E1E",
+                  border: "1px solid #2E2E2E",
                   borderRadius: 14,
                   padding: 16,
                   display: "flex",
@@ -201,7 +201,7 @@ export default async function DashboardEvents() {
                   alt=""
                   width={56}
                   height={56}
-                  style={{ borderRadius: 10, objectFit: "cover", background: "#f2f2f2", flexShrink: 0 }}
+                  style={{ borderRadius: 10, objectFit: "cover", background: "#2A2A2A", flexShrink: 0 }}
                 />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -209,7 +209,7 @@ export default async function DashboardEvents() {
                       style={{
                         fontSize: 16,
                         fontWeight: 700,
-                        color: "#111",
+                        color: "#F2F2F2",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         whiteSpace: "nowrap",
@@ -231,7 +231,7 @@ export default async function DashboardEvents() {
                       {pill.label}
                     </span>
                   </div>
-                  <div style={{ fontSize: 13, color: "#777", marginTop: 2 }}>
+                  <div style={{ fontSize: 13, color: "#8F8F8F", marginTop: 2 }}>
                     {fmtDate(e.eventDate)} · {e.venueName}
                   </div>
                   {typeof s.sold === "number" ? <EventStats s={s} /> : null}

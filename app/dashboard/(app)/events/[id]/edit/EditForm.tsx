@@ -145,7 +145,7 @@ export function EditForm({ event }: { event: EditableEvent }) {
       >
         {busy ? "Saving…" : "Save changes"}
       </button>
-      <p style={{ color: "#999", fontSize: 13, margin: 0 }}>
+      <p style={{ color: "#8F8F8F", fontSize: 13, margin: 0 }}>
         Flyer image is edited in the fansonly app.
       </p>
     </form>
@@ -168,7 +168,7 @@ function Field({
           display: "block",
           fontSize: 12,
           fontWeight: 700,
-          color: "#666",
+          color: "#8F8F8F",
           textTransform: "uppercase",
           letterSpacing: 0.5,
           marginBottom: 6,
@@ -184,8 +184,10 @@ function Field({
 const input: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  border: "1px solid #ddd",
+  border: "1px solid #383838",
   borderRadius: 10,
   padding: "12px 14px",
   fontSize: 16,
+  background: "#222",
+  color: "#F2F2F2",
 };

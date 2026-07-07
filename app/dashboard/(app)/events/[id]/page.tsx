@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { EventDetail, DetailSummary, STATUS, card, fmtDate, fmtTime, getJSON, money } from "./_shared";
+import { EventDetail, DetailSummary, STATUS, T, backLink, card, fmtDate, fmtTime, getJSON, money } from "./_shared";
 import { PublishToggle } from "./PublishToggle";
 
 export const dynamic = "force-dynamic";
@@ -29,7 +29,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
   if (!event) {
     return (
       <div style={{ maxWidth: 620, margin: "0 auto" }}>
-        <Link href="/dashboard/events" style={{ color: "#161616", fontWeight: 700, fontSize: 14 }}>
+        <Link href="/dashboard/events" style={backLink}>
           ← Your events
         </Link>
         <div style={{ ...card, marginTop: 16, textAlign: "center", color: "#888" }}>
@@ -46,12 +46,12 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
 
   return (
     <div style={{ maxWidth: 620, margin: "0 auto" }}>
-      <Link href="/dashboard/events" style={{ color: "#161616", fontWeight: 700, fontSize: 14 }}>
+      <Link href="/dashboard/events" style={backLink}>
         ← Your events
       </Link>
 
       <div style={{ display: "flex", alignItems: "center", gap: 10, margin: "12px 0 2px" }}>
-        <h1 style={{ fontSize: 26, fontWeight: 800, color: "#111", margin: 0 }}>{event.name}</h1>
+        <h1 style={{ fontSize: 26, fontWeight: 800, color: T.text, margin: 0 }}>{event.name}</h1>
         <span
           style={{
             fontSize: 11,
@@ -65,7 +65,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
           {pill.label}
         </span>
       </div>
-      <div style={{ color: "#777", fontSize: 15, marginBottom: 18 }}>
+      <div style={{ color: T.muted, fontSize: 15, marginBottom: 18 }}>
         {event.venueName} · {event.venueAddress}
         <br />
         {fmtDate(event.eventDate)} · {fmtTime(event.eventDate)}
@@ -77,7 +77,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
           style={{
             fontSize: 12,
             fontWeight: 700,
-            color: "#999",
+            color: T.muted,
             textTransform: "uppercase",
             letterSpacing: 0.5,
             marginBottom: 10,
@@ -91,10 +91,10 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
           <Stat label="Revenue" value={money(summary?.grossRevenue)} />
           <Stat label="Checked in" value={summary?.checkedIn ?? 0} />
         </div>
-        <div style={{ height: 8, borderRadius: 4, background: "#ECECEC", overflow: "hidden" }}>
+        <div style={{ height: 8, borderRadius: 4, background: T.divider, overflow: "hidden" }}>
           <div style={{ width: `${pct}%`, height: "100%", background: "#F5E642" }} />
         </div>
-        <div style={{ fontSize: 12, color: "#777", textAlign: "right", marginTop: 4 }}>{pct}% sold</div>
+        <div style={{ fontSize: 12, color: T.muted, textAlign: "right", marginTop: 4 }}>{pct}% sold</div>
       </div>
 
       {/* Manage grid */}
@@ -102,7 +102,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
         style={{
           fontSize: 12,
           fontWeight: 700,
-          color: "#999",
+          color: T.muted,
           textTransform: "uppercase",
           letterSpacing: 0.5,
           margin: "18px 2px 10px",
@@ -133,7 +133,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
         <PublishToggle id={event.id} status={event.status} />
       </div>
 
-      <div style={{ color: "#999", fontSize: 13, margin: "16px 2px 0", lineHeight: 1.6 }}>
+      <div style={{ color: T.muted, fontSize: 13, margin: "16px 2px 0", lineHeight: 1.6 }}>
         Scanning tickets at the door, plus the &ldquo;In app&rdquo; tools above, live in the
         fansonly mobile app.
       </div>
@@ -144,8 +144,8 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
 function Stat({ label, value }: { label: string; value: number | string }) {
   return (
     <div>
-      <div style={{ fontSize: 22, fontWeight: 800, color: "#111" }}>{value}</div>
-      <div style={{ fontSize: 12, color: "#777", marginTop: 2 }}>{label}</div>
+      <div style={{ fontSize: 22, fontWeight: 800, color: T.text }}>{value}</div>
+      <div style={{ fontSize: 12, color: T.muted, marginTop: 2 }}>{label}</div>
     </div>
   );
 }
@@ -167,13 +167,14 @@ const tileLive: React.CSSProperties = {
   background: "#F5E642",
   border: "1px solid #E4D400",
 };
-// Not-yet-built ("In app") tiles stay muted grey to read as unavailable.
+// Not-yet-built ("In app") tiles stay muted dark to read as unavailable.
 const tileSoon: React.CSSProperties = {
   ...tileBase,
-  background: "#F0F0F0",
-  border: "1px solid #E5E5E5",
-  opacity: 0.7,
+  background: "#242424",
+  border: "1px solid #333",
+  opacity: 0.8,
 };
+// Tile labels sit on yellow tiles → stay dark. Soon tiles get a light label.
 const tileLabel: React.CSSProperties = { fontSize: 14, fontWeight: 700, color: "#161616" };
 const soonTag: React.CSSProperties = {
   position: "absolute",
@@ -181,9 +182,9 @@ const soonTag: React.CSSProperties = {
   right: 8,
   fontSize: 10,
   fontWeight: 700,
-  color: "#999",
-  background: "#fff",
-  border: "1px solid #e5e5e5",
+  color: T.muted,
+  background: "#1A1A1A",
+  border: "1px solid #333",
   borderRadius: 999,
   padding: "1px 6px",
 };

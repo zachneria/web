@@ -10,7 +10,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div style={{ minHeight: "100vh", background: "#FAFAF8" }}>
+    <div style={{ minHeight: "100vh", background: "#121212", color: "#EDEDED" }}>
       <header
         style={{
           background: "#161616",

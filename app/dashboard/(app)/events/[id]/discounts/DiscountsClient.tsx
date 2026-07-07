@@ -194,17 +194,17 @@ export function DiscountsClient({ eventId }: { eventId: string }) {
       {/* List */}
       <div style={cardStyle}>
         {loading ? (
-          <div style={{ color: "#999" }}>Loading…</div>
+          <div style={{ color: "#8F8F8F" }}>Loading…</div>
         ) : codes.length === 0 ? (
-          <div style={{ color: "#999" }}>No discount codes yet.</div>
+          <div style={{ color: "#8F8F8F" }}>No discount codes yet.</div>
         ) : (
           codes.map((c) => (
             <div key={c.id} style={listRow}>
               <div>
-                <div style={{ fontWeight: 700, color: "#111" }}>
+                <div style={{ fontWeight: 700, color: "#F2F2F2" }}>
                   {c.kind === "unique" ? `${c.batchLabel || "Batch"} · ${offLabel(c)}` : `${c.code} · ${offLabel(c)}`}
                 </div>
-                <div style={{ fontSize: 12, color: "#888" }}>
+                <div style={{ fontSize: 12, color: "#8F8F8F" }}>
                   {c.timesRedeemed}
                   {c.maxRedemptions ? `/${c.maxRedemptions}` : ""} used
                   {c.expiresAt ? ` · expires ${new Date(c.expiresAt).toLocaleDateString()}` : ""}
@@ -232,9 +232,9 @@ function Seg({ on, onClick, children }: { on: boolean; onClick: () => void; chil
         fontSize: 14,
         fontWeight: 700,
         cursor: "pointer",
-        background: on ? "#F5E642" : "#fff",
-        color: "#161616",
-        border: `1.5px solid ${on ? "#F5E642" : "#ddd"}`,
+        background: on ? "#F5E642" : "#222",
+        color: on ? "#161616" : "#D8D8D8",
+        border: `1.5px solid ${on ? "#F5E642" : "#383838"}`,
       }}
     >
       {children}
@@ -246,8 +246,8 @@ function Row({ children }: { children: React.ReactNode }) {
 }
 
 const cardStyle: React.CSSProperties = {
-  background: "#fff",
-  border: "1px solid #eee",
+  background: "#1E1E1E",
+  border: "1px solid #2E2E2E",
   borderRadius: 14,
   padding: 18,
   marginBottom: 14,
@@ -255,10 +255,12 @@ const cardStyle: React.CSSProperties = {
 const input: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  border: "1px solid #ddd",
+  border: "1px solid #383838",
   borderRadius: 10,
   padding: "11px 12px",
   fontSize: 15,
+  background: "#222",
+  color: "#F2F2F2",
 };
 const btn: React.CSSProperties = {
   width: "100%",
@@ -278,10 +280,10 @@ const listRow: React.CSSProperties = {
   alignItems: "center",
   gap: 10,
   padding: "10px 0",
-  borderBottom: "1px solid #f2f2f2",
+  borderBottom: "1px solid #2A2A2A",
 };
 const delBtn: React.CSSProperties = {
-  background: "#fff",
+  background: "#1E1E1E",
   color: "#C0322B",
   border: "1px solid #e6c9c7",
   borderRadius: 8,

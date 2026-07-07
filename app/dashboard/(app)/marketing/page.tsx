@@ -232,15 +232,18 @@ export default function MarketingComposer() {
   const input: React.CSSProperties = {
     width: "100%",
     boxSizing: "border-box",
-    border: "1px solid #e2e2e2",
+    border: "1px solid #383838",
     borderRadius: 10,
     padding: "12px 14px",
     fontSize: 15,
     fontFamily: "inherit",
+    background: "#222",
+    color: "#F2F2F2",
   };
   const chip: React.CSSProperties = {
-    border: "1.5px solid #e0e0e0",
-    background: "#fff",
+    border: "1.5px solid #383838",
+    background: "#222",
+    color: "#D8D8D8",
     borderRadius: 999,
     padding: "7px 14px",
     fontSize: 14,
@@ -250,11 +253,11 @@ export default function MarketingComposer() {
 
   return (
     <div style={{ maxWidth: 620, margin: "0 auto" }}>
-      <Link href="/dashboard" style={{ color: INK, fontWeight: 700, fontSize: 14 }}>
+      <Link href="/dashboard" style={{ color: "#F5E642", fontWeight: 700, fontSize: 14 }}>
         ← Dashboard
       </Link>
       <h1 style={{ fontSize: 26, fontWeight: 800, margin: "12px 0 4px" }}>Email your fans</h1>
-      <p style={{ color: "#777", fontSize: 14, margin: "0 0 4px" }}>
+      <p style={{ color: "#8F8F8F", fontSize: 14, margin: "0 0 4px" }}>
         {!loaded
           ? "Counting your fans…"
           : recipientCount === 0
@@ -279,7 +282,7 @@ export default function MarketingComposer() {
       <div style={{ background: AI_BG, borderRadius: 12, padding: 16, marginBottom: 16 }}>
         <div style={{ fontWeight: 800, color: AI, marginBottom: 8 }}>✨ Draft with AI</div>
         <textarea
-          style={{ ...input, minHeight: 60, background: "#fff" }}
+          style={{ ...input, minHeight: 60, background: "#222" }}
           placeholder="Tell Stub what to say — e.g. 'hype my Friday warehouse show, doors 10pm'"
           value={aiPrompt}
           onChange={(e) => setAiPrompt(e.target.value)}
@@ -324,7 +327,7 @@ export default function MarketingComposer() {
                       setSubject(s);
                       setSubjectOptions([]);
                     }}
-                    style={{ textAlign: "left", background: "#fff", border: "1px solid #444", borderRadius: 10, padding: "10px 12px", fontSize: 14, cursor: "pointer" }}
+                    style={{ textAlign: "left", background: "#222", color: "#F2F2F2", border: "1px solid #444", borderRadius: 10, padding: "10px 12px", fontSize: 14, cursor: "pointer" }}
                   >
                     ↑ {s}
                   </button>
@@ -349,7 +352,7 @@ export default function MarketingComposer() {
       />
 
       {/* feature shows */}
-      <div style={{ fontSize: 13, fontWeight: 700, color: "#999", textTransform: "uppercase", letterSpacing: 0.5, margin: "16px 0 8px" }}>
+      <div style={{ fontSize: 13, fontWeight: 700, color: "#8F8F8F", textTransform: "uppercase", letterSpacing: 0.5, margin: "16px 0 8px" }}>
         Feature shows{selectedShows.length ? ` (${selectedShows.length})` : ""}
       </div>
       {events.length > 0 && (
@@ -368,17 +371,17 @@ export default function MarketingComposer() {
                 display: "flex",
                 alignItems: "center",
                 gap: 10,
-                background: on ? "#FBF6DA" : "#fff",
-                border: `1px solid ${on ? "#EFE7C2" : "#eee"}`,
+                background: on ? "#FBF6DA" : "#1E1E1E",
+                border: `1px solid ${on ? "#EFE7C2" : "#2E2E2E"}`,
                 borderRadius: 10,
                 padding: "10px 12px",
                 cursor: "pointer",
                 textAlign: "left",
               }}
             >
-              <span style={{ color: on ? INK : "#bbb", fontWeight: 800 }}>{on ? "☑" : "☐"}</span>
-              <span style={{ flex: 1, fontSize: 14, fontWeight: 600 }}>{e.name}</span>
-              <span style={{ fontSize: 12, color: "#999" }}>{fmtDate(e.eventDate)}</span>
+              <span style={{ color: on ? INK : "#8F8F8F", fontWeight: 800 }}>{on ? "☑" : "☐"}</span>
+              <span style={{ flex: 1, fontSize: 14, fontWeight: 600, color: on ? "#161616" : "#D8D8D8" }}>{e.name}</span>
+              <span style={{ fontSize: 12, color: on ? "#6B6B57" : "#8F8F8F" }}>{fmtDate(e.eventDate)}</span>
             </button>
           );
         })}
@@ -391,20 +394,20 @@ export default function MarketingComposer() {
       >
         {sending ? "Sending…" : "Send email"}
       </button>
-      {msg ? <p style={{ textAlign: "center", color: "#555", fontSize: 14, marginTop: 10 }}>{msg}</p> : null}
-      <p style={{ textAlign: "center", color: "#999", fontSize: 12, marginTop: 10, lineHeight: 1.5 }}>
+      {msg ? <p style={{ textAlign: "center", color: "#8F8F8F", fontSize: 14, marginTop: 10 }}>{msg}</p> : null}
+      <p style={{ textAlign: "center", color: "#8F8F8F", fontSize: 12, marginTop: 10, lineHeight: 1.5 }}>
         Marketing email — every message includes a one-click unsubscribe. Use it to promote shows.
       </p>
 
       {history.length > 0 && (
         <>
-          <div style={{ fontSize: 13, fontWeight: 700, color: "#999", textTransform: "uppercase", letterSpacing: 0.5, margin: "24px 0 8px" }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: "#8F8F8F", textTransform: "uppercase", letterSpacing: 0.5, margin: "24px 0 8px" }}>
             Sent
           </div>
           {history.map((b) => (
-            <div key={b.id} style={{ background: "#fff", border: "1px solid #eee", borderRadius: 10, padding: 12, marginBottom: 8 }}>
+            <div key={b.id} style={{ background: "#1E1E1E", border: "1px solid #2E2E2E", borderRadius: 10, padding: 12, marginBottom: 8 }}>
               <div style={{ fontWeight: 700, fontSize: 14 }}>{b.subject}</div>
-              <div style={{ fontSize: 12, color: "#999" }}>
+              <div style={{ fontSize: 12, color: "#8F8F8F" }}>
                 {new Date(b.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })} ·{" "}
                 {b.recipientCount} {b.recipientCount === 1 ? "recipient" : "recipients"}
               </div>

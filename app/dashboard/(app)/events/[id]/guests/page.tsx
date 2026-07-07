@@ -13,21 +13,21 @@ export default async function GuestsPage({ params }: { params: Promise<{ id: str
 
   return (
     <div style={{ maxWidth: 620, margin: "0 auto" }}>
-      <Link href={`/dashboard/events/${id}`} style={{ color: "#161616", fontWeight: 700, fontSize: 14 }}>
+      <Link href={`/dashboard/events/${id}`} style={{ color: "#F5E642", fontWeight: 700, fontSize: 14 }}>
         ← {event?.name ?? "Event"}
       </Link>
-      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#111" }}>
+      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#F2F2F2" }}>
         Guests {guests && guests.length > 0 ? `(${guests.length})` : ""}
       </h1>
 
       <div style={card}>
         {!guests || guests.length === 0 ? (
-          <div style={{ color: "#999" }}>No guest passes yet — add them in the fansonly app.</div>
+          <div style={{ color: "#8F8F8F" }}>No guest passes yet — add them in the fansonly app.</div>
         ) : (
           guests.map((g) => (
             <div key={g.id} style={row}>
-              <span style={{ color: "#333" }}>{g.name}</span>
-              {g.email ? <span style={{ color: "#999", fontSize: 13 }}>{g.email}</span> : null}
+              <span style={{ color: "#D8D8D8" }}>{g.name}</span>
+              {g.email ? <span style={{ color: "#8F8F8F", fontSize: 13 }}>{g.email}</span> : null}
             </div>
           ))
         )}
