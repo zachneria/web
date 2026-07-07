@@ -82,6 +82,35 @@ export function EditForm({ event }: { event: EditableEvent }) {
     }
   };
 
+  const cancelEvent = async () => {
+    if (
+      !window.confirm(
+        "Cancel this event? Ticket sales stop immediately. This can't be undone.",
+      )
+    )
+      return;
+    setBusy(true);
+    setErr("");
+    try {
+      const res = await fetch(`/api/dashboard/api/events/${event.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "cancelled" }),
+      });
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}));
+        setErr(d.error || "Couldn't cancel. Try again.");
+        setBusy(false);
+        return;
+      }
+      router.push(`/dashboard/events/${event.id}`);
+      router.refresh();
+    } catch {
+      setErr("Couldn't cancel. Try again.");
+      setBusy(false);
+    }
+  };
+
   return (
     <form onSubmit={save} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
       <Field label="Event name">
@@ -148,6 +177,25 @@ export function EditForm({ event }: { event: EditableEvent }) {
       <p style={{ color: "#8F8F8F", fontSize: 13, margin: 0 }}>
         Flyer image is edited in the fansonly app.
       </p>
+
+      <button
+        type="button"
+        onClick={cancelEvent}
+        disabled={busy}
+        style={{
+          marginTop: 4,
+          background: "transparent",
+          color: "#C0322B",
+          border: "1.5px solid #C0322B",
+          borderRadius: 12,
+          padding: "13px",
+          fontSize: 15,
+          fontWeight: 700,
+          cursor: "pointer",
+        }}
+      >
+        Cancel event
+      </button>
     </form>
   );
 }

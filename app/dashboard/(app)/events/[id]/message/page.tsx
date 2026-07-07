@@ -28,6 +28,7 @@ export default async function MessagePage({ params }: { params: Promise<{ id: st
       </p>
       <MessageClient
         eventId={id}
+        eventName={event?.name ?? "the event"}
         recipientCount={ann?.recipientCount ?? 0}
         history={ann?.announcements ?? []}
       />

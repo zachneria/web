@@ -12,19 +12,42 @@ interface Announcement {
 
 export function MessageClient({
   eventId,
+  eventName,
   recipientCount,
   history,
 }: {
   eventId: string;
+  eventName: string;
   recipientCount: number;
   history: Announcement[];
 }) {
   const router = useRouter();
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
+  const [face, setFace] = useState("happy"); // Stub's mood for the email
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [err, setErr] = useState("");
+
+  // Prefill templates (mirrors the app's Message screen).
+  const applyTemplate = (kind: "update" | "reminder" | "cancelled") => {
+    const n = eventName || "the event";
+    if (kind === "update") {
+      setSubject(`Update about ${n}`);
+      setBody(`Hi! A quick update about ${n}:\n\n`);
+      setFace("excited");
+    } else if (kind === "reminder") {
+      setSubject(`${n} is coming up`);
+      setBody(`Just a reminder that ${n} is almost here. See you there!\n\n`);
+      setFace("happy");
+    } else {
+      setSubject(`${n} has been cancelled`);
+      setBody(
+        `We're sorry to share that ${n} has been cancelled. We apologize for the inconvenience.\n\n`,
+      );
+      setFace("sad");
+    }
+  };
 
   const send = async () => {
     setErr("");
@@ -39,7 +62,7 @@ export function MessageClient({
       const res = await fetch(`/api/dashboard/api/tickets/events/${eventId}/announce`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subject: s, body: b }),
+        body: JSON.stringify({ subject: s, body: b, face }),
       });
       if (!res.ok) {
         const d = await res.json().catch(() => ({}));
@@ -62,6 +85,21 @@ export function MessageClient({
       <div style={card}>
         <div style={{ fontSize: 13, color: "#8F8F8F", marginBottom: 12 }}>
           {recipientCount} recipient{recipientCount === 1 ? "" : "s"}
+        </div>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
+          {[
+            { k: "update", label: "Event updated" },
+            { k: "reminder", label: "Reminder" },
+            { k: "cancelled", label: "Cancelled" },
+          ].map((t) => (
+            <button
+              key={t.k}
+              onClick={() => applyTemplate(t.k as "update" | "reminder" | "cancelled")}
+              style={chip}
+            >
+              {t.label}
+            </button>
+          ))}
         </div>
         <input
           style={input}
@@ -129,6 +167,16 @@ const input: React.CSSProperties = {
   fontSize: 15,
   background: "#222",
   color: "#F2F2F2",
+};
+const chip: React.CSSProperties = {
+  background: "#222",
+  color: "#D8D8D8",
+  border: "1px solid #383838",
+  borderRadius: 999,
+  padding: "7px 14px",
+  fontSize: 13,
+  fontWeight: 600,
+  cursor: "pointer",
 };
 const btn: React.CSSProperties = {
   width: "100%",
