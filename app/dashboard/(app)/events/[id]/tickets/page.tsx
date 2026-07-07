@@ -10,6 +10,7 @@ import {
   row,
   rowVal,
 } from "../_shared";
+import { AddTicketForm } from "./AddTicketForm";
 
 export const dynamic = "force-dynamic";
 
@@ -31,8 +32,10 @@ export default async function TicketsPage({ params }: { params: Promise<{ id: st
       </Link>
       <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#F2F2F2" }}>Tickets</h1>
 
+      <AddTicketForm eventId={id} />
+
       {!types || types.length === 0 ? (
-        <div style={{ ...card, color: "#8F8F8F" }}>No ticket types yet — add them in the fansonly app.</div>
+        <div style={{ ...card, color: "#8F8F8F" }}>No ticket types yet — add one above.</div>
       ) : (
         <>
           <Section title="Admission" items={admission} summary={summary} />
@@ -77,7 +80,7 @@ function Section({
                 <span style={{ color: "#8F8F8F", fontSize: 12 }}> · {t.category}</span>
               ) : null}
             </span>
-            <span style={rowVal}>{s ? `${s.sold} / ${s.total}` : `— / ${t.quantity}`}</span>
+            <span style={rowVal}>{s ? `${s.sold} / ${s.total}` : `0 / ${t.quantity}`}</span>
           </div>
         );
       })}
