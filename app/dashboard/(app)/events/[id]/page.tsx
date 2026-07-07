@@ -1,4 +1,16 @@
 import Link from "next/link";
+import type { IconType } from "react-icons";
+import {
+  IoCashOutline,
+  IoMailOutline,
+  IoPeopleOutline,
+  IoPencilOutline,
+  IoPricetagOutline,
+  IoReceiptOutline,
+  IoStarOutline,
+  IoTicketOutline,
+  IoTrendingUpOutline,
+} from "react-icons/io5";
 
 import { EventDetail, DetailSummary, STATUS, T, backLink, card, fmtDate, fmtTime, getJSON, money } from "./_shared";
 import { PublishToggle } from "./PublishToggle";
@@ -7,16 +19,17 @@ export const dynamic = "force-dynamic";
 
 // Manage grid — mirrors the app's event hub. `href` present = built page; the
 // rest are app-only for now (labeled "In app").
-const TILES: { key: string; label: string; icon: string; href?: string }[] = [
-  { key: "tickets", label: "Tickets", icon: "🎟️", href: "tickets" },
-  { key: "guests", label: "Guests", icon: "👥", href: "guests" },
-  { key: "payouts", label: "Payouts", icon: "💵", href: "payouts" },
-  { key: "production", label: "Production", icon: "🧾", href: "production" },
-  { key: "potential", label: "Potential", icon: "📈", href: "potential" },
-  { key: "discounts", label: "Discounts", icon: "🏷️", href: "discounts" },
-  { key: "passports", label: "Passports", icon: "⭐", href: "passports" },
-  { key: "message", label: "Message", icon: "✉️", href: "message" },
-  { key: "edit", label: "Edit", icon: "✏️", href: "edit" },
+// Same Ionicons as the app's Manage grid (react-icons/io5).
+const TILES: { key: string; label: string; Icon: IconType; href?: string }[] = [
+  { key: "tickets", label: "Tickets", Icon: IoTicketOutline, href: "tickets" },
+  { key: "guests", label: "Guests", Icon: IoPeopleOutline, href: "guests" },
+  { key: "payouts", label: "Payouts", Icon: IoCashOutline, href: "payouts" },
+  { key: "production", label: "Production", Icon: IoReceiptOutline, href: "production" },
+  { key: "potential", label: "Potential", Icon: IoTrendingUpOutline, href: "potential" },
+  { key: "discounts", label: "Discounts", Icon: IoPricetagOutline, href: "discounts" },
+  { key: "passports", label: "Passports", Icon: IoStarOutline, href: "passports" },
+  { key: "message", label: "Message", Icon: IoMailOutline, href: "message" },
+  { key: "edit", label: "Edit", Icon: IoPencilOutline, href: "edit" },
 ];
 
 export default async function EventHub({ params }: { params: Promise<{ id: string }> }) {
@@ -115,13 +128,13 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
           t.href ? (
             <Link key={t.key} href={`/dashboard/events/${id}/${t.href}`} style={tileLink}>
               <div style={tileLive}>
-                <span style={{ fontSize: 26 }}>{t.icon}</span>
+                <t.Icon size={30} color="#F5E642" />
                 <span style={tileLabel}>{t.label}</span>
               </div>
             </Link>
           ) : (
             <div key={t.key} style={tileSoon}>
-              <span style={{ fontSize: 26 }}>{t.icon}</span>
+              <t.Icon size={30} color="#F5E642" />
               <span style={tileLabel}>{t.label}</span>
               <span style={soonTag}>In app</span>
             </div>
