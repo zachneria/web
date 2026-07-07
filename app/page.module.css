@@ -277,6 +277,20 @@
   display: block;
   font-size: 15px;
 }
+/* Live beta pills are links — brand-yellow accent + hover. */
+.storePillLive {
+  border-color: rgba(245, 230, 66, 0.5);
+  color: #e6e6e6;
+  text-decoration: none;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.storePillLive strong {
+  color: #f5e642;
+}
+.storePillLive:hover {
+  border-color: #f5e642;
+  background: rgba(245, 230, 66, 0.08);
+}
 
 @media (max-width: 860px) {
   .audience,

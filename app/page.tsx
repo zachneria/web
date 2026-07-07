@@ -23,6 +23,12 @@ import styles from "./page.module.css";
 
 const INVITE = "mailto:hello@fansonly.live?subject=fansonly%20invite%20request";
 
+// Public beta install links. iOS = TestFlight public link (stable). Android =
+// EAS internal-distribution build page (changes per build — re-point on rebuild;
+// null until the current APK build finishes → renders "Coming soon").
+const IOS_BETA_URL = "https://testflight.apple.com/join/g93ysYca";
+const ANDROID_BETA_URL: string | null = null;
+
 const FEATURES: { Icon: IconType; title: string; body: string }[] = [
   { Icon: IoLinkOutline, title: "Sell from a link", body: "One share link — text it, post it, drop it in a group chat. Buyers tap and check out." },
   { Icon: IoCashOutline, title: "Minimal, honest fees", body: "Way less than the big guys. What you price is what your fans pay — no surprise add-ons." },
@@ -166,14 +172,31 @@ export default function Home() {
           Request an invite →
         </a>
         <div className={styles.stores}>
-          <span className={styles.storePill}>
-            <strong>App Store</strong>
-            Coming soon
-          </span>
-          <span className={styles.storePill}>
-            <strong>Google Play</strong>
-            Coming soon
-          </span>
+          <a
+            className={`${styles.storePill} ${styles.storePillLive}`}
+            href={IOS_BETA_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <strong>iOS Beta</strong>
+            Join on TestFlight →
+          </a>
+          {ANDROID_BETA_URL ? (
+            <a
+              className={`${styles.storePill} ${styles.storePillLive}`}
+              href={ANDROID_BETA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <strong>Android Beta</strong>
+              Install the APK →
+            </a>
+          ) : (
+            <span className={styles.storePill}>
+              <strong>Android Beta</strong>
+              Coming soon
+            </span>
+          )}
         </div>
       </section>
 
