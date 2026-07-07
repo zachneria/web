@@ -161,11 +161,12 @@ const tileBase: React.CSSProperties = {
   justifyContent: "center",
   gap: 8,
 };
-// Live tiles = brand yellow so they stand out on the off-white page.
+// Live tiles: outlined yellow (matches the Sign-out button) — less bright than
+// a solid fill, calmer on the dark background.
 const tileLive: React.CSSProperties = {
   ...tileBase,
-  background: "#F5E642",
-  border: "1px solid #E4D400",
+  background: "#1E1E1E",
+  border: "1.5px solid #F5E642",
 };
 // Not-yet-built ("In app") tiles stay muted dark to read as unavailable.
 const tileSoon: React.CSSProperties = {
@@ -175,7 +176,7 @@ const tileSoon: React.CSSProperties = {
   opacity: 0.8,
 };
 // Tile labels sit on yellow tiles → stay dark. Soon tiles get a light label.
-const tileLabel: React.CSSProperties = { fontSize: 14, fontWeight: 700, color: "#161616" };
+const tileLabel: React.CSSProperties = { fontSize: 14, fontWeight: 700, color: "#F5E642" };
 const soonTag: React.CSSProperties = {
   position: "absolute",
   top: 8,
