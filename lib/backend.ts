@@ -19,6 +19,45 @@ export async function getPromoter(id: string): Promise<PromoterPage | null> {
   }
 }
 
+// A talent/artist's public profile + gigs (drives the /a/ page).
+export interface ArtistGig {
+  id: string;
+  slug: string | null;
+  name: string;
+  venueName: string;
+  eventDate: string;
+  flyerUrl: string | null;
+  organizerName: string;
+  organizerHandle: string | null;
+}
+export interface ArtistPage {
+  talent: {
+    id: string;
+    name: string;
+    handle: string | null;
+    bio: string | null;
+    genres: string | null;
+    city: string | null;
+    photoUrl: string | null;
+    mixUrl: string | null;
+    suggestedRate: number | null; // present only when the artist's showRate toggle is on
+  };
+  events: ArtistGig[];
+  pastGigs: ArtistGig[];
+  stats: { shows: number; promoters: number };
+}
+export async function getArtist(id: string): Promise<ArtistPage | null> {
+  try {
+    const res = await fetch(`${API_BASE}/events/talent/${id}`, {
+      next: { revalidate: 30 },
+    });
+    if (!res.ok) return null;
+    return (await res.json()) as ArtistPage;
+  } catch {
+    return null;
+  }
+}
+
 export async function getEvent(id: string): Promise<BuyEvent | null> {
   try {
     const res = await fetch(`${API_BASE}/events/${id}`, {

@@ -1,0 +1,252 @@
+/* Artist page — dark + purple (the talent accent), flashier sibling of /p. */
+
+.page {
+  background: #121212;
+  color: #f2f2f2;
+  min-height: 100vh;
+}
+
+/* ---- Hero ---- */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 48px 24px 36px;
+  background:
+    radial-gradient(60% 55% at 50% -10%, rgba(175, 82, 222, 0.28), transparent 70%),
+    #121212;
+}
+.photo {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3.5px solid #af52de;
+  background: #2a2a2a;
+  display: inline-block;
+}
+.photoFallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: 800;
+  color: #af52de;
+}
+.name {
+  font-size: clamp(30px, 6vw, 42px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin: 16px 0 4px;
+}
+.meta {
+  color: #9a9a9a;
+  font-size: 14px;
+  margin: 0 0 14px;
+}
+.genres {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.genreChip {
+  border: 1px solid rgba(175, 82, 222, 0.6);
+  color: #c98af0;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 5px 14px;
+}
+.bio {
+  color: #c9c9c9;
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 520px;
+  margin: 0 auto 20px;
+}
+.stats {
+  display: flex;
+  gap: 48px;
+  justify-content: center;
+}
+.statNum {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+}
+.statLabel {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #8f8f8f;
+}
+
+/* ---- Body ---- */
+.body {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 8px 20px 56px;
+}
+.section {
+  margin-top: 28px;
+}
+.sectionLabel {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #8f8f8f;
+  margin: 0 0 10px;
+}
+.embed {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  background: #1e1e1e;
+}
+.embedVideo {
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+.listenLink {
+  display: block;
+  background: #1e1e1e;
+  border: 1px solid #2e2e2e;
+  border-radius: 14px;
+  padding: 16px;
+  color: #c98af0;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+}
+
+/* ---- Rate + booking ---- */
+.rateStrip {
+  background: #1e1233;
+  border: 1px solid rgba(175, 82, 222, 0.5);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #d9c2f0;
+  margin-bottom: 12px;
+}
+.rateStrip strong {
+  color: #fff;
+}
+.rateNote {
+  float: right;
+  font-size: 11px;
+  color: #7a6c90;
+}
+.bookBtn {
+  display: block;
+  background: #f5e642;
+  color: #161616;
+  text-align: center;
+  font-weight: 800;
+  font-size: 17px;
+  border-radius: 12px;
+  padding: 15px;
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  box-shadow: 0 8px 30px rgba(245, 230, 66, 0.2);
+}
+.bookBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(245, 230, 66, 0.3);
+}
+
+/* ---- Gigs ---- */
+.gigCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #1e1e1e;
+  border: 1px solid #2e2e2e;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.gigDate {
+  flex-shrink: 0;
+  width: 54px;
+  background: #2a2a2a;
+  border-radius: 10px;
+  text-align: center;
+  padding: 8px 0;
+}
+.gigMonth {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #8f8f8f;
+}
+.gigDay {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+}
+.gigInfo {
+  flex: 1;
+  min-width: 0;
+}
+.gigName {
+  font-size: 16px;
+  font-weight: 700;
+}
+.gigMeta {
+  font-size: 13px;
+  color: #8f8f8f;
+  margin-top: 2px;
+}
+.gigPromoter {
+  color: #c98af0;
+  text-decoration: none;
+}
+.gigPromoter:hover {
+  text-decoration: underline;
+}
+.ticketBtn {
+  flex-shrink: 0;
+  background: #f5e642;
+  color: #161616;
+  font-size: 13px;
+  font-weight: 800;
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-decoration: none;
+}
+
+/* ---- Past gigs ---- */
+.pastList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pastRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid #222;
+}
+.pastDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: #af52de;
+  flex-shrink: 0;
+}
+.pastName {
+  flex: 1;
+  color: #ddd;
+  font-size: 14px;
+}
+.pastDate {
+  color: #777;
+  font-size: 13px;
+}
+.empty {
+  color: #8f8f8f;
+  text-align: center;
+  margin-top: 32px;
+}
