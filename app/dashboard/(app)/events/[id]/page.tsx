@@ -43,7 +43,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
 
   if (!event) {
     return (
-      <div style={{ maxWidth: 640 }}>
+      <div style={{ maxWidth: 880 }}>
         <Link href="/dashboard/events" style={backLink}>
           ← Your events
         </Link>
@@ -60,7 +60,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
   const pct = cap > 0 ? Math.round((sold / cap) * 100) : 0;
 
   return (
-    <div style={{ maxWidth: 640 }}>
+    <div style={{ maxWidth: 880 }}>
       <Link href="/dashboard/events" style={backLink}>
         ← Your events
       </Link>
@@ -125,7 +125,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
       >
         Manage
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))", gap: 12 }}>
         {TILES.map((t) =>
           t.href ? (
             <Link key={t.key} href={`/dashboard/events/${id}/${t.href}`} style={tileLink}>

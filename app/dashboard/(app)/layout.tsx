@@ -50,7 +50,6 @@ export default async function DashboardLayout({
             )}
             <div className="dsh-user-meta">
               <span className="dsh-user-name">{name || "Organizer"}</span>
-              {email ? <span className="dsh-user-email">{email}</span> : null}
             </div>
           </div>
           <DashNav isTalent={isTalent} />

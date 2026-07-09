@@ -593,24 +593,24 @@ a {
   min-height: 0;
 }
 .dsh-side {
-  width: 232px;
+  width: 120px;
   flex-shrink: 0;
   background: #f2f2ef;
   border-right: 1px solid #e2e2dd;
-  padding: 20px 12px;
+  padding: 20px 10px;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 20px;
 }
 .dsh-user {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 0 6px;
+  gap: 8px;
 }
 .dsh-avatar {
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   object-fit: cover;
   border: 2.5px solid var(--brand);
@@ -628,20 +628,17 @@ a {
 }
 .dsh-user-meta {
   min-width: 0;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .dsh-user-name {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 800;
   color: #111;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.dsh-user-email {
-  font-size: 11px;
-  color: #8a8a8a;
+  text-align: center;
+  max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -688,6 +685,7 @@ a {
     padding: 10px 14px;
     gap: 12px;
   }
+  .dsh-user { flex-direction: row; }
   .dsh-user-meta { display: none; }
   .dsh-nav { flex-direction: row; gap: 4px; }
   .dsh-nav-item { width: 46px; padding: 9px 0; border-left: none; border-bottom: 3px solid transparent; }

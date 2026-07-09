@@ -1,8 +1,53 @@
 import Link from "next/link";
+import type { IconType } from "react-icons";
+import {
+  IoCreateOutline,
+  IoImageOutline,
+  IoLinkOutline,
+  IoSparklesOutline,
+} from "react-icons/io5";
 
 import { getDashboard, type DashEvent, type DashSummary } from "@/lib/org-api";
 
 export const dynamic = "force-dynamic";
+
+// Mirrors the app's create chooser (create/index.tsx): describe / link /
+// screenshot (coming soon) / scratch. Laid out as a row of tiles.
+const CREATE_METHODS: {
+  key: string;
+  label: string;
+  hint: string;
+  Icon: IconType;
+  href?: string;
+}[] = [
+  {
+    key: "describe",
+    label: "Describe your event",
+    hint: 'e.g. "Warehouse party July 3, 9pm–3am, 200 people"',
+    Icon: IoSparklesOutline,
+    href: "/dashboard/events/new?m=describe",
+  },
+  {
+    key: "link",
+    label: "Import from a link",
+    hint: "Facebook or Partiful event URL",
+    Icon: IoLinkOutline,
+    href: "/dashboard/events/new?m=link",
+  },
+  {
+    key: "screenshot",
+    label: "Import from a screenshot",
+    hint: "Flyer or event page screenshot",
+    Icon: IoImageOutline,
+  },
+  {
+    key: "scratch",
+    label: "Start from scratch",
+    hint: "Enter the details manually",
+    Icon: IoCreateOutline,
+    href: "/dashboard/events/new?m=scratch",
+  },
+];
 
 const STATUS: Record<DashEvent["status"], { label: string; fg: string; bg: string }> = {
   published: { label: "Published", fg: "#1B873F", bg: "#E4F6E9" },
@@ -160,11 +205,52 @@ export default async function DashboardEvents() {
   ];
 
   return (
-    <>
+    <div style={{ maxWidth: 880 }}>
       <h1 style={{ fontSize: 26, fontWeight: 800, margin: "0 0 4px", color: "#111111" }}>
-        Your events
+        Create event
       </h1>
-      <p style={{ color: "#8A8A8A", margin: "0 0 24px", fontSize: 15 }}>Sales at a glance.</p>
+      <p style={{ color: "#8A8A8A", margin: "0 0 16px", fontSize: 15 }}>
+        Describe it in a sentence, import it from a link, or build it by hand.
+      </p>
+      <div
+        style={{
+          display: "grid",
+          // Rows first: tiles flow across, wrapping onto new rows as needed.
+          gridTemplateColumns: "repeat(auto-fill, minmax(190px, 1fr))",
+          gap: 12,
+          marginBottom: 36,
+        }}
+      >
+        {CREATE_METHODS.map((m) =>
+          m.href ? (
+            <Link key={m.key} href={m.href} style={{ textDecoration: "none" }}>
+              <div style={methodTile}>
+                <span style={methodIcon}>
+                  <m.Icon size={22} color="#111" />
+                </span>
+                <span style={methodLabel}>{m.label}</span>
+                <span style={methodHint}>{m.hint}</span>
+              </div>
+            </Link>
+          ) : (
+            <div key={m.key} style={{ ...methodTile, opacity: 0.55 }}>
+              <span style={methodIcon}>
+                <m.Icon size={22} color="#111" />
+              </span>
+              <span style={methodLabel}>
+                {m.label}{" "}
+                <span style={soonBadge}>Coming soon</span>
+              </span>
+              <span style={methodHint}>{m.hint}</span>
+            </div>
+          ),
+        )}
+      </div>
+
+      <h2 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px", color: "#111111" }}>
+        Your events
+      </h2>
+      <p style={{ color: "#8A8A8A", margin: "0 0 18px", fontSize: 15 }}>Sales at a glance.</p>
 
       {sorted.length === 0 ? (
         <div
@@ -248,6 +334,41 @@ export default async function DashboardEvents() {
           })}
         </div>
       )}
-    </>
+    </div>
   );
 }
+
+// Method tile styles — the app's Option card (light card, white icon circle,
+// label + hint) translated to web.
+const methodTile: React.CSSProperties = {
+  background: "#F8F8F8",
+  border: "1px solid #ECECEC",
+  borderRadius: 16,
+  padding: 16,
+  display: "flex",
+  flexDirection: "column",
+  gap: 8,
+  height: "100%",
+  boxSizing: "border-box",
+};
+const methodIcon: React.CSSProperties = {
+  width: 44,
+  height: 44,
+  borderRadius: 22,
+  background: "#fff",
+  border: "1px solid #ECECEC",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+const methodLabel: React.CSSProperties = { fontSize: 15, fontWeight: 700, color: "#111" };
+const methodHint: React.CSSProperties = { fontSize: 12.5, color: "#8A8A8A", lineHeight: 1.4 };
+const soonBadge: React.CSSProperties = {
+  fontSize: 10,
+  fontWeight: 700,
+  color: "#888",
+  background: "#ECECEC",
+  borderRadius: 6,
+  padding: "2px 6px",
+  verticalAlign: "middle",
+};
