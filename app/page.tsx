@@ -69,7 +69,10 @@ export default function Home() {
               See our pricing
             </a>
             <a className={styles.btnGhost} href="/dashboard">
-              Sign in
+              Promoter login
+            </a>
+            <a className={`${styles.btnGhost} ${styles.btnGhostArtist}`} href="/dashboard">
+              Artist login
             </a>
           </div>
           <div className={styles.valueStrip}>
@@ -85,8 +88,8 @@ export default function Home() {
         <p className={styles.kicker}>Who it&apos;s for</p>
         <h2 className={styles.h2}>Built for the whole night</h2>
         <div className={styles.audience}>
-          <div className={styles.audienceCard}>
-            <div className={styles.audEmoji}><IoHeadsetOutline size={36} color="#161616" /></div>
+          <div className={`${styles.audienceCard} ${styles.dark}`}>
+            <div className={styles.audEmoji}><IoHeadsetOutline size={36} color="#F5E642" /></div>
             <div className={styles.audTitle}>Promoters &amp; creators</div>
             <p className={styles.audBody}>
               Throw the event — we handle the rest. Create in minutes, sell from one link,
@@ -94,8 +97,8 @@ export default function Home() {
               cash out after the show.
             </p>
           </div>
-          <div className={styles.audienceCard}>
-            <div className={styles.audEmoji}><IoHeartOutline size={36} color="#161616" /></div>
+          <div className={`${styles.audienceCard} ${styles.dark}`}>
+            <div className={styles.audEmoji}><IoHeartOutline size={36} color="#F5E642" /></div>
             <div className={styles.audTitle}>Fans &amp; buyers</div>
             <p className={styles.audBody}>
               Tap a link, grab your ticket — no account, no forced app download. Keep tickets
@@ -104,12 +107,11 @@ export default function Home() {
             </p>
           </div>
           <div className={`${styles.audienceCard} ${styles.dark}`}>
-            <span className={styles.soonTag}>Soon</span>
             <div className={styles.audEmoji}><IoMicOutline size={36} color="#F5E642" /></div>
             <div className={styles.audTitle}>Talent</div>
             <p className={styles.audBody}>
-              Your own gig page, get booked, and get paid — with cost-flow that pays your
-              people fast. Talent accounts are coming soon.
+              Your own gig page with a playable mix, get booked straight from it, and get
+              paid — with your rate history built automatically from every show.
             </p>
           </div>
         </div>

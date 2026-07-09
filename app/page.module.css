@@ -79,6 +79,15 @@
   transform: translateY(-2px);
   box-shadow: 0 12px 36px rgba(245, 230, 66, 0.35);
 }
+/* Artist flavor of the ghost button — purple, the talent accent. */
+.btnGhostArtist {
+  border-color: rgba(175, 82, 222, 0.65) !important;
+  color: #d9b8f2 !important;
+}
+.btnGhostArtist:hover {
+  border-color: #af52de !important;
+  background: rgba(175, 82, 222, 0.12) !important;
+}
 .btnGhost {
   background: transparent;
   color: #fff;
