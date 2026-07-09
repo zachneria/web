@@ -16,6 +16,8 @@ export interface FindEvent {
   flyerUrl: string | null;
   organizerName?: string | null;
   organizerLogoUrl?: string | null;
+  organizerId?: string | null;
+  organizerHandle?: string | null;
   fromPrice?: number | null;
   createdAt?: string;
   soldPct?: number;

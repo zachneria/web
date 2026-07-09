@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
 
 import type { FindEvent } from "@/lib/backend";
@@ -142,6 +143,8 @@ export function EventsBrowser({ initial }: { initial: FindEvent[] }) {
 }
 
 function EventCard({ e, live }: { e: FindEvent; live?: boolean }) {
+  const router = useRouter();
+  const promoterPath = e.organizerHandle || e.organizerId ? `/p/${e.organizerHandle ?? e.organizerId}` : null;
   return (
     <Link href={`/e/${e.id}`} className={`find-card${live ? " find-card-live" : ""}`}>
       {e.flyerUrl ? (
@@ -157,10 +160,33 @@ function EventCard({ e, live }: { e: FindEvent; live?: boolean }) {
         <span className={`find-card-date${live ? " find-card-date-live" : ""}`}>
           {live ? "Happening now" : fmtDate(e.eventDate)}
         </span>
-        <span className="find-card-venue">
-          {e.venueName}
-          {e.organizerName ? ` · ${e.organizerName}` : ""}
-        </span>
+        <span className="find-card-venue">{e.venueName}</span>
+        {e.organizerName ? (
+          // Chip inside the card link — navigate to /p without triggering /e.
+          <span
+            className="find-chip"
+            role={promoterPath ? "link" : undefined}
+            onClick={
+              promoterPath
+                ? (ev) => {
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                    router.push(promoterPath);
+                  }
+                : undefined
+            }
+          >
+            {e.organizerLogoUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={e.organizerLogoUrl} alt="" />
+            ) : (
+              <span className="find-chip-initial">
+                {(e.organizerName || "?").charAt(0).toUpperCase()}
+              </span>
+            )}
+            {e.organizerName}
+          </span>
+        ) : null}
         <span className="find-card-meta">
           {e.soldOut ? (
             <span className="find-badge find-badge-out">Sold out</span>
