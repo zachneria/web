@@ -788,7 +788,7 @@ a {
   background: #fff;
   color: #111;
   min-height: 60vh;
-  padding: 0 0 72px;
+  padding: 36px 0 72px;
 }
 .find-inner {
   max-width: 1060px;
@@ -801,7 +801,6 @@ a {
   height: clamp(260px, 34vw, 400px);
   overflow: hidden;
   border-radius: 28px;
-  margin-top: 40px;
 }
 .find-photo img {
   width: 100%;
@@ -818,15 +817,6 @@ a {
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-}
-.find-eyebrow {
-  background: #f5e642;
-  color: #111;
-  font-size: clamp(11px, 1.3vw, 14px);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  padding: 6px 12px;
 }
 .find-line {
   background: #f5e642;

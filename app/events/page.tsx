@@ -31,7 +31,6 @@ export default async function EventsPage() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/find-hero.jpg" alt="" />
             <div className="find-hero-copy">
-              <span className="find-eyebrow">Out tonight?</span>
               <span className="find-line">For the befores</span>
               <span className="find-line find-line-2">&amp; the afters</span>
             </div>
