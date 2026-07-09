@@ -49,6 +49,9 @@ export default function BuyBox({
   const [chosen, setChosen] = useState<Record<string, number>>({}); // choose-a-price
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [smsConsent, setSmsConsent] = useState(false);
+  const [smsMarketing, setSmsMarketing] = useState(false); // separate EXPRESS opt-in (TCPA)
   const [step, setStep] = useState<"select" | "pay" | "done">("select");
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [viewToken, setViewToken] = useState<string | null>(null);
@@ -175,6 +178,11 @@ export default function BuyBox({
       const body = JSON.stringify({
         buyerName: name.trim(),
         buyerEmail: email.trim().toLowerCase(),
+        // Mirrors the app: the phone (and thus any SMS) only ships with the
+        // explicit consent box — a number alone is not consent (carrier rule).
+        ...(phone.trim() && smsConsent
+          ? { buyerPhone: phone.trim(), smsMarketingConsent: smsMarketing }
+          : {}),
         items: itemsPayload(),
         ...(applied ? { discountCode: applied.code } : {}),
       });
@@ -350,6 +358,43 @@ export default function BuyBox({
         autoComplete="email"
         inputMode="email"
       />
+      <input
+        style={styles.input}
+        placeholder="Phone (optional) — text me my tickets"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        autoComplete="tel"
+        inputMode="tel"
+      />
+      {/* SMS consent — separate unchecked box required (a phone number alone
+          isn't consent); marketing needs its OWN express opt-in (TCPA) and only
+          appears once they've opted into SMS at all. Mirrors the app checkout. */}
+      <label style={styles.consentRow}>
+        <input
+          type="checkbox"
+          checked={smsConsent}
+          onChange={(e) => setSmsConsent(e.target.checked)}
+          style={styles.consentBox}
+        />
+        <span style={styles.consentText}>
+          Text me my tickets &amp; event reminders. By checking, you agree to receive
+          SMS from fansonly. Msg frequency may vary. Msg &amp; data rates may apply.
+          Reply HELP for help, STOP to opt out.{" "}
+          <a href="/terms" style={styles.consentLink} target="_blank">Terms</a> ·{" "}
+          <a href="/privacy" style={styles.consentLink} target="_blank">Privacy</a>
+        </span>
+      </label>
+      {smsConsent ? (
+        <label style={styles.consentRow}>
+          <input
+            type="checkbox"
+            checked={smsMarketing}
+            onChange={(e) => setSmsMarketing(e.target.checked)}
+            style={styles.consentBox}
+          />
+          <span style={styles.consentText}>Also text me about new shows (optional).</span>
+        </label>
+      ) : null}
 
       {totals.count > 0 && (
         <>
@@ -596,6 +641,15 @@ const styles: Record<string, CSSProperties> = {
     color: "#000",
     cursor: "pointer",
   },
+  consentRow: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: 10,
+    cursor: "pointer",
+  },
+  consentBox: { marginTop: 3, accentColor: "#0FA7B5", width: 16, height: 16, flexShrink: 0 },
+  consentText: { fontSize: 12.5, lineHeight: 1.5, color: "#9A9A9A" },
+  consentLink: { color: "#B8B8B8", textDecoration: "underline" },
   soldout: { color: "#9A9A9A", marginTop: 20 },
   error: { color: "#FF6B61", fontSize: 14 },
   codeRow: { display: "flex", gap: 8 },
