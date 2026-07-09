@@ -41,6 +41,7 @@ export interface ArtistPage {
     photoUrl: string | null;
     mixUrl: string | null;
     suggestedRate: number | null; // present only when the artist's showRate toggle is on
+    links: Partial<Record<"instagram" | "facebook" | "tiktok" | "youtube" | "spotify", string>> | null;
   };
   events: ArtistGig[];
   pastGigs: ArtistGig[];

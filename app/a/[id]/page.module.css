@@ -43,6 +43,22 @@
   font-size: 14px;
   margin: 0 0 14px;
 }
+/* Social icon row */
+.socials {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin: 0 0 14px;
+}
+.socialLink {
+  color: #c98af0;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+.socialLink:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
 .genres {
   display: flex;
   gap: 8px;

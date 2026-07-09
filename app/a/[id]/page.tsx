@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FaSpotify } from "react-icons/fa";
+import {
+  IoLogoFacebook,
+  IoLogoInstagram,
+  IoLogoTiktok,
+  IoLogoYoutube,
+} from "react-icons/io5";
 
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { getArtist } from "@/lib/backend";
@@ -104,6 +111,35 @@ export default async function ArtistPage({
             .filter(Boolean)
             .join(" · ")}
         </p>
+        {talent.links && Object.keys(talent.links).length > 0 && (
+          <div className={styles.socials}>
+            {talent.links.instagram && (
+              <a className={styles.socialLink} href={talent.links.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <IoLogoInstagram size={22} />
+              </a>
+            )}
+            {talent.links.tiktok && (
+              <a className={styles.socialLink} href={talent.links.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <IoLogoTiktok size={22} />
+              </a>
+            )}
+            {talent.links.spotify && (
+              <a className={styles.socialLink} href={talent.links.spotify} target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+                <FaSpotify size={22} />
+              </a>
+            )}
+            {talent.links.youtube && (
+              <a className={styles.socialLink} href={talent.links.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <IoLogoYoutube size={22} />
+              </a>
+            )}
+            {talent.links.facebook && (
+              <a className={styles.socialLink} href={talent.links.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <IoLogoFacebook size={22} />
+              </a>
+            )}
+          </div>
+        )}
         {genres.length > 0 && (
           <div className={styles.genres}>
             {genres.map((g) => (
