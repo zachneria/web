@@ -12,7 +12,8 @@ import {
   IoTrendingUpOutline,
 } from "react-icons/io5";
 
-import { EventDetail, DetailSummary, STATUS, T, backLink, card, fmtDate, fmtTime, getJSON, money } from "./_shared";
+import { TipsRail, type Tip } from "../../TipsRail";
+import { EventDetail, DetailSummary, STATUS, T, TicketType, backLink, card, fmtDate, fmtTime, getJSON, money } from "./_shared";
 import { DiscoverableToggle } from "./DiscoverableToggle";
 import { PublishToggle } from "./PublishToggle";
 import styles from "./tiles.module.css";
@@ -34,11 +35,61 @@ const TILES: { key: string; label: string; Icon: IconType; href?: string }[] = [
   { key: "edit", label: "Edit", Icon: IoPencilOutline, href: "edit" },
 ];
 
+// Per-event nudges. The Passports one matters most: gold drink passes lock in
+// once the party starts, so it has to be configured beforehand.
+function eventTips(
+  event: EventDetail,
+  types: TicketType[] | null,
+  connect: { connected?: boolean } | null,
+  id: string,
+): Tip[] {
+  const tips: Tip[] = [];
+  const startMs = new Date(event.doorsTime ?? event.eventDate).getTime();
+  const upcoming = Date.now() < startMs && event.status !== "cancelled";
+  if (upcoming && types && !types.some((t) => t.category === "admission")) {
+    tips.push({
+      key: "tickets",
+      title: "Nothing's on sale yet",
+      body: "Add at least one admission ticket type so buyers have something to buy.",
+      href: `/dashboard/events/${id}/tickets`,
+      cta: "Add tickets",
+    });
+  }
+  if (upcoming && !event.drinkTierEnabled) {
+    tips.push({
+      key: "passports",
+      title: "Set up Passports before doors",
+      body: "Gold drink passes lock in once the party starts — configure them while the show is still ahead.",
+      href: `/dashboard/events/${id}/passports`,
+      cta: "Open Passports",
+    });
+  }
+  if (upcoming && event.status === "draft") {
+    tips.push({
+      key: "draft",
+      title: "Publish when you're ready",
+      body: "Buyers can't see a draft — flip it live with the Publish toggle below.",
+    });
+  }
+  if (connect && !connect.connected) {
+    tips.push({
+      key: "payouts",
+      title: "Set up your payouts",
+      body: "Connect your bank through Stripe so this show's ticket money can reach you.",
+      href: "/dashboard/account-settings",
+      cta: "Connect payouts",
+    });
+  }
+  return tips;
+}
+
 export default async function EventHub({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const [event, summary] = await Promise.all([
+  const [event, summary, types, connect] = await Promise.all([
     getJSON<EventDetail>(`/events/${id}`),
     getJSON<DetailSummary>(`/events/${id}/summary`),
+    getJSON<TicketType[]>(`/events/${id}/ticket-types`),
+    getJSON<{ connected?: boolean }>("/payouts/connect/status"),
   ]);
 
   if (!event) {
@@ -58,9 +109,11 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
   const sold = summary?.ticketsSold ?? 0;
   const cap = event.capacity || 0;
   const pct = cap > 0 ? Math.round((sold / cap) * 100) : 0;
+  const tips = eventTips(event, types, connect, id);
 
   return (
-    <div style={{ maxWidth: 880 }}>
+    <div className="dsh-content-row">
+      <div className="dsh-content-main" style={{ maxWidth: 880 }}>
       <Link href="/dashboard/events" style={backLink}>
         ← Your events
       </Link>
@@ -158,6 +211,8 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
         Scanning tickets at the door, plus the &ldquo;In app&rdquo; tools above, live in the
         fansonly mobile app.
       </div>
+      </div>
+      <TipsRail tips={tips} />
     </div>
   );
 }

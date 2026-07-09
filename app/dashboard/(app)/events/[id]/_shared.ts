@@ -14,6 +14,8 @@ export interface EventDetail {
   description?: string;
   slug?: string | null;
   discoverable?: boolean;
+  doorsTime?: string;
+  drinkTierEnabled?: boolean;
 }
 export interface DetailSummary {
   ticketsSold?: number;

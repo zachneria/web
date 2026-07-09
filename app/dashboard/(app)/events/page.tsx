@@ -7,7 +7,9 @@ import {
   IoSparklesOutline,
 } from "react-icons/io5";
 
-import { getDashboard, type DashEvent, type DashSummary } from "@/lib/org-api";
+import { getDashboard, getOrgClaims, orgFetch, type DashEvent, type DashSummary } from "@/lib/org-api";
+
+import { TipsRail, type Tip } from "../TipsRail";
 
 export const dynamic = "force-dynamic";
 
@@ -189,8 +191,56 @@ function EventStats({ s }: { s: DashSummary }) {
   );
 }
 
+// Dashboard-level nudges: payouts unconnected, promoter link unclaimed,
+// upcoming show still sitting in draft. Best-effort — a failed check just
+// means no tip.
+async function dashboardTips(events: DashEvent[]): Promise<Tip[]> {
+  const tips: Tip[] = [];
+  const { sub } = await getOrgClaims();
+  const [connectR, profileR] = await Promise.all([
+    orgFetch("/payouts/connect/status").catch(() => null),
+    sub ? orgFetch(`/users/${sub}`).catch(() => null) : Promise.resolve(null),
+  ]);
+  try {
+    if (connectR?.ok && !(await connectR.json())?.connected) {
+      tips.push({
+        key: "payouts",
+        title: "Set up your payouts",
+        body: "Connect your bank through Stripe so ticket money can reach you after the show.",
+        href: "/dashboard/account-settings",
+        cta: "Connect payouts",
+      });
+    }
+  } catch {}
+  try {
+    if (profileR?.ok && !(await profileR.json())?.handle) {
+      tips.push({
+        key: "handle",
+        title: "Claim your promoter link",
+        body: "fansonly.live/p/your-name — one shareable page with all your shows.",
+        href: "/dashboard/promoter-settings",
+        cta: "Pick a handle",
+      });
+    }
+  } catch {}
+  const draft = events.find(
+    (e) => e.status === "draft" && new Date(e.eventDate).getTime() > Date.now(),
+  );
+  if (draft) {
+    tips.push({
+      key: "draft",
+      title: `“${draft.name}” is still a draft`,
+      body: "Buyers can't see it until you publish.",
+      href: `/dashboard/events/${draft.id}`,
+      cta: "Open it",
+    });
+  }
+  return tips;
+}
+
 export default async function DashboardEvents() {
   const { events, summary } = await getDashboard();
+  const tips = await dashboardTips(events);
   // Mirror the app: upcoming soonest-first, past events grouped at the bottom
   // (most recent past first). Descending-only buried the nearest shows.
   const now = Date.now();
@@ -205,7 +255,8 @@ export default async function DashboardEvents() {
   ];
 
   return (
-    <div style={{ maxWidth: 880 }}>
+    <div className="dsh-content-row">
+      <div className="dsh-content-main" style={{ maxWidth: 880 }}>
       <h1 style={{ fontSize: 26, fontWeight: 800, margin: "0 0 4px", color: "#111111" }}>
         Create event
       </h1>
@@ -334,6 +385,8 @@ export default async function DashboardEvents() {
           })}
         </div>
       )}
+      </div>
+      <TipsRail tips={tips} />
     </div>
   );
 }
