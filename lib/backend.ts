@@ -112,6 +112,9 @@ export function createFreeOrder(eventId: string, body: unknown): Promise<Respons
   });
 }
 
-export function getOrder(token: string): Promise<Response> {
-  return fetch(`${API_BASE}/tickets/order?token=${encodeURIComponent(token)}`);
+export function getOrder(token?: string, code?: string): Promise<Response> {
+  const query = code
+    ? `code=${encodeURIComponent(code)}`
+    : `token=${encodeURIComponent(token ?? "")}`;
+  return fetch(`${API_BASE}/tickets/order?${query}`);
 }

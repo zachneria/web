@@ -11,16 +11,16 @@ export const metadata = { title: "Your tickets — fansonly" };
 export default async function TicketViewPage({
   searchParams,
 }: {
-  searchParams: Promise<{ token?: string }>;
+  searchParams: Promise<{ token?: string; c?: string }>;
 }) {
-  const { token } = await searchParams;
+  const { token, c } = await searchParams;
 
   let event: { name?: string; venueName?: string; eventDate?: string } | null = null;
   let tickets: ViewTicket[] = [];
   let error = false;
-  if (token) {
+  if (token || c) {
     try {
-      const res = await getOrder(token);
+      const res = await getOrder(token, c);
       if (res.ok) {
         const data = await res.json();
         event = data.event ?? null;
@@ -42,7 +42,7 @@ export default async function TicketViewPage({
     <>
       <SiteHeader />
       <main style={{ maxWidth: 460, margin: "0 auto", padding: "24px 16px 64px" }}>
-        {!token || error ? (
+        {(!token && !c) || error ? (
           <div style={{ textAlign: "center", padding: 32, color: "#777" }}>
             <h1 style={{ fontSize: 22, fontWeight: 800, color: "#F2F2F2" }}>Tickets not found</h1>
             <p style={{ marginTop: 8 }}>
