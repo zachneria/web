@@ -1,6 +1,32 @@
 import Link from "next/link";
 
+import { TipsRail, type Tip } from "../../../TipsRail";
 import { EventDetail, Payout, card, getJSON, money, row, rowVal } from "../_shared";
+
+const PAYOUT_TIPS: Tip[] = [
+  {
+    key: "after-show",
+    title: "Money moves after the show",
+    body: "Ticket revenue is held until your event ends — then Request Payout sends it to your bank. Safer for refunds if anything changes.",
+  },
+  {
+    key: "what-you-get",
+    title: "What actually transfers",
+    body: "Gross ticket sales minus the platform fee (shows under 50 tickets are free). Production costs are NOT deducted — you pay your people directly from the Production screen.",
+  },
+  {
+    key: "tips-passthrough",
+    title: "Tips pass through to staff",
+    body: "Drink tips are collected with orders and added to your transfer in full — never fee'd, earmarked for your staff.",
+  },
+  {
+    key: "connect",
+    title: "Connect your bank first",
+    body: "Request Payout needs your Stripe payout account connected.",
+    href: "/dashboard/account-settings",
+    cta: "Check payout status",
+  },
+];
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +43,8 @@ export default async function PayoutsPage({ params }: { params: Promise<{ id: st
   const net = payout?.netPayout ?? payout?.youKeep;
 
   return (
-    <div style={{ maxWidth: 640 }}>
+    <div className="dsh-content-row">
+      <div className="dsh-content-main" style={{ maxWidth: 640 }}>
       <Link href={`/dashboard/events/${id}`} style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
         ← {event?.name ?? "Event"}
       </Link>
@@ -49,6 +76,8 @@ export default async function PayoutsPage({ params }: { params: Promise<{ id: st
       <div style={{ color: "#8A8A8A", fontSize: 13, margin: "4px 2px", lineHeight: 1.6 }}>
         Requesting a payout is done in the fansonly app for now.
       </div>
+      </div>
+      <TipsRail tips={PAYOUT_TIPS} title="Good to know" />
     </div>
   );
 }
