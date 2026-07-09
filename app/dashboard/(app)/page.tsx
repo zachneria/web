@@ -1,6 +1,12 @@
 import Link from "next/link";
 import type { IconType } from "react-icons";
-import { IoGlobeOutline, IoMegaphoneOutline, IoSettingsOutline, IoTicketOutline } from "react-icons/io5";
+import {
+  IoGlobeOutline,
+  IoMegaphoneOutline,
+  IoMusicalNotesOutline,
+  IoSettingsOutline,
+  IoTicketOutline,
+} from "react-icons/io5";
 
 import { getOrgClaims, orgFetch } from "@/lib/org-api";
 
@@ -21,12 +27,15 @@ export default async function DashboardHub() {
   const { email, name, sub } = await getOrgClaims();
   const initial = (name || email || "?").charAt(0).toUpperCase();
 
-  // Pull the promoter logo (set in Promoter Settings) for the avatar.
+  // Pull the promoter logo (set in Promoter Settings) for the avatar, and the
+  // talent role (having a profile = being an artist) for the Artist row.
   let logoUrl: string | null = null;
+  let isTalent = false;
   if (sub) {
     try {
-      const r = await orgFetch(`/users/${sub}`);
+      const [r, t] = await Promise.all([orgFetch(`/users/${sub}`), orgFetch("/users/talent/me")]);
       if (r.ok) logoUrl = (await r.json())?.logoUrl ?? null;
+      isTalent = t.ok;
     } catch {
       /* best-effort — fall back to the initial */
     }
@@ -75,7 +84,21 @@ export default async function DashboardHub() {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {ROWS.map((r) => (
+        {(isTalent
+          ? [
+              ...ROWS.slice(0, 3),
+              {
+                href: "/dashboard/artist-settings",
+                Icon: IoMusicalNotesOutline,
+                label: "Artist Settings",
+                hint: "Your artist page, rates + gig history",
+                live: true,
+                accent: "#AF52DE", // the talent accent
+              },
+              ...ROWS.slice(3),
+            ]
+          : ROWS
+        ).map((r) => (
           <Link
             key={r.href}
             href={r.href}
@@ -90,7 +113,7 @@ export default async function DashboardHub() {
               textDecoration: "none",
             }}
           >
-            <r.Icon size={24} color="#F5E642" style={{ flexShrink: 0 }} />
+            <r.Icon size={24} color={(r as { accent?: string }).accent ?? "#F5E642"} style={{ flexShrink: 0 }} />
             <span style={{ flex: 1 }}>
               <span style={{ display: "block", fontSize: 16, fontWeight: 700, color: "#F2F2F2" }}>
                 {r.label}
