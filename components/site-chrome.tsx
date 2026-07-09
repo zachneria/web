@@ -13,7 +13,7 @@ export function SiteHeader({
 }) {
   return (
     <header className="topbar">
-      <div className={signIn ? "topbar-inner topbar-inner-spread" : "topbar-inner"}>
+      <div className="topbar-inner topbar-inner-spread">
         {(logo || wordmark) && (
           <Link href="/" className="topbar-brand">
             {logo && (
@@ -23,11 +23,16 @@ export function SiteHeader({
             {wordmark && <span className="topbar-word">fansonly</span>}
           </Link>
         )}
-        {signIn && (
-          <Link href="/dashboard" className="topbar-signin">
-            Sign in
+        <nav className="topbar-nav">
+          <Link href="/events" className="topbar-find">
+            Find events
           </Link>
-        )}
+          {signIn && (
+            <Link href="/dashboard" className="topbar-signin">
+              Sign in
+            </Link>
+          )}
+        </nav>
       </div>
     </header>
   );

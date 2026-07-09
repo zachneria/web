@@ -65,6 +65,9 @@ export default function Home() {
             <a className={styles.btnPrimary} href={INVITE}>
               Request an invite →
             </a>
+            <a className={styles.btnGhost} href="/events">
+              Browse events
+            </a>
             <a className={styles.btnGhost} href="/pricing">
               See our pricing
             </a>

@@ -288,6 +288,19 @@ a {
   justify-content: space-between;
   max-width: 1100px;
 }
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.topbar-find {
+  color: #e8e8e8;
+  font-size: 14px;
+  font-weight: 700;
+}
+.topbar-find:hover {
+  color: var(--brand);
+}
 .topbar-signin {
   color: var(--brand);
   font-size: 14px;
@@ -765,4 +778,185 @@ a {
   .dsh-nav-item { width: 46px; padding: 9px 0; border-left: none; border-bottom: 3px solid transparent; }
   .dsh-nav-active { border-bottom-color: #0fa7b5; }
   .dsh-main { padding: 20px 16px 56px; }
+}
+
+
+/* ---- Public /events browse (white body, brand-yellow hero glow) ---- */
+.find-page {
+  background: #fff;
+  color: #111;
+  min-height: 60vh;
+  padding: 0 20px 72px;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+.find-hero {
+  /* Glow bleeds full-width and fades before the edges — never a hard box. */
+  margin: 0 calc(50% - 50vw);
+  padding: 56px 20px 30px;
+  background:
+    radial-gradient(55% 75% at 50% -20%, rgba(245, 230, 66, 0.4), transparent 70%),
+    radial-gradient(35% 45% at 88% 5%, rgba(15, 167, 181, 0.12), transparent 70%);
+  text-align: center;
+}
+.find-title {
+  font-size: clamp(30px, 5vw, 44px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: #111;
+  margin: 0;
+}
+.find-sub {
+  color: #666;
+  font-size: 16px;
+  margin: 8px 0 0;
+}
+.find-search {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  margin: 22px auto 0;
+  box-sizing: border-box;
+  border: 1.5px solid #ddd;
+  border-radius: 999px;
+  padding: 14px 22px;
+  font-size: 16px;
+  background: #fff;
+  color: #111;
+  outline: none;
+}
+.find-search:focus {
+  border-color: #f5e642;
+  box-shadow: 0 0 0 3px rgba(245, 230, 66, 0.3);
+}
+.find-sorts {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 8px;
+}
+.find-pill {
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #555;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.find-pill-on {
+  border-color: #0fa7b5;
+  background: rgba(15, 167, 181, 0.1);
+  color: #0b8896;
+}
+.find-heading {
+  font-size: 12px;
+  font-weight: 800;
+  color: #8a8a8a;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 26px 2px 12px;
+}
+.find-heading-live {
+  color: #8a6d00;
+}
+.find-empty {
+  text-align: center;
+  color: #8a8a8a;
+  margin: 40px 0;
+}
+.find-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+}
+.find-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+.find-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: #f5e642;
+}
+.find-card-live {
+  border: 2px solid #f5e642;
+}
+.find-card-flyer {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: #f0f0f0;
+  display: block;
+}
+.find-card-flyer-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  font-weight: 900;
+  color: #cfcfcf;
+}
+.find-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 14px 14px;
+}
+.find-card-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.find-card-date {
+  font-size: 13px;
+  color: #666;
+}
+.find-card-date-live {
+  color: #8a6d00;
+  font-weight: 700;
+}
+.find-card-venue {
+  font-size: 13px;
+  color: #8a8a8a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.find-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 5px;
+}
+.find-card-price {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111;
+}
+.find-badge {
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.find-badge-fast {
+  color: #8a6d00;
+  background: #fff3c2;
+}
+.find-badge-out {
+  color: #c0322b;
+  background: #fbe6e5;
 }

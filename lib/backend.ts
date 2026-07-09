@@ -6,6 +6,34 @@ import type { BuyEvent, PromoterPage } from "./types";
 const API_BASE = process.env.API_BASE_URL || "https://api.fansonly.live";
 const BUYER_FEE_FALLBACK = 0.99;
 
+// Public browse/search — published + discoverable events (the /events page).
+export interface FindEvent {
+  id: string;
+  name: string;
+  venueName: string;
+  eventDate: string;
+  endTime?: string | null;
+  flyerUrl: string | null;
+  organizerName?: string | null;
+  organizerLogoUrl?: string | null;
+  fromPrice?: number | null;
+  createdAt?: string;
+  soldPct?: number;
+  soldOut?: boolean;
+}
+export async function browseEvents(q = ""): Promise<FindEvent[]> {
+  try {
+    const res = await fetch(
+      `${API_BASE}/events/search${q.trim() ? `?q=${encodeURIComponent(q.trim())}` : ""}`,
+      { next: { revalidate: 30 } },
+    );
+    if (!res.ok) return [];
+    return (await res.json()) as FindEvent[];
+  } catch {
+    return [];
+  }
+}
+
 // A promoter's name + logo and their published upcoming events.
 export async function getPromoter(id: string): Promise<PromoterPage | null> {
   try {
