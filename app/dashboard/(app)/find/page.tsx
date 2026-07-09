@@ -6,6 +6,7 @@ import type { IconType } from "react-icons";
 import {
   IoCalendarOutline,
   IoFlameOutline,
+  IoFlashOutline,
   IoPricetagsOutline,
   IoSparklesOutline,
 } from "react-icons/io5";
@@ -208,7 +209,7 @@ function SectionHeading({ label, live }: { label: string; live?: boolean }) {
         margin: "18px 2px 10px",
       }}
     >
-      {live ? "⚡ " : ""}
+      {live ? <IoFlashOutline size={12} style={{ verticalAlign: -1, marginRight: 3 }} /> : null}
       {label}
     </div>
   );

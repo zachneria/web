@@ -7,6 +7,7 @@ import type { IconType } from "react-icons";
 import {
   IoCalendarOutline,
   IoFlameOutline,
+  IoFlashOutline,
   IoPricetagsOutline,
   IoSparklesOutline,
 } from "react-icons/io5";
@@ -127,7 +128,7 @@ export function EventsBrowser({ initial }: { initial: FindEvent[] }) {
         <>
           {live.length > 0 ? (
             <>
-              <div className="find-heading find-heading-live">⚡ Happening now</div>
+              <div className="find-heading find-heading-live"><IoFlashOutline size={13} /> Happening now</div>
               <div className="find-grid">
                 {live.map((e) => (
                   <EventCard key={e.id} e={e} live />

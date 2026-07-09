@@ -860,6 +860,9 @@ a {
   color: #0b8896;
 }
 .find-heading {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-size: 12px;
   font-weight: 800;
   color: #8a8a8a;
