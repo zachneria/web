@@ -18,8 +18,8 @@ import { AddTicketForm } from "./AddTicketForm";
 const TICKET_TIPS: Tip[] = [
   {
     key: "drinks-gate",
-    title: "Drinks unlock at the door",
-    body: "Drink (and credit) tickets only become buyable in the app AFTER a customer is scanned in — buyers won't see a drinks option until they're checked in at your event.",
+    title: "Drinks & credits unlock at the door",
+    body: "Drink and credit tickets only become buyable in the app AFTER a customer is scanned in — buyers won't see them until they're checked in at your event.",
   },
   {
     key: "tier-ladder",
@@ -34,7 +34,7 @@ const TICKET_TIPS: Tip[] = [
   {
     key: "sales-close",
     title: "Sales close automatically",
-    body: "All sales — tickets and drinks — stop when your event ends. You can also stop any single item early (or close the whole bar) from the app's ticket editor.",
+    body: "All sales — admission, drinks, and credits — stop when your event ends. You can also stop any single item early (or close the whole bar) from the app's ticket editor.",
   },
 ];
 
