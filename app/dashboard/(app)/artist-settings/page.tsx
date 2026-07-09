@@ -179,16 +179,7 @@ export default function ArtistSettings() {
       <div>
         <Link href="/dashboard" style={{ color: "#AF52DE", fontWeight: 700, fontSize: 14 }}>← Account</Link>
         <h1 style={{ fontSize: 24, fontWeight: 900, color: "#111111", margin: "10px 0 0" }}>Artist settings</h1>
-        {publicHandle ? (
-          <a
-            href={`https://fansonly.live/a/${publicHandle}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "#0FA7B5", fontSize: 13, fontWeight: 600 }}
-          >
-            View your public page — fansonly.live/a/{publicHandle} ↗
-          </a>
-        ) : null}
+
       </div>
 
       {/* Photo + stage name */}
@@ -222,6 +213,21 @@ export default function ArtistSettings() {
             placeholder={fallbackHandle || "your-name"}
           />
         </div>
+        {publicHandle ? (
+          <div style={{ marginTop: 8 }}>
+            <div style={{ color: "#0B8896", fontSize: 12 }}>
+              Live at fansonly.live/a/{publicHandle}
+            </div>
+            <a
+              href={`https://fansonly.live/a/${publicHandle}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: "inline-block", marginTop: 6, color: "#AF52DE", fontSize: 14, fontWeight: 600 }}
+            >
+              View page ↗
+            </a>
+          </div>
+        ) : null}
 
         <div style={{ ...label, marginTop: 14 }}>BIO</div>
         <textarea style={{ ...input, minHeight: 70, resize: "vertical" }} value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Basement-bred selector. Long blends, no requests." />
