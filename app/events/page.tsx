@@ -28,8 +28,11 @@ export default async function EventsPage() {
       <div className="find-page">
         <div className="find-inner">
           <div className="find-photo">
+            {/* Two frames on a very slow crossfade (pure CSS): DJ deck <-> laser crowd. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/find-hero.jpg" alt="" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/find-hero-2.jpg" alt="" className="find-photo-alt" />
             <div className="find-hero-copy">
               <span className="find-line">For the befores</span>
               <span className="find-line find-line-2">&amp; the afters</span>

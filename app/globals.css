@@ -806,10 +806,28 @@ a {
   border-radius: 28px;
 }
 .find-photo img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+/* Second frame fades over the first on a VERY slow loop — each image holds
+   for about a minute, with gentle ~4s fades. */
+.find-photo-alt {
+  opacity: 0;
+  animation: find-hero-cycle 120s ease-in-out infinite;
+}
+@keyframes find-hero-cycle {
+  0%, 47% { opacity: 0; }
+  50%, 97% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .find-photo-alt {
+    animation: none;
+  }
 }
 .find-hero-copy {
   position: absolute;
