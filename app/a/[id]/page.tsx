@@ -89,7 +89,8 @@ export default async function ArtistPage({
     .split(",")
     .map((g) => g.trim())
     .filter(Boolean);
-  const bookHref = `mailto:hello@fansonly.live?subject=${encodeURIComponent(
+  // Book goes straight to the artist's booking email when set (platform fallback).
+  const bookHref = `mailto:${talent.bookingEmail || "hello@fansonly.live"}?subject=${encodeURIComponent(
     `Booking inquiry — ${talent.name} (via fansonly)`,
   )}`;
 
