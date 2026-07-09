@@ -671,6 +671,12 @@ a {
   background: #fff;
   padding: 28px 28px 72px;
 }
+/* A little breathing room on widescreens so pages don't hug the sidebar. */
+@media (min-width: 1200px) {
+  .dsh-main {
+    padding: 36px 48px 72px 64px;
+  }
+}
 .dsh-event-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
