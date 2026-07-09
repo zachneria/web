@@ -105,6 +105,10 @@ const styles: Record<string, CSSProperties> = {
     fontSize: 16,
     width: "100%",
     boxSizing: "border-box",
+    // Explicit — white card on the dark body; inherited color would make the
+    // typed access code white-on-white.
+    color: "#111",
+    background: "#fff",
   },
   error: { color: "#D70015", fontSize: 13, margin: 0 },
   btn: {
