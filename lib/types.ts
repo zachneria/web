@@ -42,6 +42,8 @@ export interface Promoter {
   id: string;
   name: string;
   logoUrl: string | null;
+  bio?: string | null;
+  links?: { instagram?: string; facebook?: string; tiktok?: string } | null;
 }
 
 export interface PromoterEventCard {

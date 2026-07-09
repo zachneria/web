@@ -13,6 +13,11 @@ export default function PromoterSettings() {
   const [loaded, setLoaded] = useState(false);
   const [savingHandle, setSavingHandle] = useState(false);
   const [handleMsg, setHandleMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const [bio, setBio] = useState("");
+  const [ig, setIg] = useState("");
+  const [fb, setFb] = useState("");
+  const [savingProfile, setSavingProfile] = useState(false);
+  const [profileMsg, setProfileMsg] = useState<{ ok: boolean; text: string } | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -23,6 +28,9 @@ export default function PromoterSettings() {
         setName(d.name ?? "");
         setSavedHandle(d.handle ?? null);
         setHandle(d.handle ?? "");
+        setBio(d.bio ?? "");
+        setIg(d.links?.instagram ?? "");
+        setFb(d.links?.facebook ?? "");
       } finally {
         setLoaded(true);
       }
@@ -53,6 +61,33 @@ export default function PromoterSettings() {
       setHandleMsg({ ok: true, text: d.handle ? "Saved — your page is live." : "Link removed." });
     } finally {
       setSavingHandle(false);
+    }
+  };
+
+  const saveProfile = async () => {
+    setSavingProfile(true);
+    setProfileMsg(null);
+    try {
+      const res = await fetch("/api/dashboard/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          bio: bio.trim() || null,
+          links: { instagram: ig.trim() || null, facebook: fb.trim() || null },
+        }),
+      });
+      const d = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setProfileMsg({ ok: false, text: d.error || "Couldn't save." });
+        return;
+      }
+      // Reflect the server's normalization (@handle -> full URL).
+      setBio(d.bio ?? "");
+      setIg(d.links?.instagram ?? "");
+      setFb(d.links?.facebook ?? "");
+      setProfileMsg({ ok: true, text: "Saved — it shows on your promoter page." });
+    } finally {
+      setSavingProfile(false);
     }
   };
 
@@ -144,12 +179,68 @@ export default function PromoterSettings() {
               </p>
             ) : null}
           </div>
+
+          {/* Public profile — bio + socials, shown on the /p page (mirrors the
+              artist settings pattern, promoter flavor). */}
+          <div style={card}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: "#8A8A8A", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 8 }}>
+              About your crew
+            </div>
+            <textarea
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              placeholder="Who you are, what you throw, what people should expect…"
+              maxLength={600}
+              style={{ ...inputStyle, minHeight: 90, resize: "vertical" }}
+            />
+            <label style={fieldLabel}>Instagram</label>
+            <input
+              value={ig}
+              onChange={(e) => setIg(e.target.value)}
+              placeholder="@yourcrew or full URL"
+              style={inputStyle}
+            />
+            <label style={fieldLabel}>Facebook</label>
+            <input
+              value={fb}
+              onChange={(e) => setFb(e.target.value)}
+              placeholder="facebook.com/yourcrew"
+              style={inputStyle}
+            />
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 14 }}>
+              <button onClick={saveProfile} disabled={savingProfile} style={btn}>
+                {savingProfile ? "Saving…" : "Save"}
+              </button>
+              {profileMsg ? (
+                <span style={{ color: profileMsg.ok ? "#1B873F" : "#C0322B", fontSize: 13 }}>
+                  {profileMsg.text}
+                </span>
+              ) : null}
+            </div>
+          </div>
         </>
       )}
     </div>
   );
 }
 
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  boxSizing: "border-box",
+  border: "1px solid #D9D9D9",
+  borderRadius: 10,
+  padding: "11px 12px",
+  fontSize: 15,
+  background: "#FFFFFF",
+  color: "#111111",
+};
+const fieldLabel: React.CSSProperties = {
+  display: "block",
+  fontSize: 11,
+  fontWeight: 700,
+  color: "#8A8A8A",
+  margin: "10px 0 4px",
+};
 const btn: React.CSSProperties = {
   background: "#F5E642",
   color: "#000",

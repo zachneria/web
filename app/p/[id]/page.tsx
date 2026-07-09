@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { IoLogoFacebook, IoLogoInstagram, IoLogoTiktok } from "react-icons/io5";
+
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { getPromoter } from "@/lib/backend";
 import { formatDate, formatTime } from "@/lib/pricing";
@@ -56,6 +58,26 @@ export default async function PromoterPage({
               ? `${events.length} upcoming event${events.length === 1 ? "" : "s"}`
               : "No upcoming events right now"}
           </p>
+          {organizer.bio ? <p className="promoter-bio">{organizer.bio}</p> : null}
+          {organizer.links?.instagram || organizer.links?.facebook || organizer.links?.tiktok ? (
+            <div className="promoter-socials">
+              {organizer.links?.instagram ? (
+                <a href={organizer.links.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <IoLogoInstagram size={22} />
+                </a>
+              ) : null}
+              {organizer.links?.tiktok ? (
+                <a href={organizer.links.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                  <IoLogoTiktok size={22} />
+                </a>
+              ) : null}
+              {organizer.links?.facebook ? (
+                <a href={organizer.links.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <IoLogoFacebook size={22} />
+                </a>
+              ) : null}
+            </div>
+          ) : null}
         </div>
 
         <div className="event-list">
