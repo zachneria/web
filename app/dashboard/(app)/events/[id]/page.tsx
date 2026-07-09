@@ -35,17 +35,36 @@ const TILES: { key: string; label: string; Icon: IconType; href?: string }[] = [
   { key: "edit", label: "Edit", Icon: IoPencilOutline, href: "edit" },
 ];
 
+interface BlastRow {
+  featuredEventId?: string | null;
+  featuredEventIds?: string[] | null;
+}
+
 // Per-event nudges. The Passports one matters most: gold drink passes lock in
 // once the party starts, so it has to be configured beforehand.
 function eventTips(
   event: EventDetail,
   types: TicketType[] | null,
   connect: { connected?: boolean } | null,
+  blasts: BlastRow[] | null,
   id: string,
 ): Tip[] {
   const tips: Tip[] = [];
   const startMs = new Date(event.doorsTime ?? event.eventDate).getTime();
   const upcoming = Date.now() < startMs && event.status !== "cancelled";
+  const daysOut = Math.ceil((startMs - Date.now()) / 86400000);
+  const alreadyBlasted = (blasts ?? []).some(
+    (b) => b.featuredEventId === id || (b.featuredEventIds ?? []).includes(id),
+  );
+  if (upcoming && event.status === "published" && daysOut <= 14 && !alreadyBlasted) {
+    tips.push({
+      key: "blast",
+      title: `Send a blast — ${daysOut <= 1 ? "it's showtime" : `${daysOut} days out`}`,
+      body: "Email your fans a heads-up while there's still time to make plans.",
+      href: "/dashboard/marketing",
+      cta: "Open Marketing",
+    });
+  }
   if (upcoming && types && !types.some((t) => t.category === "admission")) {
     tips.push({
       key: "tickets",
@@ -85,11 +104,12 @@ function eventTips(
 
 export default async function EventHub({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const [event, summary, types, connect] = await Promise.all([
+  const [event, summary, types, connect, blastData] = await Promise.all([
     getJSON<EventDetail>(`/events/${id}`),
     getJSON<DetailSummary>(`/events/${id}/summary`),
     getJSON<TicketType[]>(`/events/${id}/ticket-types`),
     getJSON<{ connected?: boolean }>("/payouts/connect/status"),
+    getJSON<{ blasts?: BlastRow[] }>("/tickets/blasts"),
   ]);
 
   if (!event) {
@@ -109,7 +129,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
   const sold = summary?.ticketsSold ?? 0;
   const cap = event.capacity || 0;
   const pct = cap > 0 ? Math.round((sold / cap) * 100) : 0;
-  const tips = eventTips(event, types, connect, id);
+  const tips = eventTips(event, types, connect, blastData?.blasts ?? null, id);
 
   return (
     <div className="dsh-content-row">
