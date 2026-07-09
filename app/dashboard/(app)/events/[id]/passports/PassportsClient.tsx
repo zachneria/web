@@ -79,7 +79,7 @@ export function PassportsClient({
             checked={enabled}
             disabled={locked}
             onChange={(e) => setEnabled(e.target.checked)}
-            style={{ width: 22, height: 22, accentColor: "#D4AF37", cursor: locked ? "default" : "pointer" }}
+            style={{ width: 22, height: 22, accentColor: "#0FA7B5", cursor: locked ? "default" : "pointer" }}
           />
         </div>
 
@@ -93,7 +93,7 @@ export function PassportsClient({
                 border: "1px solid #D9D9D9",
                 borderRadius: 10,
                 padding: "8px 12px",
-                background: locked ? "#ECECEC" : "#222",
+                background: locked ? "#ECECEC" : "#FFFFFF",
               }}
             >
               <span style={{ color: "#8A8A8A" }}>$</span>
