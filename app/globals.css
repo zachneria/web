@@ -502,30 +502,30 @@ a {
 }
 
 /* ---- /beta test-scripts doc ---- */
-.beta-doc h1 { font-size: 30px; font-weight: 800; margin: 0 0 8px; color: #f2f2f2; }
+.beta-doc h1 { font-size: 30px; font-weight: 800; margin: 0 0 8px; color: #000; }
 .beta-doc h2 {
-  font-size: 22px; font-weight: 800; color: #f2f2f2;
-  margin: 36px 0 10px; padding-top: 18px; border-top: 1px solid #2a2a2a;
+  font-size: 22px; font-weight: 800; color: #000;
+  margin: 36px 0 10px; padding-top: 18px; border-top: 1px solid #eee;
   scroll-margin-top: 80px;
 }
 .beta-doc h3 {
-  font-size: 16px; font-weight: 700; color: #f2f2f2; margin: 22px 0 6px;
+  font-size: 16px; font-weight: 700; color: #000; margin: 22px 0 6px;
   scroll-margin-top: 80px;
 }
-.beta-doc p { font-size: 15px; line-height: 1.6; color: #d0d0d0; margin: 8px 0; }
+.beta-doc p { font-size: 15px; line-height: 1.6; color: #222; margin: 8px 0; }
 .beta-doc ul, .beta-doc ol { padding-left: 22px; margin: 8px 0; }
-.beta-doc li { font-size: 15px; line-height: 1.55; color: #d0d0d0; margin: 4px 0; }
-.beta-doc strong { color: #fff; }
+.beta-doc li { font-size: 15px; line-height: 1.55; color: #222; margin: 4px 0; }
+.beta-doc strong { color: #000; }
 .beta-doc code {
-  background: #242424; padding: 1px 6px; border-radius: 5px;
+  background: #f2f2f2; padding: 1px 6px; border-radius: 5px;
   font-size: 0.9em; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 .beta-doc blockquote {
   border-left: 3px solid var(--brand); margin: 12px 0; padding: 4px 0 4px 14px;
-  color: #9a9a9a; font-size: 14px;
+  color: #555; font-size: 14px;
 }
-.beta-doc hr { border: 0; border-top: 1px solid #2a2a2a; margin: 28px 0; }
-.beta-doc em { color: #8f8f8f; }
+.beta-doc hr { border: 0; border-top: 1px solid #eee; margin: 28px 0; }
+.beta-doc em { color: #666; }
 
 @media print {
   .beta-no-print { display: none !important; }
