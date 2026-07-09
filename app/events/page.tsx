@@ -18,17 +18,17 @@ export const metadata: Metadata = {
 };
 
 // Public event discovery — the web counterpart of the app's Find Events tab.
-// Brand chrome stays dark; the body is white for readability (flyer wall on
-// paper), with the homepage's yellow glow bleeding behind the hero.
+// Brand chrome stays dark; a club-crowd photo hero fades into the white body
+// (flyer wall on paper), search floating over the seam.
 export default async function EventsPage() {
   const initial = await browseEvents("");
   return (
     <>
       <SiteHeader signIn />
       <div className="find-page">
-        <div className="find-hero">
-          <h1 className="find-title">Find your next show</h1>
-          <p className="find-sub">Underground shows, listed by the people throwing them.</p>
+        <div className="find-photo">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/find-hero.jpg" alt="" />
         </div>
         <EventsBrowser initial={initial} />
       </div>
