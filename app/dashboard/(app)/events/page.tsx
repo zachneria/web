@@ -317,7 +317,11 @@ export default async function DashboardEvents() {
           No events yet — create one in the fansonly app.
         </div>
       ) : (
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <div
+          className="dsh-event-grid"
+          // A lone event keeps the full row; 2+ pair up side by side.
+          style={sorted.length === 1 ? { gridTemplateColumns: "1fr" } : undefined}
+        >
           {sorted.map((e) => {
             const s = summary[e.id] || {};
             const pill = STATUS[e.status] || STATUS.draft;
@@ -325,7 +329,7 @@ export default async function DashboardEvents() {
               <Link
                 key={e.id}
                 href={`/dashboard/events/${e.id}`}
-                style={{ textDecoration: "none", color: "inherit", display: "block" }}
+                style={{ textDecoration: "none", color: "inherit", display: "block", height: "100%" }}
               >
               <div
                 style={{
@@ -336,6 +340,8 @@ export default async function DashboardEvents() {
                   display: "flex",
                   gap: 14,
                   alignItems: "flex-start",
+                  height: "100%",
+                  boxSizing: "border-box",
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
