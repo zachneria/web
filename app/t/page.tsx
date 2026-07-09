@@ -44,7 +44,7 @@ export default async function TicketViewPage({
       <main style={{ maxWidth: 460, margin: "0 auto", padding: "24px 16px 64px" }}>
         {!token || error ? (
           <div style={{ textAlign: "center", padding: 32, color: "#777" }}>
-            <h1 style={{ fontSize: 22, fontWeight: 800, color: "#111" }}>Tickets not found</h1>
+            <h1 style={{ fontSize: 22, fontWeight: 800, color: "#F2F2F2" }}>Tickets not found</h1>
             <p style={{ marginTop: 8 }}>
               This link is invalid or expired. Try opening it again from your email or text.
             </p>
@@ -53,7 +53,7 @@ export default async function TicketViewPage({
           <>
             {event ? (
               <div style={{ marginBottom: 20, textAlign: "center" }}>
-                <h1 style={{ fontSize: 24, fontWeight: 800, color: "#111", margin: 0 }}>{event.name}</h1>
+                <h1 style={{ fontSize: 24, fontWeight: 800, color: "#F2F2F2", margin: 0 }}>{event.name}</h1>
                 <p style={{ color: "#777", fontSize: 14, marginTop: 4 }}>
                   {fmt(event.eventDate)}
                   {event.venueName ? ` · ${event.venueName}` : ""}

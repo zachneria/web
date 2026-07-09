@@ -181,6 +181,10 @@
   border-radius: 14px;
   padding: 14px;
   margin-bottom: 12px;
+  transition: border-color 160ms ease;
+}
+.gigCard:hover {
+  border-color: #0fa7b5;
 }
 .gigDate {
   flex-shrink: 0;
