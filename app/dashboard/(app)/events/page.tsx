@@ -146,9 +146,18 @@ function EventStats({ s }: { s: DashSummary }) {
 
 export default async function DashboardEvents() {
   const { events, summary } = await getDashboard();
-  const sorted = [...events].sort(
-    (a, b) => new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime(),
-  );
+  // Mirror the app: upcoming soonest-first, past events grouped at the bottom
+  // (most recent past first). Descending-only buried the nearest shows.
+  const now = Date.now();
+  const isPast = (e: (typeof events)[number]) => new Date(e.eventDate).getTime() < now;
+  const sorted = [
+    ...events
+      .filter((e) => !isPast(e))
+      .sort((a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()),
+    ...events
+      .filter(isPast)
+      .sort((a, b) => new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime()),
+  ];
 
   return (
     <>
