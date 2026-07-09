@@ -10,7 +10,33 @@ import {
   row,
   rowVal,
 } from "../_shared";
+import { TipsRail, type Tip } from "../../../TipsRail";
 import { AddTicketForm } from "./AddTicketForm";
+
+// How ticket types actually behave — the non-obvious rules organizers ask
+// about. Static (always shown on this page).
+const TICKET_TIPS: Tip[] = [
+  {
+    key: "drinks-gate",
+    title: "Drinks unlock at the door",
+    body: "Drink (and credit) tickets only become buyable in the app AFTER a customer is scanned in — buyers won't see a drinks option until they're checked in at your event.",
+  },
+  {
+    key: "tier-ladder",
+    title: "Tiers open in price order",
+    body: "Fixed-price admission tiers form a ladder: only the cheapest tier with stock is on sale, and the next opens automatically when it sells out.",
+  },
+  {
+    key: "fee",
+    title: "Who pays the booking fee",
+    body: "Each admission ticket adds the buyer fee at checkout. Check “I'll cover the booking fee” on a type and buyers pay face value instead.",
+  },
+  {
+    key: "sales-close",
+    title: "Sales close automatically",
+    body: "All sales — tickets and drinks — stop when your event ends. You can also stop any single item early (or close the whole bar) from the app's ticket editor.",
+  },
+];
 
 export const dynamic = "force-dynamic";
 
@@ -26,7 +52,8 @@ export default async function TicketsPage({ params }: { params: Promise<{ id: st
   const addons = (types ?? []).filter((t) => t.category !== "admission");
 
   return (
-    <div style={{ maxWidth: 640 }}>
+    <div className="dsh-content-row">
+      <div className="dsh-content-main" style={{ maxWidth: 640 }}>
       <Link href={`/dashboard/events/${id}`} style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
         ← {event?.name ?? "Event"}
       </Link>
@@ -42,6 +69,8 @@ export default async function TicketsPage({ params }: { params: Promise<{ id: st
           {addons.length > 0 ? <Section title="Add-ons" items={addons} summary={summary} /> : null}
         </>
       )}
+      </div>
+      <TipsRail tips={TICKET_TIPS} title="Good to know" />
     </div>
   );
 }

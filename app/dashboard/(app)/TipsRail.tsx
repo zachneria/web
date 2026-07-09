@@ -12,7 +12,7 @@ export interface Tip {
   cta?: string;
 }
 
-export function TipsRail({ tips }: { tips: Tip[] }) {
+export function TipsRail({ tips, title = "Don't forget" }: { tips: Tip[]; title?: string }) {
   if (tips.length === 0) return null;
   return (
     <aside className="dsh-tips">
@@ -25,7 +25,7 @@ export function TipsRail({ tips }: { tips: Tip[] }) {
           letterSpacing: 0.6,
         }}
       >
-        💡 Don&apos;t forget
+        💡 {title}
       </div>
       {tips.map((t) => (
         <div
