@@ -33,7 +33,7 @@ export default async function EventsPage() {
             <div className="find-hero-copy">
               <span className="find-eyebrow">Out tonight?</span>
               <span className="find-line">For the befores</span>
-              <span className="find-line find-line-2">&amp; the after-afters</span>
+              <span className="find-line find-line-2">&amp; the afters</span>
             </div>
           </div>
           <EventsBrowser initial={initial} />
