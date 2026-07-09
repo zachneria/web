@@ -152,21 +152,30 @@ export function DiscountsClient({ eventId }: { eventId: string }) {
               onChange={(e) => setCode(e.target.value.toUpperCase())}
             />
             <Row>
-              <input
-                style={input}
-                placeholder="Max uses (blank = ∞)"
-                inputMode="numeric"
-                value={maxRedemptions}
-                onChange={(e) => setMaxRedemptions(e.target.value.replace(/[^0-9]/g, ""))}
-              />
-              <input
-                style={input}
-                placeholder="Per person (blank = ∞)"
-                inputMode="numeric"
-                value={perEmailLimit}
-                onChange={(e) => setPerEmailLimit(e.target.value.replace(/[^0-9]/g, ""))}
-              />
+              <Field label="Total uses">
+                <input
+                  style={input}
+                  placeholder="Unlimited"
+                  inputMode="numeric"
+                  value={maxRedemptions}
+                  onChange={(e) => setMaxRedemptions(e.target.value.replace(/[^0-9]/g, ""))}
+                />
+              </Field>
+              <Field label="Uses per person">
+                <input
+                  style={input}
+                  placeholder="Unlimited"
+                  inputMode="numeric"
+                  value={perEmailLimit}
+                  onChange={(e) => setPerEmailLimit(e.target.value.replace(/[^0-9]/g, ""))}
+                />
+              </Field>
             </Row>
+            <p style={{ fontSize: 12, color: "#8A8A8A", margin: "8px 2px 0", lineHeight: 1.5 }}>
+              Total uses caps the code across all buyers — e.g. 50 means the first 50 orders.
+              Uses per person limits one buyer (matched by their checkout email). Leave either
+              blank for no limit.
+            </p>
           </>
         ) : (
           <Row>
@@ -243,6 +252,16 @@ function Seg({ on, onClick, children }: { on: boolean; onClick: () => void; chil
 }
 function Row({ children }: { children: React.ReactNode }) {
   return <div style={{ display: "flex", gap: 8, marginTop: 10 }}>{children}</div>;
+}
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label style={{ flex: 1, minWidth: 0 }}>
+      <span style={{ display: "block", fontSize: 11, fontWeight: 700, color: "#8A8A8A", marginBottom: 4 }}>
+        {label}
+      </span>
+      {children}
+    </label>
+  );
 }
 
 const cardStyle: React.CSSProperties = {
