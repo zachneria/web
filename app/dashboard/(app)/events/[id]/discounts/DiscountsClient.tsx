@@ -232,7 +232,7 @@ function Seg({ on, onClick, children }: { on: boolean; onClick: () => void; chil
         fontSize: 14,
         fontWeight: 700,
         cursor: "pointer",
-        background: on ? "#F5E642" : "#222",
+        background: on ? "#F5E642" : "#FFFFFF",
         color: on ? "#161616" : "#333333",
         border: `1.5px solid ${on ? "#F5E642" : "#D9D9D9"}`,
       }}

@@ -324,7 +324,7 @@ export default function MarketingComposer() {
                       setSubject(s);
                       setSubjectOptions([]);
                     }}
-                    style={{ textAlign: "left", background: "#FFFFFF", color: "#111111", border: "1px solid #444", borderRadius: 10, padding: "10px 12px", fontSize: 14, cursor: "pointer" }}
+                    style={{ textAlign: "left", background: "#FFFFFF", color: "#111111", border: "1px solid #D9D9D9", borderRadius: 10, padding: "10px 12px", fontSize: 14, cursor: "pointer" }}
                   >
                     ↑ {s}
                   </button>
