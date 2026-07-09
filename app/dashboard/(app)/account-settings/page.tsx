@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import { getOrgClaims, orgFetch } from "@/lib/org-api";
+
+import { AccountName } from "./AccountName";
 import { PayoutsConnect } from "./PayoutsConnect";
 
 export const dynamic = "force-dynamic";
@@ -46,6 +48,7 @@ export default async function AccountSettings({
           <span style={{ color: "#8A8A8A" }}>Email</span>
           <span style={{ fontWeight: 600 }}>{email || "—"}</span>
         </div>
+        <AccountName />
       </div>
 
       <div style={card}>

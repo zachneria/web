@@ -13,6 +13,7 @@ export default function PromoterSettings() {
   const [loaded, setLoaded] = useState(false);
   const [savingHandle, setSavingHandle] = useState(false);
   const [handleMsg, setHandleMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const [promoterName, setPromoterName] = useState("");
   const [bio, setBio] = useState("");
   const [ig, setIg] = useState("");
   const [fb, setFb] = useState("");
@@ -28,6 +29,7 @@ export default function PromoterSettings() {
         setName(d.name ?? "");
         setSavedHandle(d.handle ?? null);
         setHandle(d.handle ?? "");
+        setPromoterName(d.promoterName ?? "");
         setBio(d.bio ?? "");
         setIg(d.links?.instagram ?? "");
         setFb(d.links?.facebook ?? "");
@@ -72,6 +74,7 @@ export default function PromoterSettings() {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          promoterName: promoterName.trim() || null,
           bio: bio.trim() || null,
           links: { instagram: ig.trim() || null, facebook: fb.trim() || null },
         }),
@@ -82,6 +85,7 @@ export default function PromoterSettings() {
         return;
       }
       // Reflect the server's normalization (@handle -> full URL).
+      setPromoterName(d.promoterName ?? "");
       setBio(d.bio ?? "");
       setIg(d.links?.instagram ?? "");
       setFb(d.links?.facebook ?? "");
@@ -186,6 +190,17 @@ export default function PromoterSettings() {
             <div style={{ fontSize: 12, fontWeight: 700, color: "#8A8A8A", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 8 }}>
               About your crew
             </div>
+            <label style={fieldLabel}>Promotion name</label>
+            <input
+              value={promoterName}
+              onChange={(e) => setPromoterName(e.target.value)}
+              placeholder="e.g. Neria Presents"
+              maxLength={80}
+              style={inputStyle}
+            />
+            <p style={{ fontSize: 12, color: "#8A8A8A", margin: "6px 0 10px" }}>
+              Shown publicly on your page and event listings — instead of your account name.
+            </p>
             <textarea
               value={bio}
               onChange={(e) => setBio(e.target.value)}
