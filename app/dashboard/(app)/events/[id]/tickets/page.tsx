@@ -32,6 +32,11 @@ const TICKET_TIPS: Tip[] = [
     body: "Each admission ticket adds the buyer fee at checkout. Check “I'll cover the booking fee” on a type and buyers pay face value instead.",
   },
   {
+    key: "order-cap",
+    title: "Max 20 per order",
+    body: "Buyers can grab at most 20 of any ticket type in one order. Bigger groups just check out twice — it's a fraud guard, not a per-person limit.",
+  },
+  {
     key: "sales-close",
     title: "Sales close automatically",
     body: "All sales — admission, drinks, and credits — stop when your event ends. You can also stop any single item early (or close the whole bar) from the app's ticket editor.",
