@@ -359,7 +359,8 @@ a {
 
 /* ---- Promoter page ---- */
 .promoter {
-  max-width: 560px;
+  /* Wide enough for the event grid; hero copy stays centered/narrow. */
+  max-width: 1100px;
   margin: 0 auto;
 }
 .promoter-hero {
@@ -427,9 +428,10 @@ a {
   opacity: 1;
 }
 .event-list {
+  /* Rows of cards, like the /events browse — not one long column. */
   padding: 16px 20px 8px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 12px;
 }
 .event-card {
