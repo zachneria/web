@@ -52,10 +52,10 @@ export function PassportsClient({
       {locked ? (
         <div
           style={{
-            background: "#242424",
+            background: "#F0F0F0",
             borderRadius: 12,
             padding: 14,
-            color: "#8F8F8F",
+            color: "#8A8A8A",
             fontSize: 14,
             marginBottom: 14,
           }}
@@ -67,8 +67,8 @@ export function PassportsClient({
       <div style={card}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: "#F2F2F2" }}>Gold drink pass</div>
-            <p style={{ color: "#8F8F8F", fontSize: 14, lineHeight: 1.5, margin: "6px 0 0" }}>
+            <div style={{ fontSize: 18, fontWeight: 800, color: "#111111" }}>Gold drink pass</div>
+            <p style={{ color: "#8A8A8A", fontSize: 14, lineHeight: 1.5, margin: "6px 0 0" }}>
               Reward generous tippers. When a guest&apos;s tips at this event reach the amount
               below, their next drink pass turns gold so bar staff can spot them and serve them
               first.
@@ -85,31 +85,31 @@ export function PassportsClient({
 
         {enabled ? (
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 16 }}>
-            <span style={{ fontSize: 14, fontWeight: 700, color: "#D8D8D8" }}>Tips to reach Gold</span>
+            <span style={{ fontSize: 14, fontWeight: 700, color: "#333333" }}>Tips to reach Gold</span>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                border: "1px solid #383838",
+                border: "1px solid #D9D9D9",
                 borderRadius: 10,
                 padding: "8px 12px",
-                background: locked ? "#2A2A2A" : "#222",
+                background: locked ? "#ECECEC" : "#222",
               }}
             >
-              <span style={{ color: "#8F8F8F" }}>$</span>
+              <span style={{ color: "#8A8A8A" }}>$</span>
               <input
                 inputMode="numeric"
                 value={threshold}
                 disabled={locked}
                 onChange={(e) => setThreshold(e.target.value.replace(/[^0-9]/g, ""))}
-                style={{ width: 60, border: "none", outline: "none", fontSize: 16, background: "transparent", color: "#F2F2F2" }}
+                style={{ width: 60, border: "none", outline: "none", fontSize: 16, background: "transparent", color: "#111111" }}
               />
             </div>
           </div>
         ) : null}
       </div>
 
-      <p style={{ color: "#8F8F8F", fontSize: 13, lineHeight: 1.6, margin: "0 0 14px" }}>
+      <p style={{ color: "#8A8A8A", fontSize: 13, lineHeight: 1.6, margin: "0 0 14px" }}>
         The tier is based on cumulative tips in actual dollars (not a percentage), so it can&apos;t
         be gamed with a tiny tip on a cheap drink.
       </p>
@@ -127,8 +127,8 @@ export function PassportsClient({
 }
 
 const card: React.CSSProperties = {
-  background: "#1E1E1E",
-  border: "1px solid #2E2E2E",
+  background: "#FAFAFA",
+  border: "1px solid #E5E5E5",
   borderRadius: 14,
   padding: 18,
   marginBottom: 14,

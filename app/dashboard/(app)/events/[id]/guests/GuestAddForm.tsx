@@ -122,16 +122,16 @@ export function GuestAddForm({ eventId }: { eventId: string }) {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label style={{ flex: 1, minWidth: 0 }}>
-      <span style={{ display: "block", fontSize: 11, color: "#8F8F8F", marginBottom: 4 }}>{label}</span>
+      <span style={{ display: "block", fontSize: 11, color: "#8A8A8A", marginBottom: 4 }}>{label}</span>
       {children}
     </label>
   );
 }
 
-const opt: React.CSSProperties = { background: "#1E1E1E" };
+const opt: React.CSSProperties = { background: "#FAFAFA" };
 const cardStyle: React.CSSProperties = {
-  background: "#1E1E1E",
-  border: "1px solid #2E2E2E",
+  background: "#FAFAFA",
+  border: "1px solid #E5E5E5",
   borderRadius: 14,
   padding: 18,
   marginBottom: 14,
@@ -143,12 +143,12 @@ const input: React.CSSProperties = {
   // render the SAME height side-by-side — selects otherwise cap shorter than
   // an input, making Plus-ones look taller than Type/Drink credits.
   height: 44,
-  border: "1px solid #383838",
+  border: "1px solid #D9D9D9",
   borderRadius: 10,
   padding: "0 12px",
   fontSize: 15,
-  background: "#222",
-  color: "#F2F2F2",
+  background: "#FFFFFF",
+  color: "#111111",
 };
 const addBtn: React.CSSProperties = {
   width: "100%",
@@ -164,8 +164,8 @@ const addBtn: React.CSSProperties = {
 };
 const cancelBtn: React.CSSProperties = {
   background: "transparent",
-  color: "#8F8F8F",
-  border: "1px solid #383838",
+  color: "#8A8A8A",
+  border: "1px solid #D9D9D9",
   borderRadius: 10,
   padding: "12px 18px",
   fontSize: 15,

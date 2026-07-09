@@ -164,21 +164,21 @@ export default function ArtistSettings() {
   const yearGigs = gigs.filter((g) => new Date(g.eventDate).getFullYear() === year);
   const yearTotal = yearGigs.reduce((s, g) => s + g.amount, 0);
 
-  if (!loaded) return <p style={{ color: "#8F8F8F", textAlign: "center" }}>Loading…</p>;
+  if (!loaded) return <p style={{ color: "#8A8A8A", textAlign: "center" }}>Loading…</p>;
   if (notTalent) {
     return (
-      <div style={{ maxWidth: 560, margin: "0 auto", textAlign: "center", color: "#8F8F8F" }}>
+      <div style={{ maxWidth: 640, textAlign: "center", color: "#8A8A8A" }}>
         <p>This account doesn&apos;t have the artist role yet.</p>
-        <Link href="/dashboard" style={{ color: "#F5E642", fontWeight: 700 }}>← Back</Link>
+        
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: 560, margin: "0 auto", display: "flex", flexDirection: "column", gap: 16 }}>
+    <div style={{ maxWidth: 640, display: "flex", flexDirection: "column", gap: 16 }}>
       <div>
         <Link href="/dashboard" style={{ color: "#AF52DE", fontWeight: 700, fontSize: 14 }}>← Account</Link>
-        <h1 style={{ fontSize: 24, fontWeight: 900, color: "#F2F2F2", margin: "10px 0 0" }}>Artist settings</h1>
+        <h1 style={{ fontSize: 24, fontWeight: 900, color: "#111111", margin: "10px 0 0" }}>Artist settings</h1>
         {publicHandle ? (
           <a
             href={`https://fansonly.live/a/${publicHandle}`}
@@ -198,7 +198,7 @@ export default function ArtistSettings() {
             // eslint-disable-next-line @next/next/no-img-element
             <img src={photoUrl} alt="" width={72} height={72} style={{ borderRadius: 36, objectFit: "cover", border: "3px solid #AF52DE", flexShrink: 0 }} />
           ) : (
-            <div style={{ width: 72, height: 72, borderRadius: 36, background: "#2A2A2A", border: "3px solid #AF52DE", display: "flex", alignItems: "center", justifyContent: "center", color: "#AF52DE", fontSize: 26, fontWeight: 800, flexShrink: 0 }}>
+            <div style={{ width: 72, height: 72, borderRadius: 36, background: "#ECECEC", border: "3px solid #AF52DE", display: "flex", alignItems: "center", justifyContent: "center", color: "#AF52DE", fontSize: 26, fontWeight: 800, flexShrink: 0 }}>
               {(stageName || "?").charAt(0).toUpperCase()}
             </div>
           )}
@@ -214,7 +214,7 @@ export default function ArtistSettings() {
       <div style={card}>
         <div style={label}>ARTIST LINK</div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ color: "#8F8F8F", fontSize: 14, whiteSpace: "nowrap" }}>fansonly.live/a/</span>
+          <span style={{ color: "#8A8A8A", fontSize: 14, whiteSpace: "nowrap" }}>fansonly.live/a/</span>
           <input
             style={{ ...input, flex: 1 }}
             value={talentHandle}
@@ -264,16 +264,16 @@ export default function ArtistSettings() {
         <div style={label}>SUGGESTED RATE</div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 4, ...input, width: 140 }}>
-            <span style={{ fontSize: 18, fontWeight: 800, color: "#F2F2F2" }}>$</span>
+            <span style={{ fontSize: 18, fontWeight: 800, color: "#111111" }}>$</span>
             <input
-              style={{ border: "none", background: "transparent", color: "#F2F2F2", fontSize: 18, fontWeight: 800, width: "100%", outline: "none" }}
+              style={{ border: "none", background: "transparent", color: "#111111", fontSize: 18, fontWeight: 800, width: "100%", outline: "none" }}
               value={rate}
               onChange={(e) => setRate(e.target.value.replace(/[^0-9.]/g, ""))}
               placeholder="300"
               inputMode="decimal"
             />
           </div>
-          <span style={{ color: "#8F8F8F", fontSize: 12 }}>per set / starting point</span>
+          <span style={{ color: "#8A8A8A", fontSize: 12 }}>per set / starting point</span>
         </div>
         <div style={{ fontSize: 12, color: "#666", marginTop: 8 }}>
           Shown as &ldquo;from ${rate || "X"}&rdquo; on your public page — a suggestion, not a lock.
@@ -304,9 +304,9 @@ export default function ArtistSettings() {
                 key={a.value}
                 onClick={() => setPayeeApp(active ? "" : a.value)}
                 style={{
-                  border: `1.5px solid ${active ? "#0FA7B5" : "#383838"}`,
+                  border: `1.5px solid ${active ? "#0FA7B5" : "#D9D9D9"}`,
                   background: active ? "#0FA7B5" : "transparent",
-                  color: active ? "#fff" : "#8F8F8F",
+                  color: active ? "#fff" : "#8A8A8A",
                   borderRadius: 999,
                   padding: "8px 14px",
                   fontSize: 13,
@@ -355,21 +355,21 @@ export default function ArtistSettings() {
       <div style={card}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={label}>RATE HISTORY</div>
-          <span style={{ background: "#2A2A2A", borderRadius: 999, padding: "2px 10px", fontSize: 10, fontWeight: 800, color: "#999", marginBottom: 6 }}>
+          <span style={{ background: "#ECECEC", borderRadius: 999, padding: "2px 10px", fontSize: 10, fontWeight: 800, color: "#999", marginBottom: 6 }}>
             🔒 ONLY YOU
           </span>
         </div>
         <div style={{ fontSize: 12, color: "#666", marginBottom: 4 }}>Built automatically from gigs paid through fansonly.</div>
         {gigs.length === 0 ? (
-          <div style={{ color: "#8F8F8F", fontSize: 13, marginTop: 8 }}>
+          <div style={{ color: "#8A8A8A", fontSize: 13, marginTop: 8 }}>
             No linked gigs yet — when a promoter links you on a cost, it lands here.
           </div>
         ) : (
           <>
             {gigs.map((g) => (
-              <div key={g.costId} style={{ display: "flex", alignItems: "center", padding: "10px 0", borderBottom: "1px solid #2A2A2A" }}>
+              <div key={g.costId} style={{ display: "flex", alignItems: "center", padding: "10px 0", borderBottom: "1px solid #ECECEC" }}>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: "#F2F2F2" }}>{g.eventName}</div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: "#111111" }}>{g.eventName}</div>
                   <div style={{ fontSize: 11, color: "#777", marginTop: 2 }}>
                     {g.organizerName} · {new Date(g.eventDate).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
                     {g.paidAt ? " · paid" : ""}
@@ -408,10 +408,10 @@ function Toggle({ on, onChange, title, sub }: { on: boolean; onChange: (v: boole
       }}
     >
       <span style={{ flex: 1 }}>
-        <span style={{ display: "block", fontSize: 15, fontWeight: 700, color: "#F2F2F2" }}>{title}</span>
-        <span style={{ display: "block", fontSize: 12, marginTop: 2, color: on ? "#0FA7B5" : "#8F8F8F" }}>{sub}</span>
+        <span style={{ display: "block", fontSize: 15, fontWeight: 700, color: "#111111" }}>{title}</span>
+        <span style={{ display: "block", fontSize: 12, marginTop: 2, color: on ? "#0FA7B5" : "#8A8A8A" }}>{sub}</span>
       </span>
-      <span style={{ flexShrink: 0, width: 46, height: 28, borderRadius: 999, background: on ? "#0FA7B5" : "#3A3A3A", position: "relative", transition: "background 150ms" }}>
+      <span style={{ flexShrink: 0, width: 46, height: 28, borderRadius: 999, background: on ? "#0FA7B5" : "#D8D8D8", position: "relative", transition: "background 150ms" }}>
         <span style={{ position: "absolute", top: 3, left: on ? 21 : 3, width: 22, height: 22, borderRadius: 999, background: "#fff", transition: "left 150ms" }} />
       </span>
     </button>
@@ -419,8 +419,8 @@ function Toggle({ on, onChange, title, sub }: { on: boolean; onChange: (v: boole
 }
 
 const card: React.CSSProperties = {
-  background: "#1E1E1E",
-  border: "1px solid #2E2E2E",
+  background: "#FAFAFA",
+  border: "1px solid #E5E5E5",
   borderRadius: 14,
   padding: 18,
 };
@@ -428,16 +428,16 @@ const label: React.CSSProperties = {
   fontSize: 11,
   fontWeight: 800,
   letterSpacing: 1,
-  color: "#8F8F8F",
+  color: "#8A8A8A",
   marginBottom: 6,
 };
 const input: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  border: "1.5px solid #383838",
+  border: "1.5px solid #D9D9D9",
   borderRadius: 10,
   padding: "11px 12px",
   fontSize: 15,
-  background: "#222",
-  color: "#F2F2F2",
+  background: "#FFFFFF",
+  color: "#111111",
 };

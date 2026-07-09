@@ -232,18 +232,18 @@ export default function MarketingComposer() {
   const input: React.CSSProperties = {
     width: "100%",
     boxSizing: "border-box",
-    border: "1px solid #383838",
+    border: "1px solid #D9D9D9",
     borderRadius: 10,
     padding: "12px 14px",
     fontSize: 15,
     fontFamily: "inherit",
-    background: "#222",
-    color: "#F2F2F2",
+    background: "#FFFFFF",
+    color: "#111111",
   };
   const chip: React.CSSProperties = {
-    border: "1.5px solid #383838",
-    background: "#222",
-    color: "#D8D8D8",
+    border: "1.5px solid #D9D9D9",
+    background: "#FFFFFF",
+    color: "#333333",
     borderRadius: 999,
     padding: "7px 14px",
     fontSize: 14,
@@ -252,12 +252,9 @@ export default function MarketingComposer() {
   };
 
   return (
-    <div style={{ maxWidth: 620, margin: "0 auto" }}>
-      <Link href="/dashboard" style={{ color: "#F5E642", fontWeight: 700, fontSize: 14 }}>
-        ← Dashboard
-      </Link>
+    <div style={{ maxWidth: 640 }}>
       <h1 style={{ fontSize: 26, fontWeight: 800, margin: "12px 0 4px" }}>Email your fans</h1>
-      <p style={{ color: "#8F8F8F", fontSize: 14, margin: "0 0 4px" }}>
+      <p style={{ color: "#8A8A8A", fontSize: 14, margin: "0 0 4px" }}>
         {!loaded
           ? "Counting your fans…"
           : recipientCount === 0
@@ -282,7 +279,7 @@ export default function MarketingComposer() {
       <div style={{ background: AI_BG, borderRadius: 12, padding: 16, marginBottom: 16 }}>
         <div style={{ fontWeight: 800, color: AI, marginBottom: 8 }}>✨ Draft with AI</div>
         <textarea
-          style={{ ...input, minHeight: 60, background: "#222" }}
+          style={{ ...input, minHeight: 60, background: "#FFFFFF" }}
           placeholder="Tell Stub what to say — e.g. 'hype my Friday warehouse show, doors 10pm'"
           value={aiPrompt}
           onChange={(e) => setAiPrompt(e.target.value)}
@@ -327,7 +324,7 @@ export default function MarketingComposer() {
                       setSubject(s);
                       setSubjectOptions([]);
                     }}
-                    style={{ textAlign: "left", background: "#222", color: "#F2F2F2", border: "1px solid #444", borderRadius: 10, padding: "10px 12px", fontSize: 14, cursor: "pointer" }}
+                    style={{ textAlign: "left", background: "#FFFFFF", color: "#111111", border: "1px solid #444", borderRadius: 10, padding: "10px 12px", fontSize: 14, cursor: "pointer" }}
                   >
                     ↑ {s}
                   </button>
@@ -352,7 +349,7 @@ export default function MarketingComposer() {
       />
 
       {/* feature shows */}
-      <div style={{ fontSize: 13, fontWeight: 700, color: "#8F8F8F", textTransform: "uppercase", letterSpacing: 0.5, margin: "16px 0 8px" }}>
+      <div style={{ fontSize: 13, fontWeight: 700, color: "#8A8A8A", textTransform: "uppercase", letterSpacing: 0.5, margin: "16px 0 8px" }}>
         Feature shows{selectedShows.length ? ` (${selectedShows.length})` : ""}
       </div>
       {events.length > 0 && (
@@ -371,17 +368,17 @@ export default function MarketingComposer() {
                 display: "flex",
                 alignItems: "center",
                 gap: 10,
-                background: on ? "#FBF6DA" : "#1E1E1E",
-                border: `1px solid ${on ? "#EFE7C2" : "#2E2E2E"}`,
+                background: on ? "#FBF6DA" : "#FAFAFA",
+                border: `1px solid ${on ? "#EFE7C2" : "#E5E5E5"}`,
                 borderRadius: 10,
                 padding: "10px 12px",
                 cursor: "pointer",
                 textAlign: "left",
               }}
             >
-              <span style={{ color: on ? INK : "#8F8F8F", fontWeight: 800 }}>{on ? "☑" : "☐"}</span>
-              <span style={{ flex: 1, fontSize: 14, fontWeight: 600, color: on ? "#161616" : "#D8D8D8" }}>{e.name}</span>
-              <span style={{ fontSize: 12, color: on ? "#6B6B57" : "#8F8F8F" }}>{fmtDate(e.eventDate)}</span>
+              <span style={{ color: on ? INK : "#8A8A8A", fontWeight: 800 }}>{on ? "☑" : "☐"}</span>
+              <span style={{ flex: 1, fontSize: 14, fontWeight: 600, color: on ? "#161616" : "#333333" }}>{e.name}</span>
+              <span style={{ fontSize: 12, color: on ? "#6B6B57" : "#8A8A8A" }}>{fmtDate(e.eventDate)}</span>
             </button>
           );
         })}
@@ -394,20 +391,20 @@ export default function MarketingComposer() {
       >
         {sending ? "Sending…" : "Send email"}
       </button>
-      {msg ? <p style={{ textAlign: "center", color: "#8F8F8F", fontSize: 14, marginTop: 10 }}>{msg}</p> : null}
-      <p style={{ textAlign: "center", color: "#8F8F8F", fontSize: 12, marginTop: 10, lineHeight: 1.5 }}>
+      {msg ? <p style={{ textAlign: "center", color: "#8A8A8A", fontSize: 14, marginTop: 10 }}>{msg}</p> : null}
+      <p style={{ textAlign: "center", color: "#8A8A8A", fontSize: 12, marginTop: 10, lineHeight: 1.5 }}>
         Marketing email — every message includes a one-click unsubscribe. Use it to promote shows.
       </p>
 
       {history.length > 0 && (
         <>
-          <div style={{ fontSize: 13, fontWeight: 700, color: "#8F8F8F", textTransform: "uppercase", letterSpacing: 0.5, margin: "24px 0 8px" }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: "#8A8A8A", textTransform: "uppercase", letterSpacing: 0.5, margin: "24px 0 8px" }}>
             Sent
           </div>
           {history.map((b) => (
-            <div key={b.id} style={{ background: "#1E1E1E", border: "1px solid #2E2E2E", borderRadius: 10, padding: 12, marginBottom: 8 }}>
+            <div key={b.id} style={{ background: "#FAFAFA", border: "1px solid #E5E5E5", borderRadius: 10, padding: 12, marginBottom: 8 }}>
               <div style={{ fontWeight: 700, fontSize: 14 }}>{b.subject}</div>
-              <div style={{ fontSize: 12, color: "#8F8F8F" }}>
+              <div style={{ fontSize: 12, color: "#8A8A8A" }}>
                 {new Date(b.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })} ·{" "}
                 {b.recipientCount} {b.recipientCount === 1 ? "recipient" : "recipients"}
               </div>

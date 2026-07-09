@@ -83,7 +83,7 @@ export function MessageClient({
   return (
     <>
       <div style={card}>
-        <div style={{ fontSize: 13, color: "#8F8F8F", marginBottom: 12 }}>
+        <div style={{ fontSize: 13, color: "#8A8A8A", marginBottom: 12 }}>
           {recipientCount} recipient{recipientCount === 1 ? "" : "s"}
         </div>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
@@ -126,7 +126,7 @@ export function MessageClient({
             style={{
               fontSize: 12,
               fontWeight: 700,
-              color: "#8F8F8F",
+              color: "#8A8A8A",
               textTransform: "uppercase",
               letterSpacing: 0.5,
               marginBottom: 8,
@@ -137,10 +137,10 @@ export function MessageClient({
           {history.map((a, i) => {
             const when = a.sentAt || a.createdAt;
             return (
-              <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid #2A2A2A" }}>
-                <div style={{ fontWeight: 700, color: "#F2F2F2" }}>{a.subject}</div>
+              <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid #ECECEC" }}>
+                <div style={{ fontWeight: 700, color: "#111111" }}>{a.subject}</div>
                 {when ? (
-                  <div style={{ fontSize: 12, color: "#8F8F8F" }}>{new Date(when).toLocaleString()}</div>
+                  <div style={{ fontSize: 12, color: "#8A8A8A" }}>{new Date(when).toLocaleString()}</div>
                 ) : null}
               </div>
             );
@@ -152,8 +152,8 @@ export function MessageClient({
 }
 
 const card: React.CSSProperties = {
-  background: "#1E1E1E",
-  border: "1px solid #2E2E2E",
+  background: "#FAFAFA",
+  border: "1px solid #E5E5E5",
   borderRadius: 14,
   padding: 18,
   marginBottom: 14,
@@ -161,17 +161,17 @@ const card: React.CSSProperties = {
 const input: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  border: "1px solid #383838",
+  border: "1px solid #D9D9D9",
   borderRadius: 10,
   padding: "12px 14px",
   fontSize: 15,
-  background: "#222",
-  color: "#F2F2F2",
+  background: "#FFFFFF",
+  color: "#111111",
 };
 const chip: React.CSSProperties = {
-  background: "#222",
-  color: "#D8D8D8",
-  border: "1px solid #383838",
+  background: "#FFFFFF",
+  color: "#333333",
+  border: "1px solid #D9D9D9",
   borderRadius: 999,
   padding: "7px 14px",
   fontSize: 13,

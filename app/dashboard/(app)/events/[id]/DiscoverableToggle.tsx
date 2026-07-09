@@ -48,8 +48,8 @@ export function DiscoverableToggle({ id, discoverable }: { id: string; discovera
           display: "flex",
           alignItems: "center",
           gap: 12,
-          background: "#1E1E1E",
-          border: "1px solid #2E2E2E",
+          background: "#FAFAFA",
+          border: "1px solid #E5E5E5",
           borderRadius: 12,
           padding: "14px 16px",
           cursor: "pointer",
@@ -57,7 +57,7 @@ export function DiscoverableToggle({ id, discoverable }: { id: string; discovera
         }}
       >
         <span style={{ flex: 1 }}>
-          <span style={{ display: "block", fontSize: 15, fontWeight: 700, color: "#F2F2F2" }}>
+          <span style={{ display: "block", fontSize: 15, fontWeight: 700, color: "#111111" }}>
             Discoverable in search
           </span>
           <span
@@ -81,7 +81,7 @@ export function DiscoverableToggle({ id, discoverable }: { id: string; discovera
             height: 28,
             borderRadius: 999,
             // Teal (the drink accent) when on — matches the tile hover; grey off.
-            background: on ? "#0FA7B5" : "#3A3A3A",
+            background: on ? "#0FA7B5" : "#D8D8D8",
             position: "relative",
             transition: "background 150ms",
           }}

@@ -15,14 +15,14 @@ export default async function EditEventPage({ params }: { params: Promise<{ id: 
   const event = await getJSON<EditEvent>(`/events/${id}`);
 
   return (
-    <div style={{ maxWidth: 620, margin: "0 auto" }}>
-      <Link href={`/dashboard/events/${id}`} style={{ color: "#F5E642", fontWeight: 700, fontSize: 14 }}>
+    <div style={{ maxWidth: 640 }}>
+      <Link href={`/dashboard/events/${id}`} style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
         ← {event?.name ?? "Event"}
       </Link>
-      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#F2F2F2" }}>Edit event</h1>
+      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#111111" }}>Edit event</h1>
 
       {!event ? (
-        <div style={{ ...card, color: "#8F8F8F", textAlign: "center" }}>Couldn&apos;t load this event.</div>
+        <div style={{ ...card, color: "#8A8A8A", textAlign: "center" }}>Couldn&apos;t load this event.</div>
       ) : (
         <EditForm
           event={{

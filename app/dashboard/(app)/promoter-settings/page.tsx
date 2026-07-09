@@ -57,22 +57,19 @@ export default function PromoterSettings() {
   };
 
   const card: React.CSSProperties = {
-    background: "#1E1E1E",
-    border: "1px solid #2E2E2E",
+    background: "#FAFAFA",
+    border: "1px solid #E5E5E5",
     borderRadius: 14,
     padding: 18,
     marginBottom: 16,
   };
 
   return (
-    <div style={{ maxWidth: 560, margin: "0 auto" }}>
-      <Link href="/dashboard" style={{ color: "#F5E642", fontWeight: 700, fontSize: 14 }}>
-        ← Dashboard
-      </Link>
+    <div style={{ maxWidth: 640 }}>
       <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px" }}>Promoter Settings</h1>
 
       {!loaded ? (
-        <p style={{ color: "#8F8F8F" }}>Loading…</p>
+        <p style={{ color: "#8A8A8A" }}>Loading…</p>
       ) : (
         <>
           {/* Logo (display only — upload your logo in the fansonly app) */}
@@ -84,7 +81,7 @@ export default function PromoterSettings() {
                 alt=""
                 width={96}
                 height={96}
-                style={{ borderRadius: "50%", objectFit: "cover", border: "3px solid #F5E642", background: "#1E1E1E" }}
+                style={{ borderRadius: "50%", objectFit: "cover", border: "3px solid #F5E642", background: "#FAFAFA" }}
               />
             ) : (
               <div
@@ -105,25 +102,25 @@ export default function PromoterSettings() {
                 {(name || "?").charAt(0).toUpperCase()}
               </div>
             )}
-            <p style={{ fontSize: 13, color: "#8F8F8F", marginTop: 12 }}>
+            <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 12 }}>
               {logoUrl ? "Your logo." : "No logo yet."} Upload or change it in the fansonly app.
             </p>
           </div>
 
           {/* Promoter page handle */}
           <div style={card}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: "#8F8F8F", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 8 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: "#8A8A8A", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 8 }}>
               Your promoter page
             </div>
-            <div style={{ display: "flex", alignItems: "center", border: "1px solid #383838", borderRadius: 10, overflow: "hidden", background: "#222" }}>
-              <span style={{ padding: "12px 8px 12px 12px", color: "#8F8F8F", fontSize: 15, whiteSpace: "nowrap" }}>
+            <div style={{ display: "flex", alignItems: "center", border: "1px solid #D9D9D9", borderRadius: 10, overflow: "hidden", background: "#FFFFFF" }}>
+              <span style={{ padding: "12px 8px 12px 12px", color: "#8A8A8A", fontSize: 15, whiteSpace: "nowrap" }}>
                 fansonly.live/p/
               </span>
               <input
                 value={handle}
                 onChange={(e) => setHandle(e.target.value)}
                 placeholder="your-name"
-                style={{ flex: 1, border: "none", outline: "none", padding: "12px 12px 12px 0", fontSize: 15, background: "transparent", color: "#F2F2F2" }}
+                style={{ flex: 1, border: "none", outline: "none", padding: "12px 12px 12px 0", fontSize: 15, background: "transparent", color: "#111111" }}
               />
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 12 }}>
@@ -135,7 +132,7 @@ export default function PromoterSettings() {
                   href={`https://fansonly.live/p/${savedHandle}`}
                   target="_blank"
                   rel="noreferrer"
-                  style={{ color: "#F5E642", fontWeight: 600, fontSize: 14 }}
+                  style={{ color: "#0B8896", fontWeight: 600, fontSize: 14 }}
                 >
                   View page ↗
                 </a>

@@ -1,9 +1,10 @@
-/* Manage grid live tiles: outlined brand-yellow, flashing to the drink teal
-   (#0FA7B5) on hover — border + icon + label shift together so it reads
-   intentional. Icon/label inherit `color` (currentColor), so one rule drives all. */
+/* Manage grid live tiles: yellow-outlined on the light card, flashing to the
+   drink teal (#0FA7B5) on hover — border + icon + label shift together so it
+   reads intentional. Icon/label inherit `color` (currentColor); text stays
+   dark at rest (yellow text fails contrast on light). */
 .tile {
   border: 1.5px solid #f5e642;
-  color: #f5e642;
+  color: #444;
   transition: border-color 160ms ease, color 160ms ease;
 }
 .tile:hover {

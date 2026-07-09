@@ -43,7 +43,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
 
   if (!event) {
     return (
-      <div style={{ maxWidth: 620, margin: "0 auto" }}>
+      <div style={{ maxWidth: 640 }}>
         <Link href="/dashboard/events" style={backLink}>
           ← Your events
         </Link>
@@ -60,7 +60,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
   const pct = cap > 0 ? Math.round((sold / cap) * 100) : 0;
 
   return (
-    <div style={{ maxWidth: 620, margin: "0 auto" }}>
+    <div style={{ maxWidth: 640 }}>
       <Link href="/dashboard/events" style={backLink}>
         ← Your events
       </Link>
@@ -136,7 +136,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
             </Link>
           ) : (
             <div key={t.key} style={tileSoon}>
-              <t.Icon size={30} color="#F5E642" />
+              <t.Icon size={30} color="#B5B5B5" />
               <span style={tileLabel}>{t.label}</span>
               <span style={soonTag}>In app</span>
             </div>
@@ -182,22 +182,19 @@ const tileBase: React.CSSProperties = {
   justifyContent: "center",
   gap: 8,
 };
-// Live tiles: outlined yellow (matches the Sign-out button) — less bright than
-// a solid fill, calmer on the dark background. Border + text color live in
+// Live tiles: yellow-outlined on light. Border + text color live in
 // tiles.module.css so the teal hover (:hover) can override them.
 const tileLive: React.CSSProperties = {
   ...tileBase,
-  background: "#1E1E1E",
+  background: "#FAFAFA",
 };
-// Not-yet-built ("In app") tiles stay muted dark to read as unavailable.
+// Not-yet-built ("In app") tiles stay muted grey to read as unavailable.
 const tileSoon: React.CSSProperties = {
   ...tileBase,
-  background: "#242424",
-  border: "1px solid #333",
-  opacity: 0.8,
+  background: "#F4F4F2",
+  border: "1px solid #E0E0E0",
 };
-// Tile labels sit on yellow tiles → stay dark. Soon tiles get a light label.
-const tileLabel: React.CSSProperties = { fontSize: 14, fontWeight: 700, color: "#F5E642" };
+const tileLabel: React.CSSProperties = { fontSize: 14, fontWeight: 700, color: "#9A9A9A" };
 const soonTag: React.CSSProperties = {
   position: "absolute",
   top: 8,
@@ -205,8 +202,8 @@ const soonTag: React.CSSProperties = {
   fontSize: 10,
   fontWeight: 700,
   color: T.muted,
-  background: "#1A1A1A",
-  border: "1px solid #333",
+  background: "#ECECEA",
+  border: "1px solid #DDD",
   borderRadius: 999,
   padding: "1px 6px",
 };

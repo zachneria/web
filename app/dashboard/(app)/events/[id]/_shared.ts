@@ -75,16 +75,17 @@ export async function getJSON<T>(path: string): Promise<T | null> {
   }
 }
 
-// ---- Dark theme tokens (match the homepage: near-black + yellow) ----
+// ---- Light workspace tokens (match the app's organizer zone: white cards on
+// a light body; dark = the PUBLIC surfaces only). ----
 export const T = {
-  bg: "#121212",
-  card: "#1E1E1E",
-  border: "#2E2E2E",
-  text: "#F2F2F2",
-  body: "#D8D8D8",
-  muted: "#8F8F8F",
+  bg: "#FFFFFF",
+  card: "#FAFAFA",
+  border: "#E5E5E5",
+  text: "#111111",
+  body: "#333333",
+  muted: "#8A8A8A",
   accent: "#F5E642",
-  divider: "#2A2A2A",
+  divider: "#ECECEC",
 };
 
 export const card: React.CSSProperties = {
@@ -114,7 +115,8 @@ export const rowVal: React.CSSProperties = {
   color: T.text,
   fontVariantNumeric: "tabular-nums",
 };
-export const backLink: React.CSSProperties = { color: T.accent, fontWeight: 700, fontSize: 14 };
+// Teal-dark (readable on white; yellow text fails contrast on light).
+export const backLink: React.CSSProperties = { color: "#0B8896", fontWeight: 700, fontSize: 14 };
 export const h1: React.CSSProperties = { fontSize: 24, fontWeight: 800, color: T.text };
 
 // Small header shown atop every sub-page: back-to-hub link + event name + status.

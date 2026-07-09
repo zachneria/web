@@ -143,7 +143,7 @@ export function AddTicketForm({ eventId }: { eventId: string }) {
       {/* Price(s) + qty */}
       {chooseMode ? (
         <div style={{ marginTop: 12 }}>
-          <div style={{ fontSize: 12, color: "#8F8F8F", marginBottom: 6 }}>
+          <div style={{ fontSize: 12, color: "#8A8A8A", marginBottom: 6 }}>
             Buyers pick one price:
           </div>
           {options.map((o, i) => (
@@ -199,7 +199,7 @@ export function AddTicketForm({ eventId }: { eventId: string }) {
       )}
 
       {isAdmission ? (
-        <label style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 12, color: "#D8D8D8", fontSize: 14 }}>
+        <label style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 12, color: "#333333", fontSize: 14 }}>
           <input type="checkbox" checked={absorbFee} onChange={(e) => setAbsorbFee(e.target.checked)} style={{ accentColor: "#F5E642" }} />
           I&apos;ll cover the booking fee (buyers pay face value)
         </label>
@@ -218,10 +218,10 @@ export function AddTicketForm({ eventId }: { eventId: string }) {
   );
 }
 
-const opt: React.CSSProperties = { background: "#1E1E1E" };
+const opt: React.CSSProperties = { background: "#FAFAFA" };
 const cardStyle: React.CSSProperties = {
-  background: "#1E1E1E",
-  border: "1px solid #2E2E2E",
+  background: "#FAFAFA",
+  border: "1px solid #E5E5E5",
   borderRadius: 14,
   padding: 18,
   marginBottom: 14,
@@ -232,12 +232,12 @@ const input: React.CSSProperties = {
   // Fixed height (not vertical padding) so text <input>s and native <select>s
   // render the SAME height (selects otherwise cap shorter than an input).
   height: 44,
-  border: "1px solid #383838",
+  border: "1px solid #D9D9D9",
   borderRadius: 10,
   padding: "0 12px",
   fontSize: 15,
-  background: "#222",
-  color: "#F2F2F2",
+  background: "#FFFFFF",
+  color: "#111111",
 };
 const addBtn: React.CSSProperties = {
   width: "100%",
@@ -253,8 +253,8 @@ const addBtn: React.CSSProperties = {
 };
 const cancelBtn: React.CSSProperties = {
   background: "transparent",
-  color: "#8F8F8F",
-  border: "1px solid #383838",
+  color: "#8A8A8A",
+  border: "1px solid #D9D9D9",
   borderRadius: 10,
   padding: "12px 18px",
   fontSize: 15,

@@ -26,16 +26,16 @@ export default async function TicketsPage({ params }: { params: Promise<{ id: st
   const addons = (types ?? []).filter((t) => t.category !== "admission");
 
   return (
-    <div style={{ maxWidth: 620, margin: "0 auto" }}>
-      <Link href={`/dashboard/events/${id}`} style={{ color: "#F5E642", fontWeight: 700, fontSize: 14 }}>
+    <div style={{ maxWidth: 640 }}>
+      <Link href={`/dashboard/events/${id}`} style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
         ← {event?.name ?? "Event"}
       </Link>
-      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#F2F2F2" }}>Tickets</h1>
+      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#111111" }}>Tickets</h1>
 
       <AddTicketForm eventId={id} />
 
       {!types || types.length === 0 ? (
-        <div style={{ ...card, color: "#8F8F8F" }}>No ticket types yet — add one above.</div>
+        <div style={{ ...card, color: "#8A8A8A" }}>No ticket types yet — add one above.</div>
       ) : (
         <>
           <Section title="Admission" items={admission} summary={summary} />
@@ -62,7 +62,7 @@ function Section({
         style={{
           fontSize: 12,
           fontWeight: 700,
-          color: "#8F8F8F",
+          color: "#8A8A8A",
           textTransform: "uppercase",
           letterSpacing: 0.5,
           marginBottom: 8,
@@ -74,10 +74,10 @@ function Section({
         const s = summary?.ticketTypes?.find((x) => x.name === t.name);
         return (
           <div key={t.id} style={row}>
-            <span style={{ color: "#D8D8D8" }}>
-              {t.name} <span style={{ color: "#8F8F8F", fontSize: 13 }}>· {money(t.price)}</span>
+            <span style={{ color: "#333333" }}>
+              {t.name} <span style={{ color: "#8A8A8A", fontSize: 13 }}>· {money(t.price)}</span>
               {t.category !== "admission" ? (
-                <span style={{ color: "#8F8F8F", fontSize: 12 }}> · {t.category}</span>
+                <span style={{ color: "#8A8A8A", fontSize: 12 }}> · {t.category}</span>
               ) : null}
             </span>
             <span style={rowVal}>{s ? `${s.sold} / ${s.total}` : `0 / ${t.quantity}`}</span>

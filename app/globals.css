@@ -569,3 +569,128 @@ a {
   color: #888;
 }
 .footer-links a { color: #bbb; text-decoration: underline; }
+
+
+/* ---- Dashboard shell (dark brand bar / light-gray icon sidebar / white content) ---- */
+.dsh-root {
+  min-height: 100vh;
+  background: #fff;
+  color: #111;
+  display: flex;
+  flex-direction: column;
+}
+.dsh-top {
+  background: #161616;
+  border-bottom: 3px solid var(--brand);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+}
+.dsh-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+.dsh-side {
+  width: 232px;
+  flex-shrink: 0;
+  background: #f2f2ef;
+  border-right: 1px solid #e2e2dd;
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.dsh-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 6px;
+}
+.dsh-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid var(--brand);
+  background: #fff;
+  flex-shrink: 0;
+}
+.dsh-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 18px;
+  color: #111;
+  background: var(--brand);
+}
+.dsh-user-meta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.dsh-user-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dsh-user-email {
+  font-size: 11px;
+  color: #8a8a8a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dsh-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.dsh-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 11px 0;
+  border-radius: 10px;
+  border-left: 3px solid transparent;
+  transition: background 140ms ease;
+}
+.dsh-nav-item:hover {
+  background: rgba(15, 167, 181, 0.08);
+}
+.dsh-nav-active {
+  background: rgba(15, 167, 181, 0.14);
+  border-left-color: #0fa7b5;
+}
+.dsh-main {
+  flex: 1;
+  min-width: 0;
+  background: #fff;
+  padding: 28px 28px 72px;
+}
+@media (max-width: 760px) {
+  .dsh-body {
+    flex-direction: column;
+  }
+  .dsh-side {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-right: none;
+    border-bottom: 1px solid #e2e2dd;
+    padding: 10px 14px;
+    gap: 12px;
+  }
+  .dsh-user-meta { display: none; }
+  .dsh-nav { flex-direction: row; gap: 4px; }
+  .dsh-nav-item { width: 46px; padding: 9px 0; border-left: none; border-bottom: 3px solid transparent; }
+  .dsh-nav-active { border-bottom-color: #0fa7b5; }
+  .dsh-main { padding: 20px 16px 56px; }
+}

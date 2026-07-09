@@ -134,7 +134,7 @@ export function CostAddForm({ eventId }: { eventId: string }) {
       <div style={{ display: "flex", gap: 8 }}>
         <select style={{ ...input, flex: 1 }} value={category} onChange={(e) => setCategory(e.target.value)}>
           {CATEGORIES.map((c) => (
-            <option key={c.value} value={c.value} style={{ background: "#1E1E1E" }}>
+            <option key={c.value} value={c.value} style={{ background: "#FAFAFA" }}>
               {c.label}
             </option>
           ))}
@@ -167,7 +167,7 @@ export function CostAddForm({ eventId }: { eventId: string }) {
                 <button key={t.id} type="button" style={talentHit} onClick={() => pickTalent(t)}>
                   <span style={talentDot} />
                   <span style={{ flex: 1, textAlign: "left" }}>
-                    <span style={{ display: "block", fontSize: 13, fontWeight: 700, color: "#F2F2F2" }}>
+                    <span style={{ display: "block", fontSize: 13, fontWeight: 700, color: "#111111" }}>
                       {t.name}
                     </span>
                     <span style={{ display: "block", fontSize: 11, color: "#B08CC9" }}>
@@ -183,7 +183,7 @@ export function CostAddForm({ eventId }: { eventId: string }) {
         </div>
         <select style={{ ...input, flex: 1 }} value={payeeApp} onChange={(e) => setPayeeApp(e.target.value)}>
           {APPS.map((a) => (
-            <option key={a.value} value={a.value} style={{ background: "#1E1E1E" }}>
+            <option key={a.value} value={a.value} style={{ background: "#FAFAFA" }}>
               {a.label}
             </option>
           ))}
@@ -228,8 +228,8 @@ export function CostAddForm({ eventId }: { eventId: string }) {
 }
 
 const cardStyle: React.CSSProperties = {
-  background: "#1E1E1E",
-  border: "1px solid #2E2E2E",
+  background: "#FAFAFA",
+  border: "1px solid #E5E5E5",
   borderRadius: 14,
   padding: 18,
   marginBottom: 14,
@@ -240,12 +240,12 @@ const input: React.CSSProperties = {
   // Fixed height (not vertical padding) so text <input>s and native <select>s
   // render the SAME height side-by-side (selects otherwise cap shorter).
   height: 44,
-  border: "1px solid #383838",
+  border: "1px solid #D9D9D9",
   borderRadius: 10,
   padding: "0 12px",
   fontSize: 15,
-  background: "#222",
-  color: "#F2F2F2",
+  background: "#FFFFFF",
+  color: "#111111",
 };
 const addBtn: React.CSSProperties = {
   width: "100%",
@@ -302,8 +302,8 @@ const talentLinked: React.CSSProperties = {
 
 const cancelBtn: React.CSSProperties = {
   background: "transparent",
-  color: "#8F8F8F",
-  border: "1px solid #383838",
+  color: "#8A8A8A",
+  border: "1px solid #D9D9D9",
   borderRadius: 10,
   padding: "12px 18px",
   fontSize: 15,
