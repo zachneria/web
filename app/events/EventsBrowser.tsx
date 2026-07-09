@@ -154,12 +154,15 @@ export function EventsBrowser({ initial }: { initial: FindEvent[] }) {
 
 function EventCard({ e, live }: { e: FindEvent; live?: boolean }) {
   const router = useRouter();
+  // Legacy flyers can be un-renderable in browsers (e.g. iPhone .heic
+  // uploads) — onError swaps to the initials fallback instead of a broken icon.
+  const [flyerBroken, setFlyerBroken] = useState(false);
   const promoterPath = e.organizerHandle || e.organizerId ? `/p/${e.organizerHandle ?? e.organizerId}` : null;
   return (
     <Link href={`/e/${e.id}`} className={`find-card${live ? " find-card-live" : ""}`}>
-      {e.flyerUrl ? (
+      {e.flyerUrl && !flyerBroken ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={e.flyerUrl} alt="" className="find-card-flyer" />
+        <img src={e.flyerUrl} alt="" className="find-card-flyer" onError={() => setFlyerBroken(true)} />
       ) : (
         <div className="find-card-flyer find-card-flyer-fallback">
           {(e.name || "?").charAt(0).toUpperCase()}
