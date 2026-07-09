@@ -842,6 +842,9 @@ a {
   margin: 16px 0 8px;
 }
 .find-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   border: 1px solid #ddd;
   background: #fff;
   color: #555;

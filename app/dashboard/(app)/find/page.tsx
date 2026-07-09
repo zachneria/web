@@ -2,6 +2,13 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { IconType } from "react-icons";
+import {
+  IoCalendarOutline,
+  IoFlameOutline,
+  IoPricetagsOutline,
+  IoSparklesOutline,
+} from "react-icons/io5";
 
 // Find Events — web mirror of the app's buyer Events tab ((tabs)/index.tsx):
 // search, Flyers ⇄ Promoters view toggle, 4-way sort, "Happening now" pinned.
@@ -26,11 +33,11 @@ interface Result {
 type SortKey = "upcoming" | "newest" | "popular" | "price";
 type ViewMode = "flyers" | "promoters";
 
-const SORTS: { key: SortKey; label: string }[] = [
-  { key: "upcoming", label: "📅 Upcoming" },
-  { key: "newest", label: "✨ Newest" },
-  { key: "popular", label: "🔥 Popular" },
-  { key: "price", label: "$$ Price" },
+const SORTS: { key: SortKey; label: string; Icon: IconType }[] = [
+  { key: "upcoming", label: "Upcoming", Icon: IoCalendarOutline },
+  { key: "newest", label: "Newest", Icon: IoSparklesOutline },
+  { key: "popular", label: "Popular", Icon: IoFlameOutline },
+  { key: "price", label: "Price", Icon: IoPricetagsOutline },
 ];
 const SORT_HEADINGS: Record<SortKey, string> = {
   upcoming: "Upcoming",
@@ -143,8 +150,9 @@ export default function FindEventsPage() {
             <button
               key={s.key}
               onClick={() => pickSort(s.key)}
-              style={{ ...pill, ...(sortKey === s.key ? pillOn : {}) }}
+              style={{ ...pill, ...(sortKey === s.key ? pillOn : {}), display: "inline-flex", alignItems: "center", gap: 5 }}
             >
+              <s.Icon size={14} />
               {s.label}
             </button>
           ))}

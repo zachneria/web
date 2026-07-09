@@ -3,6 +3,13 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
+import type { IconType } from "react-icons";
+import {
+  IoCalendarOutline,
+  IoFlameOutline,
+  IoPricetagsOutline,
+  IoSparklesOutline,
+} from "react-icons/io5";
 
 import type { FindEvent } from "@/lib/backend";
 
@@ -12,11 +19,12 @@ import type { FindEvent } from "@/lib/backend";
 
 type SortKey = "upcoming" | "newest" | "popular" | "price";
 
-const SORTS: { key: SortKey; label: string }[] = [
-  { key: "upcoming", label: "📅 Upcoming" },
-  { key: "newest", label: "✨ Newest" },
-  { key: "popular", label: "🔥 Popular" },
-  { key: "price", label: "$$ Price" },
+// Outline Ionicons (the app's icon language) — no emoji.
+const SORTS: { key: SortKey; label: string; Icon: IconType }[] = [
+  { key: "upcoming", label: "Upcoming", Icon: IoCalendarOutline },
+  { key: "newest", label: "Newest", Icon: IoSparklesOutline },
+  { key: "popular", label: "Popular", Icon: IoFlameOutline },
+  { key: "price", label: "Price", Icon: IoPricetagsOutline },
 ];
 const SORT_HEADINGS: Record<SortKey, string> = {
   upcoming: "Upcoming",
@@ -101,6 +109,7 @@ export function EventsBrowser({ initial }: { initial: FindEvent[] }) {
             onClick={() => setSortKey(s.key)}
             className={`find-pill${sortKey === s.key ? " find-pill-on" : ""}`}
           >
+            <s.Icon size={14} />
             {s.label}
           </button>
         ))}
