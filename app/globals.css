@@ -335,7 +335,16 @@ a {
 .promoter-hero {
   text-align: center;
   padding: 36px 20px 28px;
-  background: linear-gradient(180deg, rgba(245, 230, 66, 0.22), rgba(245, 230, 66, 0));
+  /* Full-bleed breakout: the hero glow spans the whole page, not the 560px
+     column (which rendered as a hard-edged box on the dark body). The radial
+     fades to transparent well before the viewport edges — no seams. */
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: radial-gradient(
+    55% 90% at 50% 0%,
+    rgba(245, 230, 66, 0.2),
+    transparent 72%
+  );
 }
 .promoter-logo {
   width: 96px;
@@ -387,21 +396,26 @@ a {
   border-color: #0fa7b5;
   transform: translateY(-2px);
 }
-.event-card-thumb {
-  width: 84px;
-  height: 96px;
-  object-fit: cover;
+.event-card-date {
   flex-shrink: 0;
-  display: block;
-}
-.event-card-thumb-fallback {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 54px;
+  margin: 12px 0 12px 12px;
   background: #2a2a2a;
-  color: #777;
-  font-size: 28px;
+  border-radius: 10px;
+  text-align: center;
+  padding: 8px 0;
+}
+.event-card-month {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #8f8f8f;
+}
+.event-card-day {
+  display: block;
+  font-size: 20px;
   font-weight: 800;
+  color: #f2f2f2;
 }
 .event-card-body {
   flex: 1;

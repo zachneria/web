@@ -61,14 +61,16 @@ export default async function PromoterPage({
         <div className="event-list">
           {events.map((ev) => (
             <Link key={ev.id} href={`/e/${ev.id}`} className="event-card">
-              {ev.flyerUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={ev.flyerUrl} alt={ev.name} className="event-card-thumb" />
-              ) : (
-                <div className="event-card-thumb event-card-thumb-fallback">
-                  {ev.name[0]?.toUpperCase()}
-                </div>
-              )}
+              {/* Uniform date block (matches the /a gig cards) — flyer thumbs
+                  made the list a patchwork of mismatched crops. */}
+              <div className="event-card-date">
+                <span className="event-card-month">
+                  {new Date(ev.eventDate)
+                    .toLocaleDateString("en-US", { month: "short" })
+                    .toUpperCase()}
+                </span>
+                <span className="event-card-day">{new Date(ev.eventDate).getDate()}</span>
+              </div>
               <div className="event-card-body">
                 <span className="event-card-name">{ev.name}</span>
                 <span className="event-card-meta">
