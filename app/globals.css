@@ -801,7 +801,7 @@ a {
   height: clamp(260px, 34vw, 400px);
   overflow: hidden;
   border-radius: 28px;
-  margin-top: 22px;
+  margin-top: 40px;
 }
 .find-photo img {
   width: 100%;
