@@ -791,7 +791,8 @@ a {
   padding: 36px 0 72px;
 }
 .find-inner {
-  max-width: 1060px;
+  /* Wide enough for five 230px+ cards per row on desktop. */
+  max-width: 1300px;
   margin: 0 auto;
   padding: 0 20px;
 }
