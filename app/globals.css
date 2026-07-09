@@ -783,17 +783,21 @@ a {
 
 /* ---- Public /events browse (white body, brand-yellow hero glow) ---- */
 .find-page {
+  /* Full-width white so the dark body never shows as side bars; content
+     constrained by .find-inner. */
   background: #fff;
   color: #111;
   min-height: 60vh;
-  padding: 0 20px 72px;
+  padding: 0 0 72px;
+}
+.find-inner {
   max-width: 1060px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 .find-photo {
   /* Full-bleed club shot under the dark chrome, fading into the white body. */
   position: relative;
-  margin: 0 calc(50% - 50vw);
   height: clamp(240px, 34vw, 360px);
   overflow: hidden;
 }

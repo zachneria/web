@@ -30,7 +30,9 @@ export default async function EventsPage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/find-hero.jpg" alt="" />
         </div>
-        <EventsBrowser initial={initial} />
+        <div className="find-inner">
+          <EventsBrowser initial={initial} />
+        </div>
       </div>
       <SiteFooter />
     </>
