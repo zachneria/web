@@ -5,13 +5,15 @@ import Link from "next/link";
 export function SiteHeader({
   logo = true,
   wordmark = true,
+  signIn = false,
 }: {
   logo?: boolean;
   wordmark?: boolean;
+  signIn?: boolean; // top-right Sign in (marketing pages only — buyers have no accounts)
 }) {
   return (
     <header className="topbar">
-      <div className="topbar-inner">
+      <div className={signIn ? "topbar-inner topbar-inner-spread" : "topbar-inner"}>
         {(logo || wordmark) && (
           <Link href="/" className="topbar-brand">
             {logo && (
@@ -19,6 +21,11 @@ export function SiteHeader({
               <img src="/logo.png" alt="" className="topbar-logo" />
             )}
             {wordmark && <span className="topbar-word">fansonly</span>}
+          </Link>
+        )}
+        {signIn && (
+          <Link href="/dashboard" className="topbar-signin">
+            Sign in
           </Link>
         )}
       </div>

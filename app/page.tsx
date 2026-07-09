@@ -48,7 +48,7 @@ const FEATURES: { Icon: IconType; title: string; body: string }[] = [
 export default function Home() {
   return (
     <div className={styles.page}>
-      <SiteHeader />
+      <SiteHeader signIn />
 
       {/* Hero */}
       <section className={styles.hero}>
@@ -69,7 +69,7 @@ export default function Home() {
               See our pricing
             </a>
             <a className={styles.btnGhost} href="/dashboard">
-              Promoter login
+              Sign in
             </a>
           </div>
           <div className={styles.valueStrip}>

@@ -38,7 +38,7 @@ const COMPARE: { label: string; fo: string; eb: string; tm: string }[] = [
 export default function Pricing() {
   return (
     <div className={styles.page}>
-      <SiteHeader />
+      <SiteHeader signIn />
 
       {/* Hero */}
       <section className={styles.hero}>
