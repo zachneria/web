@@ -21,6 +21,16 @@ export interface BuyTicketType {
   salesEnd: string | null;
 }
 
+// Registered artist linked to the event via a production cost (Cost.talentId).
+// `handle` is /a/-ready (artist handle → promoter handle → uuid fallback).
+export interface LineupArtist {
+  stageName: string;
+  handle: string;
+  photoUrl: string | null;
+  genres: string | null;
+  mixUrl: string | null;
+}
+
 export interface BuyEvent {
   id: string;
   name: string;
@@ -36,6 +46,7 @@ export interface BuyEvent {
   flyerUrl: string | null;
   ticketTypes: BuyTicketType[];
   organizer?: Promoter | null;
+  lineup?: LineupArtist[];
 }
 
 export interface Promoter {

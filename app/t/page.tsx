@@ -17,7 +17,10 @@ export default async function TicketViewPage({
 
   let event: { name?: string; venueName?: string; eventDate?: string } | null = null;
   let tickets: ViewTicket[] = [];
-  let error = false;
+  // "invalid" = the API answered 401/404 (bad/expired link). "transient" = no
+  // usable answer (cold Lambda, timeout, 5xx) — the ticket is fine, so never
+  // tell that buyer their link expired; tell them to retry instead.
+  let error: "invalid" | "transient" | false = false;
   if (token || c) {
     try {
       const res = await getOrder(token, c);
@@ -26,10 +29,10 @@ export default async function TicketViewPage({
         event = data.event ?? null;
         tickets = Array.isArray(data.tickets) ? data.tickets : [];
       } else {
-        error = true;
+        error = res.status === 401 || res.status === 404 ? "invalid" : "transient";
       }
     } catch {
-      error = true;
+      error = "transient";
     }
   }
 
@@ -42,7 +45,29 @@ export default async function TicketViewPage({
     <>
       <SiteHeader />
       <main style={{ maxWidth: 460, margin: "0 auto", padding: "24px 16px 64px" }}>
-        {(!token && !c) || error ? (
+        {error === "transient" ? (
+          <div style={{ textAlign: "center", padding: 32, color: "#777" }}>
+            <h1 style={{ fontSize: 22, fontWeight: 800, color: "#F2F2F2" }}>Couldn’t load your tickets</h1>
+            <p style={{ marginTop: 8 }}>
+              Your ticket is still good — this is just a connection hiccup on our end.
+            </p>
+            <a
+              href={`/t?${c ? `c=${encodeURIComponent(c)}` : `token=${encodeURIComponent(token ?? "")}`}`}
+              style={{
+                display: "inline-block",
+                marginTop: 16,
+                background: "#F5E642",
+                color: "#111",
+                fontWeight: 700,
+                borderRadius: 10,
+                padding: "10px 22px",
+                textDecoration: "none",
+              }}
+            >
+              Try again
+            </a>
+          </div>
+        ) : (!token && !c) || error ? (
           <div style={{ textAlign: "center", padding: 32, color: "#777" }}>
             <h1 style={{ fontSize: 22, fontWeight: 800, color: "#F2F2F2" }}>Tickets not found</h1>
             <p style={{ marginTop: 8 }}>
