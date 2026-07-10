@@ -102,3 +102,49 @@ export async function cognitoRefresh(refreshToken: string): Promise<string | nul
     return null;
   }
 }
+
+// Logged-in password change. ChangePassword wants an ACCESS token — the
+// browser only holds cookies (id + refresh), so mint a fresh access token
+// from the refresh token server-side, same pattern as the silent refresh.
+// Cognito errors bubble with .code (NotAuthorizedException = wrong current
+// password, InvalidPasswordException = policy) for the route to translate.
+export async function cognitoChangePassword(
+  refreshToken: string,
+  currentPassword: string,
+  newPassword: string,
+): Promise<void> {
+  const data = await idp("InitiateAuth", {
+    AuthFlow: "REFRESH_TOKEN_AUTH",
+    ClientId: CLIENT_ID,
+    AuthParameters: { REFRESH_TOKEN: refreshToken },
+  });
+  const accessToken = data.AuthenticationResult?.AccessToken;
+  if (!accessToken) {
+    const e = new Error("Session expired") as Error & { code?: string };
+    e.code = "SESSION_EXPIRED";
+    throw e;
+  }
+  await idp("ChangePassword", {
+    AccessToken: accessToken,
+    PreviousPassword: currentPassword,
+    ProposedPassword: newPassword,
+  });
+}
+
+// Forgot-password pair (public — same two calls the app's reset flow makes).
+export async function cognitoForgotPassword(email: string): Promise<void> {
+  await idp("ForgotPassword", { ClientId: CLIENT_ID, Username: email });
+}
+
+export async function cognitoConfirmForgotPassword(
+  email: string,
+  code: string,
+  newPassword: string,
+): Promise<void> {
+  await idp("ConfirmForgotPassword", {
+    ClientId: CLIENT_ID,
+    Username: email,
+    ConfirmationCode: code,
+    Password: newPassword,
+  });
+}

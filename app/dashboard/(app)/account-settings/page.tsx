@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getOrgClaims, orgFetch } from "@/lib/org-api";
 
 import { AccountName } from "./AccountName";
+import { ChangePassword } from "./ChangePassword";
 import { PayoutsConnect } from "./PayoutsConnect";
 
 export const dynamic = "force-dynamic";
@@ -49,6 +50,11 @@ export default async function AccountSettings({
           <span style={{ fontWeight: 600 }}>{email || "—"}</span>
         </div>
         <AccountName />
+      </div>
+
+      <div style={card}>
+        <div style={label}>Security</div>
+        <ChangePassword />
       </div>
 
       <div style={card}>
