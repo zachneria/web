@@ -8,6 +8,7 @@ export const dynamic = "force-dynamic";
 interface EditEvent extends EventDetail {
   endTime?: string | null;
   flyerUrl?: string | null;
+  ticketTypes?: { category: string; sold?: number }[];
 }
 
 export default async function EditEventPage({ params }: { params: Promise<{ id: string }> }) {
@@ -36,6 +37,9 @@ export default async function EditEventPage({ params }: { params: Promise<{ id: 
             endTime: event.endTime ?? null,
             flyerUrl: event.flyerUrl ?? null,
           }}
+          soldCount={(event.ticketTypes ?? [])
+            .filter((t) => t.category === "admission")
+            .reduce((n, t) => n + (t.sold || 0), 0)}
         />
       )}
     </div>

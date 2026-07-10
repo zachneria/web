@@ -45,6 +45,16 @@ export default function PromoterSettings() {
       setHandleMsg({ ok: false, text: "3–30 chars: lowercase letters, numbers, hyphens." });
       return;
     }
+    if (
+      savedHandle &&
+      h &&
+      h !== savedHandle &&
+      !window.confirm(
+        `Change your link? fansonly.live/p/${savedHandle} will stop working — anything printed or posted with it breaks.`,
+      )
+    ) {
+      return;
+    }
     setSavingHandle(true);
     setHandleMsg(null);
     try {

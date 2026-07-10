@@ -49,6 +49,7 @@ export default function ArtistSettings() {
 
   const [stageName, setStageName] = useState("");
   const [talentHandle, setTalentHandle] = useState("");
+  const [savedTalentHandle, setSavedTalentHandle] = useState<string | null>(null);
   const [fallbackHandle, setFallbackHandle] = useState<string | null>(null);
   const [bio, setBio] = useState("");
   const [genres, setGenres] = useState("");
@@ -70,6 +71,7 @@ export default function ArtistSettings() {
   const apply = (p: TalentProfile) => {
     setStageName(p.stageName ?? "");
     setTalentHandle(p.talentHandle ?? "");
+    setSavedTalentHandle(p.talentHandle ?? null);
     setBio(p.bio ?? "");
     setGenres(p.genres ?? "");
     setCity(p.city ?? "");
@@ -114,6 +116,17 @@ export default function ArtistSettings() {
   }, []);
 
   const save = async () => {
+    const h = talentHandle.trim().toLowerCase();
+    if (
+      savedTalentHandle &&
+      h &&
+      h !== savedTalentHandle &&
+      !window.confirm(
+        `Change your artist link? fansonly.live/a/${savedTalentHandle} will stop working — anything printed or posted with it breaks.`,
+      )
+    ) {
+      return;
+    }
     const r = rate.trim() === "" ? null : parseFloat(rate);
     if (r != null && (isNaN(r) || r < 0)) {
       setMsg({ ok: false, text: "Enter a valid suggested rate." });

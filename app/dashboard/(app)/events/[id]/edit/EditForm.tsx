@@ -23,7 +23,7 @@ function toLocalInput(iso?: string | null) {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
-export function EditForm({ event }: { event: EditableEvent }) {
+export function EditForm({ event, soldCount = 0 }: { event: EditableEvent; soldCount?: number }) {
   const router = useRouter();
   const [name, setName] = useState(event.name);
   const [venueName, setVenueName] = useState(event.venueName);
@@ -108,6 +108,23 @@ export function EditForm({ event }: { event: EditableEvent }) {
         setErr(d.error || "Couldn't save. Try again.");
         setBusy(false);
         return;
+      }
+      // Time moved on an event people already hold tickets to? Offer the
+      // Message page (announce) on the way out.
+      const origStart = new Date(event.eventDate).getTime();
+      const origEnd = event.endTime ? new Date(event.endTime).getTime() : null;
+      const newStart = new Date(eventDate).getTime();
+      const newEnd = endTime ? new Date(endTime).getTime() : null;
+      if (soldCount > 0 && (newStart !== origStart || newEnd !== origEnd)) {
+        if (
+          window.confirm(
+            `Saved. ${soldCount} ${soldCount === 1 ? "person already has a ticket" : "people already have tickets"} — message them about the new time?`,
+          )
+        ) {
+          router.push(`/dashboard/events/${event.id}/message`);
+          router.refresh();
+          return;
+        }
       }
       router.push(`/dashboard/events/${event.id}`);
       router.refresh();
