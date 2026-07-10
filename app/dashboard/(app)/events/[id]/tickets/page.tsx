@@ -64,6 +64,26 @@ export default async function TicketsPage({ params }: { params: Promise<{ id: st
       </Link>
       <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#111111" }}>Tickets</h1>
 
+      {event && admission.reduce((n, t) => n + t.quantity, 0) > event.capacity ? (
+        <div
+          style={{
+            background: "#FFF3C2",
+            border: "1px solid #EFE6B0",
+            borderRadius: 12,
+            padding: "12px 14px",
+            marginBottom: 14,
+            fontSize: 13,
+            color: "#6B5500",
+            lineHeight: 1.5,
+          }}
+        >
+          Your admission tiers total{" "}
+          <strong>{admission.reduce((n, t) => n + t.quantity, 0)}</strong> tickets, but capacity
+          is <strong>{event.capacity}</strong> — only {event.capacity} can ever sell. Trim a tier
+          or raise capacity in Edit.
+        </div>
+      ) : null}
+
       <AddTicketForm eventId={id} />
 
       {!types || types.length === 0 ? (

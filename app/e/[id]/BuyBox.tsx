@@ -39,12 +39,25 @@ export default function BuyBox({
   tickets,
   fee,
   isFree,
+  capacity = 0,
 }: {
   eventId: string;
   tickets: BuyTicketType[];
   fee: number;
   isFree?: boolean;
+  capacity?: number;
 }) {
+  // Venue capacity is the hard admission cap — tier quantities can be
+  // misconfigured past the room (server enforces this too).
+  const capacityLeft = (() => {
+    if (!(capacity > 0)) return Infinity;
+    const admSold = tickets
+      .filter((t) => t.category === "admission")
+      .reduce((n, t) => n + (t.sold ?? 0), 0);
+    return Math.max(0, capacity - admSold);
+  })();
+  const admLeft = (t: BuyTicketType) =>
+    Math.min(Math.max(0, t.quantity - (t.sold ?? 0)), capacityLeft);
   const [cart, setCart] = useState<Record<string, number>>({});
   const [chosen, setChosen] = useState<Record<string, number>>({}); // choose-a-price
   const [name, setName] = useState("");
@@ -83,7 +96,7 @@ export default function BuyBox({
           !t.isPayWhatYouWant,
       )
       .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-      .find((t) => Math.max(0, t.quantity - (t.sold ?? 0)) > 0)?.id ?? null;
+      .find((t) => admLeft(t) > 0)?.id ?? null;
   const canBuy =
     totals.count > 0 && name.trim().length >= 2 && EMAIL_RE.test(email.trim());
 
@@ -106,7 +119,7 @@ export default function BuyBox({
     const t = tickets.find((x) => x.id === id);
     let cap = MAX_PER_ORDER;
     if (t && t.category === "admission") {
-      cap = Math.min(cap, Math.max(0, t.quantity - (t.sold ?? 0)));
+      cap = Math.min(cap, admLeft(t));
       if (isFree) cap = Math.min(cap, 2); // RSVP party cap (up to 2)
     }
     q = Math.min(q, cap);
@@ -254,7 +267,7 @@ export default function BuyBox({
         const opts = Array.isArray(t.priceOptions) ? t.priceOptions : null;
         const isAdm = t.category === "admission";
         const isChoose = !!(opts && opts.length);
-        const remaining = isAdm ? Math.max(0, t.quantity - (t.sold ?? 0)) : Infinity;
+        const remaining = isAdm ? admLeft(t) : Infinity;
         const soldOut = isAdm && remaining <= 0;
         const lowStock = isAdm && remaining > 0 && remaining <= 10;
         const cap = Math.min(MAX_PER_ORDER, remaining);
