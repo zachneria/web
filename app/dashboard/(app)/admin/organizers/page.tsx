@@ -57,6 +57,8 @@ export default function AdminOrganizers() {
   const [inviting, setInviting] = useState(false);
   const [inviteMsg, setInviteMsg] = useState<{ ok: boolean; text: string } | null>(null);
 
+  const [search, setSearch] = useState("");
+
   const load = useCallback(async () => {
     try {
       const [orgRes, cfgRes] = await Promise.all([api("organizers"), api("config")]);
@@ -189,6 +191,23 @@ export default function AdminOrganizers() {
   const changeTalent = (sub: string, isTalent: boolean) =>
     patchOrganizer(sub, { isTalent }, put("talent", { sub, isTalent }));
 
+  // Unsearched = the 10 newest; searching filters everyone.
+  const q = search.trim().toLowerCase();
+  const visible = q
+    ? organizers.filter(
+        (o) =>
+          (o.name || "").toLowerCase().includes(q) || o.email.toLowerCase().includes(q),
+      )
+    : organizers
+        .slice()
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .slice(0, 10);
+  const listLabel = q
+    ? `${visible.length} match${visible.length === 1 ? "" : "es"}`
+    : organizers.length > visible.length
+      ? `${visible.length} newest of ${organizers.length} — search for the rest`
+      : `${organizers.length} organizer${organizers.length === 1 ? "" : "s"}`;
+
   return (
     <div style={{ maxWidth: 640 }}>
       <Link href="/dashboard/admin" style={{ color: "#0B8896", fontWeight: 600, fontSize: 14, textDecoration: "none" }}>
@@ -274,13 +293,24 @@ export default function AdminOrganizers() {
             ) : null}
           </div>
 
-          {/* Organizer list */}
+          {/* Organizer list — search the full set; unsearched shows the 10 newest. */}
           {organizers.length > 0 ? (
-            <div style={{ ...sectionLabel, marginTop: 4 }}>{organizers.length} organizers</div>
+            <>
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search organizers by name or email…"
+                style={{ ...inputStyle, width: "100%", marginBottom: 12 }}
+              />
+              <div style={{ ...sectionLabel, marginTop: 4 }}>{listLabel}</div>
+            </>
           ) : (
             <p style={{ color: "#8A8A8A", fontSize: 14 }}>No organizers yet.</p>
           )}
-          {organizers.map((o) => {
+          {visible.length === 0 && organizers.length > 0 ? (
+            <p style={{ color: "#8A8A8A", fontSize: 14 }}>No matches.</p>
+          ) : null}
+          {visible.map((o) => {
             const pending = o.status === "FORCE_CHANGE_PASSWORD";
             return (
               <div key={o.sub} style={card}>
