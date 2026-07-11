@@ -8,8 +8,8 @@ import {
   IoGlobeOutline,
   IoMegaphoneOutline,
   IoMusicalNotesOutline,
-  IoPersonOutline,
   IoSearchOutline,
+  IoSettingsOutline,
 } from "react-icons/io5";
 
 // Icon-only sidebar nav — the same outline Ionicons the app uses. Labels live
@@ -21,7 +21,7 @@ const ITEMS: { href: string; Icon: IconType; label: string; accent?: string; tal
   { href: "/dashboard/marketing", Icon: IoMegaphoneOutline, label: "Marketing" },
   { href: "/dashboard/promoter-settings", Icon: IoGlobeOutline, label: "Promoter Settings" },
   { href: "/dashboard/artist-settings", Icon: IoMusicalNotesOutline, label: "Artist Settings", accent: "#AF52DE", talentOnly: true },
-  { href: "/dashboard/account-settings", Icon: IoPersonOutline, label: "Account Settings" },
+  { href: "/dashboard/account-settings", Icon: IoSettingsOutline, label: "Account Settings" },
 ];
 
 export function DashNav({ isTalent }: { isTalent: boolean }) {
