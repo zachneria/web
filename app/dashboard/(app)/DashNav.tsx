@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import type { IconType } from "react-icons";
 import {
   IoCalendarOutline,
+  IoConstructOutline,
   IoGlobeOutline,
   IoMegaphoneOutline,
   IoMusicalNotesOutline,
@@ -15,20 +16,28 @@ import {
 // Icon-only sidebar nav — the same outline Ionicons the app uses. Labels live
 // in tooltips (title). Teal = the active/selected language; Artist keeps the
 // purple talent accent.
-const ITEMS: { href: string; Icon: IconType; label: string; accent?: string; talentOnly?: boolean }[] = [
+const ITEMS: {
+  href: string;
+  Icon: IconType;
+  label: string;
+  accent?: string;
+  talentOnly?: boolean;
+  adminOnly?: boolean;
+}[] = [
   { href: "/dashboard/events", Icon: IoCalendarOutline, label: "Your Events" },
   { href: "/dashboard/find", Icon: IoSearchOutline, label: "Find Events" },
   { href: "/dashboard/marketing", Icon: IoMegaphoneOutline, label: "Marketing" },
   { href: "/dashboard/promoter-settings", Icon: IoGlobeOutline, label: "Promoter Settings" },
   { href: "/dashboard/artist-settings", Icon: IoMusicalNotesOutline, label: "Artist Settings", accent: "#AF52DE", talentOnly: true },
   { href: "/dashboard/account-settings", Icon: IoSettingsOutline, label: "Account Settings" },
+  { href: "/dashboard/admin", Icon: IoConstructOutline, label: "Admin Settings", adminOnly: true },
 ];
 
-export function DashNav({ isTalent }: { isTalent: boolean }) {
+export function DashNav({ isTalent, isAdmin }: { isTalent: boolean; isAdmin: boolean }) {
   const pathname = usePathname();
   return (
     <nav className="dsh-nav" aria-label="Dashboard">
-      {ITEMS.filter((i) => !i.talentOnly || isTalent).map((i) => {
+      {ITEMS.filter((i) => (!i.talentOnly || isTalent) && (!i.adminOnly || isAdmin)).map((i) => {
         const active = pathname === i.href || pathname.startsWith(i.href + "/");
         return (
           <Link

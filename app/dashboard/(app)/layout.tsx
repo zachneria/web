@@ -14,7 +14,7 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { email, name, sub } = await getOrgClaims();
+  const { email, name, sub, isAdmin } = await getOrgClaims();
   const initial = (name || email || "?").charAt(0).toUpperCase();
 
   let logoUrl: string | null = null;
@@ -52,7 +52,7 @@ export default async function DashboardLayout({
               <span className="dsh-user-name">{name || "Organizer"}</span>
             </div>
           </div>
-          <DashNav isTalent={isTalent} />
+          <DashNav isTalent={isTalent} isAdmin={!!isAdmin} />
         </aside>
         <main className="dsh-main">{children}</main>
       </div>

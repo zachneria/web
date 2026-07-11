@@ -32,13 +32,24 @@ export async function orgFetch(path: string, init?: RequestInit): Promise<Respon
 
 // The signed-in organizer's display info, read from the id token claims (the
 // token is our own httpOnly cookie, so no verification needed just to display).
-export async function getOrgClaims(): Promise<{ email?: string; name?: string; sub?: string }> {
+// isAdmin (cognito:groups) only gates UI — fo-users re-checks the group
+// server-side on every admin route, so this is cosmetic like the app's check.
+export async function getOrgClaims(): Promise<{
+  email?: string;
+  name?: string;
+  sub?: string;
+  isAdmin?: boolean;
+}> {
   const store = await cookies();
   const tok = store.get(ID_COOKIE)?.value;
   if (!tok) return {};
   try {
     const payload = JSON.parse(Buffer.from(tok.split(".")[1], "base64").toString());
-    return { email: payload.email, name: payload.name, sub: payload.sub };
+    const groups: unknown = payload["cognito:groups"];
+    const isAdmin = Array.isArray(groups)
+      ? groups.includes("admin")
+      : typeof groups === "string" && groups.split(/[\s,]+/).includes("admin");
+    return { email: payload.email, name: payload.name, sub: payload.sub, isAdmin };
   } catch {
     return {};
   }
