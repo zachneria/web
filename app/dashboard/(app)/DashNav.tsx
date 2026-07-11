@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 import type { IconType } from "react-icons";
 import {
   IoCalendarOutline,
+  IoGlobeOutline,
   IoMegaphoneOutline,
   IoMusicalNotesOutline,
   IoPersonOutline,
   IoSearchOutline,
-  IoStorefrontOutline,
 } from "react-icons/io5";
 
 // Icon-only sidebar nav — the same outline Ionicons the app uses. Labels live
@@ -19,7 +19,7 @@ const ITEMS: { href: string; Icon: IconType; label: string; accent?: string; tal
   { href: "/dashboard/events", Icon: IoCalendarOutline, label: "Your Events" },
   { href: "/dashboard/find", Icon: IoSearchOutline, label: "Find Events" },
   { href: "/dashboard/marketing", Icon: IoMegaphoneOutline, label: "Marketing" },
-  { href: "/dashboard/promoter-settings", Icon: IoStorefrontOutline, label: "Promoter Settings" },
+  { href: "/dashboard/promoter-settings", Icon: IoGlobeOutline, label: "Promoter Settings" },
   { href: "/dashboard/artist-settings", Icon: IoMusicalNotesOutline, label: "Artist Settings", accent: "#AF52DE", talentOnly: true },
   { href: "/dashboard/account-settings", Icon: IoPersonOutline, label: "Account Settings" },
 ];
