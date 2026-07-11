@@ -32,6 +32,27 @@ export default async function PotentialPage({ params }: { params: Promise<{ id: 
   const sold = summary?.ticketsSold ?? 0;
   const cap = event?.capacity ?? 0;
 
+  // Break-even: tickets needed to cover production costs, walking tiers
+  // cheapest-first (the sequential ladder sells in that order). null = costs
+  // aren't covered even at sell-out.
+  let breakEven: number | null = null;
+  if (costs > 0) {
+    let revenue = 0;
+    let count = 0;
+    for (const t of [...admission].sort((a, b) => Number(a.price) - Number(b.price))) {
+      const price = Number(t.price);
+      const qty = t.quantity || 0;
+      if (price <= 0 || qty <= 0) continue;
+      const need = Math.ceil((costs - revenue) / price);
+      if (need <= qty) {
+        breakEven = count + need;
+        break;
+      }
+      revenue += price * qty;
+      count += qty;
+    }
+  }
+
   return (
     <div style={{ maxWidth: 640 }}>
       <Link href={`/dashboard/events/${id}`} style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
@@ -76,9 +97,19 @@ export default async function PotentialPage({ params }: { params: Promise<{ id: 
           <span style={{ color: "#cfcfcf" }}>Production costs</span>
           <span style={{ ...rowVal, color: "#fff" }}>−{money(costs)}</span>
         </div>
+        {costs > 0 ? (
+          <div style={row}>
+            <span style={{ color: "#cfcfcf" }}>Break-even</span>
+            <span style={{ ...rowVal, color: breakEven != null ? "#34D158" : "#FF6B5E" }}>
+              {breakEven != null ? `${breakEven} tickets` : "not covered at sell-out"}
+            </span>
+          </div>
+        ) : null}
         <div style={{ ...row, borderTop: "1px solid #333", marginTop: 8, paddingTop: 12 }}>
           <span style={{ fontWeight: 700, color: "#fff" }}>Potential net</span>
-          <span style={{ ...rowVal, color: "#F5E642", fontSize: 18 }}>{money(potentialNet)}</span>
+          <span style={{ ...rowVal, color: potentialNet >= 0 ? "#F5E642" : "#FF6B5E", fontSize: 18 }}>
+            {money(potentialNet)}
+          </span>
         </div>
       </div>
 
