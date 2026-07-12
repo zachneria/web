@@ -58,6 +58,7 @@ export default function AdminOrganizers() {
   const [inviteMsg, setInviteMsg] = useState<{ ok: boolean; text: string } | null>(null);
 
   const [search, setSearch] = useState("");
+  const [resends, setResends] = useState<Record<string, "sending" | "sent">>({});
 
   const load = useCallback(async () => {
     try {
@@ -190,6 +191,30 @@ export default function AdminOrganizers() {
     patchOrganizer(sub, { isPro }, put("organizer-pro", { sub, isPro }));
   const changeTalent = (sub: string, isTalent: boolean) =>
     patchOrganizer(sub, { isTalent }, put("talent", { sub, isTalent }));
+
+  // Re-send an expired/lost invite (fresh temp password) to a pending organizer.
+  const resend = async (sub: string, email: string) => {
+    if (resends[sub]) return;
+    setResends((r) => ({ ...r, [sub]: "sending" }));
+    try {
+      const res = await api("organizers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, resend: true }),
+      });
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}));
+        throw new Error(d.error || "Couldn't re-send the invite.");
+      }
+      setResends((r) => ({ ...r, [sub]: "sent" }));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Couldn't re-send the invite.");
+      setResends((r) => {
+        const { [sub]: _, ...rest } = r;
+        return rest;
+      });
+    }
+  };
 
   // Unsearched = the 10 newest; searching filters everyone.
   const q = search.trim().toLowerCase();
@@ -324,6 +349,22 @@ export default function AdminOrganizers() {
                   </span>
                 </div>
 
+                {pending ? (
+                  <div style={chipRow}>
+                    <span style={chipLabel}>Invite expired or lost?</span>
+                    <button
+                      onClick={() => resend(o.sub, o.email)}
+                      disabled={resends[o.sub] === "sent"}
+                      style={resends[o.sub] === "sent" ? chipActive : chip}
+                    >
+                      {resends[o.sub] === "sent"
+                        ? "Invite re-sent ✓"
+                        : resends[o.sub] === "sending"
+                          ? "Sending…"
+                          : "Resend invite"}
+                    </button>
+                  </div>
+                ) : null}
                 {tiers.length > 0 ? (
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 12 }}>
                     {tiers.map((t) => {
