@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { cleanHandleInput } from "@/lib/handle-input";
+
 // Web mirror of the app's Artist Settings screen (dark, purple = talent accent,
 // teal = on-state toggles, yellow = save). Photo upload stays in the app, like
 // the promoter logo. Reads/writes via /api/dashboard/talent (users service);
@@ -49,6 +51,7 @@ export default function ArtistSettings() {
 
   const [stageName, setStageName] = useState("");
   const [talentHandle, setTalentHandle] = useState("");
+  const [handleWarn, setHandleWarn] = useState<string | null>(null);
   const [savedTalentHandle, setSavedTalentHandle] = useState<string | null>(null);
   const [fallbackHandle, setFallbackHandle] = useState<string | null>(null);
   const [bio, setBio] = useState("");
@@ -222,10 +225,17 @@ export default function ArtistSettings() {
           <input
             style={{ ...input, flex: 1 }}
             value={talentHandle}
-            onChange={(e) => setTalentHandle(e.target.value.toLowerCase())}
+            onChange={(e) => {
+              const { value, warning } = cleanHandleInput(e.target.value);
+              setTalentHandle(value);
+              setHandleWarn(warning);
+            }}
             placeholder={fallbackHandle || "your-name"}
           />
         </div>
+        {handleWarn ? (
+          <div style={{ color: "#FF6B61", fontSize: 12, marginTop: 6 }}>{handleWarn}</div>
+        ) : null}
         {publicHandle ? (
           <div style={{ marginTop: 8 }}>
             <div style={{ color: "#0B8896", fontSize: 12 }}>

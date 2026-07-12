@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { cleanHandleInput } from "@/lib/handle-input";
+
 const VALID_HANDLE = /^[a-z0-9-]{3,30}$/;
 
 export default function PromoterSettings() {
@@ -167,7 +169,11 @@ export default function PromoterSettings() {
               </span>
               <input
                 value={handle}
-                onChange={(e) => setHandle(e.target.value)}
+                onChange={(e) => {
+                  const { value, warning } = cleanHandleInput(e.target.value);
+                  setHandle(value);
+                  setHandleMsg(warning ? { ok: false, text: warning } : null);
+                }}
                 placeholder="your-name"
                 style={{ flex: 1, border: "none", outline: "none", padding: "12px 12px 12px 0", fontSize: 15, background: "transparent", color: "#111111" }}
               />
