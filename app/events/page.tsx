@@ -1,47 +1,10 @@
-import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
-import { SiteFooter, SiteHeader } from "@/components/site-chrome";
-import { browseEvents } from "@/lib/backend";
-
-import { EventsBrowser } from "./EventsBrowser";
-
-export const dynamic = "force-dynamic";
-
-export const metadata: Metadata = {
-  title: "Find events — shabanga",
-  description: "Underground shows, warehouse parties, and club nights near you.",
-  openGraph: {
-    title: "Find events — shabanga",
-    description: "Underground shows, warehouse parties, and club nights near you.",
-    type: "website",
-  },
-};
-
-// Public event discovery — the web counterpart of the app's Find Events tab.
-// Hero = DJ-deck photo in a rounded card (not full-bleed) with highlighter-
-// block copy: solid yellow strips behind black type, staggered lines.
-export default async function EventsPage() {
-  const initial = await browseEvents("");
-  return (
-    <>
-      <SiteHeader signIn />
-      <div className="find-page">
-        <div className="find-inner">
-          <div className="find-photo">
-            {/* Two frames on a very slow crossfade (pure CSS): DJ deck <-> laser crowd. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/find-hero.jpg" alt="" />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/find-hero-2.jpg" alt="" className="find-photo-alt" />
-            <div className="find-hero-copy">
-              <span className="find-line">For the befores</span>
-              <span className="find-line find-line-2">&amp; the afters</span>
-            </div>
-          </div>
-          <EventsBrowser initial={initial} />
-        </div>
-      </div>
-      <SiteFooter />
-    </>
-  );
+// MOTHBALLED FOR LAUNCH (2026-07-14): a browse page with a handful of events
+// broadcasts emptiness — cold-start rule: no discovery surface until there's
+// density. The real page lives in page.tsx.mothballed (+ EventsBrowser.tsx,
+// untouched); to relaunch, swap the files back and restore the two entry
+// links (homepage ctaRow + site-chrome topbar-find).
+export default function EventsMothballed() {
+  redirect("/");
 }

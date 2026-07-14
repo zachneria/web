@@ -24,9 +24,6 @@ export function SiteHeader({
           </Link>
         )}
         <nav className="topbar-nav">
-          <Link href="/events" className="topbar-find">
-            Find events
-          </Link>
           {signIn && (
             <Link href="/dashboard" className="topbar-signin">
               Sign in
