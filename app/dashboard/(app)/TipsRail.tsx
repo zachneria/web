@@ -32,7 +32,7 @@ export function TipsRail({ tips, title = "Don't forget" }: { tips: Tip[]; title?
           key={t.key}
           style={{
             background: "#FFFCE8",
-            border: "1px solid #EFE6B0",
+            border: "none",
             borderRadius: 12,
             padding: "12px 14px",
           }}

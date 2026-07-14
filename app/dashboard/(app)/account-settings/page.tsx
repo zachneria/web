@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 const card: React.CSSProperties = {
   background: "#FAFAFA",
-  border: "1px solid #E5E5E5",
+  border: "none",
   borderRadius: 14,
   padding: 18,
   marginBottom: 14,

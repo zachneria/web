@@ -357,18 +357,18 @@ function Field({
 
 const cardStyle: React.CSSProperties = {
   background: "#FAFAFA",
-  border: "1px solid #E5E5E5",
+  border: "none",
   borderRadius: 14,
   padding: 18,
 };
 const input: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 10,
   padding: "12px 14px",
   fontSize: 16,
-  background: "#FFFFFF",
+  background: "#F4F3EF",
   color: "#22243A",
 };
 const primaryBtn: React.CSSProperties = {
@@ -395,9 +395,9 @@ const skipBtn: React.CSSProperties = {
 };
 const uploadLabel: React.CSSProperties = {
   display: "inline-block",
-  background: "#FFFFFF",
+  background: "#F4F3EF",
   color: "#22243A",
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 10,
   padding: "10px 16px",
   fontSize: 14,

@@ -109,7 +109,7 @@ export default function PromoterSettings() {
 
   const card: React.CSSProperties = {
     background: "#FAFAFA",
-    border: "1px solid #E5E5E5",
+    border: "none",
     borderRadius: 14,
     padding: 18,
     marginBottom: 16,
@@ -163,7 +163,7 @@ export default function PromoterSettings() {
             <div style={{ fontSize: 12, fontWeight: 700, color: "#8A8A8A", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 8 }}>
               Your promoter page
             </div>
-            <div style={{ display: "flex", alignItems: "center", border: "1px solid #D9D9D9", borderRadius: 10, overflow: "hidden", background: "#FFFFFF" }}>
+            <div style={{ display: "flex", alignItems: "center", border: "none", borderRadius: 10, overflow: "hidden", background: "#F4F3EF" }}>
               <span style={{ padding: "12px 8px 12px 12px", color: "#8A8A8A", fontSize: 15, whiteSpace: "nowrap" }}>
                 shabanga.com/p/
               </span>
@@ -258,11 +258,11 @@ export default function PromoterSettings() {
 const inputStyle: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 10,
   padding: "11px 12px",
   fontSize: 15,
-  background: "#FFFFFF",
+  background: "#F4F3EF",
   color: "#22243A",
 };
 const fieldLabel: React.CSSProperties = {

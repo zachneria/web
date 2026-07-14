@@ -68,7 +68,7 @@ export default async function TicketsPage({ params }: { params: Promise<{ id: st
         <div
           style={{
             background: "#FFF3C2",
-            border: "1px solid #EFE6B0",
+            border: "none",
             borderRadius: 12,
             padding: "12px 14px",
             marginBottom: 14,

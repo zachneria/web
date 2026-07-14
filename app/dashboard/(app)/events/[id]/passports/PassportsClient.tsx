@@ -90,7 +90,7 @@ export function PassportsClient({
               style={{
                 display: "flex",
                 alignItems: "center",
-                border: "1px solid #D9D9D9",
+                border: "none",
                 borderRadius: 10,
                 padding: "8px 12px",
                 background: locked ? "#ECECEC" : "#FFFFFF",
@@ -128,7 +128,7 @@ export function PassportsClient({
 
 const card: React.CSSProperties = {
   background: "#FAFAFA",
-  border: "1px solid #E5E5E5",
+  border: "none",
   borderRadius: 14,
   padding: 18,
   marginBottom: 14,

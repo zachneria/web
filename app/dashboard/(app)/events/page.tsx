@@ -307,7 +307,7 @@ export default async function DashboardEvents() {
         <div
           style={{
             background: "#FAFAFA",
-            border: "1px solid #E5E5E5",
+            border: "none",
             borderRadius: 14,
             padding: 32,
             textAlign: "center",
@@ -334,7 +334,7 @@ export default async function DashboardEvents() {
               <div
                 style={{
                   background: "#FAFAFA",
-                  border: "1px solid #E5E5E5",
+                  border: "none",
                   borderRadius: 14,
                   padding: 16,
                   display: "flex",
@@ -401,7 +401,7 @@ export default async function DashboardEvents() {
 // label + hint) translated to web.
 const methodTile: React.CSSProperties = {
   background: "#F8F8F8",
-  border: "1px solid #ECECEC",
+  border: "none",
   borderRadius: 16,
   padding: 16,
   display: "flex",
@@ -415,7 +415,7 @@ const methodIcon: React.CSSProperties = {
   height: 44,
   borderRadius: 22,
   background: "#fff",
-  border: "1px solid #ECECEC",
+  border: "none",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

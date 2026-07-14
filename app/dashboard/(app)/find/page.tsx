@@ -322,7 +322,7 @@ function Card({ e, view, live }: { e: Result; view: ViewMode; live?: boolean }) 
 const searchInput: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 12,
   padding: "12px 14px",
   fontSize: 16,
@@ -331,7 +331,7 @@ const searchInput: React.CSSProperties = {
 };
 const pillGroup: React.CSSProperties = { display: "flex", gap: 6, flexWrap: "wrap" };
 const pill: React.CSSProperties = {
-  border: "1px solid #D9D9D9",
+  border: "none",
   background: "#fff",
   color: "#555",
   borderRadius: 999,

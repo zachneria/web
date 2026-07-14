@@ -266,7 +266,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 const cardStyle: React.CSSProperties = {
   background: "#FAFAFA",
-  border: "1px solid #E5E5E5",
+  border: "none",
   borderRadius: 14,
   padding: 18,
   marginBottom: 14,
@@ -274,11 +274,11 @@ const cardStyle: React.CSSProperties = {
 const input: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 10,
   padding: "11px 12px",
   fontSize: 15,
-  background: "#FFFFFF",
+  background: "#F4F3EF",
   color: "#22243A",
 };
 const btn: React.CSSProperties = {
@@ -299,7 +299,7 @@ const listRow: React.CSSProperties = {
   alignItems: "center",
   gap: 10,
   padding: "10px 0",
-  borderBottom: "1px solid #ECECEC",
+  borderBottom: "1px solid #F1F0EC",
 };
 const delBtn: React.CSSProperties = {
   background: "#FAFAFA",

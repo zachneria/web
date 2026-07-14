@@ -39,7 +39,7 @@ export default async function ProductionPage({ params }: { params: Promise<{ id:
                 <span style={rowVal}>{money(c.amount)}</span>
               </div>
             ))}
-            <div style={{ ...row, borderTop: "1px solid #ECECEC", marginTop: 8, paddingTop: 12 }}>
+            <div style={{ ...row, borderTop: "1px solid #F1F0EC", marginTop: 8, paddingTop: 12 }}>
               <span style={{ fontWeight: 700, color: "#22243A" }}>Total costs</span>
               <span style={{ ...rowVal, fontSize: 16 }}>{money(total)}</span>
             </div>

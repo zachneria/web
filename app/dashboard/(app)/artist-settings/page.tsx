@@ -396,7 +396,7 @@ export default function ArtistSettings() {
         ) : (
           <>
             {gigs.map((g) => (
-              <div key={g.costId} style={{ display: "flex", alignItems: "center", padding: "10px 0", borderBottom: "1px solid #ECECEC" }}>
+              <div key={g.costId} style={{ display: "flex", alignItems: "center", padding: "10px 0", borderBottom: "1px solid #F1F0EC" }}>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 14, fontWeight: 600, color: "#22243A" }}>{g.eventName}</div>
                   <div style={{ fontSize: 11, color: "#777", marginTop: 2 }}>
@@ -449,7 +449,7 @@ function Toggle({ on, onChange, title, sub }: { on: boolean; onChange: (v: boole
 
 const card: React.CSSProperties = {
   background: "#FAFAFA",
-  border: "1px solid #E5E5E5",
+  border: "none",
   borderRadius: 14,
   padding: 18,
 };
@@ -463,10 +463,10 @@ const label: React.CSSProperties = {
 const input: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  border: "1.5px solid #D9D9D9",
+  border: "none",
   borderRadius: 10,
   padding: "11px 12px",
   fontSize: 15,
-  background: "#FFFFFF",
+  background: "#F4F3EF",
   color: "#22243A",
 };

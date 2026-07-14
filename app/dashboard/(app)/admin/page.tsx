@@ -168,7 +168,7 @@ export default function AdminSettings() {
 
 const card: React.CSSProperties = {
   background: "#FAFAFA",
-  border: "1px solid #E5E5E5",
+  border: "none",
   borderRadius: 14,
   padding: 18,
   marginBottom: 16,
@@ -198,9 +198,9 @@ const fieldLabel: React.CSSProperties = {
 const feeInputWrap: React.CSSProperties = {
   display: "flex",
   alignItems: "center",
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 10,
-  background: "#FFFFFF",
+  background: "#F4F3EF",
 };
 const feeInput: React.CSSProperties = {
   flex: 1,

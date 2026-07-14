@@ -221,7 +221,7 @@ export function AddTicketForm({ eventId }: { eventId: string }) {
 const opt: React.CSSProperties = { background: "#FAFAFA" };
 const cardStyle: React.CSSProperties = {
   background: "#FAFAFA",
-  border: "1px solid #E5E5E5",
+  border: "none",
   borderRadius: 14,
   padding: 18,
   marginBottom: 14,
@@ -232,11 +232,11 @@ const input: React.CSSProperties = {
   // Fixed height (not vertical padding) so text <input>s and native <select>s
   // render the SAME height (selects otherwise cap shorter than an input).
   height: 44,
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 10,
   padding: "0 12px",
   fontSize: 15,
-  background: "#FFFFFF",
+  background: "#F4F3EF",
   color: "#22243A",
 };
 const addBtn: React.CSSProperties = {
@@ -254,7 +254,7 @@ const addBtn: React.CSSProperties = {
 const cancelBtn: React.CSSProperties = {
   background: "transparent",
   color: "#8A8A8A",
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 10,
   padding: "12px 18px",
   fontSize: 15,

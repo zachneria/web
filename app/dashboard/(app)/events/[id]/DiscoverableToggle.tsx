@@ -49,7 +49,7 @@ export function DiscoverableToggle({ id, discoverable }: { id: string; discovera
           alignItems: "center",
           gap: 12,
           background: "#FAFAFA",
-          border: "1px solid #E5E5E5",
+          border: "none",
           borderRadius: 12,
           padding: "14px 16px",
           cursor: "pointer",
@@ -95,7 +95,7 @@ export function DiscoverableToggle({ id, discoverable }: { id: string; discovera
               height: 22,
               borderRadius: 999,
               // White knob — prominent on the teal track and the grey off-track.
-              background: "#FFFFFF",
+              background: "#F4F3EF",
               transition: "left 150ms, background 150ms",
             }}
           />

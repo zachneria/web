@@ -51,7 +51,7 @@ export function ChangePassword() {
   const input: React.CSSProperties = {
     width: "100%",
     boxSizing: "border-box",
-    border: "1px solid #E5E5E5",
+    border: "none",
     borderRadius: 10,
     padding: "10px 12px",
     fontSize: 14,
@@ -70,7 +70,7 @@ export function ChangePassword() {
           }}
           style={{
             background: "none",
-            border: "1px solid #E5E5E5",
+            border: "none",
             borderRadius: 10,
             padding: "9px 16px",
             fontSize: 14,

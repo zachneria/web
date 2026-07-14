@@ -66,7 +66,7 @@ export default async function PayoutsPage({ params }: { params: Promise<{ id: st
           </div>
         ) : null}
         {typeof net === "number" ? (
-          <div style={{ ...row, borderTop: "1px solid #ECECEC", marginTop: 8, paddingTop: 12 }}>
+          <div style={{ ...row, borderTop: "1px solid #F1F0EC", marginTop: 8, paddingTop: 12 }}>
             <span style={{ fontWeight: 700, color: "#22243A" }}>Net payout</span>
             <span style={{ ...rowVal, fontSize: 18 }}>{money(net)}</span>
           </div>

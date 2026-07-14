@@ -217,7 +217,7 @@ export function EditForm({ event, soldCount = 0 }: { event: EditableEvent; soldC
               alt=""
               width={56}
               height={70}
-              style={{ borderRadius: 8, objectFit: "cover", background: "#FFFFFF", flexShrink: 0 }}
+              style={{ borderRadius: 8, objectFit: "cover", background: "#F4F3EF", flexShrink: 0 }}
             />
           ) : null}
           <label style={uploadLabel}>
@@ -310,9 +310,9 @@ function Field({
 
 const uploadLabel: React.CSSProperties = {
   display: "inline-block",
-  background: "#FFFFFF",
+  background: "#F4F3EF",
   color: "#22243A",
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 10,
   padding: "10px 16px",
   fontSize: 14,
@@ -329,10 +329,10 @@ const removeLink: React.CSSProperties = {
 const input: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 10,
   padding: "12px 14px",
   fontSize: 16,
-  background: "#FFFFFF",
+  background: "#F4F3EF",
   color: "#22243A",
 };

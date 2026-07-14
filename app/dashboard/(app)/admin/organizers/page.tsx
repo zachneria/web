@@ -417,7 +417,7 @@ export default function AdminOrganizers() {
 
 const card: React.CSSProperties = {
   background: "#FAFAFA",
-  border: "1px solid #E5E5E5",
+  border: "none",
   borderRadius: 14,
   padding: 18,
   marginBottom: 16,
@@ -432,11 +432,11 @@ const sectionLabel: React.CSSProperties = {
 };
 const inputStyle: React.CSSProperties = {
   boxSizing: "border-box",
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 10,
   padding: "10px 12px",
   fontSize: 14,
-  background: "#FFFFFF",
+  background: "#F4F3EF",
   color: "#22243A",
   minWidth: 0,
 };
@@ -508,8 +508,8 @@ const chipRow: React.CSSProperties = {
 const chipLabel: React.CSSProperties = { fontSize: 13, color: "#666" };
 const chip: React.CSSProperties = {
   borderRadius: 16,
-  border: "1.5px solid #D9D9D9",
-  background: "#FFFFFF",
+  border: "none",
+  background: "#F4F3EF",
   color: "#666",
   padding: "6px 12px",
   fontSize: 13,

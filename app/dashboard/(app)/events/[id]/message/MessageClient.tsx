@@ -137,7 +137,7 @@ export function MessageClient({
           {history.map((a, i) => {
             const when = a.sentAt || a.createdAt;
             return (
-              <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid #ECECEC" }}>
+              <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid #F1F0EC" }}>
                 <div style={{ fontWeight: 700, color: "#22243A" }}>{a.subject}</div>
                 {when ? (
                   <div style={{ fontSize: 12, color: "#8A8A8A" }}>{new Date(when).toLocaleString()}</div>
@@ -153,7 +153,7 @@ export function MessageClient({
 
 const card: React.CSSProperties = {
   background: "#FAFAFA",
-  border: "1px solid #E5E5E5",
+  border: "none",
   borderRadius: 14,
   padding: 18,
   marginBottom: 14,
@@ -161,17 +161,17 @@ const card: React.CSSProperties = {
 const input: React.CSSProperties = {
   width: "100%",
   boxSizing: "border-box",
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 10,
   padding: "12px 14px",
   fontSize: 15,
-  background: "#FFFFFF",
+  background: "#F4F3EF",
   color: "#22243A",
 };
 const chip: React.CSSProperties = {
-  background: "#FFFFFF",
+  background: "#F4F3EF",
   color: "#333333",
-  border: "1px solid #D9D9D9",
+  border: "none",
   borderRadius: 999,
   padding: "7px 14px",
   fontSize: 13,

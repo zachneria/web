@@ -232,17 +232,17 @@ export default function MarketingComposer() {
   const input: React.CSSProperties = {
     width: "100%",
     boxSizing: "border-box",
-    border: "1px solid #D9D9D9",
+    border: "none",
     borderRadius: 10,
     padding: "12px 14px",
     fontSize: 15,
     fontFamily: "inherit",
-    background: "#FFFFFF",
+    background: "#F4F3EF",
     color: "#22243A",
   };
   const chip: React.CSSProperties = {
-    border: "1.5px solid #D9D9D9",
-    background: "#FFFFFF",
+    border: "none",
+    background: "#F4F3EF",
     color: "#333333",
     borderRadius: 999,
     padding: "7px 14px",
@@ -279,7 +279,7 @@ export default function MarketingComposer() {
       <div style={{ background: AI_BG, borderRadius: 12, padding: 16, marginBottom: 16 }}>
         <div style={{ fontWeight: 800, color: AI, marginBottom: 8 }}>✨ Draft with AI</div>
         <textarea
-          style={{ ...input, minHeight: 60, background: "#FFFFFF" }}
+          style={{ ...input, minHeight: 60, background: "#F4F3EF" }}
           placeholder="Tell Stub what to say — e.g. 'hype my Friday warehouse show, doors 10pm'"
           value={aiPrompt}
           onChange={(e) => setAiPrompt(e.target.value)}
@@ -324,7 +324,7 @@ export default function MarketingComposer() {
                       setSubject(s);
                       setSubjectOptions([]);
                     }}
-                    style={{ textAlign: "left", background: "#FFFFFF", color: "#22243A", border: "1px solid #D9D9D9", borderRadius: 10, padding: "10px 12px", fontSize: 14, cursor: "pointer" }}
+                    style={{ textAlign: "left", background: "#F4F3EF", color: "#22243A", border: "none", borderRadius: 10, padding: "10px 12px", fontSize: 14, cursor: "pointer" }}
                   >
                     ↑ {s}
                   </button>
@@ -402,7 +402,7 @@ export default function MarketingComposer() {
             Sent
           </div>
           {history.map((b) => (
-            <div key={b.id} style={{ background: "#FAFAFA", border: "1px solid #E5E5E5", borderRadius: 10, padding: 12, marginBottom: 8 }}>
+            <div key={b.id} style={{ background: "#FAFAFA", border: "none", borderRadius: 10, padding: 12, marginBottom: 8 }}>
               <div style={{ fontWeight: 700, fontSize: 14 }}>{b.subject}</div>
               <div style={{ fontSize: 12, color: "#8A8A8A" }}>
                 {new Date(b.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })} ·{" "}
