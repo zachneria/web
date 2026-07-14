@@ -29,8 +29,29 @@ export default async function AccountSettings({
 }: {
   searchParams: Promise<{ connect?: string }>;
 }) {
-  const { email } = await getOrgClaims();
+  const { email, sub } = await getOrgClaims();
   const { connect: justReturned = null } = await searchParams;
+  // The organizer's own plan (self-only fields on GET /users/:id).
+  let plan: {
+    isPro?: boolean;
+    tierName?: string | null;
+    tierGuestCap?: number | null;
+    platformFeeRate?: number | null;
+  } | null = null;
+  try {
+    if (sub) {
+      const r = await orgFetch(`/users/${sub}`);
+      if (r.ok) plan = await r.json();
+    }
+  } catch {
+    /* best-effort */
+  }
+  const feeLine =
+    plan?.platformFeeRate === 0
+      ? "0% — waived"
+      : typeof plan?.platformFeeRate === "number"
+        ? `Custom: ${(plan.platformFeeRate * 100).toFixed(1).replace(/\.0$/, "")}%`
+        : "Standard sliding scale — free on shows under 50 tickets";
   let connect: { connected?: boolean; onboarded?: boolean } | null = null;
   try {
     const r = await orgFetch("/payouts/connect/status");
@@ -42,6 +63,43 @@ export default async function AccountSettings({
   return (
     <div style={{ maxWidth: 640 }}>
       <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px" }}>Account Settings</h1>
+
+      <div style={card}>
+        <div style={label}>Your plan</div>
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+          <span style={{ color: "#8A8A8A" }}>Level</span>
+          <span style={{ fontWeight: 600 }}>
+            {plan?.isPro ? (
+              <span
+                style={{
+                  background: "#F5E642",
+                  color: "#191D33",
+                  borderRadius: 99,
+                  padding: "2px 10px",
+                  fontWeight: 800,
+                  fontSize: 13,
+                  marginRight: 8,
+                }}
+              >
+                PRO
+              </span>
+            ) : null}
+            {plan?.isPro ? "Pro" : "Standard"}
+          </span>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+          <span style={{ color: "#8A8A8A" }}>Guest passes</span>
+          <span style={{ fontWeight: 600 }}>
+            {plan?.tierName
+              ? `${plan.tierName} — ${plan.tierGuestCap ?? "—"} per event`
+              : "—"}
+          </span>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <span style={{ color: "#8A8A8A" }}>Platform fee</span>
+          <span style={{ fontWeight: 600 }}>{feeLine}</span>
+        </div>
+      </div>
 
       <div style={card}>
         <div style={label}>Account</div>
