@@ -23,11 +23,26 @@ export function PublishToggle({
   const published = status === "published";
   const toggle = async () => {
     const next = published ? "draft" : "published";
+    // Selling works before payouts are connected (funds hold at the platform
+    // until requested) — but say so at publish time, not at payout time.
+    let payoutNote = "";
+    if (!published) {
+      try {
+        const r = await fetch("/api/dashboard/connect");
+        const c = await r.json().catch(() => ({}));
+        if (!c?.connected) {
+          payoutNote =
+            "\n\nHeads up: payouts aren't connected yet — you can sell tickets now, but you can't receive your payout until you connect (Account Settings → Get Paid).";
+        }
+      } catch {
+        /* unknown status — don't block publishing */
+      }
+    }
     if (
       !window.confirm(
         published
           ? "Unpublish this event? Tickets will stop selling."
-          : "Publish this event? It'll be live for buyers.",
+          : "Publish this event? It'll be live for buyers." + payoutNote,
       )
     )
       return;
