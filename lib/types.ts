@@ -1,4 +1,4 @@
-// Shapes returned by the fansonly APIs (subset the web needs).
+// Shapes returned by the shabanga APIs (subset the web needs).
 
 export interface PriceOption {
   label: string | null;

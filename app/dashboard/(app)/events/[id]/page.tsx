@@ -229,7 +229,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
 
       <div style={{ color: T.muted, fontSize: 13, margin: "16px 2px 0", lineHeight: 1.6 }}>
         Scanning tickets at the door, plus the &ldquo;In app&rdquo; tools above, live in the
-        fansonly mobile app.
+        shabanga mobile app.
       </div>
       </div>
       <TipsRail tips={tips} />

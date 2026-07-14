@@ -1,8 +1,8 @@
-# fo-web — fansonly.live website
+# fo-web — shabanga.com website
 
-Next.js (App Router) buyer site for fansonly. Server-rendered event pages with
+Next.js (App Router) buyer site for shabanga. Server-rendered event pages with
 real OG link previews + **admission-ticket** checkout via Stripe. It reads the
-same `api.fansonly.live` APIs as the app — **no database of its own**.
+same `api.shabanga.com` APIs as the app — **no database of its own**.
 
 ## Routes
 
@@ -22,7 +22,7 @@ same `api.fansonly.live` APIs as the app — **no database of its own**.
 
 ## Env (both have safe defaults in code)
 
-- `API_BASE_URL` (server) — default `https://api.fansonly.live`
+- `API_BASE_URL` (server) — default `https://api.shabanga.com`
 - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (browser-safe) — defaults to the **test**
   key; set the **live** key in Vercel for production.
 
@@ -30,5 +30,5 @@ same `api.fansonly.live` APIs as the app — **no database of its own**.
 
 Connect the repo in Vercel (framework auto-detected as Next.js). Push to `main`
 = production deploy; branches get preview URLs. Requires **Node ≥20** (Vercel
-default; local dev needs `nvm use 20`). Custom domain: `fansonly.live`
-(API stays on `api.fansonly.live`).
+default; local dev needs `nvm use 20`). Custom domain: `shabanga.com`
+(API stays on `api.shabanga.com`).

@@ -9,12 +9,12 @@ export const TERMS_MD = `# Terms of Service
 
 _Last updated: ${LAST_UPDATED}_
 
-Welcome to fansonly. These Terms of Service ("Terms") govern your use of the
-fansonly website and app (the "Service"), operated by fansonly ("we", "us").
+Welcome to shabanga. These Terms of Service ("Terms") govern your use of the
+shabanga website and app (the "Service"), operated by shabanga ("we", "us").
 By using the Service or buying a ticket, you agree to these Terms.
 
 ## 1. The Service
-fansonly is a ticketing platform that lets event organizers ("Organizers") sell
+shabanga is a ticketing platform that lets event organizers ("Organizers") sell
 tickets and lets attendees ("Buyers") purchase them. We provide the technology;
 the event itself is the responsibility of the Organizer.
 
@@ -23,7 +23,7 @@ You must be able to form a binding contract to use the Service. Organizer
 accounts are invite-only.
 
 ## 3. Tickets & Purchases
-- Ticket prices are set by the Organizer. fansonly may add a service fee, shown
+- Ticket prices are set by the Organizer. shabanga may add a service fee, shown
   before purchase.
 - Payments are processed by our payment provider (Stripe). We do not store full
   card numbers.
@@ -48,7 +48,7 @@ time by replying STOP, or reply HELP for help. See our Privacy Policy for how we
 handle your information.
 
 ## 7. Intellectual Property
-The Service, including its branding and software, is owned by fansonly. You may
+The Service, including its branding and software, is owned by shabanga. You may
 not copy or reuse it without permission.
 
 ## 8. Disclaimers
@@ -56,7 +56,7 @@ The Service is provided "as is" without warranties of any kind. We are not the
 organizer of, and are not responsible for, the events listed on the platform.
 
 ## 9. Limitation of Liability
-To the maximum extent permitted by law, fansonly is not liable for indirect or
+To the maximum extent permitted by law, shabanga is not liable for indirect or
 consequential damages. Our total liability for any claim is limited to the
 amount you paid for the relevant ticket.
 
@@ -69,15 +69,15 @@ We may update these Terms. Continued use of the Service after changes means you
 accept the updated Terms.
 
 ## 12. Contact
-Questions? Email us at hello@fansonly.live.
+Questions? Email us at hello@shabanga.com.
 `;
 
 export const PRIVACY_MD = `# Privacy Policy
 
 _Last updated: ${LAST_UPDATED}_
 
-This Privacy Policy explains how fansonly ("we", "us") collects, uses, and
-protects your information when you use the fansonly website and app.
+This Privacy Policy explains how shabanga ("we", "us") collects, uses, and
+protects your information when you use the shabanga website and app.
 
 ## 1. Information We Collect
 - **Purchase info** you provide at checkout: name, email address, and
@@ -131,5 +131,5 @@ We may update this Policy. We'll post the updated version with a new "last
 updated" date.
 
 ## 10. Contact
-Questions about your privacy? Email us at hello@fansonly.live.
+Questions about your privacy? Email us at hello@shabanga.com.
 `;

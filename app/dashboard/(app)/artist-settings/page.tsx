@@ -125,7 +125,7 @@ export default function ArtistSettings() {
       h &&
       h !== savedTalentHandle &&
       !window.confirm(
-        `Change your artist link? fansonly.live/a/${savedTalentHandle} will stop working — anything printed or posted with it breaks.`,
+        `Change your artist link? shabanga.com/a/${savedTalentHandle} will stop working — anything printed or posted with it breaks.`,
       )
     ) {
       return;
@@ -221,7 +221,7 @@ export default function ArtistSettings() {
       <div style={card}>
         <div style={label}>ARTIST LINK</div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ color: "#8A8A8A", fontSize: 14, whiteSpace: "nowrap" }}>fansonly.live/a/</span>
+          <span style={{ color: "#8A8A8A", fontSize: 14, whiteSpace: "nowrap" }}>shabanga.com/a/</span>
           <input
             style={{ ...input, flex: 1 }}
             value={talentHandle}
@@ -239,10 +239,10 @@ export default function ArtistSettings() {
         {publicHandle ? (
           <div style={{ marginTop: 8 }}>
             <div style={{ color: "#0B8896", fontSize: 12 }}>
-              Live at fansonly.live/a/{publicHandle}
+              Live at shabanga.com/a/{publicHandle}
             </div>
             <a
-              href={`https://fansonly.live/a/${publicHandle}`}
+              href={`https://shabanga.com/a/${publicHandle}`}
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: "inline-block", marginTop: 6, color: "#AF52DE", fontSize: 14, fontWeight: 600 }}
@@ -312,7 +312,7 @@ export default function ArtistSettings() {
           on={showRate}
           onChange={setShowRate}
           title="Show rate on my public page"
-          sub={showRate && publicHandle ? `Visible on fansonly.live/a/${publicHandle}` : "Hidden — rate stays private"}
+          sub={showRate && publicHandle ? `Visible on shabanga.com/a/${publicHandle}` : "Hidden — rate stays private"}
         />
         <Toggle
           on={discoverable}
@@ -388,7 +388,7 @@ export default function ArtistSettings() {
             🔒 ONLY YOU
           </span>
         </div>
-        <div style={{ fontSize: 12, color: "#666", marginBottom: 4 }}>Built automatically from gigs paid through fansonly.</div>
+        <div style={{ fontSize: 12, color: "#666", marginBottom: 4 }}>Built automatically from gigs paid through shabanga.</div>
         {gigs.length === 0 ? (
           <div style={{ color: "#8A8A8A", fontSize: 13, marginTop: 8 }}>
             No linked gigs yet — when a promoter links you on a cost, it lands here.

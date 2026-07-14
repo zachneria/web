@@ -24,13 +24,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const data = await getArtist(id);
-  if (!data) return { title: "Artist — fansonly" };
+  if (!data) return { title: "Artist — shabanga" };
   const { talent } = data;
   const desc =
-    talent.bio || `Catch ${talent.name} at their next show — tickets on fansonly.`;
+    talent.bio || `Catch ${talent.name} at their next show — tickets on shabanga.`;
   const image = talent.photoUrl || "/logo.png";
   return {
-    title: `${talent.name} — fansonly`,
+    title: `${talent.name} — shabanga`,
     description: desc,
     openGraph: { title: talent.name, description: desc, images: [{ url: image }], type: "profile" },
     twitter: { card: "summary", title: talent.name, description: desc, images: [image] },
@@ -90,8 +90,8 @@ export default async function ArtistPage({
     .map((g) => g.trim())
     .filter(Boolean);
   // Book goes straight to the artist's booking email when set (platform fallback).
-  const bookHref = `mailto:${talent.bookingEmail || "hello@fansonly.live"}?subject=${encodeURIComponent(
-    `Booking inquiry — ${talent.name} (via fansonly)`,
+  const bookHref = `mailto:${talent.bookingEmail || "hello@shabanga.com"}?subject=${encodeURIComponent(
+    `Booking inquiry — ${talent.name} (via shabanga)`,
   )}`;
 
   return (

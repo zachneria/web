@@ -76,10 +76,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const event = await getEvent(id);
-  if (!event) return { title: "Event — fansonly" };
+  if (!event) return { title: "Event — shabanga" };
   const desc = `${formatDate(event.eventDate)} · ${event.venueName}`;
   return {
-    title: `${event.name} — fansonly`,
+    title: `${event.name} — shabanga`,
     description: desc,
     openGraph: {
       title: event.name,

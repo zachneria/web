@@ -1,9 +1,9 @@
-// Server-side calls to the fansonly API. Kept on the server (Server Components +
-// route handlers) so the browser never hits api.fansonly.live directly — no CORS
+// Server-side calls to the shabanga API. Kept on the server (Server Components +
+// route handlers) so the browser never hits api.shabanga.com directly — no CORS
 // to configure, and the API base stays out of the client bundle.
 import type { BuyEvent, PromoterPage } from "./types";
 
-const API_BASE = process.env.API_BASE_URL || "https://api.fansonly.live";
+const API_BASE = process.env.API_BASE_URL || "https://api.shabanga.com";
 const BUYER_FEE_FALLBACK = 0.99;
 
 // Public browse/search — published + discoverable events (the /events page).

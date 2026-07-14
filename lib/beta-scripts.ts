@@ -4,7 +4,7 @@
 export const BETA_SCRIPTS = `
 # Beta Test Scripts
 
-Step-by-step tasks to test fansonly. No technical knowledge needed — follow the
+Step-by-step tasks to test shabanga. No technical knowledge needed — follow the
 steps and note anything that doesn't match the **Expected result**.
 
 ## Before you start
@@ -69,7 +69,7 @@ screenshot if you can. One report per issue.
 
 ### ORG-08 — Publish + share
 1. Publish the event. Use **Share** to copy the link.
-2. **Expected:** Status becomes **Published** (green pill). Link looks like fansonly.live/e/...
+2. **Expected:** Status becomes **Published** (green pill). Link looks like shabanga.com/e/...
 
 ### ORG-09 — My Events card stats
 1. After a ticket has sold (do BUY-02 first), return to My Events.
@@ -176,12 +176,12 @@ screenshot if you can. One report per issue.
 
 ---
 
-## Part 5 — Website checkout (fansonly.live)
+## Part 5 — Website checkout (shabanga.com)
 
 > Do these in a web browser, not the app.
 
 ### WEB-01 — Event page
-1. Open a share link fansonly.live/e/...
+1. Open a share link shabanga.com/e/...
 2. **Expected:** Loads with flyer, details, and a ticket box.
 
 ### WEB-02 — Buy on the web
@@ -199,7 +199,7 @@ screenshot if you can. One report per issue.
 2. **Expected:** Works like the app (1 per person). A code does **not** reduce the Choose Your Adventure amount.
 
 ### WEB-05 — Promoter page
-1. Open fansonly.live/p/HANDLE (ask the organizer for theirs).
+1. Open shabanga.com/p/HANDLE (ask the organizer for theirs).
 2. **Expected:** The promoter's branding and their upcoming events.
 
 ---
@@ -264,7 +264,7 @@ screenshot if you can. One report per issue.
 
 ### ACCT-01 — Handle
 1. Account, **Promoter Settings**, set a **handle** (e.g. loomiere).
-2. **Expected:** Saves. fansonly.live/p/loomiere loads your promoter page.
+2. **Expected:** Saves. shabanga.com/p/loomiere loads your promoter page.
 
 ### ACCT-02 — Account settings
 1. Account, **Account Settings**.

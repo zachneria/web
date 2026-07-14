@@ -17,12 +17,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const data = await getPromoter(id);
-  if (!data) return { title: "Promoter — fansonly" };
+  if (!data) return { title: "Promoter — shabanga" };
   const { organizer } = data;
   const desc = `Upcoming events from ${organizer.name}`;
   const image = organizer.logoUrl || "/logo.png";
   return {
-    title: `${organizer.name} — fansonly`,
+    title: `${organizer.name} — shabanga`,
     description: desc,
     openGraph: { title: organizer.name, description: desc, images: [{ url: image }], type: "website" },
     twitter: { card: "summary", title: organizer.name, description: desc, images: [image] },

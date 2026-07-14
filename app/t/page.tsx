@@ -3,9 +3,9 @@ import { TicketQRs, type ViewTicket } from "@/components/ticket-qrs";
 import { getOrder } from "@/lib/backend";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Your tickets — fansonly" };
+export const metadata = { title: "Your tickets — shabanga" };
 
-// /t?token=<orderViewToken> — the SMS/email ticket link. Opens the fansonly app
+// /t?token=<orderViewToken> — the SMS/email ticket link. Opens the shabanga app
 // when installed (Universal Link); otherwise this web viewer renders the tickets
 // (the token is the credential — same trust model as the email link).
 export default async function TicketViewPage({

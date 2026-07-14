@@ -7,7 +7,7 @@ import Scripts from "./Scripts";
 
 // Unlisted: not linked anywhere + tell crawlers to stay out.
 export const metadata: Metadata = {
-  title: "Beta Test Scripts — fansonly",
+  title: "Beta Test Scripts — shabanga",
   robots: { index: false, follow: false },
 };
 

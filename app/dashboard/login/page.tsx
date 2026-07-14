@@ -168,7 +168,7 @@ export default function DashboardLogin() {
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/icon.png" alt="" width={32} height={32} style={{ borderRadius: 7 }} />
-          <span style={{ fontWeight: 800, fontSize: 20, letterSpacing: -0.4, color: "#111" }}>fansonly</span>
+          <span style={{ fontWeight: 800, fontSize: 20, letterSpacing: -0.4, color: "#111" }}>shabanga</span>
         </div>
 
         {session ? (
@@ -278,7 +278,7 @@ export default function DashboardLogin() {
           <>
             <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px", color: "#111" }}>Sign in</h1>
             <p style={{ color: "#777", fontSize: 14, margin: "0 0 20px" }}>
-              Use your fansonly account — promoters &amp; artists.
+              Use your shabanga account — promoters &amp; artists.
             </p>
 
             <label style={labelStyle}>Email</label>

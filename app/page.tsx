@@ -21,7 +21,7 @@ import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 
 import styles from "./page.module.css";
 
-const INVITE = "mailto:hello@fansonly.live?subject=fansonly%20invite%20request";
+const INVITE = "mailto:hello@shabanga.com?subject=shabanga%20invite%20request";
 
 // Public beta install links. iOS = TestFlight public link (stable). Android =
 // EAS internal-distribution build page (changes per build — re-point on rebuild;
@@ -58,7 +58,7 @@ export default function Home() {
             Sell out the show. <em>Keep the money.</em>
           </h1>
           <p className={styles.sub}>
-            fansonly is ticketing built for promoters and creators — minimal fees, sell
+            shabanga is ticketing built for promoters and creators — minimal fees, sell
             straight from a link, and your buyers never need an account.
           </p>
           <div className={styles.ctaRow}>

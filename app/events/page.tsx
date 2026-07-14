@@ -8,10 +8,10 @@ import { EventsBrowser } from "./EventsBrowser";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Find events — fansonly",
+  title: "Find events — shabanga",
   description: "Underground shows, warehouse parties, and club nights near you.",
   openGraph: {
-    title: "Find events — fansonly",
+    title: "Find events — shabanga",
     description: "Underground shows, warehouse parties, and club nights near you.",
     type: "website",
   },

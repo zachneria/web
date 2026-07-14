@@ -1,4 +1,4 @@
-// Live input filter for handle fields (fansonly.live/p/… and /a/…).
+// Live input filter for handle fields (shabanga.com/p/… and /a/…).
 // Handles allow only lowercase letters, numbers, and hyphens (see fo-users
 // lib/handles.js). Instead of silently swallowing a typed "." (or erroring at
 // save), strip it AND say why — people naturally type periods ("crew.live").

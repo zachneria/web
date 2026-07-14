@@ -1,5 +1,5 @@
-// Apple App Site Association — lets iOS open fansonly Universal Links in the app.
-// Served at https://fansonly.live/.well-known/apple-app-site-association with
+// Apple App Site Association — lets iOS open shabanga Universal Links in the app.
+// Served at https://shabanga.com/.well-known/apple-app-site-association with
 // Content-Type application/json (no file extension). appID = TEAM_ID.bundleID.
 // Paths the app claims: the ticket link (/t) for now; add /e, /p later.
 export function GET() {

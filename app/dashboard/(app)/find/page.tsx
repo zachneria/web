@@ -135,7 +135,7 @@ export default function FindEventsPage() {
         Find events
       </h1>
       <p style={{ color: "#8A8A8A", margin: "0 0 16px", fontSize: 15 }}>
-        Everything listed publicly on fansonly.
+        Everything listed publicly on shabanga.
       </p>
 
       <input

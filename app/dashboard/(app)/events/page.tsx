@@ -217,7 +217,7 @@ async function dashboardTips(events: DashEvent[]): Promise<Tip[]> {
       tips.push({
         key: "handle",
         title: "Claim your promoter link",
-        body: "fansonly.live/p/your-name — one shareable page with all your shows.",
+        body: "shabanga.com/p/your-name — one shareable page with all your shows.",
         href: "/dashboard/promoter-settings",
         cta: "Pick a handle",
       });
@@ -314,7 +314,7 @@ export default async function DashboardEvents() {
             color: "#8A8A8A",
           }}
         >
-          No events yet — create one in the fansonly app.
+          No events yet — create one in the shabanga app.
         </div>
       ) : (
         <div

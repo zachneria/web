@@ -7,9 +7,9 @@ import { cookies } from "next/headers";
 
 import { ID_COOKIE } from "./org-auth";
 
-const API_BASE = process.env.API_BASE_URL || "https://api.fansonly.live";
+const API_BASE = process.env.API_BASE_URL || "https://api.shabanga.com";
 
-// Forward a request to the fansonly API with the organizer's bearer token.
+// Forward a request to the shabanga API with the organizer's bearer token.
 // Returns the raw Response (status passes through), or a 401 Response if there's
 // no session.
 export async function orgFetch(path: string, init?: RequestInit): Promise<Response> {

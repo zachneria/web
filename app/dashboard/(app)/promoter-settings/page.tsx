@@ -52,7 +52,7 @@ export default function PromoterSettings() {
       h &&
       h !== savedHandle &&
       !window.confirm(
-        `Change your link? fansonly.live/p/${savedHandle} will stop working — anything printed or posted with it breaks.`,
+        `Change your link? shabanga.com/p/${savedHandle} will stop working — anything printed or posted with it breaks.`,
       )
     ) {
       return;
@@ -123,7 +123,7 @@ export default function PromoterSettings() {
         <p style={{ color: "#8A8A8A" }}>Loading…</p>
       ) : (
         <>
-          {/* Logo (display only — upload your logo in the fansonly app) */}
+          {/* Logo (display only — upload your logo in the shabanga app) */}
           <div style={{ ...card, textAlign: "center" }}>
             {logoUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -154,7 +154,7 @@ export default function PromoterSettings() {
               </div>
             )}
             <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 12 }}>
-              {logoUrl ? "Your logo." : "No logo yet."} Upload or change it in the fansonly app.
+              {logoUrl ? "Your logo." : "No logo yet."} Upload or change it in the shabanga app.
             </p>
           </div>
 
@@ -165,7 +165,7 @@ export default function PromoterSettings() {
             </div>
             <div style={{ display: "flex", alignItems: "center", border: "1px solid #D9D9D9", borderRadius: 10, overflow: "hidden", background: "#FFFFFF" }}>
               <span style={{ padding: "12px 8px 12px 12px", color: "#8A8A8A", fontSize: 15, whiteSpace: "nowrap" }}>
-                fansonly.live/p/
+                shabanga.com/p/
               </span>
               <input
                 value={handle}
@@ -184,7 +184,7 @@ export default function PromoterSettings() {
               </button>
               {savedHandle ? (
                 <a
-                  href={`https://fansonly.live/p/${savedHandle}`}
+                  href={`https://shabanga.com/p/${savedHandle}`}
                   target="_blank"
                   rel="noreferrer"
                   style={{ color: "#0B8896", fontWeight: 600, fontSize: 14 }}

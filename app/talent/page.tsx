@@ -10,7 +10,7 @@ export default function TalentDashboard() {
       <SiteHeader />
       <main className="home">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="home-icon" src="/logo.png" alt="fansonly" width={108} height={108} />
+        <img className="home-icon" src="/logo.png" alt="shabanga" width={108} height={108} />
         <h1 className="logo">Talent</h1>
         <p className="tag">coming soon</p>
         <p>
@@ -23,7 +23,7 @@ export default function TalentDashboard() {
         </p>
         <a
           className="home-invite"
-          href="mailto:hello@fansonly.live?subject=fansonly%20talent%20interest"
+          href="mailto:hello@shabanga.com?subject=shabanga%20talent%20interest"
         >
           Get on the list →
         </a>

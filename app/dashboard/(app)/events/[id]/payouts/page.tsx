@@ -74,7 +74,7 @@ export default async function PayoutsPage({ params }: { params: Promise<{ id: st
       </div>
 
       <div style={{ color: "#8A8A8A", fontSize: 13, margin: "4px 2px", lineHeight: 1.6 }}>
-        Requesting a payout is done in the fansonly app for now.
+        Requesting a payout is done in the shabanga app for now.
       </div>
       </div>
       <TipsRail tips={PAYOUT_TIPS} title="Good to know" />

@@ -1,5 +1,5 @@
 // Android App Links — the Android counterpart of the AASA file. Lets
-// https://fansonly.live/t links open the fansonly app on Android (the app's
+// https://shabanga.com/t links open the shabanga app on Android (the app's
 // intentFilters claim /t; extend alongside the AASA when /e, /p are claimed).
 // SHA-256 = the EAS production keystore's signing-cert fingerprint.
 export function GET() {

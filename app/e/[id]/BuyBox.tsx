@@ -391,7 +391,7 @@ export default function BuyBox({
         />
         <span style={styles.consentText}>
           Text me my tickets &amp; event reminders. By checking, you agree to receive
-          SMS from fansonly. Msg frequency may vary. Msg &amp; data rates may apply.
+          SMS from shabanga. Msg frequency may vary. Msg &amp; data rates may apply.
           Reply HELP for help, STOP to opt out.{" "}
           <a href="/terms" style={styles.consentLink} target="_blank">Terms</a> ·{" "}
           <a href="/privacy" style={styles.consentLink} target="_blank">Privacy</a>

@@ -34,7 +34,7 @@ export default function Scripts({
     <div style={styles.page}>
       <div style={styles.bar}>
         <span style={styles.brandDot}>☺</span>
-        <span style={styles.barTitle}>fansonly · Beta</span>
+        <span style={styles.barTitle}>shabanga · Beta</span>
         {bugFormUrl && (
           <a
             style={styles.report}

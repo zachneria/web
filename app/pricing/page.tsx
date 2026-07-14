@@ -5,15 +5,15 @@ import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Pricing — fansonly vs Eventbrite & Ticketmaster",
+  title: "Pricing — shabanga vs Eventbrite & Ticketmaster",
   description:
-    "One flat $3 fee per ticket. Organizers keep 100% of face value. See exactly how fansonly compares to Eventbrite and Ticketmaster on a $20–$40 show.",
+    "One flat $3 fee per ticket. Organizers keep 100% of face value. See exactly how shabanga compares to Eventbrite and Ticketmaster on a $20–$40 show.",
 };
 
-const INVITE = "mailto:hello@fansonly.live?subject=fansonly%20invite%20request";
+const INVITE = "mailto:hello@shabanga.com?subject=shabanga%20invite%20request";
 
 // Fee math (US). Buyer-facing total on a face-value ticket.
-// fansonly: flat $3 buyer fee; organizer keeps 100% of face (we absorb card processing).
+// shabanga: flat $3 buyer fee; organizer keeps 100% of face (we absorb card processing).
 // Eventbrite: 3.7% + $1.79 service + 2.9% payment processing, passed to the buyer.
 // Ticketmaster: notoriously opaque stacked fees (service + facility + processing),
 //   commonly 20–30%+ and only revealed at checkout — illustrated here at ~28%.
@@ -82,7 +82,7 @@ export default function Pricing() {
             <thead>
               <tr>
                 <th className={styles.rowHead}></th>
-                <th className={styles.foCol}>fansonly</th>
+                <th className={styles.foCol}>shabanga</th>
                 <th>Eventbrite</th>
                 <th>Ticketmaster</th>
               </tr>
@@ -113,7 +113,7 @@ export default function Pricing() {
             <div key={face} className={styles.breakdownCard}>
               <div className={styles.faceTag}>${face} ticket</div>
               <div className={`${styles.payRow} ${styles.payWin}`}>
-                <span>fansonly</span>
+                <span>shabanga</span>
                 <strong>{money(foBuyer(face))}</strong>
               </div>
               <div className={styles.payRow}>
@@ -129,7 +129,7 @@ export default function Pricing() {
           ))}
         </div>
         <p className={styles.footnote}>
-          fansonly: face value + $3 flat. Eventbrite: 3.7% + $1.79 service + 2.9% processing,
+          shabanga: face value + $3 flat. Eventbrite: 3.7% + $1.79 service + 2.9% processing,
           passed to the buyer. *Ticketmaster fees are stacked (service + facility + processing),
           commonly 20–30%+ and shown only at checkout — illustrated here at ~28%. US pricing,
           single-ticket order.

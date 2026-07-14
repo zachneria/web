@@ -35,7 +35,7 @@ export default async function DashboardLayout({
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/icon.png" alt="" width={26} height={26} style={{ borderRadius: 6 }} />
-          <span style={{ color: "#fff", fontWeight: 800, fontSize: 18, letterSpacing: -0.3 }}>fansonly</span>
+          <span style={{ color: "#fff", fontWeight: 800, fontSize: 18, letterSpacing: -0.3 }}>shabanga</span>
         </Link>
         <SignOutButton />
       </header>
