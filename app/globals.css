@@ -1053,6 +1053,10 @@ a {
   border: 2px solid #f5e642;
 }
 .find-card-flyer {
+  /* flex: none — media must NOT grow/shrink with grid-stretched card height,
+     or <img> (shrinks) and the fallback <div> (doesn't) render different
+     heights and card contents misalign across a row. */
+  flex: none;
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
@@ -1072,6 +1076,7 @@ a {
   flex-direction: column;
   gap: 3px;
   padding: 12px 14px 14px;
+  flex: 1; /* fill the grid-stretched card so meta can pin to the bottom */
 }
 .find-card-name {
   font-size: 16px;
@@ -1135,7 +1140,8 @@ a {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 5px;
+  margin-top: auto; /* price/badge row rides the card bottom — bottoms align */
+  padding-top: 8px;
 }
 .find-card-price {
   font-size: 14px;
