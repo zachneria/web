@@ -129,7 +129,7 @@ export default function Home() {
             {FEATURES.map((f) => (
               <div key={f.title} className={styles.feature}>
                 <div className={styles.featureIcon}>
-                  <f.Icon size={26} color="#161616" />
+                  <f.Icon size={26} color="#1A1E38" />
                 </div>
                 <div className={styles.featureTitle}>{f.title}</div>
                 <p className={styles.featureBody}>{f.body}</p>

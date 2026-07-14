@@ -210,7 +210,7 @@ export function DiscountsClient({ eventId }: { eventId: string }) {
           codes.map((c) => (
             <div key={c.id} style={listRow}>
               <div>
-                <div style={{ fontWeight: 700, color: "#111111" }}>
+                <div style={{ fontWeight: 700, color: "#22243A" }}>
                   {c.kind === "unique" ? `${c.batchLabel || "Batch"} · ${offLabel(c)}` : `${c.code} · ${offLabel(c)}`}
                 </div>
                 <div style={{ fontSize: 12, color: "#8A8A8A" }}>
@@ -242,7 +242,7 @@ function Seg({ on, onClick, children }: { on: boolean; onClick: () => void; chil
         fontWeight: 700,
         cursor: "pointer",
         background: on ? "#F5E642" : "#FFFFFF",
-        color: on ? "#161616" : "#333333",
+        color: on ? "#1A1E38" : "#333333",
         border: `1.5px solid ${on ? "#F5E642" : "#D9D9D9"}`,
       }}
     >
@@ -279,13 +279,13 @@ const input: React.CSSProperties = {
   padding: "11px 12px",
   fontSize: 15,
   background: "#FFFFFF",
-  color: "#111111",
+  color: "#22243A",
 };
 const btn: React.CSSProperties = {
   width: "100%",
   marginTop: 14,
   background: "#F5E642",
-  color: "#000",
+  color: "#191D33",
   border: "none",
   borderRadius: 10,
   padding: "12px",

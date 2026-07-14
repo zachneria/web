@@ -71,7 +71,7 @@ const styles: Record<string, CSSProperties> = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: "#161616",
+    background: "#1A1E38",
     padding: 20,
   },
   card: {
@@ -90,13 +90,13 @@ const styles: Record<string, CSSProperties> = {
     height: 44,
     borderRadius: 10,
     background: BRAND,
-    color: "#000",
+    color: "#191D33",
     fontSize: 26,
     lineHeight: "44px",
     margin: "0 auto",
     fontWeight: 700,
   },
-  title: { fontSize: 22, fontWeight: 800, margin: 0, color: "#000" },
+  title: { fontSize: 22, fontWeight: 800, margin: 0, color: "#191D33" },
   sub: { fontSize: 14, color: "#666", margin: 0 },
   input: {
     border: "1.5px solid #E0E0E0",
@@ -107,7 +107,7 @@ const styles: Record<string, CSSProperties> = {
     boxSizing: "border-box",
     // Explicit — white card on the dark body; inherited color would make the
     // typed access code white-on-white.
-    color: "#111",
+    color: "#22243A",
     background: "#fff",
   },
   error: { color: "#D70015", fontSize: 13, margin: 0 },
@@ -118,7 +118,7 @@ const styles: Record<string, CSSProperties> = {
     padding: "14px",
     fontSize: 16,
     fontWeight: 700,
-    color: "#000",
+    color: "#191D33",
     cursor: "pointer",
   },
 };

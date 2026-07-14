@@ -57,7 +57,7 @@ export function DiscoverableToggle({ id, discoverable }: { id: string; discovera
         }}
       >
         <span style={{ flex: 1 }}>
-          <span style={{ display: "block", fontSize: 15, fontWeight: 700, color: "#111111" }}>
+          <span style={{ display: "block", fontSize: 15, fontWeight: 700, color: "#22243A" }}>
             Discoverable in search
           </span>
           <span

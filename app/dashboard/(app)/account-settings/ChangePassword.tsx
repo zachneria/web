@@ -55,7 +55,7 @@ export function ChangePassword() {
     borderRadius: 10,
     padding: "10px 12px",
     fontSize: 14,
-    color: "#111",
+    color: "#22243A",
     background: "#fff",
     marginTop: 8,
   };
@@ -75,7 +75,7 @@ export function ChangePassword() {
             padding: "9px 16px",
             fontSize: 14,
             fontWeight: 600,
-            color: "#111",
+            color: "#22243A",
             cursor: "pointer",
           }}
         >
@@ -113,7 +113,7 @@ export function ChangePassword() {
               disabled={busy || !current || !next}
               style={{
                 background: "#F5E642",
-                color: "#000",
+                color: "#191D33",
                 border: "none",
                 borderRadius: 8,
                 padding: "8px 16px",

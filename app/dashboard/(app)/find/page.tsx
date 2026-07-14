@@ -131,7 +131,7 @@ export default function FindEventsPage() {
 
   return (
     <div style={{ maxWidth: 980 }}>
-      <h1 style={{ fontSize: 26, fontWeight: 800, margin: "0 0 4px", color: "#111" }}>
+      <h1 style={{ fontSize: 26, fontWeight: 800, margin: "0 0 4px", color: "#22243A" }}>
         Find events
       </h1>
       <p style={{ color: "#8A8A8A", margin: "0 0 16px", fontSize: 15 }}>
@@ -280,7 +280,7 @@ function Card({ e, view, live }: { e: Result; view: ViewMode; live?: boolean }) 
             style={{
               fontSize: 15,
               fontWeight: 700,
-              color: "#111",
+              color: "#22243A",
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
@@ -301,7 +301,7 @@ function Card({ e, view, live }: { e: Result; view: ViewMode; live?: boolean }) 
             ) : (
               <>
                 {typeof e.fromPrice === "number" ? (
-                  <span style={{ fontSize: 13, fontWeight: 700, color: "#111" }}>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: "#22243A" }}>
                     {e.fromPrice === 0 ? "Free" : `From $${e.fromPrice}`}
                   </span>
                 ) : null}
@@ -327,7 +327,7 @@ const searchInput: React.CSSProperties = {
   padding: "12px 14px",
   fontSize: 16,
   background: "#fff",
-  color: "#111",
+  color: "#22243A",
 };
 const pillGroup: React.CSSProperties = { display: "flex", gap: 6, flexWrap: "wrap" };
 const pill: React.CSSProperties = {

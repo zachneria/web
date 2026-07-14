@@ -167,7 +167,7 @@ export function CostAddForm({ eventId }: { eventId: string }) {
                 <button key={t.id} type="button" style={talentHit} onClick={() => pickTalent(t)}>
                   <span style={talentDot} />
                   <span style={{ flex: 1, textAlign: "left" }}>
-                    <span style={{ display: "block", fontSize: 13, fontWeight: 700, color: "#111111" }}>
+                    <span style={{ display: "block", fontSize: 13, fontWeight: 700, color: "#22243A" }}>
                       {t.name}
                     </span>
                     <span style={{ display: "block", fontSize: 11, color: "#B08CC9" }}>
@@ -245,13 +245,13 @@ const input: React.CSSProperties = {
   padding: "0 12px",
   fontSize: 15,
   background: "#FFFFFF",
-  color: "#111111",
+  color: "#22243A",
 };
 const addBtn: React.CSSProperties = {
   width: "100%",
   marginBottom: 14,
   background: "#F5E642",
-  color: "#000",
+  color: "#191D33",
   border: "none",
   borderRadius: 10,
   padding: "12px",

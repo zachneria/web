@@ -67,7 +67,7 @@ export function PassportsClient({
       <div style={card}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: "#111111" }}>Gold drink pass</div>
+            <div style={{ fontSize: 18, fontWeight: 800, color: "#22243A" }}>Gold drink pass</div>
             <p style={{ color: "#8A8A8A", fontSize: 14, lineHeight: 1.5, margin: "6px 0 0" }}>
               Reward generous tippers. When a guest&apos;s tips at this event reach the amount
               below, their next drink pass turns gold so bar staff can spot them and serve them
@@ -102,7 +102,7 @@ export function PassportsClient({
                 value={threshold}
                 disabled={locked}
                 onChange={(e) => setThreshold(e.target.value.replace(/[^0-9]/g, ""))}
-                style={{ width: 60, border: "none", outline: "none", fontSize: 16, background: "transparent", color: "#111111" }}
+                style={{ width: 60, border: "none", outline: "none", fontSize: 16, background: "transparent", color: "#22243A" }}
               />
             </div>
           </div>
@@ -136,7 +136,7 @@ const card: React.CSSProperties = {
 const btn: React.CSSProperties = {
   width: "100%",
   background: "#F5E642",
-  color: "#000",
+  color: "#191D33",
   border: "none",
   borderRadius: 12,
   padding: "13px",

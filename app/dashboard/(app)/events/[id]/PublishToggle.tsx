@@ -65,7 +65,7 @@ export function PublishToggle({
           fontWeight: 700,
           cursor: "pointer",
           background: published ? "#FAFAFA" : "#F5E642",
-          color: published ? "#C0322B" : "#000",
+          color: published ? "#C0322B" : "#191D33",
           border: published ? "1.5px solid #C0322B" : "none",
         }}
       >

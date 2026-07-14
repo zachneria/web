@@ -141,7 +141,7 @@ export default function PromoterSettings() {
                   height: 96,
                   borderRadius: "50%",
                   background: "#F5E642",
-                  color: "#000",
+                  color: "#191D33",
                   fontSize: 40,
                   fontWeight: 800,
                   display: "flex",
@@ -175,7 +175,7 @@ export default function PromoterSettings() {
                   setHandleMsg(warning ? { ok: false, text: warning } : null);
                 }}
                 placeholder="your-name"
-                style={{ flex: 1, border: "none", outline: "none", padding: "12px 12px 12px 0", fontSize: 15, background: "transparent", color: "#111111" }}
+                style={{ flex: 1, border: "none", outline: "none", padding: "12px 12px 12px 0", fontSize: 15, background: "transparent", color: "#22243A" }}
               />
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 12 }}>
@@ -263,7 +263,7 @@ const inputStyle: React.CSSProperties = {
   padding: "11px 12px",
   fontSize: 15,
   background: "#FFFFFF",
-  color: "#111111",
+  color: "#22243A",
 };
 const fieldLabel: React.CSSProperties = {
   display: "block",
@@ -274,7 +274,7 @@ const fieldLabel: React.CSSProperties = {
 };
 const btn: React.CSSProperties = {
   background: "#F5E642",
-  color: "#000",
+  color: "#191D33",
   border: "none",
   borderRadius: 10,
   padding: "10px 18px",

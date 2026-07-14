@@ -651,7 +651,7 @@ const styles: Record<string, CSSProperties> = {
     padding: "16px",
     fontSize: 16,
     fontWeight: 700,
-    color: "#000",
+    color: "#191D33",
     cursor: "pointer",
   },
   consentRow: {
@@ -683,7 +683,7 @@ const styles: Record<string, CSSProperties> = {
     padding: "0 20px",
     fontSize: 15,
     fontWeight: 700,
-    color: "#000",
+    color: "#191D33",
     cursor: "pointer",
   },
   codeApplied: {
@@ -715,6 +715,6 @@ const styles: Record<string, CSSProperties> = {
   },
   qrWrap: { background: "#fff", padding: 12, borderRadius: 12, border: `3px solid ${BRAND}` },
   holder: { fontSize: 14, color: "#9A9A9A" },
-  hint: { fontSize: 11, fontWeight: 700, letterSpacing: 1, color: "#000" },
+  hint: { fontSize: 11, fontWeight: 700, letterSpacing: 1, color: "#191D33" },
   muted: { color: "#666", fontSize: 14, textAlign: "center" },
 };

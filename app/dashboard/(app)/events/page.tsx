@@ -113,7 +113,7 @@ function EventStats({ s }: { s: DashSummary }) {
               }}
             >
               {soldShare >= 0.16 ? (
-                <span style={{ color: "#000", fontSize: 12, fontWeight: 800 }}>{sold}</span>
+                <span style={{ color: "#191D33", fontSize: 12, fontWeight: 800 }}>{sold}</span>
               ) : null}
             </div>
           ) : null}
@@ -132,7 +132,7 @@ function EventStats({ s }: { s: DashSummary }) {
             </div>
           ) : null}
         </div>
-        <span style={{ width: 44, textAlign: "right", fontSize: 14, fontWeight: 800, color: "#111111" }}>
+        <span style={{ width: 44, textAlign: "right", fontSize: 14, fontWeight: 800, color: "#22243A" }}>
           {pct}%
         </span>
       </div>
@@ -257,7 +257,7 @@ export default async function DashboardEvents() {
   return (
     <div className="dsh-content-row">
       <div className="dsh-content-main" style={{ maxWidth: 880 }}>
-      <h1 style={{ fontSize: 26, fontWeight: 800, margin: "0 0 4px", color: "#111111" }}>
+      <h1 style={{ fontSize: 26, fontWeight: 800, margin: "0 0 4px", color: "#22243A" }}>
         Create event
       </h1>
       <p style={{ color: "#8A8A8A", margin: "0 0 16px", fontSize: 15 }}>
@@ -277,7 +277,7 @@ export default async function DashboardEvents() {
             <Link key={m.key} href={m.href} style={{ textDecoration: "none" }}>
               <div style={methodTile}>
                 <span style={methodIcon}>
-                  <m.Icon size={22} color="#111" />
+                  <m.Icon size={22} color="#22243A" />
                 </span>
                 <span style={methodLabel}>{m.label}</span>
                 <span style={methodHint}>{m.hint}</span>
@@ -286,7 +286,7 @@ export default async function DashboardEvents() {
           ) : (
             <div key={m.key} style={{ ...methodTile, opacity: 0.55 }}>
               <span style={methodIcon}>
-                <m.Icon size={22} color="#111" />
+                <m.Icon size={22} color="#22243A" />
               </span>
               <span style={methodLabel}>
                 {m.label}{" "}
@@ -298,7 +298,7 @@ export default async function DashboardEvents() {
         )}
       </div>
 
-      <h2 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px", color: "#111111" }}>
+      <h2 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px", color: "#22243A" }}>
         Your events
       </h2>
       <p style={{ color: "#8A8A8A", margin: "0 0 18px", fontSize: 15 }}>Sales at a glance.</p>
@@ -358,7 +358,7 @@ export default async function DashboardEvents() {
                       style={{
                         fontSize: 16,
                         fontWeight: 700,
-                        color: "#111111",
+                        color: "#22243A",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         whiteSpace: "nowrap",
@@ -420,7 +420,7 @@ const methodIcon: React.CSSProperties = {
   alignItems: "center",
   justifyContent: "center",
 };
-const methodLabel: React.CSSProperties = { fontSize: 15, fontWeight: 700, color: "#111" };
+const methodLabel: React.CSSProperties = { fontSize: 15, fontWeight: 700, color: "#22243A" };
 const methodHint: React.CSSProperties = { fontSize: 12.5, color: "#8A8A8A", lineHeight: 1.4 };
 const soonBadge: React.CSSProperties = {
   fontSize: 10,

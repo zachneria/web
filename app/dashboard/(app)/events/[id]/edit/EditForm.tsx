@@ -245,7 +245,7 @@ export function EditForm({ event, soldCount = 0 }: { event: EditableEvent; soldC
         disabled={busy}
         style={{
           background: "#F5E642",
-          color: "#000",
+          color: "#191D33",
           border: "none",
           borderRadius: 12,
           padding: "13px",
@@ -311,7 +311,7 @@ function Field({
 const uploadLabel: React.CSSProperties = {
   display: "inline-block",
   background: "#FFFFFF",
-  color: "#111111",
+  color: "#22243A",
   border: "1px solid #D9D9D9",
   borderRadius: 10,
   padding: "10px 16px",
@@ -334,5 +334,5 @@ const input: React.CSSProperties = {
   padding: "12px 14px",
   fontSize: 16,
   background: "#FFFFFF",
-  color: "#111111",
+  color: "#22243A",
 };

@@ -58,7 +58,7 @@ export default async function PotentialPage({ params }: { params: Promise<{ id: 
       <Link href={`/dashboard/events/${id}`} style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
         ← {event?.name ?? "Event"}
       </Link>
-      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 4px", color: "#111111" }}>Potential</h1>
+      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 4px", color: "#22243A" }}>Potential</h1>
       <p style={{ color: "#8A8A8A", fontSize: 14, margin: "0 0 18px" }}>
         If every admission ticket sells.
       </p>
@@ -76,7 +76,7 @@ export default async function PotentialPage({ params }: { params: Promise<{ id: 
         </div>
       </div>
 
-      <div style={{ ...card, background: "#161616", border: "1px solid #161616" }}>
+      <div style={{ ...card, background: "#1A1E38", border: "1px solid #1A1E38" }}>
         <div
           style={{
             fontSize: 12,

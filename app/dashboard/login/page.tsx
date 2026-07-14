@@ -147,7 +147,7 @@ export default function DashboardLogin() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#161616",
+        background: "#1A1E38",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -168,12 +168,12 @@ export default function DashboardLogin() {
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/icon.png" alt="" width={32} height={32} style={{ borderRadius: 7 }} />
-          <span style={{ fontWeight: 800, fontSize: 20, letterSpacing: -0.4, color: "#111" }}>shabanga</span>
+          <span style={{ fontWeight: 800, fontSize: 20, letterSpacing: -0.4, color: "#22243A" }}>shabanga</span>
         </div>
 
         {session ? (
           <>
-            <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px", color: "#111" }}>Set your password</h1>
+            <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px", color: "#22243A" }}>Set your password</h1>
             <p style={{ color: "#777", fontSize: 14, margin: "0 0 20px" }}>
               First time in — choose a password for <strong>{email}</strong>.
             </p>
@@ -205,7 +205,7 @@ export default function DashboardLogin() {
           </>
         ) : forgot ? (
           <>
-            <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px", color: "#111" }}>Reset password</h1>
+            <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px", color: "#22243A" }}>Reset password</h1>
             <p style={{ color: "#777", fontSize: 14, margin: "0 0 20px" }}>
               {codeSent
                 ? "Enter the code we emailed you and choose a new password."
@@ -276,7 +276,7 @@ export default function DashboardLogin() {
           </>
         ) : (
           <>
-            <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px", color: "#111" }}>Sign in</h1>
+            <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 4px", color: "#22243A" }}>Sign in</h1>
             <p style={{ color: "#777", fontSize: 14, margin: "0 0 20px" }}>
               Use your shabanga account — promoters &amp; artists.
             </p>
@@ -345,14 +345,14 @@ const inputStyle: React.CSSProperties = {
   fontSize: 16,
   // Explicit — the card is a white island on the dark body; inherited colors
   // washed out the headings and would make typed text white-on-white.
-  color: "#111",
+  color: "#22243A",
   background: "#fff",
 };
 const buttonStyle: React.CSSProperties = {
   width: "100%",
   marginTop: 20,
   background: "#F5E642",
-  color: "#000",
+  color: "#191D33",
   border: "none",
   borderRadius: 10,
   padding: "13px",

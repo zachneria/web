@@ -37,7 +37,7 @@ export function TipsRail({ tips, title = "Don't forget" }: { tips: Tip[]; title?
             padding: "12px 14px",
           }}
         >
-          <div style={{ fontSize: 14, fontWeight: 700, color: "#111", marginBottom: 4 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "#22243A", marginBottom: 4 }}>
             {t.title}
           </div>
           <div style={{ fontSize: 13, color: "#555", lineHeight: 1.45 }}>{t.body}</div>

@@ -19,7 +19,7 @@ export default async function ProductionPage({ params }: { params: Promise<{ id:
       <Link href={`/dashboard/events/${id}`} style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
         ← {event?.name ?? "Event"}
       </Link>
-      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#111111" }}>Production</h1>
+      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#22243A" }}>Production</h1>
 
       <CostAddForm eventId={id} />
 
@@ -40,7 +40,7 @@ export default async function ProductionPage({ params }: { params: Promise<{ id:
               </div>
             ))}
             <div style={{ ...row, borderTop: "1px solid #ECECEC", marginTop: 8, paddingTop: 12 }}>
-              <span style={{ fontWeight: 700, color: "#111111" }}>Total costs</span>
+              <span style={{ fontWeight: 700, color: "#22243A" }}>Total costs</span>
               <span style={{ ...rowVal, fontSize: 16 }}>{money(total)}</span>
             </div>
           </>

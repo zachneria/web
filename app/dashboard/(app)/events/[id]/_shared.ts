@@ -83,7 +83,7 @@ export const T = {
   bg: "#FFFFFF",
   card: "#FAFAFA",
   border: "#E5E5E5",
-  text: "#111111",
+  text: "#22243A",
   body: "#333333",
   muted: "#8A8A8A",
   accent: "#F5E642",
