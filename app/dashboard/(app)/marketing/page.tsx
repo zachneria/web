@@ -44,6 +44,7 @@ export default function MarketingComposer() {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
   const [face, setFace] = useState("happy");
+  const [theme, setTheme] = useState("teal"); // email colorway (matches the show's vibe)
   const [featuredIds, setFeaturedIds] = useState<string[]>([]);
   const [lastTemplate, setLastTemplate] = useState<string | null>(null);
   const [aiPrompt, setAiPrompt] = useState("");
@@ -207,6 +208,7 @@ export default function MarketingComposer() {
           featuredEventIds: featuredIds,
           idempotencyKey: idemKey,
           face,
+          theme,
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -347,6 +349,43 @@ export default function MarketingComposer() {
         value={body}
         onChange={(e) => setBody(e.target.value)}
       />
+
+      {/* email theme — colorway for the header + buttons */}
+      <div style={{ fontSize: 13, fontWeight: 700, color: "#8A8A8A", textTransform: "uppercase", letterSpacing: 0.5, margin: "16px 0 8px" }}>
+        Email theme
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 4 }}>
+        {[
+          { k: "teal", c: "#0FA7B5", label: "Teal" },
+          { k: "night", c: "#161616", label: "Night" },
+          { k: "amber", c: "#F5A623", label: "Amber" },
+          { k: "sunset", c: "#FF7052", label: "Sunset" },
+          { k: "ember", c: "#3A2A16", label: "Ember" },
+          { k: "acid", c: "#B7F34D", label: "Acid" },
+          { k: "og", c: "#F5E642", label: "OG" },
+        ].map((t) => (
+          <button
+            key={t.k}
+            onClick={() => setTheme(t.k)}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              borderRadius: 999,
+              padding: "7px 12px",
+              fontSize: 13,
+              fontWeight: theme === t.k ? 800 : 600,
+              border: "none",
+              cursor: "pointer",
+              background: theme === t.k ? "#161616" : "#F4F3EF",
+              color: theme === t.k ? "#fff" : "#555",
+            }}
+          >
+            <span style={{ width: 12, height: 12, borderRadius: 6, background: t.c, border: "1px solid rgba(0,0,0,0.15)" }} />
+            {t.label}
+          </button>
+        ))}
+      </div>
 
       {/* feature shows */}
       <div style={{ fontSize: 13, fontWeight: 700, color: "#8A8A8A", textTransform: "uppercase", letterSpacing: 0.5, margin: "16px 0 8px" }}>
