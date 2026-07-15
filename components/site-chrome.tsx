@@ -6,13 +6,15 @@ export function SiteHeader({
   logo = true,
   wordmark = true,
   signIn = false,
+  accent,
 }: {
   logo?: boolean;
   wordmark?: boolean;
   signIn?: boolean; // top-right Sign in (marketing pages only — buyers have no accounts)
+  accent?: string; // stripe override (talent purple on /a)
 }) {
   return (
-    <header className="topbar">
+    <header className="topbar" style={accent ? { borderBottomColor: accent } : undefined}>
       <div className="topbar-inner topbar-inner-spread">
         {(logo || wordmark) && (
           <Link href="/" className="topbar-brand">

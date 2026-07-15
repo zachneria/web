@@ -96,7 +96,7 @@ export default async function ArtistPage({
 
   return (
     <div className={styles.page}>
-      <SiteHeader />
+      <SiteHeader logo={false} wordmark={false} accent="#AF52DE" />
 
       {/* Hero */}
       <section className={styles.hero}>
