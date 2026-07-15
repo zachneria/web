@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { VenueSearch } from "../VenueSearch";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -50,6 +51,8 @@ export function CreateFlow({ method }: { method: "describe" | "link" | "scratch"
   const [name, setName] = useState("");
   const [venueName, setVenueName] = useState("");
   const [venueAddress, setVenueAddress] = useState("");
+  const [venueLat, setVenueLat] = useState<number | null>(null);
+  const [venueLng, setVenueLng] = useState<number | null>(null);
   const [eventDate, setEventDate] = useState("");
   const [endTime, setEndTime] = useState("");
   const [capacity, setCapacity] = useState("");
@@ -174,6 +177,8 @@ export function CreateFlow({ method }: { method: "describe" | "link" | "scratch"
           name: name.trim(),
           venueName: venueName.trim(),
           venueAddress: venueAddress.trim(),
+          venueLat,
+          venueLng,
           description: description.trim(),
           capacity: cap,
           eventDate: startIso,
@@ -244,7 +249,17 @@ export function CreateFlow({ method }: { method: "describe" | "link" | "scratch"
             <input style={input} value={name} onChange={(e) => setName(e.target.value)} />
           </Field>
           <Field label="Venue name">
-            <input style={input} value={venueName} onChange={(e) => setVenueName(e.target.value)} />
+            <VenueSearch
+              venueName={venueName}
+              inputStyle={input}
+              onType={setVenueName}
+              onPick={(v) => {
+                setVenueName(v.name);
+                setVenueAddress(v.address);
+                setVenueLat(v.lat);
+                setVenueLng(v.lng);
+              }}
+            />
           </Field>
           <Field label="Venue address">
             <input style={input} value={venueAddress} onChange={(e) => setVenueAddress(e.target.value)} />

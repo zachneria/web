@@ -1,12 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { VenueSearch } from "../../VenueSearch";
 import { useState } from "react";
 
 export interface EditableEvent {
   id: string;
   name: string;
   venueName: string;
+  venueLat?: number | null;
+  venueLng?: number | null;
   venueAddress: string;
   description?: string;
   capacity: number;
@@ -28,6 +31,8 @@ export function EditForm({ event, soldCount = 0 }: { event: EditableEvent; soldC
   const [name, setName] = useState(event.name);
   const [venueName, setVenueName] = useState(event.venueName);
   const [venueAddress, setVenueAddress] = useState(event.venueAddress);
+  const [venueLat, setVenueLat] = useState<number | null>(event.venueLat ?? null);
+  const [venueLng, setVenueLng] = useState<number | null>(event.venueLng ?? null);
   const [capacity, setCapacity] = useState(String(event.capacity ?? ""));
   const [description, setDescription] = useState(event.description ?? "");
   const [eventDate, setEventDate] = useState(toLocalInput(event.eventDate));
@@ -94,6 +99,8 @@ export function EditForm({ event, soldCount = 0 }: { event: EditableEvent; soldC
           name: name.trim(),
           venueName: venueName.trim(),
           venueAddress: venueAddress.trim(),
+          venueLat,
+          venueLng,
           description: description.trim(),
           capacity: cap,
           eventDate: startIso,
@@ -169,7 +176,17 @@ export function EditForm({ event, soldCount = 0 }: { event: EditableEvent; soldC
         <input style={input} value={name} onChange={(e) => setName(e.target.value)} />
       </Field>
       <Field label="Venue name">
-        <input style={input} value={venueName} onChange={(e) => setVenueName(e.target.value)} />
+        <VenueSearch
+          venueName={venueName}
+          inputStyle={input}
+          onType={setVenueName}
+          onPick={(v) => {
+            setVenueName(v.name);
+            setVenueAddress(v.address);
+            setVenueLat(v.lat);
+            setVenueLng(v.lng);
+          }}
+        />
       </Field>
       <Field label="Venue address">
         <input style={input} value={venueAddress} onChange={(e) => setVenueAddress(e.target.value)} />
