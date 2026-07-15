@@ -245,10 +245,10 @@ export function CreateFlow({ method }: { method: "describe" | "link" | "scratch"
       ) : (
         <form onSubmit={create} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           {importNote ? <p style={{ ...errText, color: "#8A8A8A" }}>{importNote}</p> : null}
-          <Field label="Event name">
+          <Field label="Event name" valid={!!name.trim()}>
             <input style={input} value={name} onChange={(e) => setName(e.target.value)} />
           </Field>
-          <Field label="Venue name">
+          <Field label="Venue name" valid={!!venueName.trim()}>
             <VenueSearch
               venueName={venueName}
               inputStyle={input}
@@ -261,11 +261,11 @@ export function CreateFlow({ method }: { method: "describe" | "link" | "scratch"
               }}
             />
           </Field>
-          <Field label="Venue address">
+          <Field label="Venue address" valid={!!venueAddress.trim()}>
             <input style={input} value={venueAddress} onChange={(e) => setVenueAddress(e.target.value)} />
           </Field>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <Field label="Start" style={{ flex: 1, minWidth: 200 }}>
+            <Field label="Start" valid={!!eventDate} style={{ flex: 1, minWidth: 200 }}>
               <input
                 style={input}
                 type="datetime-local"
@@ -273,7 +273,7 @@ export function CreateFlow({ method }: { method: "describe" | "link" | "scratch"
                 onChange={(e) => setEventDate(e.target.value)}
               />
             </Field>
-            <Field label="End" style={{ flex: 1, minWidth: 200 }}>
+            <Field label="End" valid={!!endTime} style={{ flex: 1, minWidth: 200 }}>
               <input
                 style={input}
                 type="datetime-local"
@@ -282,7 +282,7 @@ export function CreateFlow({ method }: { method: "describe" | "link" | "scratch"
               />
             </Field>
           </div>
-          <Field label="Capacity">
+          <Field label="Capacity" valid={Number(capacity) > 0}>
             <input
               style={input}
               inputMode="numeric"
@@ -329,7 +329,16 @@ export function CreateFlow({ method }: { method: "describe" | "link" | "scratch"
 
           {err ? <p style={errText}>{err}</p> : null}
 
-          <button type="submit" disabled={busy} style={primaryBtn}>
+          <button
+            type="submit"
+            disabled={busy}
+            style={{
+              ...primaryBtn,
+              ...(name.trim() && venueName.trim() && venueAddress.trim() && eventDate && endTime && Number(capacity) > 0
+                ? {}
+                : { background: "#E4E1D6", color: "#9A9A9A" }),
+            }}
+          >
             {busy ? "Creating…" : "Create event"}
           </button>
           <p style={{ fontSize: 13, color: "#8A8A8A", margin: 0 }}>
@@ -345,10 +354,12 @@ function Field({
   label,
   children,
   style,
+  valid,
 }: {
   label: string;
   children: React.ReactNode;
   style?: React.CSSProperties;
+  valid?: boolean; // green ✓ by the label when the required field is satisfied
 }) {
   return (
     <label style={{ display: "block", ...style }}>
@@ -364,6 +375,7 @@ function Field({
         }}
       >
         {label}
+        {valid ? <span style={{ color: "#34C759", marginLeft: 6 }}>✓</span> : null}
       </span>
       {children}
     </label>

@@ -172,10 +172,10 @@ export function EditForm({ event, soldCount = 0 }: { event: EditableEvent; soldC
 
   return (
     <form onSubmit={save} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-      <Field label="Event name">
+      <Field label="Event name" valid={!!name.trim()}>
         <input style={input} value={name} onChange={(e) => setName(e.target.value)} />
       </Field>
-      <Field label="Venue name">
+      <Field label="Venue name" valid={!!venueName.trim()}>
         <VenueSearch
           venueName={venueName}
           inputStyle={input}
@@ -188,11 +188,11 @@ export function EditForm({ event, soldCount = 0 }: { event: EditableEvent; soldC
           }}
         />
       </Field>
-      <Field label="Venue address">
+      <Field label="Venue address" valid={!!venueAddress.trim()}>
         <input style={input} value={venueAddress} onChange={(e) => setVenueAddress(e.target.value)} />
       </Field>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-        <Field label="Start" style={{ flex: 1, minWidth: 200 }}>
+        <Field label="Start" valid={!!eventDate} style={{ flex: 1, minWidth: 200 }}>
           <input
             style={input}
             type="datetime-local"
@@ -209,7 +209,7 @@ export function EditForm({ event, soldCount = 0 }: { event: EditableEvent; soldC
           />
         </Field>
       </div>
-      <Field label="Capacity">
+      <Field label="Capacity" valid={Number(capacity) > 0}>
         <input
           style={input}
           inputMode="numeric"
@@ -300,10 +300,12 @@ function Field({
   label,
   children,
   style,
+  valid,
 }: {
   label: string;
   children: React.ReactNode;
   style?: React.CSSProperties;
+  valid?: boolean; // green ✓ by the label when the required field is satisfied
 }) {
   return (
     <label style={{ display: "block", ...style }}>
@@ -319,6 +321,7 @@ function Field({
         }}
       >
         {label}
+        {valid ? <span style={{ color: "#34C759", marginLeft: 6 }}>✓</span> : null}
       </span>
       {children}
     </label>
