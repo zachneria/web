@@ -27,7 +27,7 @@ export default async function PassportsPage({ params }: { params: Promise<{ id: 
   return (
     <div style={{ maxWidth: 640 }}>
       <Link href={`/dashboard/events/${id}`} style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
-        ← {event?.name ?? "Event"}
+        {event?.name ?? "Event"}
       </Link>
       <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#161616" }}>Passports</h1>
       <PassportsClient

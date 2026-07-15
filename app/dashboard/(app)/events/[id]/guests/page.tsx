@@ -40,7 +40,7 @@ export default async function GuestsPage({ params }: { params: Promise<{ id: str
     <div className="dsh-content-row">
       <div className="dsh-content-main" style={{ maxWidth: 640 }}>
       <Link href={`/dashboard/events/${id}`} style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
-        ← {event?.name ?? "Event"}
+        {event?.name ?? "Event"}
       </Link>
       <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#161616" }}>
         Guests {guests && guests.length > 0 ? `(${guests.length})` : ""}

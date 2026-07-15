@@ -20,7 +20,7 @@ export default async function MessagePage({ params }: { params: Promise<{ id: st
   return (
     <div style={{ maxWidth: 640 }}>
       <Link href={`/dashboard/events/${id}`} style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
-        ← {event?.name ?? "Event"}
+        {event?.name ?? "Event"}
       </Link>
       <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 4px", color: "#161616" }}>Message buyers</h1>
       <p style={{ color: "#8A8A8A", fontSize: 14, margin: "0 0 18px" }}>
