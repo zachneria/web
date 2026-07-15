@@ -37,21 +37,40 @@ export default async function DashboardLayout({
           <img src="/icon.png" alt="" width={26} height={26} style={{ borderRadius: 6 }} />
           <span style={{ color: "#0FA7B5", fontFamily: "Cochin, Georgia, serif", fontWeight: 700, fontSize: 21, letterSpacing: 0.3 }}>shabanga</span>
         </Link>
-        <SignOutButton />
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          {logoUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={logoUrl}
+              alt=""
+              width={30}
+              height={30}
+              style={{ borderRadius: "50%", objectFit: "cover", border: "2px solid #0FA7B5", background: "#fff" }}
+            />
+          ) : (
+            <div
+              style={{
+                width: 30,
+                height: 30,
+                borderRadius: "50%",
+                background: "#0FA7B5",
+                color: "#161616",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontWeight: 800,
+                fontSize: 14,
+              }}
+            >
+              {initial}
+            </div>
+          )}
+          <span style={{ color: "#fff", fontSize: 13.5, fontWeight: 700 }}>{name || "Organizer"}</span>
+          <SignOutButton />
+        </div>
       </header>
       <div className="dsh-body">
         <aside className="dsh-side">
-          <div className="dsh-user">
-            {logoUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={logoUrl} alt="" width={42} height={42} className="dsh-avatar" />
-            ) : (
-              <div className="dsh-avatar dsh-avatar-fallback">{initial}</div>
-            )}
-            <div className="dsh-user-meta">
-              <span className="dsh-user-name">{name || "Organizer"}</span>
-            </div>
-          </div>
           <DashNav isTalent={isTalent} isAdmin={!!isAdmin} />
         </aside>
         <main className="dsh-main">{children}</main>
