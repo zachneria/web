@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { IconType } from "react-icons";
 import {
-  IoCashOutline,
   IoMailOutline,
   IoPeopleOutline,
   IoPencilOutline,
@@ -26,7 +25,6 @@ export const dynamic = "force-dynamic";
 const TILES: { key: string; label: string; Icon: IconType; href?: string }[] = [
   { key: "tickets", label: "Tickets", Icon: IoTicketOutline, href: "tickets" },
   { key: "guests", label: "Guests", Icon: IoPeopleOutline, href: "guests" },
-  { key: "payouts", label: "Payouts", Icon: IoCashOutline, href: "payouts" },
   { key: "production", label: "Production", Icon: IoReceiptOutline, href: "production" },
   { key: "potential", label: "Potential", Icon: IoTrendingUpOutline, href: "potential" },
   { key: "discounts", label: "Discounts", Icon: IoPricetagOutline, href: "discounts" },

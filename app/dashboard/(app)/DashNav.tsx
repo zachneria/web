@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import type { IconType } from "react-icons";
 import {
   IoCalendarOutline,
+  IoCashOutline,
   IoConstructOutline,
   IoGlobeOutline,
   IoMegaphoneOutline,
@@ -29,6 +30,7 @@ const ITEMS: {
   { href: "/dashboard/marketing", Icon: IoMegaphoneOutline, label: "Marketing" },
   { href: "/dashboard/promoter-settings", Icon: IoGlobeOutline, label: "Promoter Profile" },
   { href: "/dashboard/artist-settings", Icon: IoMusicalNotesOutline, label: "Artist Settings", accent: "#AF52DE", talentOnly: true },
+  { href: "/dashboard/payouts", Icon: IoCashOutline, label: "Payouts" },
   { href: "/dashboard/account-settings", Icon: IoSettingsOutline, label: "Account Settings" },
   { href: "/dashboard/admin", Icon: IoConstructOutline, label: "Admin Settings", adminOnly: true },
 ];
