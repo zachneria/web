@@ -23,6 +23,7 @@ const money = (n: number) =>
 export default async function PayoutsHub() {
   let events: Ev[] = [];
   const nets: Record<string, number | null> = {};
+  const statuses: Record<string, string | null> = {};
   try {
     const [evRes, sumRes] = await Promise.all([
       orgFetch("/events"),
@@ -31,7 +32,10 @@ export default async function PayoutsHub() {
     if (evRes.ok) events = await evRes.json();
     if (sumRes.ok) {
       const sum = await sumRes.json();
-      for (const s of sum?.events ?? []) nets[s.eventId] = s.netPayout;
+      for (const s of sum?.events ?? []) {
+        nets[s.eventId] = s.netPayout;
+        statuses[s.eventId] = s.payoutStatus ?? null;
+      }
     }
   } catch {
     /* empty state covers failure */
@@ -101,6 +105,11 @@ export default async function PayoutsHub() {
                     month: "short",
                     day: "numeric",
                   })}
+                  {statuses[e.id] ? (
+                    <span style={{ color: "#1A7A3A", fontWeight: 700 }}>
+                      {" "}· Deposit {statuses[e.id]}
+                    </span>
+                  ) : null}
                 </span>
               </span>
               <span
