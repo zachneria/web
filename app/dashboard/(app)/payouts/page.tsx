@@ -79,6 +79,11 @@ export default async function PayoutsHub() {
       ) : (
         rows.map((e) => {
           const net = nets[e.id];
+          const ready =
+            !statuses[e.id] &&
+            typeof net === "number" &&
+            net > 0 &&
+            new Date(e.eventDate) <= new Date();
           return (
             <Link
               key={e.id}
@@ -109,23 +114,41 @@ export default async function PayoutsHub() {
                     <span style={{ color: "#1A7A3A", fontWeight: 700 }}>
                       {" "}· Deposit {statuses[e.id]}
                     </span>
+                  ) : ready ? (
+                    <span style={{ color: "#E5484D", fontWeight: 700 }}> · Ready to pay out</span>
                   ) : null}
                 </span>
               </span>
-              <span
-                style={{
-                  flexShrink: 0,
-                  fontWeight: 800,
-                  fontSize: 13,
-                  borderRadius: 999,
-                  padding: "5px 12px",
-                  background:
-                    typeof net !== "number" ? "#EFEFEC" : net < 0 ? "#FDEDEA" : "#E6F5F6",
-                  color:
-                    typeof net !== "number" ? "#8A8A8A" : net < 0 ? "#C0322B" : "#0B7285",
-                }}
-              >
-                {typeof net !== "number" ? "Custom" : money(net)}
+              <span style={{ position: "relative", flexShrink: 0 }}>
+                <span
+                  style={{
+                    display: "inline-block",
+                    fontWeight: 800,
+                    fontSize: 13,
+                    borderRadius: 999,
+                    padding: "5px 12px",
+                    background:
+                      typeof net !== "number" ? "#EFEFEC" : net < 0 ? "#FDEDEA" : "#E6F5F6",
+                    color:
+                      typeof net !== "number" ? "#8A8A8A" : net < 0 ? "#C0322B" : "#0B7285",
+                  }}
+                >
+                  {typeof net !== "number" ? "Custom" : money(net)}
+                </span>
+                {ready ? (
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: -3,
+                      right: -3,
+                      width: 9,
+                      height: 9,
+                      borderRadius: "50%",
+                      background: "#E5484D",
+                      border: "1.5px solid #FAFAFA",
+                    }}
+                  />
+                ) : null}
               </span>
             </Link>
           );
