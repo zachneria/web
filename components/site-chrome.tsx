@@ -20,7 +20,7 @@ export function SiteHeader({
           <Link href="/" className="topbar-brand">
             {logo && (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src="/creature.png" alt="" className="topbar-logo" />
+              <img src="/creature-night.png" alt="" className="topbar-logo" />
             )}
             {wordmark && <span className="topbar-word">shabanga</span>}
           </Link>
