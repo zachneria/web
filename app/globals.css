@@ -1,5 +1,5 @@
 :root {
-  --brand: #f5e642;
+  --brand: #B7F34D;
 }
 
 * {
@@ -535,7 +535,7 @@ a {
   margin-top: 14px;
 }
 .promoter-socials a {
-  color: #f5e642;
+  color: #B7F34D;
   opacity: 0.9;
 }
 .promoter-socials a:hover {
@@ -954,7 +954,7 @@ a {
   gap: 10px;
 }
 .find-line {
-  background: #f5e642;
+  background: #B7F34D;
   color: #22243A;
   font-size: clamp(24px, 4.4vw, 48px);
   font-weight: 900;
@@ -983,7 +983,7 @@ a {
   outline: none;
 }
 .find-search:focus {
-  border-color: #f5e642;
+  border-color: #B7F34D;
   box-shadow: 0 0 0 3px rgba(245, 230, 66, 0.3);
 }
 .find-sorts {
@@ -1049,10 +1049,10 @@ a {
 .find-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  border-color: #f5e642;
+  border-color: #B7F34D;
 }
 .find-card-live {
-  border: 2px solid #f5e642;
+  border: 2px solid #B7F34D;
 }
 .find-card-flyer {
   /* flex: none — media must NOT grow/shrink with grid-stretched card height,
