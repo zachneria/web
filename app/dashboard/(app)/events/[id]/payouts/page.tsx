@@ -3,6 +3,8 @@ import Link from "next/link";
 import { TipsRail, type Tip } from "../../../TipsRail";
 import { EventDetail, Payout, card, getJSON, money, row, rowVal } from "../_shared";
 
+import { RequestPayout } from "./RequestPayout";
+
 const PAYOUT_TIPS: Tip[] = [
   {
     key: "after-show",
@@ -73,9 +75,12 @@ export default async function PayoutsPage({ params }: { params: Promise<{ id: st
         ) : null}
       </div>
 
-      <div style={{ color: "#8A8A8A", fontSize: 13, margin: "4px 2px", lineHeight: 1.6 }}>
-        Requesting a payout is done in the shabanga app for now.
-      </div>
+      <RequestPayout
+        id={id}
+        eventOver={!!event && new Date(event.eventDate) <= new Date()}
+        existing={payout?.payout ?? null}
+        deposit={payout?.depositAmount ?? (typeof net === "number" ? net + tips : null)}
+      />
       </div>
       <TipsRail tips={PAYOUT_TIPS} title="Good to know" />
     </div>

@@ -49,6 +49,7 @@ export interface Payout {
   depositAmount?: number;
   tipsCollected?: number;
   costs?: Cost[];
+  payout?: { id: string; status: string; netPayout: string } | null;
 }
 
 export const STATUS: Record<EventDetail["status"], { label: string; fg: string; bg: string }> = {
