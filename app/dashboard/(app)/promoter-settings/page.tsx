@@ -132,7 +132,7 @@ export default function PromoterSettings() {
                 alt=""
                 width={96}
                 height={96}
-                style={{ borderRadius: "50%", objectFit: "cover", border: "3px solid #F5E642", background: "#FAFAFA" }}
+                style={{ borderRadius: "50%", objectFit: "cover", border: "3px solid #B7F34D", background: "#FAFAFA" }}
               />
             ) : (
               <div
@@ -140,7 +140,7 @@ export default function PromoterSettings() {
                   width: 96,
                   height: 96,
                   borderRadius: "50%",
-                  background: "#F5E642",
+                  background: "#B7F34D",
                   color: "#191D33",
                   fontSize: 40,
                   fontWeight: 800,
@@ -273,7 +273,7 @@ const fieldLabel: React.CSSProperties = {
   margin: "10px 0 4px",
 };
 const btn: React.CSSProperties = {
-  background: "#F5E642",
+  background: "#B7F34D",
   color: "#191D33",
   border: "none",
   borderRadius: 10,

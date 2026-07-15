@@ -21,8 +21,8 @@ export function SignOutButton() {
       disabled={busy}
       style={{
         background: "transparent",
-        color: "#F5E642",
-        border: "1.5px solid #F5E642",
+        color: "#B7F34D",
+        border: "1.5px solid #B7F34D",
         borderRadius: 8,
         padding: "6px 14px",
         fontWeight: 700,

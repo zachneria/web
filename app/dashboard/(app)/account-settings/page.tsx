@@ -72,7 +72,7 @@ export default async function AccountSettings({
             {plan?.isPro ? (
               <span
                 style={{
-                  background: "#F5E642",
+                  background: "#B7F34D",
                   color: "#191D33",
                   borderRadius: 99,
                   padding: "2px 10px",

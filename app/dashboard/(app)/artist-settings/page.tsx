@@ -366,7 +366,7 @@ export default function ArtistSettings() {
         onClick={save}
         disabled={saving}
         style={{
-          background: "#F5E642",
+          background: "#B7F34D",
           color: "#191D33",
           border: "none",
           borderRadius: 12,

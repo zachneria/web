@@ -351,7 +351,7 @@ const inputStyle: React.CSSProperties = {
 const buttonStyle: React.CSSProperties = {
   width: "100%",
   marginTop: 20,
-  background: "#F5E642",
+  background: "#B7F34D",
   color: "#191D33",
   border: "none",
   borderRadius: 10,

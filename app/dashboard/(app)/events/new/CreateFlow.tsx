@@ -373,7 +373,7 @@ const input: React.CSSProperties = {
 };
 const primaryBtn: React.CSSProperties = {
   width: "100%",
-  background: "#F5E642",
+  background: "#B7F34D",
   color: "#191D33",
   border: "none",
   borderRadius: 12,

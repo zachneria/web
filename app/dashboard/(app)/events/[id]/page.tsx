@@ -180,7 +180,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
           <Stat label="Checked in" value={summary?.checkedIn ?? 0} />
         </div>
         <div style={{ height: 8, borderRadius: 4, background: T.divider, overflow: "hidden" }}>
-          <div style={{ width: `${pct}%`, height: "100%", background: "#F5E642" }} />
+          <div style={{ width: `${pct}%`, height: "100%", background: "#B7F34D" }} />
         </div>
         <div style={{ fontSize: 12, color: T.muted, textAlign: "right", marginTop: 4 }}>{pct}% sold</div>
       </div>

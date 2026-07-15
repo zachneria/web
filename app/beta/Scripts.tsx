@@ -3,7 +3,7 @@
 import { type CSSProperties, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 
-const BRAND = "#F5E642";
+const BRAND = "#B7F34D";
 
 // Flatten markdown heading children to a plain string for slug/anchor ids.
 function textOf(node: ReactNode): string {

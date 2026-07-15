@@ -441,7 +441,7 @@ const inputStyle: React.CSSProperties = {
   minWidth: 0,
 };
 const btn: React.CSSProperties = {
-  background: "#F5E642",
+  background: "#B7F34D",
   color: "#191D33",
   border: "none",
   borderRadius: 10,
@@ -486,7 +486,7 @@ const addTierBtn: React.CSSProperties = {
   marginTop: 4,
 };
 const badgeActive: React.CSSProperties = {
-  background: "#F5E642",
+  background: "#B7F34D",
   color: "#191D33",
   borderRadius: 20,
   padding: "4px 10px",

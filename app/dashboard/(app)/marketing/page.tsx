@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
-const AI = "#F5E642"; // brand yellow — AI accent
+const AI = "#B7F34D"; // brand yellow — AI accent
 const AI_BG = "#1A1E38"; // dark AI card (on-brand dark+yellow)
 const INK = "#1A1E38"; // readable link / text color
 
@@ -387,7 +387,7 @@ export default function MarketingComposer() {
       <button
         onClick={send}
         disabled={sending}
-        style={{ width: "100%", marginTop: 20, background: "#F5E642", color: "#191D33", border: "none", borderRadius: 10, padding: 14, fontSize: 16, fontWeight: 700, cursor: "pointer" }}
+        style={{ width: "100%", marginTop: 20, background: "#B7F34D", color: "#191D33", border: "none", borderRadius: 10, padding: 14, fontSize: 16, fontWeight: 700, cursor: "pointer" }}
       >
         {sending ? "Sending…" : "Send email"}
       </button>

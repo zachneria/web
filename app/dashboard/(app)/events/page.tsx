@@ -106,7 +106,7 @@ function EventStats({ s }: { s: DashSummary }) {
             <div
               style={{
                 flex: sold,
-                background: "#F5E642",
+                background: "#B7F34D",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",

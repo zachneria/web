@@ -244,7 +244,7 @@ export function EditForm({ event, soldCount = 0 }: { event: EditableEvent; soldC
         type="submit"
         disabled={busy}
         style={{
-          background: "#F5E642",
+          background: "#B7F34D",
           color: "#191D33",
           border: "none",
           borderRadius: 12,
