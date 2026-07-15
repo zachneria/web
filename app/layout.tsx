@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     description: "Built for promoters and scene makers. Minimal fees, no account needed.",
     url: "https://shabanga.com",
     siteName: "shabanga",
-    images: ["/logo.png"],
+    images: ["/creature.png"],
   },
   twitter: {
     card: "summary",
     title: "shabanga",
     description: "Built for promoters and scene makers.",
-    images: ["/logo.png"],
+    images: ["/creature.png"],
   },
 };
 
