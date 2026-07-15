@@ -66,7 +66,7 @@ export function AccountName() {
             background: "transparent",
             fontSize: 15,
             fontWeight: 600,
-            color: "#22243A",
+            color: "#161616",
           }}
         />
         {name.trim() !== saved ? (
@@ -75,7 +75,7 @@ export function AccountName() {
             disabled={busy}
             style={{
               background: "#0FA7B5",
-              color: "#191D33",
+              color: "#161616",
               border: "none",
               borderRadius: 8,
               padding: "6px 14px",

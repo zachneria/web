@@ -2,14 +2,14 @@
 
 .page {
   background: #fff;
-  color: #1A1E38;
+  color: #161616;
 }
 
 /* ---- Hero ---- */
 .hero {
   position: relative;
   overflow: hidden;
-  background: #1A1E38;
+  background: #161616;
   color: #fff;
   padding: 88px 24px 72px;
   text-align: center;
@@ -97,7 +97,7 @@
   gap: 16px;
 }
 .bigNumberCard {
-  background: #1A1E38;
+  background: #161616;
   border-radius: 18px;
   padding: 32px 20px;
   text-align: center;
@@ -129,7 +129,7 @@
   font-size: 15px;
 }
 .table thead th {
-  background: #1A1E38;
+  background: #161616;
   color: #fff;
   font-weight: 800;
   padding: 16px 18px;
@@ -147,13 +147,13 @@
 }
 .rowHead {
   font-weight: 700;
-  color: #1A1E38;
+  color: #161616;
   background: #fafafa;
   white-space: nowrap;
 }
 .foCell {
   font-weight: 700;
-  color: #1A1E38;
+  color: #161616;
   background: rgba(15, 167, 181, 0.14);
 }
 
@@ -188,11 +188,11 @@
 }
 .payRow strong {
   font-weight: 800;
-  color: #1A1E38;
+  color: #161616;
 }
 .payWin {
   border-top: none;
-  color: #1A1E38;
+  color: #161616;
 }
 .payWin span {
   font-weight: 800;
@@ -207,7 +207,7 @@
   padding: 9px 12px;
   font-size: 13px;
   font-weight: 700;
-  color: #1A1E38;
+  color: #161616;
   text-align: center;
 }
 .footnote {
@@ -221,7 +221,7 @@
 
 /* ---- Target band ---- */
 .bandWrap {
-  background: #1A1E38;
+  background: #161616;
   color: #fff;
 }
 .band {
@@ -263,7 +263,7 @@
   display: inline-block;
   margin-top: 8px;
   background: #0FA7B5;
-  color: #1A1E38;
+  color: #161616;
   font-weight: 800;
   font-size: 17px;
   padding: 15px 26px;

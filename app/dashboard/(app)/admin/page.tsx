@@ -93,7 +93,7 @@ export default function AdminSettings() {
       ) : (
         <>
           <Link href="/dashboard/admin/organizers" style={navRow}>
-            <span style={{ fontWeight: 700, color: "#22243A" }}>Organizers, tiers &amp; caps</span>
+            <span style={{ fontWeight: 700, color: "#161616" }}>Organizers, tiers &amp; caps</span>
             <span style={{ color: "#8A8A8A", fontSize: 18 }}>›</span>
           </Link>
 
@@ -209,11 +209,11 @@ const feeInput: React.CSSProperties = {
   padding: "11px 12px 11px 6px",
   fontSize: 15,
   background: "transparent",
-  color: "#22243A",
+  color: "#161616",
 };
 const btn: React.CSSProperties = {
   background: "#0FA7B5",
-  color: "#191D33",
+  color: "#161616",
   border: "none",
   borderRadius: 10,
   padding: "10px 18px",

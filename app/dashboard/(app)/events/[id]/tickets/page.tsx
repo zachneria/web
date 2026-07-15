@@ -62,7 +62,7 @@ export default async function TicketsPage({ params }: { params: Promise<{ id: st
       <Link href={`/dashboard/events/${id}`} style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
         ← {event?.name ?? "Event"}
       </Link>
-      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#22243A" }}>Tickets</h1>
+      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#161616" }}>Tickets</h1>
 
       {event && admission.reduce((n, t) => n + t.quantity, 0) > event.capacity ? (
         <div

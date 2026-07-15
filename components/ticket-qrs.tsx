@@ -30,7 +30,7 @@ export function TicketQRs({ tickets }: { tickets: ViewTicket[] }) {
               TICKET {i + 1} OF {tickets.length}
             </div>
             {t.ticketTypeName ? (
-              <div style={{ fontSize: 18, fontWeight: 800, color: "#191D33", margin: "4px 0 16px" }}>
+              <div style={{ fontSize: 18, fontWeight: 800, color: "#161616", margin: "4px 0 16px" }}>
                 {t.ticketTypeName}
               </div>
             ) : null}
@@ -40,7 +40,7 @@ export function TicketQRs({ tickets }: { tickets: ViewTicket[] }) {
             {t.ownerName ? (
               <div style={{ fontSize: 14, color: "#666", marginTop: 12 }}>{t.ownerName}</div>
             ) : null}
-            <div style={{ fontSize: 11, letterSpacing: 1, fontWeight: 700, color: used ? "#999" : "#191D33", marginTop: 8 }}>
+            <div style={{ fontSize: 11, letterSpacing: 1, fontWeight: 700, color: used ? "#999" : "#161616", marginTop: 8 }}>
               {used ? "CHECKED IN ✓" : "SHOW THIS AT THE DOOR"}
             </div>
           </div>

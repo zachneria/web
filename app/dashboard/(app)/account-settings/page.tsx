@@ -73,7 +73,7 @@ export default async function AccountSettings({
               <span
                 style={{
                   background: "#0FA7B5",
-                  color: "#191D33",
+                  color: "#161616",
                   borderRadius: 99,
                   padding: "2px 10px",
                   fontWeight: 800,

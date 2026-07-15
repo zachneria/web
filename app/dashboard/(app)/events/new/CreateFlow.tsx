@@ -205,7 +205,7 @@ export function CreateFlow({ method }: { method: "describe" | "link" | "scratch"
       <Link href="/dashboard/events" style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
         ← Events
       </Link>
-      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 4px", color: "#22243A" }}>
+      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 4px", color: "#161616" }}>
         {step === "input" ? h.title : "Create event"}
       </h1>
       <p style={{ color: "#8A8A8A", fontSize: 14, margin: "0 0 18px" }}>
@@ -369,12 +369,12 @@ const input: React.CSSProperties = {
   padding: "12px 14px",
   fontSize: 16,
   background: "#F4F3EF",
-  color: "#22243A",
+  color: "#161616",
 };
 const primaryBtn: React.CSSProperties = {
   width: "100%",
   background: "#0FA7B5",
-  color: "#191D33",
+  color: "#161616",
   border: "none",
   borderRadius: 12,
   padding: "13px",
@@ -396,7 +396,7 @@ const skipBtn: React.CSSProperties = {
 const uploadLabel: React.CSSProperties = {
   display: "inline-block",
   background: "#F4F3EF",
-  color: "#22243A",
+  color: "#161616",
   border: "none",
   borderRadius: 10,
   padding: "10px 16px",

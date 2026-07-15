@@ -148,13 +148,13 @@ const input: React.CSSProperties = {
   padding: "0 12px",
   fontSize: 15,
   background: "#F4F3EF",
-  color: "#22243A",
+  color: "#161616",
 };
 const addBtn: React.CSSProperties = {
   width: "100%",
   marginBottom: 14,
   background: "#0FA7B5",
-  color: "#191D33",
+  color: "#161616",
   border: "none",
   borderRadius: 10,
   padding: "12px",

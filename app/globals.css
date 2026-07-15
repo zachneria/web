@@ -71,7 +71,7 @@ a {
 
 /* Mobile-only "open in app vs web" choice */
 .appbanner {
-  background: #1A1E38;
+  background: #161616;
   color: #fff;
   padding: 14px 16px;
   display: flex;
@@ -108,7 +108,7 @@ a {
 }
 .appbanner-open {
   background: var(--brand);
-  color: #191D33;
+  color: #161616;
 }
 .appbanner-web {
   background: transparent;
@@ -308,7 +308,7 @@ a {
   margin-top: 24px;
   font-size: 16px;
   font-weight: 700;
-  color: #191D33;
+  color: #161616;
 }
 .home-invite {
   display: inline-block;
@@ -317,7 +317,7 @@ a {
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #191D33;
+  color: #161616;
   border-bottom: 3px solid var(--brand);
   padding-bottom: 3px;
 }
@@ -343,7 +343,7 @@ a {
 .dash-pill strong {
   font-size: 14px;
   font-weight: 800;
-  color: #191D33;
+  color: #161616;
 }
 .dash-pill span {
   font-size: 11px;
@@ -374,7 +374,7 @@ a {
 .store-pill strong {
   font-size: 14px;
   font-weight: 700;
-  color: #191D33;
+  color: #161616;
 }
 .store-pill span {
   font-size: 11px;
@@ -386,7 +386,7 @@ a {
 /* ---- Shared branded chrome (event + promoter pages) ---- */
 /* Dark bar + poppy-yellow stripe + smiley — matches the ticket-email header. */
 .topbar {
-  background: #1A1E38;
+  background: #161616;
   border-bottom: 4px solid var(--brand);
 }
 .topbar-inner {
@@ -445,7 +445,7 @@ a {
   color: #0FA7B5;
 }
 .footer {
-  background: #1A1E38;
+  background: #161616;
 }
 .footer-inner {
   max-width: 560px;
@@ -507,7 +507,7 @@ a {
   justify-content: center;
   font-size: 40px;
   font-weight: 800;
-  color: #191D33;
+  color: #161616;
   background: var(--brand);
 }
 .promoter-name {
@@ -613,7 +613,7 @@ a {
   margin-right: 14px;
   flex-shrink: 0;
   background: var(--brand);
-  color: #191D33;
+  color: #161616;
   font-size: 12px;
   font-weight: 700;
   padding: 6px 10px;
@@ -646,7 +646,7 @@ a {
   align-items: center;
   justify-content: center;
   background: var(--brand);
-  color: #191D33;
+  color: #161616;
   font-size: 13px;
   font-weight: 800;
 }
@@ -669,20 +669,20 @@ a {
 }
 
 /* ---- /beta test-scripts doc ---- */
-.beta-doc h1 { font-size: 30px; font-weight: 800; margin: 0 0 8px; color: #191D33; }
+.beta-doc h1 { font-size: 30px; font-weight: 800; margin: 0 0 8px; color: #161616; }
 .beta-doc h2 {
-  font-size: 22px; font-weight: 800; color: #191D33;
+  font-size: 22px; font-weight: 800; color: #161616;
   margin: 36px 0 10px; padding-top: 18px; border-top: 1px solid #eee;
   scroll-margin-top: 80px;
 }
 .beta-doc h3 {
-  font-size: 16px; font-weight: 700; color: #191D33; margin: 22px 0 6px;
+  font-size: 16px; font-weight: 700; color: #161616; margin: 22px 0 6px;
   scroll-margin-top: 80px;
 }
 .beta-doc p { font-size: 15px; line-height: 1.6; color: #222; margin: 8px 0; }
 .beta-doc ul, .beta-doc ol { padding-left: 22px; margin: 8px 0; }
 .beta-doc li { font-size: 15px; line-height: 1.55; color: #222; margin: 4px 0; }
-.beta-doc strong { color: #191D33; }
+.beta-doc strong { color: #161616; }
 .beta-doc code {
   background: #f2f2f2; padding: 1px 6px; border-radius: 5px;
   font-size: 0.9em; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -725,12 +725,12 @@ a {
 .dsh-root {
   min-height: 100vh;
   background: #fff;
-  color: #22243A;
+  color: #161616;
   display: flex;
   flex-direction: column;
 }
 .dsh-top {
-  background: #1A1E38;
+  background: #161616;
   border-bottom: 3px solid var(--brand);
   display: flex;
   align-items: center;
@@ -773,7 +773,7 @@ a {
   justify-content: center;
   font-weight: 800;
   font-size: 18px;
-  color: #22243A;
+  color: #161616;
   background: var(--brand);
 }
 .dsh-user-meta {
@@ -786,7 +786,7 @@ a {
 .dsh-user-name {
   font-size: 12px;
   font-weight: 800;
-  color: #22243A;
+  color: #161616;
   text-align: center;
   max-width: 100%;
   white-space: nowrap;
@@ -902,7 +902,7 @@ a {
   /* Full-width white so the dark body never shows as side bars; content
      constrained by .find-inner. */
   background: #fff;
-  color: #22243A;
+  color: #161616;
   min-height: 60vh;
   padding: 36px 0 72px;
 }
@@ -955,7 +955,7 @@ a {
 }
 .find-line {
   background: #0FA7B5;
-  color: #22243A;
+  color: #161616;
   font-size: clamp(24px, 4.4vw, 48px);
   font-weight: 900;
   letter-spacing: -1px;
@@ -978,7 +978,7 @@ a {
   padding: 14px 22px;
   font-size: 16px;
   background: #fff;
-  color: #22243A;
+  color: #161616;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
   outline: none;
 }
@@ -1083,7 +1083,7 @@ a {
 .find-card-name {
   font-size: 16px;
   font-weight: 800;
-  color: #22243A;
+  color: #161616;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1148,7 +1148,7 @@ a {
 .find-card-price {
   font-size: 14px;
   font-weight: 800;
-  color: #22243A;
+  color: #161616;
 }
 .find-badge {
   font-size: 11px;

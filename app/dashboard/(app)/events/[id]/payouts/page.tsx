@@ -48,7 +48,7 @@ export default async function PayoutsPage({ params }: { params: Promise<{ id: st
       <Link href={`/dashboard/events/${id}`} style={{ color: "#0B8896", fontWeight: 700, fontSize: 14 }}>
         ← {event?.name ?? "Event"}
       </Link>
-      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#22243A" }}>Payouts</h1>
+      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px", color: "#161616" }}>Payouts</h1>
 
       <div style={card}>
         <div style={row}>
@@ -67,7 +67,7 @@ export default async function PayoutsPage({ params }: { params: Promise<{ id: st
         ) : null}
         {typeof net === "number" ? (
           <div style={{ ...row, borderTop: "1px solid #F1F0EC", marginTop: 8, paddingTop: 12 }}>
-            <span style={{ fontWeight: 700, color: "#22243A" }}>Net payout</span>
+            <span style={{ fontWeight: 700, color: "#161616" }}>Net payout</span>
             <span style={{ ...rowVal, fontSize: 18 }}>{money(net)}</span>
           </div>
         ) : null}

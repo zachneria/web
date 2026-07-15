@@ -138,7 +138,7 @@ export function MessageClient({
             const when = a.sentAt || a.createdAt;
             return (
               <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid #F1F0EC" }}>
-                <div style={{ fontWeight: 700, color: "#22243A" }}>{a.subject}</div>
+                <div style={{ fontWeight: 700, color: "#161616" }}>{a.subject}</div>
                 {when ? (
                   <div style={{ fontSize: 12, color: "#8A8A8A" }}>{new Date(when).toLocaleString()}</div>
                 ) : null}
@@ -166,7 +166,7 @@ const input: React.CSSProperties = {
   padding: "12px 14px",
   fontSize: 15,
   background: "#F4F3EF",
-  color: "#22243A",
+  color: "#161616",
 };
 const chip: React.CSSProperties = {
   background: "#F4F3EF",
@@ -182,7 +182,7 @@ const btn: React.CSSProperties = {
   width: "100%",
   marginTop: 14,
   background: "#0FA7B5",
-  color: "#191D33",
+  color: "#161616",
   border: "none",
   borderRadius: 10,
   padding: "12px",

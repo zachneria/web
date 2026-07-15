@@ -194,7 +194,7 @@ export default function ArtistSettings() {
     <div style={{ maxWidth: 640, display: "flex", flexDirection: "column", gap: 16 }}>
       <div>
         <Link href="/dashboard" style={{ color: "#AF52DE", fontWeight: 700, fontSize: 14 }}>← Account</Link>
-        <h1 style={{ fontSize: 24, fontWeight: 900, color: "#22243A", margin: "10px 0 0" }}>Artist settings</h1>
+        <h1 style={{ fontSize: 24, fontWeight: 900, color: "#161616", margin: "10px 0 0" }}>Artist settings</h1>
 
       </div>
 
@@ -293,9 +293,9 @@ export default function ArtistSettings() {
         <div style={label}>SUGGESTED RATE</div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 4, ...input, width: 140 }}>
-            <span style={{ fontSize: 18, fontWeight: 800, color: "#22243A" }}>$</span>
+            <span style={{ fontSize: 18, fontWeight: 800, color: "#161616" }}>$</span>
             <input
-              style={{ border: "none", background: "transparent", color: "#22243A", fontSize: 18, fontWeight: 800, width: "100%", outline: "none" }}
+              style={{ border: "none", background: "transparent", color: "#161616", fontSize: 18, fontWeight: 800, width: "100%", outline: "none" }}
               value={rate}
               onChange={(e) => setRate(e.target.value.replace(/[^0-9.]/g, ""))}
               placeholder="300"
@@ -367,7 +367,7 @@ export default function ArtistSettings() {
         disabled={saving}
         style={{
           background: "#0FA7B5",
-          color: "#191D33",
+          color: "#161616",
           border: "none",
           borderRadius: 12,
           padding: 14,
@@ -398,7 +398,7 @@ export default function ArtistSettings() {
             {gigs.map((g) => (
               <div key={g.costId} style={{ display: "flex", alignItems: "center", padding: "10px 0", borderBottom: "1px solid #F1F0EC" }}>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: "#22243A" }}>{g.eventName}</div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: "#161616" }}>{g.eventName}</div>
                   <div style={{ fontSize: 11, color: "#777", marginTop: 2 }}>
                     {g.organizerName} · {new Date(g.eventDate).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
                     {g.paidAt ? " · paid" : ""}
@@ -437,7 +437,7 @@ function Toggle({ on, onChange, title, sub }: { on: boolean; onChange: (v: boole
       }}
     >
       <span style={{ flex: 1 }}>
-        <span style={{ display: "block", fontSize: 15, fontWeight: 700, color: "#22243A" }}>{title}</span>
+        <span style={{ display: "block", fontSize: 15, fontWeight: 700, color: "#161616" }}>{title}</span>
         <span style={{ display: "block", fontSize: 12, marginTop: 2, color: on ? "#0FA7B5" : "#8A8A8A" }}>{sub}</span>
       </span>
       <span style={{ flexShrink: 0, width: 46, height: 28, borderRadius: 999, background: on ? "#0FA7B5" : "#D8D8D8", position: "relative", transition: "background 150ms" }}>
@@ -468,5 +468,5 @@ const input: React.CSSProperties = {
   padding: "11px 12px",
   fontSize: 15,
   background: "#F4F3EF",
-  color: "#22243A",
+  color: "#161616",
 };

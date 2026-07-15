@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
 const AI = "#0FA7B5"; // brand yellow — AI accent
-const AI_BG = "#1A1E38"; // dark AI card (on-brand dark+yellow)
-const INK = "#1A1E38"; // readable link / text color
+const AI_BG = "#161616"; // dark AI card (on-brand dark+yellow)
+const INK = "#161616"; // readable link / text color
 
 interface PickEvent {
   id: string;
@@ -238,7 +238,7 @@ export default function MarketingComposer() {
     fontSize: 15,
     fontFamily: "inherit",
     background: "#F4F3EF",
-    color: "#22243A",
+    color: "#161616",
   };
   const chip: React.CSSProperties = {
     border: "none",
@@ -287,7 +287,7 @@ export default function MarketingComposer() {
         <button
           onClick={handleDraft}
           disabled={drafting}
-          style={{ marginTop: 8, width: "100%", background: AI, color: "#191D33", border: "none", borderRadius: 10, padding: 12, fontWeight: 700, fontSize: 15, cursor: "pointer" }}
+          style={{ marginTop: 8, width: "100%", background: AI, color: "#161616", border: "none", borderRadius: 10, padding: 12, fontWeight: 700, fontSize: 15, cursor: "pointer" }}
         >
           {drafting ? "Drafting…" : "✨ Draft it"}
         </button>
@@ -324,7 +324,7 @@ export default function MarketingComposer() {
                       setSubject(s);
                       setSubjectOptions([]);
                     }}
-                    style={{ textAlign: "left", background: "#F4F3EF", color: "#22243A", border: "none", borderRadius: 10, padding: "10px 12px", fontSize: 14, cursor: "pointer" }}
+                    style={{ textAlign: "left", background: "#F4F3EF", color: "#161616", border: "none", borderRadius: 10, padding: "10px 12px", fontSize: 14, cursor: "pointer" }}
                   >
                     ↑ {s}
                   </button>
@@ -377,7 +377,7 @@ export default function MarketingComposer() {
               }}
             >
               <span style={{ color: on ? INK : "#8A8A8A", fontWeight: 800 }}>{on ? "☑" : "☐"}</span>
-              <span style={{ flex: 1, fontSize: 14, fontWeight: 600, color: on ? "#1A1E38" : "#333333" }}>{e.name}</span>
+              <span style={{ flex: 1, fontSize: 14, fontWeight: 600, color: on ? "#161616" : "#333333" }}>{e.name}</span>
               <span style={{ fontSize: 12, color: on ? "#6B6B57" : "#8A8A8A" }}>{fmtDate(e.eventDate)}</span>
             </button>
           );
@@ -387,7 +387,7 @@ export default function MarketingComposer() {
       <button
         onClick={send}
         disabled={sending}
-        style={{ width: "100%", marginTop: 20, background: "#0FA7B5", color: "#191D33", border: "none", borderRadius: 10, padding: 14, fontSize: 16, fontWeight: 700, cursor: "pointer" }}
+        style={{ width: "100%", marginTop: 20, background: "#0FA7B5", color: "#161616", border: "none", borderRadius: 10, padding: 14, fontSize: 16, fontWeight: 700, cursor: "pointer" }}
       >
         {sending ? "Sending…" : "Send email"}
       </button>
