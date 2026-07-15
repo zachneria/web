@@ -19,11 +19,34 @@ export default async function DashboardLayout({
 
   let logoUrl: string | null = null;
   let isTalent = false;
+  let payoutsDue = false;
   if (sub) {
     try {
-      const [r, t] = await Promise.all([orgFetch(`/users/${sub}`), orgFetch("/users/talent/me")]);
+      const [r, t, ev, sum] = await Promise.all([
+        orgFetch(`/users/${sub}`),
+        orgFetch("/users/talent/me"),
+        orgFetch("/events"),
+        orgFetch("/payouts/summary"),
+      ]);
       if (r.ok) logoUrl = (await r.json())?.logoUrl ?? null;
       isTalent = t.ok;
+      // Red dot on the Payouts icon: an ended event with money to move and
+      // no payout requested yet = something needs doing.
+      if (ev.ok && sum.ok) {
+        const events: { id: string; eventDate: string; status: string }[] = await ev.json();
+        const rows: { eventId: string; netPayout: number | null; payoutStatus?: string | null }[] =
+          (await sum.json())?.events ?? [];
+        const byId = new Map(rows.map((s) => [s.eventId, s]));
+        payoutsDue = events.some((e) => {
+          const s = byId.get(e.id);
+          return (
+            e.status !== "draft" &&
+            new Date(e.eventDate) <= new Date() &&
+            !s?.payoutStatus &&
+            (s?.netPayout ?? 0) > 0
+          );
+        });
+      }
     } catch {
       /* best-effort chrome */
     }
@@ -71,7 +94,7 @@ export default async function DashboardLayout({
       </header>
       <div className="dsh-body">
         <aside className="dsh-side">
-          <DashNav isTalent={isTalent} isAdmin={!!isAdmin} />
+          <DashNav isTalent={isTalent} isAdmin={!!isAdmin} payoutsDue={payoutsDue} />
         </aside>
         <main className="dsh-main">{children}</main>
       </div>

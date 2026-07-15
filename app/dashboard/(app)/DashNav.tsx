@@ -35,7 +35,7 @@ const ITEMS: {
   { href: "/dashboard/admin", Icon: IoConstructOutline, label: "Admin Settings", adminOnly: true },
 ];
 
-export function DashNav({ isTalent, isAdmin }: { isTalent: boolean; isAdmin: boolean }) {
+export function DashNav({ isTalent, isAdmin, payoutsDue }: { isTalent: boolean; isAdmin: boolean; payoutsDue?: boolean }) {
   const pathname = usePathname();
   return (
     <nav className="dsh-nav" aria-label="Dashboard">
@@ -49,7 +49,24 @@ export function DashNav({ isTalent, isAdmin }: { isTalent: boolean; isAdmin: boo
             aria-label={i.label}
             className={`dsh-nav-item${active ? " dsh-nav-active" : ""}`}
           >
-            <i.Icon size={24} color={active ? "#0B8896" : (i.accent ?? "#555")} />
+            <span style={{ position: "relative", display: "inline-flex" }}>
+              <i.Icon size={24} color={active ? "#0B8896" : (i.accent ?? "#555")} />
+              {i.href === "/dashboard/payouts" && payoutsDue ? (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: -3,
+                    right: -5,
+                    width: 9,
+                    height: 9,
+                    borderRadius: "50%",
+                    background: "#E5484D",
+                    border: "1.5px solid #f2f2ef",
+                  }}
+                  aria-label="Payout ready to request"
+                />
+              ) : null}
+            </span>
           </Link>
         );
       })}
