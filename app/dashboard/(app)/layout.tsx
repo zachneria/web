@@ -43,6 +43,7 @@ export default async function DashboardLayout({
             <img
               src={logoUrl}
               alt=""
+              title={name || "Organizer"}
               width={30}
               height={30}
               style={{ borderRadius: "50%", objectFit: "cover", border: "2px solid #0FA7B5", background: "#fff" }}
@@ -65,7 +66,6 @@ export default async function DashboardLayout({
               {initial}
             </div>
           )}
-          <span style={{ color: "#fff", fontSize: 13.5, fontWeight: 700 }}>{name || "Organizer"}</span>
           <SignOutButton />
         </div>
       </header>
