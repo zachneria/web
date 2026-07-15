@@ -1,7 +1,10 @@
 // Apple App Site Association — lets iOS open shabanga Universal Links in the app.
 // Served at https://shabanga.com/.well-known/apple-app-site-association with
 // Content-Type application/json (no file extension). appID = TEAM_ID.bundleID.
-// Paths the app claims: the ticket link (/t) for now; add /e, /p later.
+// Served identically on shabanga.com and fansonly.live (same Vercel app),
+// matching the build's associatedDomains for both.
+// Paths the app claims: ticket links (/t) + event pages (/e/<slug>, which
+// the app forwards to its buy screen). /p stays web-only (no in-app page).
 export function GET() {
   const body = {
     applinks: {
@@ -9,7 +12,7 @@ export function GET() {
       details: [
         {
           appID: "VWKR8RY44Z.com.zneria.foapp",
-          paths: ["/t", "/t/*"],
+          paths: ["/t", "/t/*", "/e/*"],
         },
       ],
     },
