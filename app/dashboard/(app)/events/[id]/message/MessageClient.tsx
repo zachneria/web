@@ -181,7 +181,7 @@ const chip: React.CSSProperties = {
 const btn: React.CSSProperties = {
   width: "100%",
   marginTop: 14,
-  background: "#B7F34D",
+  background: "#0FA7B5",
   color: "#191D33",
   border: "none",
   borderRadius: 10,

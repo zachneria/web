@@ -86,7 +86,7 @@ export const T = {
   text: "#22243A",
   body: "#333333",
   muted: "#8A8A8A",
-  accent: "#B7F34D",
+  accent: "#0FA7B5",
   divider: "#ECECEC",
 };
 

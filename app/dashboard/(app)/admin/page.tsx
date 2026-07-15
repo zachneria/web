@@ -212,7 +212,7 @@ const feeInput: React.CSSProperties = {
   color: "#22243A",
 };
 const btn: React.CSSProperties = {
-  background: "#B7F34D",
+  background: "#0FA7B5",
   color: "#191D33",
   border: "none",
   borderRadius: 10,

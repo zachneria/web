@@ -89,7 +89,7 @@ export default function Home() {
         <h2 className={styles.h2}>Built for the whole night</h2>
         <div className={styles.audience}>
           <div className={`${styles.audienceCard} ${styles.dark}`}>
-            <div className={styles.audEmoji}><IoHeadsetOutline size={36} color="#B7F34D" /></div>
+            <div className={styles.audEmoji}><IoHeadsetOutline size={36} color="#0FA7B5" /></div>
             <div className={styles.audTitle}>Promoters &amp; creators</div>
             <p className={styles.audBody}>
               Throw the event — we handle the rest. Create in minutes, sell from one link,
@@ -98,7 +98,7 @@ export default function Home() {
             </p>
           </div>
           <div className={`${styles.audienceCard} ${styles.dark}`}>
-            <div className={styles.audEmoji}><IoHeartOutline size={36} color="#B7F34D" /></div>
+            <div className={styles.audEmoji}><IoHeartOutline size={36} color="#0FA7B5" /></div>
             <div className={styles.audTitle}>Fans &amp; buyers</div>
             <p className={styles.audBody}>
               Tap a link, grab your ticket — no account, no forced app download. Keep tickets
@@ -107,7 +107,7 @@ export default function Home() {
             </p>
           </div>
           <div className={`${styles.audienceCard} ${styles.dark}`}>
-            <div className={styles.audEmoji}><IoMicOutline size={36} color="#B7F34D" /></div>
+            <div className={styles.audEmoji}><IoMicOutline size={36} color="#0FA7B5" /></div>
             <div className={styles.audTitle}>Talent</div>
             <p className={styles.audBody}>
               Your own gig page with a playable mix, get booked straight from it, and get

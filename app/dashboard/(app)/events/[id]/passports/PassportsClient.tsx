@@ -135,7 +135,7 @@ const card: React.CSSProperties = {
 };
 const btn: React.CSSProperties = {
   width: "100%",
-  background: "#B7F34D",
+  background: "#0FA7B5",
   color: "#191D33",
   border: "none",
   borderRadius: 12,

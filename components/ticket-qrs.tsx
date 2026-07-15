@@ -34,7 +34,7 @@ export function TicketQRs({ tickets }: { tickets: ViewTicket[] }) {
                 {t.ticketTypeName}
               </div>
             ) : null}
-            <div style={{ display: "inline-block", border: "3px solid #B7F34D", borderRadius: 12, padding: 10, background: "#fff" }}>
+            <div style={{ display: "inline-block", border: "3px solid #0FA7B5", borderRadius: 12, padding: 10, background: "#fff" }}>
               <QRCodeSVG value={t.qrToken} size={200} />
             </div>
             {t.ownerName ? (

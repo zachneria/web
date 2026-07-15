@@ -3,7 +3,7 @@
    reads intentional. Icon/label inherit `color` (currentColor); text stays
    dark at rest (yellow text fails contrast on light). */
 .tile {
-  border: 1.5px solid #B7F34D;
+  border: 1.5px solid #0FA7B5;
   color: #444;
   transition: border-color 160ms ease, color 160ms ease;
 }

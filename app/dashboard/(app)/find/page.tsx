@@ -237,7 +237,7 @@ function Card({ e, view, live }: { e: Result; view: ViewMode; live?: boolean }) 
       <div
         style={{
           background: "#FAFAFA",
-          border: live ? "2px solid #B7F34D" : "1px solid #E5E5E5",
+          border: live ? "2px solid #0FA7B5" : "1px solid #E5E5E5",
           borderRadius: 14,
           padding: 14,
           display: "flex",

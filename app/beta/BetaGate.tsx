@@ -2,7 +2,7 @@
 
 import { useState, type CSSProperties } from "react";
 
-const BRAND = "#B7F34D";
+const BRAND = "#0FA7B5";
 
 export default function BetaGate({ configured }: { configured: boolean }) {
   const [password, setPassword] = useState("");

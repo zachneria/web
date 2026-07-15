@@ -64,7 +64,7 @@ export function PayoutsConnect({
 }
 
 const btn: React.CSSProperties = {
-  background: "#B7F34D",
+  background: "#0FA7B5",
   color: "#191D33",
   border: "none",
   borderRadius: 10,

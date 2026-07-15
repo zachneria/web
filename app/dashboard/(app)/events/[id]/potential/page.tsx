@@ -107,7 +107,7 @@ export default async function PotentialPage({ params }: { params: Promise<{ id: 
         ) : null}
         <div style={{ ...row, borderTop: "none", marginTop: 8, paddingTop: 12 }}>
           <span style={{ fontWeight: 700, color: "#fff" }}>Potential net</span>
-          <span style={{ ...rowVal, color: potentialNet >= 0 ? "#B7F34D" : "#FF6B5E", fontSize: 18 }}>
+          <span style={{ ...rowVal, color: potentialNet >= 0 ? "#0FA7B5" : "#FF6B5E", fontSize: 18 }}>
             {money(potentialNet)}
           </span>
         </div>

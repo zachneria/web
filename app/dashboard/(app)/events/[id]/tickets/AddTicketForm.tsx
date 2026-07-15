@@ -200,7 +200,7 @@ export function AddTicketForm({ eventId }: { eventId: string }) {
 
       {isAdmission ? (
         <label style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 12, color: "#333333", fontSize: 14 }}>
-          <input type="checkbox" checked={absorbFee} onChange={(e) => setAbsorbFee(e.target.checked)} style={{ accentColor: "#B7F34D" }} />
+          <input type="checkbox" checked={absorbFee} onChange={(e) => setAbsorbFee(e.target.checked)} style={{ accentColor: "#0FA7B5" }} />
           I&apos;ll cover the booking fee (buyers pay face value)
         </label>
       ) : null}
@@ -242,7 +242,7 @@ const input: React.CSSProperties = {
 const addBtn: React.CSSProperties = {
   width: "100%",
   marginBottom: 14,
-  background: "#B7F34D",
+  background: "#0FA7B5",
   color: "#191D33",
   border: "none",
   borderRadius: 10,

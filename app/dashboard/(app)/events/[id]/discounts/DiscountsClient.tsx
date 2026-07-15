@@ -241,9 +241,9 @@ function Seg({ on, onClick, children }: { on: boolean; onClick: () => void; chil
         fontSize: 14,
         fontWeight: 700,
         cursor: "pointer",
-        background: on ? "#B7F34D" : "#FFFFFF",
+        background: on ? "#0FA7B5" : "#FFFFFF",
         color: on ? "#1A1E38" : "#333333",
-        border: `1.5px solid ${on ? "#B7F34D" : "#D9D9D9"}`,
+        border: `1.5px solid ${on ? "#0FA7B5" : "#D9D9D9"}`,
       }}
     >
       {children}
@@ -284,7 +284,7 @@ const input: React.CSSProperties = {
 const btn: React.CSSProperties = {
   width: "100%",
   marginTop: 14,
-  background: "#B7F34D",
+  background: "#0FA7B5",
   color: "#191D33",
   border: "none",
   borderRadius: 10,

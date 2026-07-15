@@ -56,7 +56,7 @@ export default async function TicketViewPage({
               style={{
                 display: "inline-block",
                 marginTop: 16,
-                background: "#B7F34D",
+                background: "#0FA7B5",
                 color: "#22243A",
                 fontWeight: 700,
                 borderRadius: 10,

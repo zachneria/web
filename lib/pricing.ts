@@ -1,7 +1,7 @@
 // Pure helpers — safe in both Server Components and the client.
 import type { BuyEvent, BuyTicketType } from "./types";
 
-export const BRAND = "#B7F34D";
+export const BRAND = "#0FA7B5";
 
 // WEB IS ADMISSION-ONLY. Drinks/credits/merch are app-only for now, so the site
 // never lists or sells them.
