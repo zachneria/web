@@ -168,7 +168,7 @@ export default function DashboardLogin() {
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/icon.png" alt="" width={32} height={32} style={{ borderRadius: 7 }} />
-          <span style={{ fontWeight: 800, fontSize: 20, letterSpacing: -0.4, color: "#22243A" }}>shabanga</span>
+          <span style={{ fontFamily: "Cochin, Georgia, serif", fontWeight: 700, fontSize: 23, letterSpacing: 0.3, color: "#22243A" }}>shabanga</span>
         </div>
 
         {session ? (

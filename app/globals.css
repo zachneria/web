@@ -438,10 +438,11 @@ a {
   display: block;
 }
 .topbar-word {
-  font-size: 19px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: #fff;
+  font-family: Cochin, Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #F5E642;
 }
 .footer {
   background: #1A1E38;
@@ -457,10 +458,11 @@ a {
   text-align: center;
 }
 .footer-word {
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: #fff;
+  font-family: Cochin, Georgia, serif;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #F5E642;
 }
 .footer-tag {
   font-size: 12px;
