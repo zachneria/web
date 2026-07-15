@@ -117,7 +117,7 @@ export default function PromoterSettings() {
 
   return (
     <div style={{ maxWidth: 640 }}>
-      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px" }}>Promoter Settings</h1>
+      <h1 style={{ fontSize: 24, fontWeight: 800, margin: "12px 0 18px" }}>Promoter Profile</h1>
 
       {!loaded ? (
         <p style={{ color: "#8A8A8A" }}>Loading…</p>

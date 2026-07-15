@@ -27,7 +27,7 @@ const ITEMS: {
   { href: "/dashboard/events", Icon: IoCalendarOutline, label: "Your Events" },
   { href: "/dashboard/find", Icon: IoSearchOutline, label: "Find Events" },
   { href: "/dashboard/marketing", Icon: IoMegaphoneOutline, label: "Marketing" },
-  { href: "/dashboard/promoter-settings", Icon: IoGlobeOutline, label: "Promoter Settings" },
+  { href: "/dashboard/promoter-settings", Icon: IoGlobeOutline, label: "Promoter Profile" },
   { href: "/dashboard/artist-settings", Icon: IoMusicalNotesOutline, label: "Artist Settings", accent: "#AF52DE", talentOnly: true },
   { href: "/dashboard/account-settings", Icon: IoSettingsOutline, label: "Account Settings" },
   { href: "/dashboard/admin", Icon: IoConstructOutline, label: "Admin Settings", adminOnly: true },

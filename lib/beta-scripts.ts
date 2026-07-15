@@ -49,7 +49,7 @@ screenshot if you can. One report per issue.
 
 ### ORG-04 — Flyer + logo
 1. On the event, upload a **flyer** image.
-2. Account, **Promoter Settings**, upload a **logo**.
+2. Account, **Promoter Profile**, upload a **logo**.
 3. **Expected:** Flyer shows on the event; logo shows on your account and promoter page.
 
 ### ORG-05 — Fixed-price ticket tiers
@@ -263,7 +263,7 @@ screenshot if you can. One report per issue.
 ## Part 8 — Account & promoter (Organizer)
 
 ### ACCT-01 — Handle
-1. Account, **Promoter Settings**, set a **handle** (e.g. loomiere).
+1. Account, **Promoter Profile**, set a **handle** (e.g. loomiere).
 2. **Expected:** Saves. shabanga.com/p/loomiere loads your promoter page.
 
 ### ACCT-02 — Account settings
