@@ -19,7 +19,7 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(60% 55% at 50% -10%, rgba(245, 230, 66, 0.28), transparent 70%),
+    radial-gradient(60% 55% at 50% -10%, rgba(15, 167, 181, 0.28), transparent 70%),
     radial-gradient(40% 40% at 85% 20%, rgba(15, 167, 181, 0.18), transparent 70%);
   pointer-events: none;
 }
@@ -35,7 +35,7 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #0FA7B5;
-  border: 1px solid rgba(245, 230, 66, 0.4);
+  border: 1px solid rgba(15, 167, 181, 0.4);
   border-radius: 999px;
   padding: 6px 14px;
   margin-bottom: 22px;
@@ -154,7 +154,7 @@
 .foCell {
   font-weight: 700;
   color: #1A1E38;
-  background: rgba(245, 230, 66, 0.14);
+  background: rgba(15, 167, 181, 0.14);
 }
 
 /* ---- Breakdown cards ---- */
@@ -202,7 +202,7 @@
 }
 .keepNote {
   margin-top: 14px;
-  background: rgba(245, 230, 66, 0.16);
+  background: rgba(15, 167, 181, 0.16);
   border-radius: 10px;
   padding: 9px 12px;
   font-size: 13px;
@@ -255,7 +255,7 @@
 .bandFill {
   height: 100%;
   width: 100%;
-  background: linear-gradient(90deg, rgba(245, 230, 66, 0.4), #0FA7B5);
+  background: linear-gradient(90deg, rgba(15, 167, 181, 0.4), #0FA7B5);
 }
 
 /* ---- CTA button ---- */
@@ -270,11 +270,11 @@
   border-radius: 12px;
   text-decoration: none;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
-  box-shadow: 0 8px 30px rgba(245, 230, 66, 0.25);
+  box-shadow: 0 8px 30px rgba(15, 167, 181, 0.25);
 }
 .btnPrimary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(245, 230, 66, 0.35);
+  box-shadow: 0 12px 36px rgba(15, 167, 181, 0.35);
 }
 
 @media (max-width: 720px) {

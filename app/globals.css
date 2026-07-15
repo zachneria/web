@@ -417,14 +417,14 @@ a {
   color: var(--brand);
   font-size: 14px;
   font-weight: 800;
-  border: 1.5px solid rgba(245, 230, 66, 0.55);
+  border: 1.5px solid rgba(15, 167, 181, 0.55);
   border-radius: 999px;
   padding: 7px 16px;
   transition: border-color 150ms ease, background 150ms ease;
 }
 .topbar-signin:hover {
   border-color: var(--brand);
-  background: rgba(245, 230, 66, 0.1);
+  background: rgba(15, 167, 181, 0.1);
 }
 .topbar-brand {
   display: flex;
@@ -487,7 +487,7 @@ a {
   margin-right: calc(50% - 50vw);
   background: radial-gradient(
     55% 90% at 50% 0%,
-    rgba(245, 230, 66, 0.2),
+    rgba(15, 167, 181, 0.2),
     transparent 72%
   );
 }
@@ -984,7 +984,7 @@ a {
 }
 .find-search:focus {
   border-color: #0FA7B5;
-  box-shadow: 0 0 0 3px rgba(245, 230, 66, 0.3);
+  box-shadow: 0 0 0 3px rgba(15, 167, 181, 0.3);
 }
 .find-sorts {
   display: flex;

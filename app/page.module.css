@@ -19,7 +19,7 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(60% 55% at 50% -10%, rgba(245, 230, 66, 0.28), transparent 70%),
+    radial-gradient(60% 55% at 50% -10%, rgba(15, 167, 181, 0.28), transparent 70%),
     radial-gradient(40% 40% at 85% 20%, rgba(15, 167, 181, 0.18), transparent 70%);
   pointer-events: none;
 }
@@ -35,7 +35,7 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #0FA7B5;
-  border: 1px solid rgba(245, 230, 66, 0.4);
+  border: 1px solid rgba(15, 167, 181, 0.4);
   border-radius: 999px;
   padding: 6px 14px;
   margin-bottom: 24px;
@@ -73,11 +73,11 @@
   border-radius: 12px;
   text-decoration: none;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
-  box-shadow: 0 8px 30px rgba(245, 230, 66, 0.25);
+  box-shadow: 0 8px 30px rgba(15, 167, 181, 0.25);
 }
 .btnPrimary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(245, 230, 66, 0.35);
+  box-shadow: 0 12px 36px rgba(15, 167, 181, 0.35);
 }
 /* Artist flavor of the ghost button — purple, the talent accent. */
 .btnGhostArtist {
@@ -206,7 +206,7 @@
   border: 1px solid #ecdd6a;
   border-radius: 16px;
   padding: 22px;
-  box-shadow: 0 7px 20px rgba(245, 230, 66, 0.18);
+  box-shadow: 0 7px 20px rgba(15, 167, 181, 0.18);
 }
 .featureIcon {
   font-size: 24px;
@@ -288,7 +288,7 @@
 }
 /* Live beta pills are links — brand-yellow accent + hover. */
 .storePillLive {
-  border-color: rgba(245, 230, 66, 0.5);
+  border-color: rgba(15, 167, 181, 0.5);
   color: #e6e6e6;
   text-decoration: none;
   transition: border-color 150ms ease, background 150ms ease;
@@ -298,7 +298,7 @@
 }
 .storePillLive:hover {
   border-color: #0FA7B5;
-  background: rgba(245, 230, 66, 0.08);
+  background: rgba(15, 167, 181, 0.08);
 }
 
 @media (max-width: 860px) {
