@@ -28,7 +28,7 @@ const INVITE = "mailto:hello@shabanga.com?subject=shabanga%20invite%20request";
 // null until the current APK build finishes → renders "Coming soon").
 const IOS_BETA_URL = "https://testflight.apple.com/join/m6NSN9EK";
 const ANDROID_BETA_URL: string | null =
-  "https://expo.dev/accounts/zneria/projects/fo-app/builds/57d505fa-2233-4434-badf-e7503a7e7e1c";
+  "https://expo.dev/accounts/zneria/projects/fo-app/builds/0c0ae93a-6b15-4795-90a6-a32bf06e4301";
 
 const FEATURES: { Icon: IconType; title: string; body: string }[] = [
   { Icon: IoLinkOutline, title: "Sell from a link", body: "One share link — text it, post it, drop it in a group chat. Buyers tap and check out." },
