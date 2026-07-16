@@ -155,8 +155,8 @@
 }
 .bookBtn {
   display: block;
-  background: #0FA7B5;
-  color: #161616;
+  background: #AF52DE;
+  color: #ffffff;
   text-align: center;
   font-weight: 800;
   font-size: 17px;
@@ -227,8 +227,8 @@
 }
 .ticketBtn {
   flex-shrink: 0;
-  background: #0FA7B5;
-  color: #161616;
+  background: #AF52DE;
+  color: #ffffff;
   font-size: 13px;
   font-weight: 800;
   border-radius: 10px;
