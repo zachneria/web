@@ -41,8 +41,9 @@ export async function generateMetadata({
 // becomes a "Listen" link.
 function MixEmbed({ url }: { url: string }) {
   if (/soundcloud\.com/.test(url)) {
-    const src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}&color=%23af52de&auto_play=false&hide_related=true&show_comments=false&show_user=true`;
-    return <iframe className={styles.embed} height="166" src={src} allow="autoplay" title="Featured mix" />;
+    // SC MINI (20px) — Zach's pick 2026-07-15: the skinny strip, everywhere.
+    const src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}&color=%23af52de&auto_play=false&hide_related=true&show_comments=false&show_user=true&visual=false`;
+    return <iframe className={styles.embed} height="20" style={{ height: 20 }} src={src} allow="autoplay" title="Featured mix" />;
   }
   const yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{6,})/);
   if (yt) {
