@@ -11,12 +11,19 @@ export function GET() {
       apps: [],
       details: [
         {
+          // New identity (identity rename 2026-07-16 — see fo-app/IDENTITY-RENAME.md).
+          appID: "VWKR8RY44Z.com.shabanga.app",
+          paths: ["/t", "/t/*", "/e/*"],
+        },
+        {
+          // Legacy identity — keep while com.zneria.foapp installs exist.
           appID: "VWKR8RY44Z.com.zneria.foapp",
           paths: ["/t", "/t/*", "/e/*"],
         },
       ],
     },
   };
+  // webcredentials (passkeys, backlog #32) rides the same file when needed.
   return new Response(JSON.stringify(body), {
     status: 200,
     headers: { "Content-Type": "application/json" },
