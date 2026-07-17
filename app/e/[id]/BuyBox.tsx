@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useState, type CSSProperties, useEffect } from "react";
 import {
   Elements,
   PaymentElement,
@@ -61,6 +61,31 @@ export default function BuyBox({
   const [cart, setCart] = useState<Record<string, number>>({});
   const [chosen, setChosen] = useState<Record<string, number>>({}); // choose-a-price
   const [name, setName] = useState("");
+  // Device-local remember-me (localStorage — no account, the browser remembers).
+  const [rememberMe, setRememberMe] = useState(false);
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("checkoutContact:v1");
+      if (raw) {
+        const c = JSON.parse(raw);
+        if (c.name) setName((v) => v || c.name);
+        if (c.email) setEmail((v) => v || c.email);
+        if (c.phone) setPhone((v) => v || c.phone);
+        setRememberMe(true);
+      }
+    } catch {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const persistContact = () => {
+    try {
+      if (rememberMe)
+        localStorage.setItem(
+          "checkoutContact:v1",
+          JSON.stringify({ name: name.trim(), email: email.trim().toLowerCase(), phone: phone.trim() }),
+        );
+      else localStorage.removeItem("checkoutContact:v1");
+    } catch {}
+  };
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [smsConsent, setSmsConsent] = useState(false);
@@ -214,6 +239,7 @@ export default function BuyBox({
           return;
         }
         setIssued(data.tickets || []);
+        persistContact();
         setStep("done");
         return;
       }
@@ -250,6 +276,7 @@ export default function BuyBox({
           viewToken={viewToken!}
           onPaid={(t) => {
             setIssued(t);
+            persistContact();
             setStep("done");
           }}
         />
@@ -370,7 +397,18 @@ export default function BuyBox({
         onChange={(e) => setEmail(e.target.value)}
         autoComplete="email"
         inputMode="email"
+        list="email-domains"
       />
+      <datalist id="email-domains">
+        {(() => {
+          const at = email.indexOf("@");
+          if (at < 1) return null;
+          const local = email.slice(0, at);
+          return ["gmail.com", "yahoo.com", "icloud.com", "hotmail.com", "outlook.com", "aol.com", "proton.me"]
+            .map((d) => `${local}@${d}`)
+            .map((v) => <option key={v} value={v} />);
+        })()}
+      </datalist>
       <input
         style={styles.input}
         placeholder="Phone (optional) — text me my tickets"
@@ -379,6 +417,10 @@ export default function BuyBox({
         autoComplete="tel"
         inputMode="tel"
       />
+      <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "#555", cursor: "pointer" }}>
+        <input type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
+        Remember me on this device for faster checkout
+      </label>
       {/* SMS consent — separate unchecked box required (a phone number alone
           isn't consent); marketing needs its OWN express opt-in (TCPA) and only
           appears once they've opted into SMS at all. Mirrors the app checkout. */}
