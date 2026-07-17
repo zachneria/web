@@ -301,6 +301,26 @@
   background: rgba(15, 167, 181, 0.08);
 }
 
+/* Full-width caption under the store pills — the TestFlight requirement.
+   flex-basis 100% drops it onto its own row within the .stores flex row. */
+.storeNote {
+  flex-basis: 100%;
+  margin: 4px auto 0;
+  max-width: 440px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #9a9a9a;
+}
+.storeNote strong {
+  color: #cfcfcf;
+}
+.storeNote a {
+  color: #0FA7B5;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
 @media (max-width: 860px) {
   .audience,
   .features,

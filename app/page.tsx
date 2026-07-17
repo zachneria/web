@@ -27,8 +27,12 @@ const INVITE = "mailto:hello@shabanga.com?subject=shabanga%20invite%20request";
 // EAS internal-distribution build page (changes per build — re-point on rebuild;
 // null until the current APK build finishes → renders "Coming soon").
 const IOS_BETA_URL = "https://testflight.apple.com/join/X8G7zYkj";
+// iOS testers MUST have Apple's free TestFlight app installed FIRST — the
+// join link hands off to the itms-beta:// scheme and shows "address is
+// invalid" in Safari otherwise. We surface this requirement + the link below.
+const TESTFLIGHT_APP_URL = "https://apps.apple.com/app/testflight/id899247664";
 const ANDROID_BETA_URL: string | null =
-  "https://expo.dev/accounts/zneria/projects/fo-app/builds/ef92ac12-39ca-41e5-9cf3-03ea5d799c9f";
+  "https://expo.dev/accounts/zneria/projects/fo-app/builds/0615e29a-f127-41f9-8e90-63a05bf0e414";
 
 const FEATURES: { Icon: IconType; title: string; body: string }[] = [
   { Icon: IoLinkOutline, title: "Sell from a link", body: "One share link — text it, post it, drop it in a group chat. Buyers tap and check out." },
@@ -187,6 +191,18 @@ export default function Home() {
             <strong>iOS Beta</strong>
             Join on TestFlight →
           </a>
+          <p className={styles.storeNote}>
+            <strong>iOS:</strong> install Apple&rsquo;s free{" "}
+            <a
+              href={TESTFLIGHT_APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TestFlight app
+            </a>{" "}
+            first, then tap <em>Join on TestFlight</em>. Without it the link
+            shows &ldquo;address is invalid.&rdquo;
+          </p>
           {ANDROID_BETA_URL ? (
             <a
               className={`${styles.storePill} ${styles.storePillLive}`}
