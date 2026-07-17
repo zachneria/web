@@ -27,6 +27,8 @@ export async function orgFetch(path: string, init?: RequestInit): Promise<Respon
     ? { "x-auth-token": `Bearer ${idToken}` }
     : { Authorization: `Bearer ${idToken}` };
   if (init?.body) headers["Content-Type"] = "application/json";
+  // Server-side API key (some public GETs the dashboard reuses are key-gated).
+  if (process.env.SHABANGA_API_KEY) headers["x-api-key"] = process.env.SHABANGA_API_KEY;
   return fetch(`${API_BASE}${path}`, { ...init, headers, cache: "no-store" });
 }
 

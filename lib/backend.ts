@@ -4,6 +4,19 @@
 import type { BuyEvent, PromoterPage } from "./types";
 
 const API_BASE = process.env.API_BASE_URL || "https://api.shabanga.com";
+
+// Server-side API key (Vercel env SHABANGA_API_KEY) — attached to every
+// upstream call, never shipped to the browser (all fetches here run in
+// server components / route handlers). The client-platform pattern.
+const API_KEY = process.env.SHABANGA_API_KEY;
+const apiFetch = (url: string, init: RequestInit & { next?: { revalidate?: number } } = {}) =>
+  fetch(url, {
+    ...init,
+    headers: {
+      ...(init.headers || {}),
+      ...(API_KEY ? { "x-api-key": API_KEY } : {}),
+    },
+  });
 const BUYER_FEE_FALLBACK = 0.99;
 
 // Public browse/search — published + discoverable events (the /events page).
@@ -25,7 +38,7 @@ export interface FindEvent {
 }
 export async function browseEvents(q = ""): Promise<FindEvent[]> {
   try {
-    const res = await fetch(
+    const res = await apiFetch(
       `${API_BASE}/events/search${q.trim() ? `?q=${encodeURIComponent(q.trim())}` : ""}`,
       { next: { revalidate: 30 } },
     );
@@ -39,7 +52,7 @@ export async function browseEvents(q = ""): Promise<FindEvent[]> {
 // A promoter's name + logo and their published upcoming events.
 export async function getPromoter(id: string): Promise<PromoterPage | null> {
   try {
-    const res = await fetch(`${API_BASE}/events/promoter/${id}`, {
+    const res = await apiFetch(`${API_BASE}/events/promoter/${id}`, {
       next: { revalidate: 30 },
     });
     if (!res.ok) return null;
@@ -80,7 +93,7 @@ export interface ArtistPage {
 }
 export async function getArtist(id: string): Promise<ArtistPage | null> {
   try {
-    const res = await fetch(`${API_BASE}/events/talent/${id}`, {
+    const res = await apiFetch(`${API_BASE}/events/talent/${id}`, {
       next: { revalidate: 30 },
     });
     if (!res.ok) return null;
@@ -92,7 +105,7 @@ export async function getArtist(id: string): Promise<ArtistPage | null> {
 
 export async function getEvent(id: string): Promise<BuyEvent | null> {
   try {
-    const res = await fetch(`${API_BASE}/events/${id}`, {
+    const res = await apiFetch(`${API_BASE}/events/${id}`, {
       next: { revalidate: 30 }, // brief cache; edits show within ~30s
     });
     if (!res.ok) return null;
@@ -105,7 +118,7 @@ export async function getEvent(id: string): Promise<BuyEvent | null> {
 // Live buyer fee (admin-editable). Falls back to 0.99 if unavailable.
 export async function getBuyerFee(): Promise<number> {
   try {
-    const res = await fetch(`${API_BASE}/tickets/config`, { next: { revalidate: 60 } });
+    const res = await apiFetch(`${API_BASE}/tickets/config`, { next: { revalidate: 60 } });
     if (!res.ok) return BUYER_FEE_FALLBACK;
     const data = await res.json();
     return typeof data?.buyerFee === "number" ? data.buyerFee : BUYER_FEE_FALLBACK;
@@ -116,7 +129,7 @@ export async function getBuyerFee(): Promise<number> {
 
 // Proxied by the route handlers — return the raw Response so status passes through.
 export function createIntent(eventId: string, body: unknown): Promise<Response> {
-  return fetch(`${API_BASE}/tickets/events/${eventId}/orders/intent`, {
+  return apiFetch(`${API_BASE}/tickets/events/${eventId}/orders/intent`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -125,7 +138,7 @@ export function createIntent(eventId: string, body: unknown): Promise<Response> 
 
 // Price a cart + optional discount code before charging.
 export function previewOrder(eventId: string, body: unknown): Promise<Response> {
-  return fetch(`${API_BASE}/tickets/events/${eventId}/orders/preview`, {
+  return apiFetch(`${API_BASE}/tickets/events/${eventId}/orders/preview`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -135,7 +148,7 @@ export function previewOrder(eventId: string, body: unknown): Promise<Response> 
 // Free / $0 order (RSVP, or a code that zeroes the total) — no Stripe; issues
 // tickets immediately.
 export function createFreeOrder(eventId: string, body: unknown): Promise<Response> {
-  return fetch(`${API_BASE}/tickets/events/${eventId}/orders`, {
+  return apiFetch(`${API_BASE}/tickets/events/${eventId}/orders`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -146,5 +159,5 @@ export function getOrder(token?: string, code?: string): Promise<Response> {
   const query = code
     ? `code=${encodeURIComponent(code)}`
     : `token=${encodeURIComponent(token ?? "")}`;
-  return fetch(`${API_BASE}/tickets/order?${query}`);
+  return apiFetch(`${API_BASE}/tickets/order?${query}`);
 }
