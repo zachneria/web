@@ -26,7 +26,7 @@ const INVITE = "mailto:hello@shabanga.com?subject=shabanga%20invite%20request";
 // Public beta install links. iOS = TestFlight public link (stable). Android =
 // EAS internal-distribution build page (changes per build — re-point on rebuild;
 // null until the current APK build finishes → renders "Coming soon").
-const IOS_BETA_URL = "https://testflight.apple.com/join/m6NSN9EK";
+const IOS_BETA_URL = "https://testflight.apple.com/join/X8G7zYkj";
 const ANDROID_BETA_URL: string | null =
   "https://expo.dev/accounts/zneria/projects/fo-app/builds/316509b5-56df-488f-a058-ba532daf8e3d";
 
