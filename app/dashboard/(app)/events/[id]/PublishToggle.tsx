@@ -8,9 +8,12 @@ import { useState } from "react";
 export function PublishToggle({
   id,
   status,
+  ticketCount,
 }: {
   id: string;
   status: "draft" | "published" | "cancelled";
+  // null = couldn't load the list — don't false-alarm on a fetch hiccup.
+  ticketCount: number | null;
 }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
@@ -38,11 +41,17 @@ export function PublishToggle({
         /* unknown status — don't block publishing */
       }
     }
+    // Ticketless publish is legal ("announce now, price later") but usually
+    // an accident — warn with what fans will actually see.
+    const noTickets = !published && ticketCount === 0;
     if (
       !window.confirm(
         published
           ? "Unpublish this event? Tickets will stop selling."
-          : "Publish this event? It'll be live for buyers." + payoutNote,
+          : noTickets
+            ? "No tickets listed yet — fans who open this event will see \u201CTickets aren\u2019t on sale yet.\u201D You can publish now and add tickets later.\n\nPublish anyway?" +
+              payoutNote
+            : "Publish this event? It'll be live for buyers." + payoutNote,
       )
     )
       return;

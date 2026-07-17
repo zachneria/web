@@ -222,7 +222,7 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
       ) : null}
 
       <div style={{ marginTop: 12 }}>
-        <PublishToggle id={event.id} status={event.status} />
+        <PublishToggle id={event.id} status={event.status} ticketCount={types === null ? null : (types ?? []).length} />
       </div>
 
       <div style={{ color: T.muted, fontSize: 13, margin: "16px 2px 0", lineHeight: 1.6 }}>
