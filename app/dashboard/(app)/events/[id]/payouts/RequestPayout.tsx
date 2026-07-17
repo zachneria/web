@@ -36,7 +36,9 @@ export function RequestPayout({
           fontSize: 14,
         }}
       >
-        Deposit {existing.status} — {money(Number(existing.netPayout))}
+        {existing.status === "pending"
+          ? `${money(Number(existing.netPayout))} sent — typically lands in your bank within 2 business days`
+          : `Deposit ${existing.status} — ${money(Number(existing.netPayout))}`}
       </div>
     );
   }
