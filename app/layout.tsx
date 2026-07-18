@@ -20,6 +20,10 @@ export const metadata: Metadata = {
     description: "Built for promoters and scene makers.",
     images: ["/creature.png"],
   },
+  // Belt-and-suspenders with robots.ts: never index Vercel preview deploys.
+  ...(process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production"
+    ? { robots: { index: false, follow: false } }
+    : {}),
 };
 
 export default function RootLayout({

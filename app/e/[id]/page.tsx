@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { getEvent, getBuyerFee } from "@/lib/backend";
 import { admissionTypes, formatDate, formatTime } from "@/lib/pricing";
+import { eventJsonLd, eventUrl, SEO_LIVE } from "@/lib/seo";
 import type { LineupArtist } from "@/lib/types";
 import AppBanner from "./AppBanner";
 import BuyBox from "./BuyBox";
@@ -77,13 +78,22 @@ export async function generateMetadata({
   const { id } = await params;
   const event = await getEvent(id);
   if (!event) return { title: "Event — shabanga" };
-  const desc = `${formatDate(event.eventDate)} · ${event.venueName}`;
+  // Hidden-location safe: fall back to the teaser, never print "null".
+  const place = event.venueName || event.locationTeaser;
+  const desc = place
+    ? `${formatDate(event.eventDate)} · ${place}`
+    : formatDate(event.eventDate);
+  const canonical = eventUrl(event);
   return {
     title: `${event.name} — shabanga`,
     description: desc,
+    // Pre-launch: keep every event page out of the index (test data).
+    ...(SEO_LIVE ? {} : { robots: { index: false, follow: false } }),
+    alternates: { canonical },
     openGraph: {
       title: event.name,
       description: desc,
+      url: canonical,
       images: event.flyerUrl ? [{ url: event.flyerUrl }] : [],
       type: "website",
     },
@@ -119,6 +129,11 @@ export default async function EventPage({
 
   return (
     <>
+      {/* schema.org/Event structured data for Google rich results. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd(event)) }}
+      />
       <SiteHeader />
       <main className="event">
         <AppBanner eventId={event.id} />
@@ -160,9 +175,15 @@ export default async function EventPage({
                 {formatDate(event.eventDate)} · {formatTime(event.eventDate)}
               </p>
               <p className="venue">
-                {event.venueName}
-                <br />
-                <span className="addr">{event.venueAddress}</span>
+                {event.venueName ||
+                  event.locationTeaser ||
+                  "Location revealed before doors"}
+                {event.venueAddress && (
+                  <>
+                    <br />
+                    <span className="addr">{event.venueAddress}</span>
+                  </>
+                )}
               </p>
 
               {ended ? (

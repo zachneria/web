@@ -33,17 +33,24 @@ export interface LineupArtist {
 
 export interface BuyEvent {
   id: string;
+  slug?: string | null; // friendly URL slug, frozen at first publish
   name: string;
   description: string | null;
-  venueName: string;
-  venueAddress: string;
+  venueName: string | null; // null when locationHidden (#44) — backend strips it
+  venueAddress: string | null;
+  venueLat?: number | null;
+  venueLng?: number | null;
+  timezone?: string | null;
   eventDate: string;
   endTime?: string | null;
   doorsTime: string;
   capacity: number;
   isFree?: boolean; // free/RSVP event — no fee, reserve up to 2
+  locationHidden?: boolean;
+  locationTeaser?: string | null;
   status: "draft" | "published" | "cancelled";
   flyerUrl: string | null;
+  updatedAt?: string; // for sitemap lastmod
   ticketTypes: BuyTicketType[];
   organizer?: Promoter | null;
   lineup?: LineupArtist[];
@@ -52,6 +59,7 @@ export interface BuyEvent {
 export interface Promoter {
   id: string;
   name: string;
+  handle?: string | null; // friendly /p/<handle> URL
   logoUrl: string | null;
   bio?: string | null;
   links?: { instagram?: string; facebook?: string; tiktok?: string } | null;

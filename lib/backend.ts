@@ -22,6 +22,8 @@ const BUYER_FEE_FALLBACK = 0.99;
 // Public browse/search — published + discoverable events (the /events page).
 export interface FindEvent {
   id: string;
+  slug?: string | null; // present once fo-events /search returns it (sitemap)
+  updatedAt?: string; // sitemap lastmod
   name: string;
   venueName: string;
   eventDate: string;

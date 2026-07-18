@@ -3,7 +3,11 @@ import { TicketQRs, type ViewTicket } from "@/components/ticket-qrs";
 import { getOrder } from "@/lib/backend";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Your tickets — shabanga" };
+// Ticket-viewer URLs carry credential tokens — never index them.
+export const metadata = {
+  title: "Your tickets — shabanga",
+  robots: { index: false, follow: false },
+};
 
 // /t?token=<orderViewToken> — the SMS/email ticket link. Opens the shabanga app
 // when installed (Universal Link); otherwise this web viewer renders the tickets
