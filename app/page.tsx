@@ -191,18 +191,6 @@ export default function Home() {
             <strong>iOS Beta</strong>
             Join on TestFlight →
           </a>
-          <p className={styles.storeNote}>
-            <strong>iOS:</strong> install Apple&rsquo;s free{" "}
-            <a
-              href={TESTFLIGHT_APP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              TestFlight app
-            </a>{" "}
-            first, then tap <em>Join on TestFlight</em>. Without it the link
-            shows &ldquo;address is invalid.&rdquo;
-          </p>
           {ANDROID_BETA_URL ? (
             <a
               className={`${styles.storePill} ${styles.storePillLive}`}
@@ -220,6 +208,14 @@ export default function Home() {
             </span>
           )}
         </div>
+        <p className={styles.storeNote}>
+          <strong>iOS:</strong> install Apple&rsquo;s free{" "}
+          <a href={TESTFLIGHT_APP_URL} target="_blank" rel="noopener noreferrer">
+            TestFlight app
+          </a>{" "}
+          first, then tap <em>Join on TestFlight</em>. Without it the link shows
+          &ldquo;address is invalid.&rdquo;
+        </p>
       </section>
 
       <SiteFooter />

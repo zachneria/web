@@ -301,11 +301,10 @@
   background: rgba(15, 167, 181, 0.08);
 }
 
-/* Full-width caption under the store pills — the TestFlight requirement.
-   flex-basis 100% drops it onto its own row within the .stores flex row. */
+/* Caption below the store pills — the TestFlight requirement. Sits as its own
+   block under .stores (not a flex child, or it splits the pill row). */
 .storeNote {
-  flex-basis: 100%;
-  margin: 4px auto 0;
+  margin: 14px auto 0;
   max-width: 440px;
   text-align: center;
   font-size: 13px;
