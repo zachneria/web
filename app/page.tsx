@@ -32,7 +32,7 @@ const IOS_BETA_URL = "https://testflight.apple.com/join/X8G7zYkj";
 // invalid" in Safari otherwise. We surface this requirement + the link below.
 const TESTFLIGHT_APP_URL = "https://apps.apple.com/app/testflight/id899247664";
 const ANDROID_BETA_URL: string | null =
-  "https://expo.dev/accounts/zneria/projects/fo-app/builds/f5ccf46e-d59e-486e-b33f-cfc92e6cfbee";
+  "https://expo.dev/accounts/zneria/projects/fo-app/builds/4a2c77d1-8a58-4ac4-8f86-ccec65be671b";
 
 const FEATURES: { Icon: IconType; title: string; body: string }[] = [
   { Icon: IoLinkOutline, title: "Sell from a link", body: "One share link — text it, post it, drop it in a group chat. Buyers tap and check out." },
