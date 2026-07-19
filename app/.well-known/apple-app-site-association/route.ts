@@ -14,7 +14,7 @@ export function GET() {
       details: [
         {
           appID: "VWKR8RY44Z.com.shabanga.app",
-          paths: ["/t", "/t/*", "/e/*", "/bar"],
+          paths: ["/t", "/t/*", "/e/*", "/bar", "/scan"],
         },
       ],
     },
