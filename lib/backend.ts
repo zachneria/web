@@ -129,6 +129,22 @@ export async function getBuyerFee(): Promise<number> {
   }
 }
 
+// Bar queue (#51) — PIN-gated staff display. Proxied server-side so the web
+// key + PIN never sit in the browser. Return the raw Response for passthrough.
+export function barQueue(eventId: string, pin: string): Promise<Response> {
+  return apiFetch(
+    `${API_BASE}/checkin/event/${eventId}/bar-queue?eventPin=${encodeURIComponent(pin)}`,
+    { cache: "no-store" },
+  );
+}
+export function barQueueComplete(body: unknown): Promise<Response> {
+  return apiFetch(`${API_BASE}/checkin/bar-queue/complete`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+}
+
 // Proxied by the route handlers — return the raw Response so status passes through.
 export function createIntent(eventId: string, body: unknown): Promise<Response> {
   return apiFetch(`${API_BASE}/tickets/events/${eventId}/orders/intent`, {
