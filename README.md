@@ -1,4 +1,4 @@
-# fo-web — shabanga.com website
+# web — shabanga.com website
 
 Next.js (App Router) buyer site for shabanga. Server-rendered event pages with
 real OG link previews + **admission-ticket** checkout via Stripe. It reads the
