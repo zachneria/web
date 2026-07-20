@@ -184,7 +184,7 @@ export default function PromoterSettings() {
               </button>
               {savedHandle ? (
                 <a
-                  href={`https://shabanga.com/p/${savedHandle}`}
+                  href={`${process.env.NEXT_PUBLIC_SITE_URL || "https://shabanga.com"}/p/${savedHandle}`}
                   target="_blank"
                   rel="noreferrer"
                   style={{ color: "#0B8896", fontWeight: 600, fontSize: 14 }}

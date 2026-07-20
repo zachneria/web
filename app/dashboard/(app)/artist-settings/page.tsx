@@ -242,7 +242,7 @@ export default function ArtistSettings() {
               Live at shabanga.com/a/{publicHandle}
             </div>
             <a
-              href={`https://shabanga.com/a/${publicHandle}`}
+              href={`${process.env.NEXT_PUBLIC_SITE_URL || "https://shabanga.com"}/a/${publicHandle}`}
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: "inline-block", marginTop: 6, color: "#AF52DE", fontSize: 14, fontWeight: 600 }}
