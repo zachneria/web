@@ -413,7 +413,14 @@ export default function BuyBox({
         style={styles.input}
         placeholder="Phone (optional) — text me my tickets"
         value={phone}
-        onChange={(e) => setPhone(e.target.value)}
+        onChange={(e) => {
+          setPhone(e.target.value);
+          // Consent is meaningless without a number — clear it if emptied.
+          if (!e.target.value.trim()) {
+            setSmsConsent(false);
+            setSmsMarketing(false);
+          }
+        }}
         autoComplete="tel"
         inputMode="tel"
       />
@@ -424,10 +431,13 @@ export default function BuyBox({
       {/* SMS consent — separate unchecked box required (a phone number alone
           isn't consent); marketing needs its OWN express opt-in (TCPA) and only
           appears once they've opted into SMS at all. Mirrors the app checkout. */}
-      <label style={styles.consentRow}>
+      <label
+        style={{ ...styles.consentRow, opacity: phone.trim() ? 1 : 0.45 }}
+      >
         <input
           type="checkbox"
           checked={smsConsent}
+          disabled={!phone.trim()}
           onChange={(e) => setSmsConsent(e.target.checked)}
           style={styles.consentBox}
         />
