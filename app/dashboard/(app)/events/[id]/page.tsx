@@ -14,6 +14,7 @@ import {
 import { TipsRail, type Tip } from "../../TipsRail";
 import { EventDetail, DetailSummary, STATUS, T, TicketType, backLink, card, fmtDate, fmtTime, getJSON, money } from "./_shared";
 import { DiscoverableToggle } from "./DiscoverableToggle";
+import { DoorPinCard } from "./DoorPinCard";
 import { PublishToggle } from "./PublishToggle";
 import styles from "./tiles.module.css";
 
@@ -224,6 +225,12 @@ export default async function EventHub({ params }: { params: Promise<{ id: strin
       <div style={{ marginTop: 12 }}>
         <PublishToggle id={event.id} status={event.status} ticketCount={types === null ? null : (types ?? []).length} />
       </div>
+
+      {event.status !== "cancelled" ? (
+        <div style={{ marginTop: 20 }}>
+          <DoorPinCard id={event.id} doorPin={event.doorPin ?? null} />
+        </div>
+      ) : null}
 
       <div style={{ color: T.muted, fontSize: 13, margin: "16px 2px 0", lineHeight: 1.6 }}>
         Scanning tickets at the door, plus the &ldquo;In app&rdquo; tools above, live in the

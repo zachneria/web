@@ -14,6 +14,7 @@ export interface EventDetail {
   description?: string;
   slug?: string | null;
   discoverable?: boolean;
+  doorPin?: string | null;
   doorsTime?: string;
   drinkTierEnabled?: boolean;
 }
