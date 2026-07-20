@@ -1,7 +1,7 @@
 // Apple App Site Association — lets iOS open shabanga Universal Links in the app.
 // Served at https://shabanga.com/.well-known/apple-app-site-association with
 // Content-Type application/json (no file extension). appID = TEAM_ID.bundleID.
-// Served identically on shabanga.com and fansonly.live (same Vercel app),
+// Served identically on shabanga.com and shabanga.com (same Vercel app),
 // matching the build's associatedDomains for both. Legacy com.zneria.foapp
 // identity dropped 2026-07-18 — old-bundle installs open links in the browser.
 // Paths the app claims: ticket links (/t) + event pages (/e/<slug>, forwarded
