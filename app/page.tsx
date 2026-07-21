@@ -29,7 +29,7 @@ const INVITE = "mailto:hello@shabanga.com?subject=shabanga%20invite%20request";
 // below — so prod needs no Vercel change. Android = EAS internal-distribution
 // build page (changes per build — re-point on rebuild; null → "Coming soon").
 const IOS_BETA_URL =
-  process.env.NEXT_PUBLIC_IOS_BETA_URL || "https://testflight.apple.com/join/X8G7zYkj";
+  process.env.NEXT_PUBLIC_IOS_BETA_URL || "https://testflight.apple.com/join/rKz8dYNb";
 // iOS testers MUST have Apple's free TestFlight app installed FIRST — the
 // join link hands off to the itms-beta:// scheme and shows "address is
 // invalid" in Safari otherwise. We surface this requirement + the link below.
