@@ -260,6 +260,7 @@ export default function BarQueueClient() {
             </span>
           ))}
         </div>
+        {lane && isReady && <div className={styles.ping}>🔔 Guest pinged — drinks ready</div>}
         {lane ? (
           <button
             className={styles.laneBtn}

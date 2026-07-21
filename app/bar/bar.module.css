@@ -183,6 +183,7 @@
   cursor: pointer;
 }
 .laneBtn:disabled { opacity: 0.5; }
+.ping { color: #8fe0a6; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
 
 /* empty */
 .empty {
