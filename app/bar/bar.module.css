@@ -115,6 +115,75 @@
 }
 .doneBtn:disabled { opacity: 0.5; }
 
+/* Simple ⇄ Board toggle */
+.toggle {
+  margin-left: auto;
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+}
+.seg {
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: #9a95ab;
+  font-weight: 700;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+.segOn { background: rgba(124, 116, 255, 0.9); color: #fff; }
+
+/* Board mode — New / Preparing / Ready lanes */
+.board { flex: 1; min-height: 0; display: flex; gap: 8px; padding: 8px; }
+.lane {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.laneHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.laneDot { width: 9px; height: 9px; border-radius: 5px; }
+.laneLabel { color: #c9c4d6; font-weight: 800; font-size: 12.5px; letter-spacing: 1px; flex: 1; }
+.count {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #c9c4d6;
+  font-weight: 800;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.laneList { flex: 1; overflow-y: auto; padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+.laneEmpty { color: #4e4a5a; text-align: center; padding: 24px 0; font-size: 18px; }
+.cardReady { border-color: rgba(62, 214, 111, 0.55); background: rgba(62, 214, 111, 0.06); }
+.laneBtn {
+  margin-top: auto;
+  border: 0;
+  border-radius: 12px;
+  padding: 11px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.laneBtn:disabled { opacity: 0.5; }
+
 /* empty */
 .empty {
   flex: 1;

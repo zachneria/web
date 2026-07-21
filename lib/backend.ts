@@ -145,6 +145,15 @@ export function barQueueComplete(body: unknown): Promise<Response> {
   });
 }
 
+// Board mode (#51): advance an order through new -> preparing -> ready.
+export function barQueueStatus(body: unknown): Promise<Response> {
+  return apiFetch(`${API_BASE}/checkin/bar-queue/status`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+}
+
 // Proxied by the route handlers — return the raw Response so status passes through.
 export function createIntent(eventId: string, body: unknown): Promise<Response> {
   return apiFetch(`${API_BASE}/tickets/events/${eventId}/orders/intent`, {
