@@ -23,10 +23,13 @@ import styles from "./page.module.css";
 
 const INVITE = "mailto:hello@shabanga.com?subject=shabanga%20invite%20request";
 
-// Public beta install links. iOS = TestFlight public link (stable). Android =
-// EAS internal-distribution build page (changes per build — re-point on rebuild;
-// null until the current APK build finishes → renders "Coming soon").
-const IOS_BETA_URL = "https://testflight.apple.com/join/X8G7zYkj";
+// Public beta install links. iOS = TestFlight public link (stable), PER ENV via
+// NEXT_PUBLIC_IOS_BETA_URL (set per Vercel project): stage's project points it at
+// the STAGE TestFlight; prod leaves it unset and falls back to the prod link
+// below — so prod needs no Vercel change. Android = EAS internal-distribution
+// build page (changes per build — re-point on rebuild; null → "Coming soon").
+const IOS_BETA_URL =
+  process.env.NEXT_PUBLIC_IOS_BETA_URL || "https://testflight.apple.com/join/X8G7zYkj";
 // iOS testers MUST have Apple's free TestFlight app installed FIRST — the
 // join link hands off to the itms-beta:// scheme and shows "address is
 // invalid" in Safari otherwise. We surface this requirement + the link below.
