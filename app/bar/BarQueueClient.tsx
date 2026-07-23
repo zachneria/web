@@ -63,6 +63,54 @@ function since(iso: string): string {
   return `${Math.floor(mins / 60)}h`;
 }
 
+// Local optimistic actions awaiting server confirmation, protected from a stale
+// poll overwriting them — a just-advanced card snapping back to its old lane, or
+// a just-completed one re-appearing (the "button didn't respond" bug).
+type PendingEntry = { status: BarStatus | "completed"; at: number };
+const PENDING_GRACE_MS = 12000;
+
+// Merge server queue data with pending actions: clear an entry once the server
+// matches; keep the optimistic state while it's recent; drop it (trust server)
+// past the grace window (guards against a POST that silently failed).
+function mergePending(
+  server: QueueData,
+  pending: Map<string, PendingEntry>,
+  now: number,
+): QueueData {
+  const orders = server.orders
+    .map((o) => {
+      const p = pending.get(o.orderId);
+      if (!p || p.status === "completed") return o;
+      if (o.barStatus === p.status) {
+        pending.delete(o.orderId); // server caught up
+        return o;
+      }
+      if (now - p.at < PENDING_GRACE_MS) {
+        return {
+          ...o,
+          barStatus: p.status,
+          readyAt: p.status === "ready" ? new Date(p.at).toISOString() : o.readyAt,
+        };
+      }
+      pending.delete(o.orderId); // stale — trust server
+      return o;
+    })
+    .filter((o) => {
+      const p = pending.get(o.orderId);
+      if (!p || p.status !== "completed") return true;
+      if (now - p.at < PENDING_GRACE_MS) return false; // keep optimistic removal
+      pending.delete(o.orderId); // stale — re-show
+      return true;
+    });
+  // A completed order the server already dropped → clear its pending entry.
+  for (const [id, p] of pending) {
+    if (p.status === "completed" && !server.orders.some((o) => o.orderId === id)) {
+      pending.delete(id);
+    }
+  }
+  return { ...server, orders };
+}
+
 export default function BarQueueClient() {
   const params = useSearchParams();
   const eventId = params.get("e") ?? "";
@@ -75,6 +123,9 @@ export default function BarQueueClient() {
   const [data, setData] = useState<QueueData | null>(null);
   const [completing, setCompleting] = useState<string | null>(null);
   const [, setTick] = useState(0); // 1s re-render so the ages stay live
+  // Optimistic actions awaiting server confirmation — shields the just-tapped
+  // card from a stale 5s poll reverting it (the "button didn't respond" bug).
+  const pending = useRef<Map<string, PendingEntry>>(new Map());
 
   // Restore the view mode chosen on this device.
   useEffect(() => {
@@ -99,7 +150,10 @@ export default function BarQueueClient() {
       const res = await fetch(`/api/bar-queue?e=${eventId}&pin=${encodeURIComponent(pin)}`, {
         cache: "no-store",
       });
-      if (res.ok) setData(await res.json());
+      if (res.ok) {
+        const server = (await res.json()) as QueueData;
+        setData(mergePending(server, pending.current, Date.now()));
+      }
     } catch {
       /* transient — next poll recovers */
     }
@@ -162,6 +216,7 @@ export default function BarQueueClient() {
   // Board mode: advance an order to the next lane (optimistic, reconciled by poll).
   const advance = async (orderId: string, barStatus: BarStatus) => {
     if (!pin) return;
+    pending.current.set(orderId, { status: barStatus, at: Date.now() });
     setData((d) =>
       d
         ? {
@@ -181,6 +236,7 @@ export default function BarQueueClient() {
         body: JSON.stringify({ eventId, pin, orderId, barStatus }),
       });
     } catch {
+      pending.current.delete(orderId);
       fetchQueue();
     }
   };
@@ -188,6 +244,7 @@ export default function BarQueueClient() {
   const complete = async (orderId: string) => {
     if (!pin) return;
     setCompleting(orderId);
+    pending.current.set(orderId, { status: "completed", at: Date.now() });
     setData((d) => (d ? { ...d, orders: d.orders.filter((o) => o.orderId !== orderId) } : d));
     try {
       await fetch("/api/bar-queue/complete", {
@@ -196,6 +253,7 @@ export default function BarQueueClient() {
         body: JSON.stringify({ eventId, pin, orderId }),
       });
     } catch {
+      pending.current.delete(orderId);
       fetchQueue(); // restore true state on failure
     } finally {
       setCompleting(null);
