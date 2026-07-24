@@ -54,6 +54,8 @@ export default function AdminOrganizers() {
 
   const [inviteName, setInviteName] = useState("");
   const [inviteEmail, setInviteEmail] = useState("");
+  // Which org's custom platform-fee input is open, + its in-progress % text.
+  const [feeEdit, setFeeEdit] = useState<{ sub: string; value: string } | null>(null);
   const [inviting, setInviting] = useState(false);
   const [inviteMsg, setInviteMsg] = useState<{ ok: boolean; text: string } | null>(null);
 
@@ -337,6 +339,13 @@ export default function AdminOrganizers() {
           ) : null}
           {visible.map((o) => {
             const pending = o.status === "FORCE_CHANGE_PASSWORD";
+            // Fee state: null = default scale, 0 = waived, >0 = a flat custom rate.
+            const isCustom = o.platformFeeRate != null && o.platformFeeRate !== 0;
+            const customPct = +(((o.platformFeeRate ?? 0) * 100).toFixed(2));
+            const editing = feeEdit?.sub === o.sub;
+            const editValue = editing && feeEdit ? feeEdit.value : "";
+            const pctNum = parseFloat(editValue);
+            const pctValid = Number.isFinite(pctNum) && pctNum > 0 && pctNum <= 100;
             return (
               <div key={o.sub} style={card}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -382,14 +391,67 @@ export default function AdminOrganizers() {
                   </div>
                 ) : null}
 
-                <div style={chipRow}>
+                <div style={feeBlock}>
                   <span style={chipLabel}>Platform fee</span>
-                  <button
-                    onClick={() => changeFee(o.sub, o.platformFeeRate === 0 ? null : 0)}
-                    style={o.platformFeeRate === 0 ? chipActive : chip}
-                  >
-                    {o.platformFeeRate === 0 ? "0% — waived ✓" : "Waive (0%)"}
-                  </button>
+                  <div style={segment}>
+                    <button
+                      onClick={() => {
+                        setFeeEdit(null);
+                        if (o.platformFeeRate != null) changeFee(o.sub, null);
+                      }}
+                      style={o.platformFeeRate == null ? chipActive : chip}
+                    >
+                      Default
+                    </button>
+                    <button
+                      onClick={() => {
+                        setFeeEdit(null);
+                        if (o.platformFeeRate !== 0) changeFee(o.sub, 0);
+                      }}
+                      style={o.platformFeeRate === 0 ? chipActive : chip}
+                    >
+                      Waive 0%
+                    </button>
+                    <button
+                      onClick={() =>
+                        setFeeEdit({ sub: o.sub, value: isCustom ? String(customPct) : "" })
+                      }
+                      style={isCustom ? chipActive : chip}
+                    >
+                      {isCustom ? `Custom ${customPct}%` : "Custom"}
+                    </button>
+                  </div>
+                  {editing && (
+                    <>
+                      <div style={feeEditRow}>
+                        <input
+                          style={pctInput}
+                          value={editValue}
+                          onChange={(e) => setFeeEdit({ sub: o.sub, value: e.target.value })}
+                          inputMode="decimal"
+                          placeholder="5.0"
+                          autoFocus
+                        />
+                        <span style={chipLabel}>%</span>
+                        <button
+                          style={pctValid ? saveBtn : saveBtnDisabled}
+                          disabled={!pctValid}
+                          onClick={() => {
+                            changeFee(o.sub, pctNum / 100);
+                            setFeeEdit(null);
+                          }}
+                        >
+                          Save
+                        </button>
+                        <button style={cancelBtn} onClick={() => setFeeEdit(null)}>
+                          Cancel
+                        </button>
+                      </div>
+                      <div style={feeHint}>
+                        Flat % of ticket sales (net of discounts) — not the buyer fee or tips. 0–100.
+                      </div>
+                    </>
+                  )}
                 </div>
                 <div style={chipRow}>
                   <span style={chipLabel}>Pro (free/RSVP events)</span>
@@ -506,6 +568,38 @@ const chipRow: React.CSSProperties = {
   marginTop: 10,
 };
 const chipLabel: React.CSSProperties = { fontSize: 13, color: "#666" };
+const feeBlock: React.CSSProperties = { display: "flex", flexDirection: "column", gap: 6, marginTop: 8 };
+const segment: React.CSSProperties = { display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" };
+const feeEditRow: React.CSSProperties = { display: "flex", alignItems: "center", gap: 6, marginTop: 2 };
+const pctInput: React.CSSProperties = {
+  width: 72,
+  border: "1.5px solid #E0E0E0",
+  borderRadius: 10,
+  padding: "6px 8px",
+  fontSize: 14,
+  textAlign: "right",
+};
+const saveBtn: React.CSSProperties = {
+  background: "#0FA7B5",
+  color: "#000",
+  border: "none",
+  borderRadius: 10,
+  padding: "6px 14px",
+  fontSize: 13,
+  fontWeight: 700,
+  cursor: "pointer",
+};
+const saveBtnDisabled: React.CSSProperties = { ...saveBtn, opacity: 0.5, cursor: "not-allowed" };
+const cancelBtn: React.CSSProperties = {
+  background: "none",
+  border: "none",
+  color: "#666",
+  fontSize: 13,
+  fontWeight: 600,
+  cursor: "pointer",
+  padding: "6px 8px",
+};
+const feeHint: React.CSSProperties = { fontSize: 11, color: "#999", lineHeight: "15px" };
 const chip: React.CSSProperties = {
   borderRadius: 16,
   border: "none",
